@@ -1,0 +1,16 @@
+﻿<Properties>
+  <Array name="active" />
+  <ActiveConfiguration value="Debug" />
+  <ActivePlatform value="x86" />
+  <Array name="bookmarks" />
+  <Array name="files" />
+  <SerializedValue name="ModuleBrowserState">
+    <ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <string>{056473D5-0AFD-46E6-96C0-1706E42C8265}</string>
+      <string>6e12a760-6636-488c-b3e9-7d256aa61ae5</string>
+      <string>60513a05-eab7-41e7-8c10-e51c735edc2e</string>
+    </ArrayOfString>
+  </SerializedValue>
+  <ProjectBrowserState value="[Solution Lynn_DPI_AT[Lynn_DPI_AT[]]]&#xD;&#xA;Solution Lynn_DPI_AT\Lynn_DPI_AT\Login_Pass.rxrec&#xD;&#xA;Solution Lynn_DPI_AT" />
+  <StartupProject value="{056473D5-0AFD-46E6-96C0-1706E42C8265}" />
+</Properties>

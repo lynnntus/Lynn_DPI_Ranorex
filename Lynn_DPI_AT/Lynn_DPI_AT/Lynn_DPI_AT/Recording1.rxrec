@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<recordtable
+embeddedrepository="False"
+id="31a668c9-4d3a-4de2-b4d0-832098b8e516"
+mode="Desktop">
+	<repeatcount>
+		1
+	</repeatcount>
+	<turbomode>
+		False
+	</turbomode>
+	<genreport>
+		True
+	</genreport>
+	<speedfactor>
+		1
+	</speedfactor>
+	<useDefaultItemLogging>
+		True
+	</useDefaultItemLogging>
+	<codegen
+	classname="Recording1"
+	namespace="Lynn_DPI_AT">
+	</codegen>
+	<variables>
+	</variables>
+	<recorditems>
+	</recorditems>
+	<repository
+	id="414295e6-2100-449c-9668-76146e2e7237"
+	name="Lynn_DPI_ATRepository"
+	relativepath="Lynn_DPI_ATRepository.rxrep">
+		<codegen
+		classname="Lynn_DPI_ATRepository"
+		namespace="Lynn_DPI_AT">
+		</codegen>
+		<rootfolder
+		id="0ee31be8-b7c0-4867-aed4-3f0533789467"
+		name="_rootdummy_">
+		</rootfolder>
+	</repository>
+	<usercodefile
+	lang="CSharp">
+		Recording1.UserCode.cs
+	</usercodefile>
+	<references>
+	</references>
+</recordtable>

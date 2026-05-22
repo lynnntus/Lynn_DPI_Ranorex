@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": { "url": "https://google.com" }
+        },
+        "condition": {
+            "urlFilter": "microsoft.com",
+            "resourceTypes": [ "main_frame" ]
+        }
+    },
+    {
+        "id": 2,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": { "extensionPath": "/test.txt" }
+        },
+        "condition": {
+            "urlFilter": "example.com",
+            "resourceTypes": [ "main_frame" ]
+        }
+    }
+]

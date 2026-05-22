@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<recordtable
+embeddedrepository="False"
+id="9c64181c-7a09-48fb-99df-ff91dc9385fd"
+mode="Desktop">
+	<repeatcount>
+		1
+	</repeatcount>
+	<turbomode>
+		False
+	</turbomode>
+	<genreport>
+		True
+	</genreport>
+	<speedfactor>
+		1
+	</speedfactor>
+	<useDefaultItemLogging>
+		True
+	</useDefaultItemLogging>
+	<codegen
+	classname="StartAUT"
+	namespace="Lynn_DPI_AT">
+	</codegen>
+	<variables>
+		<var
+		id="53d7fca5-8640-4cb7-a5f6-e5d20d907afb"
+		name="StartAutProcessIDVar">
+		</var>
+	</variables>
+	<recorditems>
+		<runapprecorditem
+		enabled="True"
+		maximized="False"
+		optional="False">
+			<comment>
+			</comment>
+			<bindings>
+				<binding
+				target="ReturnVariable"
+				variable="StartAutProcessIDVar">
+				</binding>
+			</bindings>
+			<filename>
+				C:\Kohyoung\AOI\AOIGUI.exe
+			</filename>
+			<args>
+			</args>
+		</runapprecorditem>
+	</recorditems>
+	<repository
+	id="414295e6-2100-449c-9668-76146e2e7237"
+	name="Lynn_DPI_ATRepository"
+	relativepath="Lynn_DPI_ATRepository.rxrep">
+		<codegen
+		classname="Lynn_DPI_ATRepository"
+		namespace="Lynn_DPI_AT">
+		</codegen>
+		<rootfolder
+		id="0ee31be8-b7c0-4867-aed4-3f0533789467"
+		name="_rootdummy_">
+		</rootfolder>
+	</repository>
+	<usercodefile
+	lang="CSharp">
+		StartAUT.UserCode.cs
+	</usercodefile>
+	<references>
+	</references>
+</recordtable>

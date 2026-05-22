@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modulegroupdoc>
+  <testsuiteentryhierarchy>
+    <flatlistofchildren>
+      <modulegroups
+      name="Lynn_DPI_AT"
+      id="b1979010-2ec1-4c69-8131-65e96849ac0f"/>
+    </flatlistofchildren>
+    <childhierarchy>
+      <modulegroups
+      name="Lynn_DPI_AT"
+      id="b1979010-2ec1-4c69-8131-65e96849ac0f"/>
+    </childhierarchy>
+  </testsuiteentryhierarchy>
+</modulegroupdoc>

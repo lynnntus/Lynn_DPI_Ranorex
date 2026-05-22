@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{056473D5-0AFD-46E6-96C0-1706E42C8265}</ProjectGuid>
+    <TargetFrameworkProfile />
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Lynn_DPI_AT</RootNamespace>
+    <AssemblyName>Lynn_DPI_AT</AssemblyName>
+    <NoWarn>1591</NoWarn>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <RANOREX_BIN_PATH Condition=" '$(RANOREX_BIN_PATH)' == '' ">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Ranorex\Studio', 'InstallDir', null, RegistryView.Registry64, RegistryView.Registry32))\Bin</RANOREX_BIN_PATH>
+    <RanorexTargetsPath>$(RANOREX_BIN_PATH)\Ranorex.MSBuild.Targets</RanorexTargetsPath>
+    <projectdefaultrepository>b8295835-9fc5-456e-b3bc-19800986597e</projectdefaultrepository>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>True</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ranorex.Bootstrapper">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Core.Resolver">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Cef">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.ChromeWeb">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Delphi">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.FirefoxWeb">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Flex">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Java">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Mobile">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Msaa">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Office">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Qt">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.RawText">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Sap">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Uia">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Web">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WebDriver">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Win32">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WinForms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.WinForms.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Wpf">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ranorex.Plugin.Wpf.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <id>285e8786-8e66-4d6b-a579-ba3485663053</id>
+    </Compile>
+    <Compile Include="CloseAUT.cs">
+      <BoundTo>e67e3f69-b1f1-4af1-84a5-f4ea0a8b1ddc</BoundTo>
+      <DependentUpon>CloseAUT.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>c2f231ef-c846-4ccc-bcfa-b950fd7b8552</id>
+    </Compile>
+    <Compile Include="CloseAUT.UserCode.cs">
+      <BoundTo>e67e3f69-b1f1-4af1-84a5-f4ea0a8b1ddc</BoundTo>
+      <DependentUpon>CloseAUT.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>e1b6e45b-1e4d-4083-95a7-2c013198f3f5</id>
+    </Compile>
+    <Compile Include="LoginRetry.cs">
+      <id>a1b2c3d4-e5f6-7890-abcd-ef1234567890</id>
+    </Compile>
+    <Compile Include="Login_Pass.cs">
+      <BoundTo>8616d773-741f-4345-b623-854d5555ca66</BoundTo>
+      <DependentUpon>Login_Pass.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>8957dc58-945c-4bcc-9803-960da8e5d967</id>
+    </Compile>
+    <Compile Include="Login_Pass.UserCode.cs">
+      <BoundTo>8616d773-741f-4345-b623-854d5555ca66</BoundTo>
+      <DependentUpon>Login_Pass.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>687f358a-5965-4e08-9a68-c7f7d831514d</id>
+    </Compile>
+    <Compile Include="Logout.cs">
+      <BoundTo>d6c43710-4235-422f-9ae8-57bf342ab743</BoundTo>
+      <DependentUpon>Logout.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>4747270d-8fb0-4e88-ae42-5ab3204d4d6d</id>
+    </Compile>
+    <Compile Include="Logout.UserCode.cs">
+      <BoundTo>d6c43710-4235-422f-9ae8-57bf342ab743</BoundTo>
+      <DependentUpon>Logout.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>48249721-9929-4b76-aca9-703fd5ee4b5b</id>
+    </Compile>
+    <Compile Include="Lynn_DPI_ATRepository.cs">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <DependentUpon>Lynn_DPI_ATRepository.rxrep</DependentUpon>
+      <RepositoryCode>true</RepositoryCode>
+      <id>afccfc04-d917-445b-b5c3-d04db13265fb</id>
+    </Compile>
+    <Compile Include="Program.cs">
+      <id>7181de22-0e81-46b7-9af4-f65fea7f3ba3</id>
+    </Compile>
+    <Compile Include="Recording1.cs">
+      <BoundTo>969c5364-3bb5-4cce-bbdc-51c161eeed18</BoundTo>
+      <DependentUpon>Recording1.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>7223f6c1-4df0-471f-99f6-31f7bd7059cb</id>
+    </Compile>
+    <Compile Include="Recording1.UserCode.cs">
+      <BoundTo>969c5364-3bb5-4cce-bbdc-51c161eeed18</BoundTo>
+      <DependentUpon>Recording1.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>637f56f0-89f2-4275-a693-22a7e0896fb4</id>
+    </Compile>
+    <Compile Include="StartAUT.cs">
+      <BoundTo>9e077b68-f9f6-45e7-9e83-701d3b8ec9a4</BoundTo>
+      <DependentUpon>StartAUT.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>364eddb8-8521-4090-b03a-b33dc115d4c3</id>
+    </Compile>
+    <Compile Include="StartAUT.UserCode.cs">
+      <BoundTo>9e077b68-f9f6-45e7-9e83-701d3b8ec9a4</BoundTo>
+      <DependentUpon>StartAUT.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>e5da76f0-8387-4d6f-b0a2-1a4fbf6b4fc3</id>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <id>412bca01-7441-4951-b1db-78ac1ecf3717</id>
+    </None>
+    <None Include="CloseAUT.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>e67e3f69-b1f1-4af1-84a5-f4ea0a8b1ddc</id>
+      <recordtableid>1fbbe2ab-015d-4b7b-b59f-9503c15b22f8</recordtableid>
+    </None>
+    <None Include="Login_Pass.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>8616d773-741f-4345-b623-854d5555ca66</id>
+      <recordtableid>d6e58a7d-7478-483b-b95c-a25eb4ef5194</recordtableid>
+    </None>
+    <None Include="Logout.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>d6c43710-4235-422f-9ae8-57bf342ab743</id>
+      <recordtableid>4cb11b5a-7d21-442d-af8e-dc1bab920931</recordtableid>
+    </None>
+    <None Include="Lynn_DPI_ATRepository.rximg">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <DependentUpon>Lynn_DPI_ATRepository.rxrep</DependentUpon>
+      <imageblob>true</imageblob>
+      <id>e4c195c0-6123-40e2-8803-3926e04d38f0</id>
+    </None>
+    <None Include="Lynn_DPI_ATRepository.rxrep">
+      <id>b8295835-9fc5-456e-b3bc-19800986597e</id>
+      <repoid>414295e6-2100-449c-9668-76146e2e7237</repoid>
+      <reporootid>0ee31be8-b7c0-4867-aed4-3f0533789467</reporootid>
+    </None>
+    <None Include="Recording1.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>969c5364-3bb5-4cce-bbdc-51c161eeed18</id>
+      <recordtableid>31a668c9-4d3a-4de2-b4d0-832098b8e516</recordtableid>
+    </None>
+    <None Include="StartAUT.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>9e077b68-f9f6-45e7-9e83-701d3b8ec9a4</id>
+      <recordtableid>9c64181c-7a09-48fb-99df-ff91dc9385fd</recordtableid>
+    </None>
+    <Content Include="Users_DataSource.csv">
+      <Link>Users_DataSource.csv</Link>
+      <BoundTo>065d7525-ff79-421f-b6c7-67812186b634</BoundTo>
+      <DependentUpon>Lynn_DPI_AT.rxtst</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <id>1b6aaded-5987-490e-b247-f330740b9146</id>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lynn_DPI_AT.rxtmg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <id>29950a3e-599e-4030-9ebf-3f35a402e9a2</id>
+    </Content>
+    <Content Include="Lynn_DPI_AT.rxtst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <id>065d7525-ff79-421f-b6c7-67812186b634</id>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(RanorexTargetsPath)" Condition="Exists('$(RanorexTargetsPath)')" />
+</Project>
