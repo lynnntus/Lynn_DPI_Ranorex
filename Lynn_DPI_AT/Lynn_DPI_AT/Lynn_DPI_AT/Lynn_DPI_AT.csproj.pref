@@ -1,11 +1,13 @@
 ﻿<Properties>
   <Array name="active">
-    <Element value="Login_Pass.rxrec" />
+    <Element value="Lynn_DPI_AT.rxtst" />
   </Array>
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
     <Element value="Login_Pass.rxrec" />
+    <Element value="LoginRetry.cs" />
+    <Element value="Login_Pass.UserCode.cs" />
   </Array>
   <Properties name="projectSavedData">
     <Array name="recentusercodeselections" />

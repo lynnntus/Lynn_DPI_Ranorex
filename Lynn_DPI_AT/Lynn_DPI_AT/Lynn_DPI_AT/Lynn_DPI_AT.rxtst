@@ -3,7 +3,7 @@
 	<testsuiteentryhierarchy>
 		<flatlistofchildren>
 			<smartfoldernode
-			datasource="Users"
+			datasource="NewConnector"
 			id="381b6681-d396-4d7f-acb9-ba7d3441db5a"
 			name="Users">
 				<parameters>
@@ -57,6 +57,26 @@
 			id="953ef8fb-81a1-4f8c-a444-536434292ca1"
 			name="TestCase">
 			</testcase>
+			<testmodule
+			id="96358888-34d5-4075-9e55-5500a5ff9924"
+			name="Login_Pass"
+			ref="d6e58a7d-7478-483b-b95c-a25eb4ef5194"
+			type="Recording">
+				<databinding>
+					<var
+					dataname="UserName"
+					datasourceid="381b6681-d396-4d7f-acb9-ba7d3441db5a"
+					variableid="4c09ea2f-1705-48bb-b16a-c64e556da24b"
+					variablename="UserName">
+					</var>
+					<var
+					dataname="Password"
+					datasourceid="381b6681-d396-4d7f-acb9-ba7d3441db5a"
+					variableid="5d4d6c94-2c75-4db3-a680-edf942858962"
+					variablename="Password">
+					</var>
+				</databinding>
+			</testmodule>
 			<setup
 			id="9c35c421-85d4-4d8b-825e-25794a9eaf46"
 			name="setup">
@@ -187,6 +207,10 @@
 						<smartfoldernode
 						id="381b6681-d396-4d7f-acb9-ba7d3441db5a"
 						name="Users">
+							<testmodule
+							id="96358888-34d5-4075-9e55-5500a5ff9924"
+							name="Login_Pass">
+							</testmodule>
 						</smartfoldernode>
 						<testmodule
 						id="db56bd37-53c2-4db5-b317-dff5bc08120c"
@@ -207,30 +231,10 @@
 	</testsuiteentryhierarchy>
 	<datasources>
 		<DataSource
-		filename="D:\RanorexProjects\Lynn_DPI_AT\TestData.xlsx"
-		id="d1fafe45-21a7-483f-a961-e875507b1cd1"
+		id="6c350a81-e3c7-40b4-b4c3-987c76420d64"
 		includefile="Unchecked"
-		lastknownrowcount="1"
-		name="Users"
-		type="Ranorex.Core.Data.ExcelDataConnector"
-		worksheetname="Login"
-		worksheetrange="Auto-Range">
-			<lastknowncolumns>
-				<column>
-					User
-				</column>
-				<column>
-					Pass
-				</column>
-			</lastknowncolumns>
-			<maskedcolumns>
-			</maskedcolumns>
-		</DataSource>
-		<DataSource
-		id="cf0d7f6a-e73b-462d-8bdd-9ea21bef0eb5"
-		includefile="Checked"
-		lastknownrowcount="0"
-		name="Users_DataSource"
+		lastknownrowcount="2"
+		name="NewConnector"
 		type="Ranorex.Core.Data.CsvDataConnector"
 		withheaders="True">
 			<lastknowncolumns>
@@ -238,13 +242,13 @@
 					UserName
 				</column>
 				<column>
-					Password
+					Password &#32;
 				</column>
 			</lastknowncolumns>
 			<maskedcolumns>
 			</maskedcolumns>
 			<file>
-				Users_DataSource.csv
+				D:\RanorexProjects\Lynn_DPI_Ranorex\TestData\Users.csv
 			</file>
 		</DataSource>
 	</datasources>
@@ -253,10 +257,7 @@
 		<testconfiguration
 		name="TestRun">
 			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
+			id="bed77880-1e1a-4061-9d52-61e4510ded0a">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">

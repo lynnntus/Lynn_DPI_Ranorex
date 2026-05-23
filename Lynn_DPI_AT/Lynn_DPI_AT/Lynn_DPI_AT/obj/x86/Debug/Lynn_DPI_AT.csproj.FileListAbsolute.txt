@@ -25,3 +25,15 @@ F:\RanorexProjects\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug
 F:\RanorexProjects\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI.F1680F3D.Up2Date
 F:\RanorexProjects\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.exe
 F:\RanorexProjects\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.pdb
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.rxtmg
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.rxtst
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.exe.config
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.xml
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.exe
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.pdb
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Ranorex.Core.Resolver.dll
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.csproj.AssemblyReference.cache
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.csproj.CoreCompileInputs.cache
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.csproj.CopyComplete
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.exe
+D:\RanorexProjects\Lynn_DPI_Ranorex\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\obj\x86\Debug\Lynn_DPI_AT.pdb

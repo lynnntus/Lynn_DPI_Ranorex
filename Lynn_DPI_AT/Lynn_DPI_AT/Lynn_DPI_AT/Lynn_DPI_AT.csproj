@@ -238,13 +238,6 @@
       <id>9e077b68-f9f6-45e7-9e83-701d3b8ec9a4</id>
       <recordtableid>9c64181c-7a09-48fb-99df-ff91dc9385fd</recordtableid>
     </None>
-    <Content Include="Users_DataSource.csv">
-      <Link>Users_DataSource.csv</Link>
-      <BoundTo>065d7525-ff79-421f-b6c7-67812186b634</BoundTo>
-      <DependentUpon>Lynn_DPI_AT.rxtst</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <id>1b6aaded-5987-490e-b247-f330740b9146</id>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lynn_DPI_AT.rxtmg">
