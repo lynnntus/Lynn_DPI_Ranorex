@@ -136,7 +136,7 @@ namespace Lynn_DPI_AT
             /// Creates a new CCILoginWindow  folder.
             /// </summary>
             public CCILoginWindowAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("CCILoginWindow", "/form[@name='View']", parentFolder, 30000, null, true, "41fd3549-b30e-4b19-80d6-d11c3933f29d", "")
+                    base("CCILoginWindow", "/form[@name='View']", parentFolder, 30000, null, false, "41fd3549-b30e-4b19-80d6-d11c3933f29d", "")
             {
                 _xidpwloginarea = new Lynn_DPI_ATRepositoryFolders.XIDPWLoginAreaFolder(this);
                 _loginInfo = new RepoItemInfo(this, "Login", "?/?/button[@automationid='xLoginButton']/text[@caption='Login']", "", 30000, null, "4397492c-fec2-4486-9f38-0b2d7409c6bc");

@@ -18,9 +18,10 @@ name="Lynn_DPI_ATRepository">
 		id="41fd3549-b30e-4b19-80d6-d11c3933f29d"
 		isrooted="True"
 		name="CCILoginWindow"
+		refimgid="1c05e688-1719-4bd3-ab70-c08402306a59"
 		refpath="/form[@name='View']"
 		searchtimeout="30000ms"
-		usecache="True">
+		usecache="False">
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
 			capname="text"
