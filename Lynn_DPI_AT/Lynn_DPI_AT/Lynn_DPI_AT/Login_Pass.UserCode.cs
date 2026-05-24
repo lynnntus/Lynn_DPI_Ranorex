@@ -51,7 +51,8 @@ namespace Lynn_DPI_AT
                 TypeIntoPasswordField(pass);
 
                 repo.CCILoginWindow.Login.Click("10;8");
-                Delay.Milliseconds(200);
+                Report.Log(ReportLevel.Info, "Login", "Da click Login. Cho 30 giay de man hinh load...");
+                Delay.Milliseconds(3000);
 
                 return IsLoginSuccessful();
             }
