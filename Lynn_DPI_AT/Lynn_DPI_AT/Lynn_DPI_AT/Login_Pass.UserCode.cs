@@ -24,14 +24,16 @@ namespace Lynn_DPI_AT
 {
     public partial class Login_Pass
     {
-        /// <summary>
-        /// This method gets called right after the recording has been started.
-        /// It can be used to execute recording specific initialization code.
-        /// </summary>
         private void Init()
         {
             Report.Log(ReportLevel.Info, "Login",
                 string.Format("Login_Pass chay voi user '{0}'.", this.UserName));
+
+            if (repo.CCIMainWindow.SelfInfo.Exists(2000))
+            {
+                Report.Log(ReportLevel.Warn, "Login",
+                    "Main window da ton tai. Login da thanh cong tu LoginRetry truoc do.");
+            }
         }
 
         public static bool TryLoginWithUser(string user, string pass)
@@ -41,25 +43,24 @@ namespace Lynn_DPI_AT
                 repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
                 Delay.Seconds(1);
 
-                repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
-                Delay.Milliseconds(500);
-                Keyboard.Press("{Control}a");
-                Delay.Milliseconds(200);
-                Keyboard.Press("{Delete}");
-                Delay.Milliseconds(200);
-                Keyboard.Press(user);
-                Delay.Milliseconds(300);
+                Report.Log(ReportLevel.Info, "Login",
+                    string.Format("Bat dau nhap credentials cho user '{0}'.", user));
 
-                repo.CCILoginWindow.XIDPWLoginArea.XPWWatermark.Click("36;6");
-                Delay.Milliseconds(500);
-                Keyboard.Press("{Control}a");
-                Delay.Milliseconds(200);
-                Keyboard.Press("{Delete}");
-                Delay.Milliseconds(200);
-                Keyboard.Press(pass);
-                Delay.Milliseconds(300);
+                bool userOk = TypeIntoField(
+                    repo.CCILoginWindow.XIDPWLoginArea.SomeText,
+                    user, "Username");
 
-                repo.CCILoginWindow.Login.Click("10;8");
+                if (!userOk)
+                {
+                    Report.Log(ReportLevel.Error, "Login",
+                        string.Format("Khong the nhap dung username '{0}' sau nhieu lan thu.", user));
+                    return false;
+                }
+
+                InputPassword(repo.CCILoginWindow.XIDPWLoginArea.TextXPW, pass);
+
+                Report.Log(ReportLevel.Info, "Login", "Click nut Login.");
+                repo.CCILoginWindow.Login.Click();
                 Delay.Milliseconds(500);
 
                 return IsLoginSuccessful();
@@ -72,22 +73,115 @@ namespace Lynn_DPI_AT
             }
         }
 
+        private static bool TypeIntoField(Ranorex.Text element, string value, string fieldName)
+        {
+            const int MAX_RETRIES = 3;
+            bool verifySupported = true;
+
+            for (int attempt = 1; attempt <= MAX_RETRIES; attempt++)
+            {
+                Report.Log(ReportLevel.Info, "Login",
+                    string.Format("{0}: lan thu {1}/{2}, nhap '{3}'.",
+                        fieldName, attempt, MAX_RETRIES, value));
+
+                element.Click();
+                Delay.Milliseconds(500);
+
+                Keyboard.Press("{Home}");
+                Delay.Milliseconds(100);
+                Keyboard.Press("{Shift down}{End}{Shift up}");
+                Delay.Milliseconds(100);
+                Keyboard.Press("{Delete}");
+                Delay.Milliseconds(200);
+
+                Keyboard.Press(value);
+                Delay.Milliseconds(500);
+
+                if (!verifySupported)
+                {
+                    Report.Log(ReportLevel.Info, "Login",
+                        string.Format("{0}: Verify khong ho tro, tin tuong input da dung.", fieldName));
+                    return true;
+                }
+
+                string actual = string.Empty;
+                try
+                {
+                    actual = element.Element.GetAttributeValueText("Text");
+                }
+                catch
+                {
+                    // attribute read failed
+                }
+
+                if (string.IsNullOrEmpty(actual))
+                {
+                    Report.Log(ReportLevel.Info, "Login",
+                        string.Format("{0}: GetAttributeValueText tra ve empty. Skip verify tu lan sau.", fieldName));
+                    verifySupported = false;
+                    return true;
+                }
+
+                Report.Log(ReportLevel.Info, "Login",
+                    string.Format("{0}: Expected='{1}', Actual='{2}'.", fieldName, value, actual));
+
+                if (string.Equals(actual.Trim(), value.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    Report.Log(ReportLevel.Success, "Login",
+                        string.Format("{0}: Nhap dung '{1}' o lan thu {2}.", fieldName, value, attempt));
+                    return true;
+                }
+
+                Report.Log(ReportLevel.Warn, "Login",
+                    string.Format("{0}: Gia tri khong khop. Thu lai...", fieldName));
+
+                Keyboard.Press("{Escape}");
+                Delay.Milliseconds(300);
+            }
+
+            return false;
+        }
+
+        private static void InputPassword(Ranorex.Text element, string pass)
+        {
+            Report.Log(ReportLevel.Info, "Login", "Nhap password.");
+
+            element.Click();
+            Delay.Milliseconds(500);
+
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Delete}");
+            Delay.Milliseconds(200);
+
+            Keyboard.Press(pass);
+            Delay.Milliseconds(300);
+        }
+
         public static void ClearLoginFields()
         {
             if (!repo.CCILoginWindow.SelfInfo.Exists(3000))
                 return;
 
-            repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
+            Report.Log(ReportLevel.Info, "Login", "ClearLoginFields: xoa username va password.");
+
+            repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click();
             Delay.Milliseconds(500);
-            Keyboard.Press("{Control}a");
-            Delay.Milliseconds(200);
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(100);
             Keyboard.Press("{Delete}");
             Delay.Milliseconds(200);
 
-            repo.CCILoginWindow.XIDPWLoginArea.XPWWatermark.Click("36;6");
+            repo.CCILoginWindow.XIDPWLoginArea.TextXPW.Click();
             Delay.Milliseconds(500);
-            Keyboard.Press("{Control}a");
-            Delay.Milliseconds(200);
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(100);
             Keyboard.Press("{Delete}");
             Delay.Milliseconds(200);
         }
