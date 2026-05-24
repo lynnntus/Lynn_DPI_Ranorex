@@ -39,23 +39,28 @@ namespace Lynn_DPI_AT
             try
             {
                 repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
+                Delay.Seconds(1);
 
                 repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
-                Delay.Milliseconds(200);
+                Delay.Milliseconds(500);
                 Keyboard.Press("{Control}a");
-                Delay.Milliseconds(50);
+                Delay.Milliseconds(200);
+                Keyboard.Press("{Delete}");
+                Delay.Milliseconds(200);
                 Keyboard.Press(user);
-                Delay.Milliseconds(100);
+                Delay.Milliseconds(300);
 
                 repo.CCILoginWindow.XIDPWLoginArea.XPWWatermark.Click("36;6");
-                Delay.Milliseconds(200);
+                Delay.Milliseconds(500);
                 Keyboard.Press("{Control}a");
-                Delay.Milliseconds(50);
+                Delay.Milliseconds(200);
+                Keyboard.Press("{Delete}");
+                Delay.Milliseconds(200);
                 Keyboard.Press(pass);
-                Delay.Milliseconds(100);
+                Delay.Milliseconds(300);
 
                 repo.CCILoginWindow.Login.Click("10;8");
-                Delay.Milliseconds(200);
+                Delay.Milliseconds(500);
 
                 return IsLoginSuccessful();
             }
@@ -73,16 +78,18 @@ namespace Lynn_DPI_AT
                 return;
 
             repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
-            Delay.Milliseconds(100);
+            Delay.Milliseconds(500);
             Keyboard.Press("{Control}a");
+            Delay.Milliseconds(200);
             Keyboard.Press("{Delete}");
-            Delay.Milliseconds(100);
+            Delay.Milliseconds(200);
 
             repo.CCILoginWindow.XIDPWLoginArea.XPWWatermark.Click("36;6");
-            Delay.Milliseconds(100);
+            Delay.Milliseconds(500);
             Keyboard.Press("{Control}a");
+            Delay.Milliseconds(200);
             Keyboard.Press("{Delete}");
-            Delay.Milliseconds(100);
+            Delay.Milliseconds(200);
         }
 
         public static bool IsLoginSuccessful()
