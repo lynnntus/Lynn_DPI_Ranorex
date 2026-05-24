@@ -58,7 +58,9 @@ namespace Lynn_DPI_AT
 
             repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
 
-            Login_Pass.ClearLoginFields();
+            Report.Screenshot(ReportLevel.Info, "LoginRetry",
+                string.Format("Trang thai UI truoc khi login voi user '{0}'.", UserName),
+                repo.CCILoginWindow.Self, false);
 
             bool success = Login_Pass.TryLoginWithUser(UserName, Password);
 
@@ -76,6 +78,10 @@ namespace Lynn_DPI_AT
             {
                 Report.Log(ReportLevel.Warn, "LoginRetry",
                     string.Format("Login that bai voi user '{0}'. Neu khong co row nao thanh cong, default credentials se duoc dung.", UserName));
+
+                Report.Screenshot(ReportLevel.Warn, "LoginRetry",
+                    string.Format("Login that bai voi user '{0}'. Screenshot de debug.", UserName),
+                    repo.CCILoginWindow.Self, false);
 
                 Login_Pass.ClearLoginFields();
             }
