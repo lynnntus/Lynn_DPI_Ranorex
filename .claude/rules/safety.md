@@ -35,3 +35,32 @@ using Ranorex.Core;
 using Ranorex.Core.Repository;
 using Ranorex.Core.Testing;
 ```
+
+## Cảnh báo: KHÔNG hardcode credentials trong UserCode
+
+```csharp
+// ❌ SAI — hardcode phá vỡ data-driven testing và lộ thông tin nhạy cảm
+string user = "kyadmin";
+string pass = "21077421!";
+
+// ✅ ĐÚNG — để Ranorex inject qua data binding
+string user = this.UserName;
+string pass = this.Password;
+```
+
+Hardcode credentials dẫn đến:
+- Test không còn data-driven
+- Thông tin nhạy cảm bị lưu trong source code / version control
+- Phá vỡ mục đích của CsvDataConnector
+
+## Cảnh báo: KHÔNG dùng đường dẫn tuyệt đối trong UserCode
+
+```csharp
+// ❌ SAI — chỉ chạy được trên 1 máy
+string path = @"D:\RanorexProjects\Lynn_DPI_AT\TestData.xlsx";
+
+// ✅ ĐÚNG — đường dẫn data source được cấu hình trong Ranorex Studio
+// Vào Manage Data Sources, UserCode không tự quản lý đường dẫn
+```
+
+Đường dẫn tuyệt đối khiến test không chạy được trên CI/CD hoặc máy khác.

@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// LoginRetry - Thin orchestrator module.
-// Calls Login_Pass.LoginWithAllUsersFromDataSource() which reads Excel
-// and loops through all credentials until login succeeds.
+// LoginRetry - Orchestrator module.
+// Uses module variables (UserName, Password) injected via data binding.
+// Calls Login_Pass.TryLoginWithUser() to perform login.
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -26,8 +26,16 @@ namespace Lynn_DPI_AT
     {
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
+        [TestVariable("b2c3d4e5-f6a7-8901-bcde-f12345678901")]
+        public string UserName { get; set; }
+
+        [TestVariable("c3d4e5f6-a7b8-9012-cdef-123456789012")]
+        public string Password { get; set; }
+
         public LoginRetry()
         {
+            UserName = "";
+            Password = "";
         }
 
         void ITestModule.Run()
@@ -39,7 +47,10 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "LoginRetry", "Chờ login window...");
             repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
 
-            bool success = Login_Pass.LoginWithAllUsersFromDataSource();
+            Report.Log(ReportLevel.Info, "LoginRetry",
+                string.Format("Thử login với user '{0}'", UserName));
+
+            bool success = Login_Pass.TryLoginWithUser(UserName, Password);
 
             if (success)
             {
@@ -56,7 +67,7 @@ namespace Lynn_DPI_AT
             else
             {
                 throw new Ranorex.ValidationException(
-                    "Tất cả credentials đều thất bại. Không thể login.");
+                    string.Format("Login thất bại với user '{0}'", UserName));
             }
         }
     }

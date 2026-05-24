@@ -1,24 +1,59 @@
-# Build & Chạy test
+# Build & Deploy — Quy trình 2 máy
 
-## Build bằng MSBuild
+## Tổng quan môi trường
+
+| Máy | Vai trò | Phần mềm |
+|-----|---------|----------|
+| **Máy A** | Sửa code | VS Code + Claude Code, Ranorex SDK, Git |
+| **Máy B** | Chạy test | Ranorex Studio, Neptune DPI app, Git |
+
+- Không có CI/CD — deploy thủ công qua Git (push/pull)
+- Máy A không có Ranorex Studio và không có app Neptune
+- Máy B là nơi duy nhất chạy được test thực tế
+
+## Quy trình sau khi sửa code (Claude Code thực hiện trên Máy A)
+
+### Bước 1 — Kiểm tra compile error bằng MSBuild
 
 ```powershell
-# Cần Ranorex Studio đã cài trên máy
-msbuild Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT.csproj /p:Configuration=Debug /p:Platform=x86
+msbuild Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT.csproj /p:Configuration=Debug /p:Platform=x86
 ```
 
-**Yêu cầu**:
-- Ranorex Studio 10.7+ đã cài
-- Platform: x86 (32-bit) — bắt buộc, không đổi sang x64
-- .NET Framework 4.8
+- **Mục đích**: chỉ check lỗi compile, không chạy test
+- **Platform**: x86 (32-bit) — bắt buộc, không đổi sang x64
+- **.NET Framework**: 4.8
+- Nếu có lỗi compile → sửa ngay trên Máy A trước khi tiếp tục
 
-## Chạy test suite
+### Bước 2 — Push code lên GitHub
 
-```powershell
-# Chạy trực tiếp từ exe
-Lynn_DPI_AT\Lynn_DPI_AT\Lynn_DPI_AT\bin\Debug\Lynn_DPI_AT.exe
+```
+git add <các file đã thay đổi>
+git commit -m "[loại] mô tả thay đổi"
 ```
 
-## Mở trong Ranorex Studio
+- **Hỏi người dùng xác nhận** trước khi `git push`
+- Sau khi được xác nhận → `git push`
 
-Mở file `Lynn_DPI_AT.rxsln` → chọn test case → bấm Run.
+### Bước 3 — Thông báo cho người dùng
+
+Sau khi push thành công, thông báo:
+
+> Đã push xong. Bạn vui lòng `git pull` trên Máy B và chạy SmokeTest,
+> sau đó báo kết quả **PASS** hoặc **FAIL** (kèm nội dung lỗi nếu FAIL).
+
+## Vòng lặp fix cho đến khi PASS
+
+```
+Người dùng báo kết quả
+  │
+  ├─ PASS → ✅ Hoàn thành
+  │
+  └─ FAIL → Đọc nội dung lỗi người dùng cung cấp
+             → Sửa code trên Máy A
+             → MSBuild check compile
+             → git add / commit / hỏi confirm push
+             → Thông báo pull và test lại
+             → Quay lại đầu vòng lặp
+```
+
+Lặp lại cho đến khi người dùng báo **PASS**.
