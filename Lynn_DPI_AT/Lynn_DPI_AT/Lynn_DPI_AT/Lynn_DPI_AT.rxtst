@@ -43,16 +43,16 @@
 			type="UserCode">
 				<databinding>
 					<var
-					dataname="Password  "
-					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
-					variableid="c3d4e5f6-a7b8-9012-cdef-123456789012"
-					variablename="Password">
-					</var>
-					<var
 					dataname="UserName"
 					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
 					variableid="b2c3d4e5-f6a7-8901-bcde-f12345678901"
 					variablename="UserName">
+					</var>
+					<var
+					dataname="Password  "
+					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
+					variableid="c3d4e5f6-a7b8-9012-cdef-123456789012"
+					variablename="Password">
 					</var>
 				</databinding>
 			</testmodule>
@@ -79,7 +79,7 @@
 			name="Login_Pass"
 			ref="d6e58a7d-7478-483b-b95c-a25eb4ef5194"
 			type="Recording">
-				<databinding>
+				<missingdatabinding>
 					<var
 					dataname="Password  "
 					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
@@ -92,7 +92,7 @@
 					variableid="4c09ea2f-1705-48bb-b16a-c64e556da24b"
 					variablename="UserName">
 					</var>
-				</databinding>
+				</missingdatabinding>
 			</testmodule>
 			<setup
 			id="9c35c421-85d4-4d8b-825e-25794a9eaf46"
@@ -224,11 +224,11 @@
 							id="8f93bd19-1753-4d5b-b20f-b8e646fb3f29"
 							name="LoginRetry">
 							</testmodule>
-							<testmodule
-							id="96358888-34d5-4075-9e55-5500a5ff9924"
-							name="Login_Pass">
-							</testmodule>
 						</smartfoldernode>
+						<testmodule
+						id="96358888-34d5-4075-9e55-5500a5ff9924"
+						name="Login_Pass">
+						</testmodule>
 						<testmodule
 						id="db56bd37-53c2-4db5-b317-dff5bc08120c"
 						name="Logout">
@@ -274,10 +274,7 @@
 		<testconfiguration
 		name="TestRun">
 			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
+			id="bed77880-1e1a-4061-9d52-61e4510ded0a">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">
