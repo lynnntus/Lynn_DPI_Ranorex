@@ -30,22 +30,8 @@ namespace Lynn_DPI_AT
         /// </summary>
         private void Init()
         {
-            string user = this.UserName;
-            string pass = this.Password;
-
             Report.Log(ReportLevel.Info, "Login",
-                string.Format("=== Thử login với user '{0}' ===", user));
-
-            if (TryLoginWithUser(user, pass))
-            {
-                Report.Log(ReportLevel.Success, "Login",
-                    string.Format("Login thành công với user: {0}", user));
-            }
-            else
-            {
-                Report.Log(ReportLevel.Error, "Login",
-                    string.Format("Login thất bại với user: {0}", user));
-            }
+                string.Format("Login_Pass chay voi user '{0}'.", this.UserName));
         }
 
         public static bool TryLoginWithUser(string user, string pass)
@@ -74,7 +60,7 @@ namespace Lynn_DPI_AT
             catch (Exception ex)
             {
                 Report.Log(ReportLevel.Error, "Login",
-                    string.Format("Lỗi khi thử login với user '{0}': {1}", user, ex.Message));
+                    string.Format("Loi khi thu login voi user '{0}': {1}", user, ex.Message));
                 return false;
             }
         }

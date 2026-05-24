@@ -3,11 +3,8 @@
 	<testsuiteentryhierarchy>
 		<flatlistofchildren>
 			<smartfoldernode
-			datarangeset="1,2"
 			datasource="NewConnector"
 			id="381b6681-d396-4d7f-acb9-ba7d3441db5a"
-			maxrange="1"
-			minrange="0"
 			name="Users">
 				<parameters>
 					<param
@@ -37,25 +34,10 @@
 			type="Recording">
 			</testmodule>
 			<testmodule
-			enabled="False"
 			id="8f93bd19-1753-4d5b-b20f-b8e646fb3f29"
 			name="LoginRetry"
 			ref="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 			type="UserCode">
-				<databinding>
-					<var
-					dataname="Password  "
-					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
-					variableid="c3d4e5f6-a7b8-9012-cdef-123456789012"
-					variablename="Password">
-					</var>
-					<var
-					dataname="UserName"
-					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
-					variableid="b2c3d4e5-f6a7-8901-bcde-f12345678901"
-					variablename="UserName">
-					</var>
-				</databinding>
 			</testmodule>
 			<testmodule
 			id="945b85da-5a20-4b4f-995b-761f90f5dc77"
@@ -82,16 +64,16 @@
 			type="Recording">
 				<databinding>
 					<var
-					dataname="Password  "
-					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
-					variableid="5d4d6c94-2c75-4db3-a680-edf942858962"
-					variablename="Password">
-					</var>
-					<var
 					dataname="UserName"
-					datasourceid="6c350a81-e3c7-40b4-b4c3-987c76420d64"
+					datasourceid="381b6681-d396-4d7f-acb9-ba7d3441db5a"
 					variableid="4c09ea2f-1705-48bb-b16a-c64e556da24b"
 					variablename="UserName">
+					</var>
+					<var
+					dataname="Password"
+					datasourceid="381b6681-d396-4d7f-acb9-ba7d3441db5a"
+					variableid="5d4d6c94-2c75-4db3-a680-edf942858962"
+					variablename="Password">
 					</var>
 				</databinding>
 			</testmodule>
@@ -218,13 +200,13 @@
 						id="c8b4181e-077b-4542-9417-2eda02ae4181"
 						name="StartAUT">
 						</testmodule>
+						<testmodule
+						id="8f93bd19-1753-4d5b-b20f-b8e646fb3f29"
+						name="LoginRetry">
+						</testmodule>
 						<smartfoldernode
 						id="381b6681-d396-4d7f-acb9-ba7d3441db5a"
 						name="Users">
-							<testmodule
-							id="8f93bd19-1753-4d5b-b20f-b8e646fb3f29"
-							name="LoginRetry">
-							</testmodule>
 							<testmodule
 							id="96358888-34d5-4075-9e55-5500a5ff9924"
 							name="Login_Pass">

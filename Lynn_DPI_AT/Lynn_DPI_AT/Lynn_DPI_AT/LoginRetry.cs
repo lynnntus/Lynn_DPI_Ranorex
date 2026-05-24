@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// LoginRetry - Orchestrator module.
-// Uses module variables (UserName, Password) injected via data binding.
-// Calls Login_Pass.TryLoginWithUser() to perform login.
+// LoginRetry - Credential retry module.
+// Iterates CSV rows via data binding. Stops after first successful login.
+// Sets Login_Pass.Instance credentials for downstream modules.
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +26,8 @@ namespace Lynn_DPI_AT
     {
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
+        private static bool credentialFound = false;
+
         [TestVariable("b2c3d4e5-f6a7-8901-bcde-f12345678901")]
         public string UserName { get; set; }
 
@@ -44,30 +46,38 @@ namespace Lynn_DPI_AT
             Keyboard.DefaultKeyPressTime = 100;
             Delay.SpeedFactor = 1.00;
 
-            Report.Log(ReportLevel.Info, "LoginRetry", "Chờ login window...");
-            repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
+            if (credentialFound)
+            {
+                Report.Log(ReportLevel.Info, "LoginRetry",
+                    string.Format("Valid credential da tim thay truoc do. Skip CSV row '{0}'.", UserName));
+                return;
+            }
 
             Report.Log(ReportLevel.Info, "LoginRetry",
-                string.Format("Thử login với user '{0}'", UserName));
+                string.Format("Thu login voi user '{0}'...", UserName));
+
+            repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
+
+            Login_Pass.ClearLoginFields();
 
             bool success = Login_Pass.TryLoginWithUser(UserName, Password);
 
             if (success)
             {
-                Report.Log(ReportLevel.Info, "LoginRetry", "Validating main window...");
-                Validate.AttributeEqual(repo.CCIMainWindow.CreateOrOpenRecipeInfo,
-                    "Text", "Create or open recipe.");
-                Delay.Milliseconds(100);
+                Report.Log(ReportLevel.Success, "LoginRetry",
+                    string.Format("Login thanh cong voi user '{0}'.", UserName));
 
-                Report.Screenshot(ReportLevel.Info, "User", "Main window after login",
-                    repo.CCIMainWindow.CreateOrOpenRecipe, false, new RecordItemIndex(0));
-                Report.Screenshot(ReportLevel.Info, "User", "Full main window",
-                    repo.CCIMainWindow.Self, false, new RecordItemIndex(1));
+                Login_Pass.Instance.UserName = UserName;
+                Login_Pass.Instance.Password = Password;
+
+                credentialFound = true;
             }
             else
             {
-                throw new Ranorex.ValidationException(
-                    string.Format("Login thất bại với user '{0}'", UserName));
+                Report.Log(ReportLevel.Warn, "LoginRetry",
+                    string.Format("Login that bai voi user '{0}'. Neu khong co row nao thanh cong, default credentials se duoc dung.", UserName));
+
+                Login_Pass.ClearLoginFields();
             }
         }
     }
