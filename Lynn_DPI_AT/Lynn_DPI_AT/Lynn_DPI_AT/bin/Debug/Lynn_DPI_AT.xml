@@ -91,6 +91,12 @@
             instance to the <see cref="M:Ranorex.Core.Testing.TestModuleRunner.Run(Ranorex.Core.Testing.ITestModule)"/> method
             that will in turn invoke this method.</remarks>
         </member>
+        <member name="M:Lynn_DPI_AT.Login_Pass.Init">
+            <summary>
+            This method gets called right after the recording has been started.
+            It can be used to execute recording specific initialization code.
+            </summary>
+        </member>
         <member name="T:Lynn_DPI_AT.Logout">
              <summary>
             The Logout recording.
