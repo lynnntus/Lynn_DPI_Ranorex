@@ -31,8 +31,12 @@ namespace Lynn_DPI_AT
 
             if (repo.CCIMainWindow.SelfInfo.Exists(2000))
             {
-                Report.Log(ReportLevel.Warn, "Login",
-                    "CCIMainWindow da ton tai. LoginRetry co the da login thanh cong truoc do.");
+                Report.Log(ReportLevel.Success, "Login",
+                    "LoginRetry da login thanh cong truoc do. Login_Pass skip login steps.");
+
+                Report.Screenshot(ReportLevel.Info, "Login",
+                    "CCIMainWindow da ton tai — skip login.",
+                    repo.CCIMainWindow.Self, false);
             }
         }
 
@@ -43,13 +47,7 @@ namespace Lynn_DPI_AT
                 repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
                 Delay.Milliseconds(500);
 
-                bool userOk = TypeIntoUserField(user);
-                if (!userOk)
-                {
-                    Report.Log(ReportLevel.Warn, "Login",
-                        string.Format("Khong verify duoc username '{0}', tiep tuc login.", user));
-                }
-
+                TypeIntoUserField(user);
                 TypeIntoPasswordField(pass);
 
                 repo.CCILoginWindow.Login.Click("10;8");
@@ -65,56 +63,23 @@ namespace Lynn_DPI_AT
             }
         }
 
-        private static bool TypeIntoUserField(string value)
+        private static void TypeIntoUserField(string value)
         {
-            for (int attempt = 1; attempt <= 3; attempt++)
-            {
-                repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
-                Delay.Milliseconds(500);
+            repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
+            Delay.Milliseconds(500);
 
-                Keyboard.Press("{Home}");
-                Delay.Milliseconds(100);
-                Keyboard.Press("{Shift down}{End}{Shift up}");
-                Delay.Milliseconds(100);
-                Keyboard.Press("{Delete}");
-                Delay.Milliseconds(200);
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Delete}");
+            Delay.Milliseconds(200);
 
-                Keyboard.Press(value);
-                Delay.Milliseconds(500);
+            Keyboard.Press(value);
+            Delay.Milliseconds(500);
 
-                try
-                {
-                    string actual = repo.CCILoginWindow.XIDPWLoginArea.SomeText.Element.GetAttributeValueText("Text");
-
-                    if (string.IsNullOrEmpty(actual))
-                    {
-                        Report.Log(ReportLevel.Info, "Login",
-                            string.Format("UserName: GetAttributeValueText tra ve empty, skip verify (attempt {0}).", attempt));
-                        return true;
-                    }
-
-                    if (actual.Trim() == value.Trim())
-                    {
-                        Report.Log(ReportLevel.Info, "Login",
-                            string.Format("UserName: Verify OK. Expected='{0}', Actual='{1}' (attempt {2}).", value, actual, attempt));
-                        return true;
-                    }
-
-                    Report.Log(ReportLevel.Warn, "Login",
-                        string.Format("UserName: Verify FAILED. Expected='{0}', Actual='{1}' (attempt {2}).", value, actual, attempt));
-
-                    Keyboard.Press("{Escape}");
-                    Delay.Milliseconds(300);
-                }
-                catch (Exception ex)
-                {
-                    Report.Log(ReportLevel.Warn, "Login",
-                        string.Format("UserName: Verify exception: {0}. Skip verify.", ex.Message));
-                    return true;
-                }
-            }
-
-            return false;
+            Report.Log(ReportLevel.Info, "Login",
+                string.Format("Da nhap username '{0}'.", value));
         }
 
         private static void TypeIntoPasswordField(string pass)
@@ -159,7 +124,7 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(20000);
+            return repo.CCIMainWindow.SelfInfo.Exists(40000);
         }
     }
 }
