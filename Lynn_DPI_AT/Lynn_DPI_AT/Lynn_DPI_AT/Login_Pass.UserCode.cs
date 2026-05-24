@@ -124,7 +124,7 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(40000);
+            return repo.CCIMainWindow.SelfInfo.Exists(60000);
         }
     }
 }
