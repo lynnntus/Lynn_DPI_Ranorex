@@ -38,6 +38,8 @@ namespace Lynn_DPI_AT
         {
             try
             {
+                repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
+
                 repo.CCILoginWindow.XIDPWLoginArea.SomeText.Click("47;2");
                 Delay.Milliseconds(200);
                 Keyboard.Press("{Control}a");
