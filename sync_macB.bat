@@ -24,9 +24,9 @@ if not "%STATUS%"=="" (
     echo [CANH BAO] Ban co file chua push!
     echo.
     echo Cac file chua push:
-    echo ----------------------------------------
+    echo ========================================
     git status --short
-    echo ----------------------------------------
+    echo ========================================
     echo.
     echo Hay chay push_macB.bat truoc roi quay lai day.
     echo.
