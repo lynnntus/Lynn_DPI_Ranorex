@@ -8,8 +8,12 @@
     <Element value="Login_Pass.rxrec" />
     <Element value="Login_Pass.UserCode.cs" />
     <Element value="Logout.rxrec" />
+    <Element value="Recording1.rxrec" />
   </Array>
   <Properties name="projectSavedData">
+    <Properties name="customTool">
+      <runOnBuild value="False" />
+    </Properties>
     <Array name="recentusercodeselections" />
   </Properties>
 </Properties>

@@ -133,6 +133,39 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			searchtimeout="30000ms">
 				/form[@title='CCIMainWindow']/container[@automationid='WindowTitleBarPanel']/text/button[7]
 			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="61562d2a-c372-439a-89c4-7b1cc865cf35"
+			name="LeftMenuOpenToogleButton"
+			refimgid="106b2fdb-76c4-41a0-96b1-712c2692f42f"
+			refpath="/form[@title='CCIMainWindow']/container[@automationid='WindowTitleBarPanel']/container/button[@automationid='LeftMenuOpenToogleButton']"
+			robustPath="/form[@title='CCIMainWindow']//button[@automationid='LeftMenuOpenToogleButton']"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/container[@automationid='WindowTitleBarPanel']/?/?/button[@automationid='LeftMenuOpenToogleButton']
+			</item>
+			<item
+			addcaps="indicator,wpfelement,wpfgroupelement"
+			capname="indicator"
+			id="9a218138-9e43-4ae1-9552-8a075e56667f"
+			name="SomeIndicator"
+			refimgid="1963418a-e530-45cf-be5c-861b3cc3c11d"
+			refpath="/form[@title='CCIMainWindow']/indicator[1]"
+			robustPath="/form[@title='CCIMainWindow']/indicator[1]"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/indicator[1]
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="1331a4f5-770d-435c-9543-0d016a69fe0e"
+			name="Text"
+			refimgid="c101769d-e93f-4244-8b29-8142df2657c6"
+			refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[1]/table[@automationid='DevGrid']/table/container[8]/row[1]/cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']"
+			robustPath="/form[@title='CCIMainWindow']//text[@automationid='Text']"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/table[@automationid='DevGrid']//cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']
+			</item>
 			<basepath>
 				/form[@title='CCIMainWindow']
 			</basepath>
@@ -282,6 +315,50 @@ UFit6os1hgJ03J3QJZrrFHB8hReiALW3wlBg+bMtmpBM/4gjsGfqGQq1ZWjfi8xOSf363ILl8aeM
 I0CU3y1ClRegdnWB0KXRm0sDHDpxFecnLiMWi6HRaNiBXWfnMHzusUM4euoSJqem4ff7EQwGEYlE
 kEqlUKlUIMuyEZhJreDghYcYO3MdJ8evwefzIRAI8DGj0Siy2SxKpRKq1SokSUK73YaiKIZsjnw+
 j0QigXQ6DZoLgsDvWK/XBzc6hsu1BRMfpP7Bj/TsAAAAAElFTkSuQmCC
+			</icon>
+		</appfolder>
+		<appfolder
+		addcaps="form,nativewindow"
+		capname="form"
+		id="e603f9b6-a8b1-4722-89a2-cfe80a1d5a95"
+		isrooted="True"
+		name="SelectRecipeFile"
+		refpath="/form[@title='Select Recipe File']"
+		searchtimeout="30000ms"
+		usecache="True">
+			<item
+			addcaps="button,nativewindow"
+			capname="button"
+			id="829245ec-40d8-4f1c-9839-d7e703858b02"
+			name="ButtonOpen"
+			refimgid="ca5e8844-1552-4c8b-b338-156ea3a238cd"
+			refpath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
+			robustPath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
+			searchtimeout="30000ms">
+				/form[@title='Select Recipe File']/button[@text='&amp;Open']
+			</item>
+			<basepath>
+				/form[@title='Select Recipe File']
+			</basepath>
+			<icon>
+				iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAOOSURBVDhPbZJ/UNNlHMe/Xd1FAW1EQFfpOKvr
+ImHCxUWCDNDYpjCHMc5tjLEx2HeDMXOATLABDSa5sSQG5NLNgKAWIMsfVH9gGNWpFHecGklpHikY
+6amAJ+7Lu2+wrqvz9d/n7v16P89zz4f4P3KTKUC1uzVBUt5p2KbvdGwpOujYJGsxcLLMCRyOPMAf
+ezCl9c4YdaPXnW8ZnhGbT1Oit89CUDGCdO0glSzrnInf3HQ4NskY44//F02DO73QNjSRZ78Asf0K
+cmxX8ebeKWTWXAKv4hw45AheFXnwcnLjxEsxeq5fW0Fd18wusA39JG//DQrXTSjd88h33UXegQVs
+338bWQ3Xwd01iSTVd3hlczdWra2eYLEk65ZlnY73qNra7yZdkyB7bkPTuwhtnw/Fn1H0TNGF9yFp
+WUCWZRbcsotIkJ7EmtfeR9gzyg4WixVAkCZbAukYntZ8MgvtkUW8dZxC1ZcUTF9QqDxKodhDQXbI
+h2z7HDL2/I4U9Q+ITu9G6HO6mbAwThJRWN9uKHKOUmTXNWh6bqDqxF3s/ZqCZYhC7VcrJX/fRNJ2
+DwLzn0gtOQ925gCeiiyjmMyU3YTKctChcY5Cd+hn7Pz4Giq886ikT981SMFw1Adtrw8FHYuQtM5B
+WH8daaUXwN56DKGRlQgKSnQRqoa2Vu2Ho6junYZ5cB5l3kXoB3wo6feB9NyHsuseZM472G7/AwLT
+JaRqR8HO6EPIqp10QfxHhLxmX3lR2ymqtHsaOzx3oPcsQNezAE3XPAoPz0HhvAVp8yxElilsqTyP
+DcqTiNrowhMRiqXg4CgzITcaE1V270yx6yKK3VNQH7gCleMy8t/7FXnWSeQ1TiCn9hyExjFwdd/j
+dfHn9C9Y8TiTfyMkhMUnsrMTHlO809alsg+hoOkMFPvGILeMQ2Yeh7hmDKKq0xAaToFLHkdy7qdY
+x/8A4c+XIDAozruawQhZ3oUcgyFeWtX+S27tMeTWjUBa9yMkdePIqR6j5W/BJ08gWdqBOJ4VLPYO
+BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
+/+WhlG2SRJ6i/AiffPcmT9OytEnlQJKkCWvT9yw9Gy2/xYxYP0i/m0dnH1lRHgCbzWbGpr2RGZ26
+1fbiekE/K44/EP7ChuYnn44SBQYGhvtjfgjiL7Wu7l4LodGqAAAAAElFTkSuQmCC
 			</icon>
 		</appfolder>
 		<basepath>
