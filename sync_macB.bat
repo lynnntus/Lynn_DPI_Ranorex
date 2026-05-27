@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 cd /d "D:\RanorexProjects\Lynn_DPI_Ranorex"
 
 echo.
@@ -21,7 +20,9 @@ if not "%STATUS%"=="" (
     echo ----------------------------------------
     echo.
     echo Hay chay push_macB.bat truoc roi quay lai day.
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 echo Khong co file thay doi local. Dang pull code moi tu Git...
@@ -34,7 +35,9 @@ if errorlevel 1 (
     echo   PULL THAT BAI!
     echo   Chup man hinh nay va gui cho may A.
     echo ========================================
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 echo.
@@ -44,7 +47,5 @@ echo   Hay mo Ranorex Studio:
 echo     Build  -^>  Rebuild Solution
 echo   roi chay test.
 echo ========================================
-
-:END
 echo.
 pause

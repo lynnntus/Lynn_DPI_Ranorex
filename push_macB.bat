@@ -1,5 +1,4 @@
 @echo off
-chcp 65001 >nul
 cd /d "D:\RanorexProjects\Lynn_DPI_Ranorex"
 
 echo.
@@ -15,7 +14,8 @@ set /p STATUS=<"%TEMP%\git_status.tmp"
 if "%STATUS%"=="" (
     echo Khong co file moi, khong can push.
     echo.
-    goto :END
+    pause
+    goto :EOF
 )
 
 echo Cac file da thay doi:
@@ -28,7 +28,9 @@ set /p CONFIRM="Ban co muon push cac file nay len Git? (Y/N): "
 if /i not "%CONFIRM%"=="Y" (
     echo.
     echo Da huy. Khong push gi ca.
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 echo.
@@ -44,7 +46,9 @@ if errorlevel 1 (
     echo.
     echo [LOI] Git add that bai!
     echo Push THAT BAI! Chup man hinh nay va gui cho may A.
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 git commit -m "%MSG%"
@@ -52,7 +56,9 @@ if errorlevel 1 (
     echo.
     echo [LOI] Git commit that bai!
     echo Push THAT BAI! Chup man hinh nay va gui cho may A.
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 git push origin main
@@ -62,7 +68,9 @@ if errorlevel 1 (
     echo   PUSH THAT BAI!
     echo   Chup man hinh nay va gui cho may A.
     echo ========================================
-    goto :END
+    echo.
+    pause
+    goto :EOF
 )
 
 echo.
@@ -70,7 +78,5 @@ echo ========================================
 echo   PUSH THANH CONG!
 echo   Hay bao may A de sua code.
 echo ========================================
-
-:END
 echo.
 pause
