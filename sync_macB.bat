@@ -9,8 +9,8 @@ echo.
 echo Dang kiem tra trang thai...
 echo.
 
-git status --porcelain > "D:\git_status.tmp"
-set /p STATUS=<"D:\git_status.tmp"
+set STATUS=
+for /f "tokens=*" %%i in ('git status --porcelain') do set STATUS=%%i
 if not "%STATUS%"=="" (
     echo [CANH BAO] Ban co file chua push!
     echo.
