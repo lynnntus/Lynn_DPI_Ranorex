@@ -9,8 +9,8 @@ echo.
 echo Dang kiem tra thay doi...
 echo.
 
-git status --porcelain > "%TEMP%\git_status.tmp"
-set /p STATUS=<"%TEMP%\git_status.tmp"
+git status --porcelain > "D:\git_status.tmp"
+set /p STATUS=<"D:\git_status.tmp"
 if "%STATUS%"=="" (
     echo Khong co file moi, khong can push.
     echo.
