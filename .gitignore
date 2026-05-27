@@ -1,0 +1,5 @@
+bin/ 
+obj/ 
+*.rxlog 
+*.rxlog.data 
+*.rxsettings 
