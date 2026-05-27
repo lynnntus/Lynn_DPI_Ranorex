@@ -42,6 +42,9 @@ namespace Lynn_DPI_AT
 
         public static bool TryLoginWithUser(string user, string pass)
         {
+            Report.Log(ReportLevel.Info, "Login",
+                "BAT DAU CHAY VAO HAM TryLoginWithUser");
+
             try
             {
                 repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
@@ -51,7 +54,10 @@ namespace Lynn_DPI_AT
                 TypeIntoPasswordField(pass);
 
                 repo.CCILoginWindow.Login.Click("10;8");
-                Delay.Milliseconds(200);
+
+                Report.Log(ReportLevel.Info, "Login",
+                    string.Format("Da click Login voi user '{0}'. Cho 30 giay de ung dung xu ly...", user));
+                Delay.Milliseconds(30000);
 
                 return IsLoginSuccessful();
             }
@@ -124,7 +130,38 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(60000);
+            Report.Log(ReportLevel.Info, "Login",
+                "Kiem tra CCIMainWindow co xuat hien khong (cho toi da 40 giay)...");
+
+            bool mainWindowExists = repo.CCIMainWindow.SelfInfo.Exists(40000);
+
+            if (mainWindowExists)
+            {
+                try
+                {
+                    Validate.AttributeEqual(repo.CCIMainWindow.CreateOrOpenRecipeInfo,
+                        "Text", "Create or open recipe.");
+                    Report.Log(ReportLevel.Success, "Login",
+                        "Login THANH CONG — CCIMainWindow va 'Create or open recipe.' da xuat hien.");
+                }
+                catch (Exception ex)
+                {
+                    Report.Log(ReportLevel.Warn, "Login",
+                        string.Format("CCIMainWindow ton tai nhung validate 'Create or open recipe.' that bai: {0}", ex.Message));
+                }
+
+                Report.Screenshot(ReportLevel.Info, "Login",
+                    "Trang thai UI sau khi login thanh cong.",
+                    repo.CCIMainWindow.Self, false);
+
+                return true;
+            }
+            else
+            {
+                Report.Log(ReportLevel.Failure, "Login",
+                    "Login THAT BAI — CCIMainWindow KHONG xuat hien sau 40 giay.");
+                return false;
+            }
         }
     }
 }

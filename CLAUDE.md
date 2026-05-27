@@ -51,6 +51,11 @@ string pass = this.Password;
 | [.claude/rules/testing.md](.claude/rules/testing.md) | Data source CSV, lưu ý phát triển thêm |
 | [.claude/rules/data_binding.md](.claude/rules/data_binding.md) | Cấu hình CsvDataConnector, thêm CSV mới, kiểm tra binding |
 
+### Bài học
+| File | Nội dung |
+|------|----------|
+| [.claude/lessons/login-retry-lesson.md](.claude/lessons/login-retry-lesson.md) | Bài học từ debug login: WPF input, call chain, Init() limitations |
+
 ### Workflow
 | File | Nội dung |
 |------|----------|
