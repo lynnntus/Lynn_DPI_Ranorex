@@ -28,9 +28,9 @@ if "%STATUS%"=="" (
 )
 
 echo Cac file da thay doi:
-echo ----------------------------------------
+echo ========================================
 git status --short
-echo ----------------------------------------
+echo ========================================
 echo.
 
 set /p CONFIRM="Ban co muon push cac file nay len Git? (Y/N): "
