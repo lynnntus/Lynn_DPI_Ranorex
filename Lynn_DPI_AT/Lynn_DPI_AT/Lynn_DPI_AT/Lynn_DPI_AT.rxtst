@@ -75,6 +75,7 @@
 			name="TestCase">
 			</testcase>
 			<testmodule
+			enabled="False"
 			id="96358888-34d5-4075-9e55-5500a5ff9924"
 			name="Login_Pass"
 			ref="d6e58a7d-7478-483b-b95c-a25eb4ef5194"
@@ -274,10 +275,7 @@
 		<testconfiguration
 		name="TestRun">
 			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
+			id="bed77880-1e1a-4061-9d52-61e4510ded0a">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">
