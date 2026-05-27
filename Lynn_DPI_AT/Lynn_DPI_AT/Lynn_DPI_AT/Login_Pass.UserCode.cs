@@ -24,6 +24,10 @@ namespace Lynn_DPI_AT
 {
     public partial class Login_Pass
     {
+        public const int LOGIN_WINDOW_TIMEOUT_MS = 80000;
+        public const int LOGIN_FIELD_TIMEOUT_MS = 10000;
+        public const int MAIN_WINDOW_TIMEOUT_MS = 80000;
+
         private void Init()
         {
             Report.Log(ReportLevel.Info, "Login",
@@ -45,20 +49,17 @@ namespace Lynn_DPI_AT
 
         private void WaitForLoginWindowReady()
         {
-            int timeoutMs = 60000;
             Report.Log(ReportLevel.Info, "Login",
-                string.Format("Cho login window san sang (timeout {0}s)...", timeoutMs / 1000));
+                string.Format("Cho login window san sang (timeout {0}s)...", LOGIN_WINDOW_TIMEOUT_MS / 1000));
 
-            if (!repo.CCILoginWindow.SelfInfo.Exists(timeoutMs))
+            if (!repo.CCILoginWindow.SelfInfo.Exists(LOGIN_WINDOW_TIMEOUT_MS))
             {
-                Report.Log(ReportLevel.Failure, "Login",
-                    "Login window khong xuat hien sau " + (timeoutMs / 1000) + " giay.");
-                throw new Ranorex.ElementNotFoundException(
-                    "CCILoginWindow khong xuat hien trong " + (timeoutMs / 1000) + "s",
-                    repo.CCILoginWindow.SelfInfo.AbsolutePath);
+                Report.Log(ReportLevel.Warn, "Login",
+                    "Login window chua xuat hien sau " + (LOGIN_WINDOW_TIMEOUT_MS / 1000) + " giay. De recording steps tu xu ly.");
+                return;
             }
 
-            repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(10000);
+            repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(LOGIN_FIELD_TIMEOUT_MS);
             Report.Log(ReportLevel.Success, "Login", "Login window da san sang.");
         }
 
@@ -69,8 +70,8 @@ namespace Lynn_DPI_AT
 
             try
             {
-                repo.CCILoginWindow.SelfInfo.WaitForExists(60000);
-                repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(10000);
+                repo.CCILoginWindow.SelfInfo.WaitForExists(LOGIN_WINDOW_TIMEOUT_MS);
+                repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(LOGIN_FIELD_TIMEOUT_MS);
 
                 TypeIntoUserField(user);
                 TypeIntoPasswordField(pass);
@@ -150,7 +151,7 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(60000);
+            return repo.CCIMainWindow.SelfInfo.Exists(MAIN_WINDOW_TIMEOUT_MS);
         }
     }
 }

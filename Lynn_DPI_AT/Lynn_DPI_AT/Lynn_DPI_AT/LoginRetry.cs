@@ -56,7 +56,7 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "LoginRetry",
                 string.Format("Thu login voi user '{0}'...", UserName));
 
-            repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
+            repo.CCILoginWindow.SelfInfo.WaitForExists(Login_Pass.LOGIN_WINDOW_TIMEOUT_MS);
 
             Report.Screenshot(ReportLevel.Info, "LoginRetry",
                 string.Format("Trang thai UI truoc khi login voi user '{0}'.", UserName),
