@@ -26,7 +26,14 @@ namespace Lynn_DPI_AT
     {
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
+        public const int LOGIN_WINDOW_EXIST_CHECK_MS = 5000;
+
         private static bool credentialFound = false;
+
+        public static void ResetState()
+        {
+            credentialFound = false;
+        }
 
         [TestVariable("b2c3d4e5-f6a7-8901-bcde-f12345678901")]
         public string UserName { get; set; }
@@ -53,10 +60,23 @@ namespace Lynn_DPI_AT
                 return;
             }
 
+            if (repo.CCIMainWindow.SelfInfo.Exists(2000))
+            {
+                Report.Log(ReportLevel.Success, "LoginRetry",
+                    "CCIMainWindow da ton tai — skip login.");
+                credentialFound = true;
+                return;
+            }
+
             Report.Log(ReportLevel.Info, "LoginRetry",
                 string.Format("Thu login voi user '{0}'...", UserName));
 
-            repo.CCILoginWindow.SelfInfo.WaitForExists(Login_Pass.LOGIN_WINDOW_TIMEOUT_MS);
+            if (!repo.CCILoginWindow.SelfInfo.Exists(Login_Pass.LOGIN_WINDOW_TIMEOUT_MS))
+            {
+                Report.Log(ReportLevel.Warn, "LoginRetry",
+                    "Login window khong xuat hien. Check lai app.");
+                return;
+            }
 
             Report.Screenshot(ReportLevel.Info, "LoginRetry",
                 string.Format("Trang thai UI truoc khi login voi user '{0}'.", UserName),
@@ -77,13 +97,30 @@ namespace Lynn_DPI_AT
             else
             {
                 Report.Log(ReportLevel.Warn, "LoginRetry",
-                    string.Format("Login that bai voi user '{0}'. Neu khong co row nao thanh cong, default credentials se duoc dung.", UserName));
+                    string.Format("Login that bai voi user '{0}'.", UserName));
 
-                Report.Screenshot(ReportLevel.Warn, "LoginRetry",
-                    string.Format("Login that bai voi user '{0}'. Screenshot de debug.", UserName),
-                    repo.CCILoginWindow.Self, false);
+                if (repo.CCILoginWindow.SelfInfo.Exists(LOGIN_WINDOW_EXIST_CHECK_MS))
+                {
+                    Report.Screenshot(ReportLevel.Warn, "LoginRetry",
+                        string.Format("Login that bai voi user '{0}'. Screenshot de debug.", UserName),
+                        repo.CCILoginWindow.Self, false);
 
-                Login_Pass.ClearLoginFields();
+                    Login_Pass.ClearLoginFields();
+                }
+                else if (repo.CCIMainWindow.SelfInfo.Exists(Login_Pass.POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS))
+                {
+                    Report.Log(ReportLevel.Success, "LoginRetry",
+                        string.Format("Main window xuat hien muon — login '{0}' thanh cong.", UserName));
+
+                    Login_Pass.Instance.UserName = UserName;
+                    Login_Pass.Instance.Password = Password;
+                    credentialFound = true;
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Warn, "LoginRetry",
+                        "Login window bien mat nhung main window khong xuat hien. App co the da crash.");
+                }
             }
         }
     }

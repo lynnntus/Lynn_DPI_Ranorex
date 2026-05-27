@@ -27,6 +27,8 @@ namespace Lynn_DPI_AT
         public const int LOGIN_WINDOW_TIMEOUT_MS = 80000;
         public const int LOGIN_FIELD_TIMEOUT_MS = 10000;
         public const int MAIN_WINDOW_TIMEOUT_MS = 80000;
+        public const int POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS = 120000;
+        public const int POST_LOGIN_POLL_INTERVAL_MS = 2000;
 
         private void Init()
         {
@@ -84,8 +86,15 @@ namespace Lynn_DPI_AT
             }
             catch (Exception ex)
             {
-                Report.Log(ReportLevel.Error, "Login",
-                    string.Format("Loi khi thu login voi user '{0}': {1}", user, ex.Message));
+                Report.Log(ReportLevel.Warn, "Login",
+                    string.Format("Exception khi login voi user '{0}': {1}. Check main window truoc khi ket luan fail...", user, ex.Message));
+
+                if (repo.CCIMainWindow.SelfInfo.Exists(POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS))
+                {
+                    Report.Log(ReportLevel.Success, "Login",
+                        "CCIMainWindow xuat hien sau exception — login thanh cong.");
+                    return true;
+                }
                 return false;
             }
         }
@@ -151,7 +160,38 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(MAIN_WINDOW_TIMEOUT_MS);
+            return WaitForMainWindowAfterLogin();
+        }
+
+        private static bool WaitForMainWindowAfterLogin()
+        {
+            int elapsed = 0;
+
+            while (elapsed < POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS)
+            {
+                if (repo.CCIMainWindow.SelfInfo.Exists(POST_LOGIN_POLL_INTERVAL_MS))
+                {
+                    Report.Log(ReportLevel.Success, "Login",
+                        string.Format("CCIMainWindow xuat hien sau {0}s.", elapsed / 1000));
+                    return true;
+                }
+
+                elapsed += POST_LOGIN_POLL_INTERVAL_MS;
+
+                bool loginWindowGone = !repo.CCILoginWindow.SelfInfo.Exists(1000);
+                elapsed += 1000;
+
+                if (loginWindowGone)
+                {
+                    Report.Log(ReportLevel.Info, "Login",
+                        string.Format("Login window da bien mat, app dang load... ({0}s/{1}s)",
+                            elapsed / 1000, POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS / 1000));
+                }
+            }
+
+            Report.Log(ReportLevel.Warn, "Login",
+                string.Format("CCIMainWindow khong xuat hien sau {0}s.", POST_LOGIN_MAIN_WINDOW_TIMEOUT_MS / 1000));
+            return false;
         }
     }
 }

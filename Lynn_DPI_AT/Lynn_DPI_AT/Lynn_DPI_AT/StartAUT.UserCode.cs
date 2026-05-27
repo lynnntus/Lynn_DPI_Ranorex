@@ -30,7 +30,9 @@ namespace Lynn_DPI_AT
         /// </summary>
         private void Init()
         {
-            // Your recording specific initialization code goes here.
+            LoginRetry.ResetState();
+            Report.Log(ReportLevel.Info, "StartAUT",
+                "Da reset LoginRetry.credentialFound cho lan chay moi.");
         }
 
     }
