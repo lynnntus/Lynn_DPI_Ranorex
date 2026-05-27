@@ -100,7 +100,7 @@ namespace Lynn_DPI_AT
         void ITestModule.Run()
         {
             Mouse.DefaultMoveTime = 300;
-            Keyboard.DefaultKeyPressTime = 100;
+            Keyboard.DefaultKeyPressTime = 20;
             Delay.SpeedFactor = 1.00;
 
             Init();
@@ -110,7 +110,7 @@ namespace Lynn_DPI_AT
             Delay.Milliseconds(200);
             
             Report.Log(ReportLevel.Info, "Keyboard", "Key sequence from variable '$UserName'.", new RecordItemIndex(1));
-            Keyboard.Press(UserName);
+            Keyboard.Press(UserName, 100);
             Delay.Milliseconds(0);
             
             Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCILoginWindow.XIDPWLoginArea.XPWWatermark' at 36;6.", repo.CCILoginWindow.XIDPWLoginArea.XPWWatermarkInfo, new RecordItemIndex(2));
@@ -118,7 +118,7 @@ namespace Lynn_DPI_AT
             Delay.Milliseconds(200);
             
             Report.Log(ReportLevel.Info, "Keyboard", "Key sequence from variable '$Password'.", new RecordItemIndex(3));
-            Keyboard.Press(Password);
+            Keyboard.Press(Password, 100);
             Delay.Milliseconds(0);
             
             Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCILoginWindow.Login' at 10;8.", repo.CCILoginWindow.LoginInfo, new RecordItemIndex(4));

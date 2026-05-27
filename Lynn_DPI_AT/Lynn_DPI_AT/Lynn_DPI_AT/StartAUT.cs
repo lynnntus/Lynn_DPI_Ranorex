@@ -87,7 +87,7 @@ namespace Lynn_DPI_AT
         void ITestModule.Run()
         {
             Mouse.DefaultMoveTime = 300;
-            Keyboard.DefaultKeyPressTime = 100;
+            Keyboard.DefaultKeyPressTime = 20;
             Delay.SpeedFactor = 1.00;
 
             Init();
