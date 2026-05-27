@@ -3,3 +3,5 @@ obj/
 *.rxlog 
 *.rxlog.data 
 *.rxsettings 
+bin/ 
+obj/ 

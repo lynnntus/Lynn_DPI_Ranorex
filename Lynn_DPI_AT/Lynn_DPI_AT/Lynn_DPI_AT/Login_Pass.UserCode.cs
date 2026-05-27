@@ -54,10 +54,15 @@ namespace Lynn_DPI_AT
                 TypeIntoPasswordField(pass);
 
                 repo.CCILoginWindow.Login.Click("10;8");
+<<<<<<< HEAD
 
                 Report.Log(ReportLevel.Info, "Login",
                     string.Format("Da click Login voi user '{0}'. Cho 30 giay de ung dung xu ly...", user));
                 Delay.Milliseconds(30000);
+=======
+                Report.Log(ReportLevel.Info, "Login", "Da click Login. Cho 30 giay de man hinh load...");
+                Delay.Milliseconds(3000);
+>>>>>>> cfee66633293b13f105f0cf7c002b821af911567
 
                 return IsLoginSuccessful();
             }
@@ -130,6 +135,7 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
+<<<<<<< HEAD
             Report.Log(ReportLevel.Info, "Login",
                 "Kiem tra CCIMainWindow co xuat hien khong (cho toi da 40 giay)...");
 
@@ -162,6 +168,9 @@ namespace Lynn_DPI_AT
                     "Login THAT BAI — CCIMainWindow KHONG xuat hien sau 40 giay.");
                 return false;
             }
+=======
+            return repo.CCIMainWindow.SelfInfo.Exists(40000);
+>>>>>>> cfee66633293b13f105f0cf7c002b821af911567
         }
     }
 }

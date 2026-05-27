@@ -125,14 +125,14 @@ namespace Lynn_DPI_AT
             repo.CCILoginWindow.Login.Click("10;8");
             Delay.Milliseconds(200);
             
-            Report.Log(ReportLevel.Info, "Delay", "Waiting for 12s.", new RecordItemIndex(5));
-            Delay.Duration(12000, false);
+            Report.Log(ReportLevel.Info, "Delay", "Waiting for 30s.", new RecordItemIndex(5));
+            Delay.Duration(30000, false);
             
             Report.Log(ReportLevel.Info, "Wait", "Waiting 20s to exist. Associated repository item: 'CCIMainWindow'", repo.CCIMainWindow.SelfInfo, new ActionTimeout(20000), new RecordItemIndex(6));
             repo.CCIMainWindow.SelfInfo.WaitForExists(20000);
             
             Report.Log(ReportLevel.Info, "Validation", "Validating AttributeEqual (Text='Create or open recipe.') on item 'CCIMainWindow.CreateOrOpenRecipe'.", repo.CCIMainWindow.CreateOrOpenRecipeInfo, new RecordItemIndex(7));
-            Validate.AttributeEqual(repo.CCIMainWindow.CreateOrOpenRecipeInfo, "Text", "Create or open recipe.");
+            Validate.AttributeEqual(repo.CCIMainWindow.CreateOrOpenRecipeInfo, "Text", "Create or open recipe.", null, new Validate.Options(){ReportScreenshot=Validate.ResultOption.Always});
             Delay.Milliseconds(100);
             
             Report.Screenshot(ReportLevel.Info, "User", "", repo.CCIMainWindow.CreateOrOpenRecipe, false, new RecordItemIndex(8));
