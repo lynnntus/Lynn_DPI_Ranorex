@@ -55,7 +55,7 @@ namespace Lynn_DPI_AT
                     "Login window khong xuat hien sau " + (timeoutMs / 1000) + " giay.");
                 throw new Ranorex.ElementNotFoundException(
                     "CCILoginWindow khong xuat hien trong " + (timeoutMs / 1000) + "s",
-                    repo.CCILoginWindow.SelfInfo);
+                    repo.CCILoginWindow.SelfInfo.AbsolutePath);
             }
 
             repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(10000);
