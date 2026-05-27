@@ -1,7 +1,10 @@
 bin/ 
 obj/ 
-*.rxlog 
-*.rxlog.data 
-*.rxsettings 
-bin/ 
-obj/ 
+*.rxlog
+*.rxlog.data
+*.rxsettings
+*.rxlog.lnk
+**/Reports/*.lnk
+**/Reports/*.rxlog.lnk
+bin/
+obj/

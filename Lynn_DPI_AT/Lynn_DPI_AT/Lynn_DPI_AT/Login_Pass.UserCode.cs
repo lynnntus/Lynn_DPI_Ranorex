@@ -37,7 +37,29 @@ namespace Lynn_DPI_AT
                 Report.Screenshot(ReportLevel.Info, "Login",
                     "CCIMainWindow da ton tai — skip login.",
                     repo.CCIMainWindow.Self, false);
+                return;
             }
+
+            WaitForLoginWindowReady();
+        }
+
+        private void WaitForLoginWindowReady()
+        {
+            int timeoutMs = 60000;
+            Report.Log(ReportLevel.Info, "Login",
+                string.Format("Cho login window san sang (timeout {0}s)...", timeoutMs / 1000));
+
+            if (!repo.CCILoginWindow.SelfInfo.Exists(timeoutMs))
+            {
+                Report.Log(ReportLevel.Failure, "Login",
+                    "Login window khong xuat hien sau " + (timeoutMs / 1000) + " giay.");
+                throw new Ranorex.ElementNotFoundException(
+                    "CCILoginWindow khong xuat hien trong " + (timeoutMs / 1000) + "s",
+                    repo.CCILoginWindow.SelfInfo);
+            }
+
+            repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(10000);
+            Report.Log(ReportLevel.Success, "Login", "Login window da san sang.");
         }
 
         public static bool TryLoginWithUser(string user, string pass)
@@ -47,15 +69,15 @@ namespace Lynn_DPI_AT
 
             try
             {
-                repo.CCILoginWindow.SelfInfo.WaitForExists(30000);
-                Delay.Milliseconds(500);
+                repo.CCILoginWindow.SelfInfo.WaitForExists(60000);
+                repo.CCILoginWindow.XIDPWLoginArea.SomeTextInfo.WaitForExists(10000);
 
                 TypeIntoUserField(user);
                 TypeIntoPasswordField(pass);
 
                 repo.CCILoginWindow.Login.Click("10;8");
-                Report.Log(ReportLevel.Info, "Login", "Da click Login. Cho 30 giay de man hinh load...");
-                Delay.Milliseconds(3000);
+                Report.Log(ReportLevel.Info, "Login",
+                    "Da click Login. Smart wait cho main window...");
 
                 return IsLoginSuccessful();
             }
@@ -128,7 +150,7 @@ namespace Lynn_DPI_AT
 
         public static bool IsLoginSuccessful()
         {
-            return repo.CCIMainWindow.SelfInfo.Exists(40000);
+            return repo.CCIMainWindow.SelfInfo.Exists(60000);
         }
     }
 }
