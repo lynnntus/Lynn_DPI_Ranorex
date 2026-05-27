@@ -1,6 +1,15 @@
 @echo off
 cd /d "D:\RanorexProjects\Lynn_DPI_Ranorex"
 
+set REMOTE_URL=
+for /f "tokens=*" %%i in ('git remote get-url origin') do set REMOTE_URL=%%i
+echo %REMOTE_URL% | findstr /i "https://" >nul
+if not errorlevel 1 (
+    git remote set-url origin git@github.com:lynnntus/Lynn_DPI_Ranorex.git
+    echo Da chuyen sang SSH.
+    echo.
+)
+
 echo.
 echo ========================================
 echo   PULL CODE TU GIT VE MAY B
