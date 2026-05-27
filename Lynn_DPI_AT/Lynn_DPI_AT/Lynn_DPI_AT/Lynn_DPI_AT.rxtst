@@ -212,14 +212,6 @@
 						</teardown>
 					</testcase>
 					<testcase
-					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
-					name="Logout">
-						<testmodule
-						id="8bce43af-0c7b-4dc9-ad07-16b0eba7a5b1"
-						name="Logout">
-						</testmodule>
-					</testcase>
-					<testcase
 					id="3d1682f4-1614-490d-9714-819edec40d65"
 					name="SmokeTest">
 						<testmodule
@@ -240,6 +232,14 @@
 						</testmodule>
 						<testmodule
 						id="db56bd37-53c2-4db5-b317-dff5bc08120c"
+						name="Logout">
+						</testmodule>
+					</testcase>
+					<testcase
+					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
+					name="Logout">
+						<testmodule
+						id="8bce43af-0c7b-4dc9-ad07-16b0eba7a5b1"
 						name="Logout">
 						</testmodule>
 					</testcase>
