@@ -27,12 +27,8 @@ namespace Lynn_DPI_AT
         // Timeout cho Select Recipe File dialog (ms)
         public const int FILE_DIALOG_TIMEOUT_MS = 30000;
 
-        // Data-driven variables — bind trong Ranorex Studio: Data binding -> RecipeFilePath / ExpectedFileName
-        [TestVariable("d4e5f6a7-b8c9-0123-def0-123456789013")]
-        public string RecipeFilePath { get; set; }
-
-        [TestVariable("e5f6a7b8-c9d0-1234-ef01-234567890124")]
-        public string ExpectedFileName { get; set; }
+        // NOTE: RecipeFilePath va ExpectedFileName duoc dinh nghia trong OpenFile.cs #region Variables,
+        // auto-generated boi Ranorex Studio tu .rxrec. KHONG khai bao lai o day — gay CS0102.
 
         /// <summary>
         /// This method gets called right after the recording has been started.
@@ -40,8 +36,7 @@ namespace Lynn_DPI_AT
         /// </summary>
         private void Init()
         {
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("OpenFile bat dau, RecipeFilePath: '{0}'", RecipeFilePath));
+            Report.Log(ReportLevel.Info, "OpenFile", "OpenFile bat dau.");
             // NOTE (R3): Init() KHONG the skip recording steps.
             // OpenRecipeFileByPath() phai duoc goi tu User Code Action step trong Ranorex Studio.
         }
