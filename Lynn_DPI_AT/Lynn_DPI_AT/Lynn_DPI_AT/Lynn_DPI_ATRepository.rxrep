@@ -166,6 +166,28 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			searchtimeout="30000ms">
 				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/table[@automationid='DevGrid']//cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']
 			</item>
+			<item
+			addcaps="indicator,wpfelement,wpfgroupelement"
+			capname="indicator"
+			id="bded332f-bdf3-40ec-9168-48857d170949"
+			name="SomeIndicator1"
+			refimgid="880dc227-a8bc-4e92-8d81-fc30d70242ff"
+			refpath="/form[@title='CCIMainWindow']/indicator[2]"
+			robustPath="/form[@title='CCIMainWindow']/indicator[2]"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/indicator[2]
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="d4b6b860-3698-49af-a31c-7a02f71e64d8"
+			name="SomeText"
+			refimgid="41a8aefe-2787-46e8-8d94-aee48fd1c4e1"
+			refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[1]/container[@automationid='View']/container[@caption='']/container[@caption='']/text[@caption='Lynn_Array_BadMark']/text[@caption='']"
+			robustPath="/form[@title='CCIMainWindow']//text[@caption='Lynn_Array_BadMark']/text[@caption='']"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/text[@caption='']
+			</item>
 			<basepath>
 				/form[@title='CCIMainWindow']
 			</basepath>
@@ -337,8 +359,74 @@ j0QigXQ6DZoLgsDvWK/XBzc6hsu1BRMfpP7Bj/TsAAAAAElFTkSuQmCC
 			searchtimeout="30000ms">
 				/form[@title='Select Recipe File']/button[@text='&amp;Open']
 			</item>
+			<item
+			addcaps="text,uiautomation,uiautomationvalue"
+			capname="text"
+			id="56977f94-f427-4225-94f5-476e9cca2afa"
+			name="SystemItemNameDisplay"
+			refimgid="3d2ba37e-beab-495c-8d4b-0b0b7a94f05b"
+			refpath="/form[@title='Select Recipe File']/element[@class='DUIViewWndClassName']/container/element[@class='CtrlNotifySink' and @instance='1']/container/container/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']"
+			robustPath="/form[@title='Select Recipe File']//listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']"
+			searchtimeout="30000ms">
+				/form[@title='Select Recipe File']/element[@class='DUIViewWndClassName']//container[@caption='ShellView']/?/?/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']
+			</item>
+			<item
+			addcaps="text,nativewindow"
+			capname="text"
+			id="1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe"
+			name="Text1148"
+			refimgid="677453c0-2199-4b41-9c1b-14970549ed65"
+			refpath="/form[@title='Select Recipe File']/combobox[@controlid='1148']/text[@controlid='1148']"
+			robustPath="/form[@title='Select Recipe File']/?/?/text[@controlid='1148']"
+			searchtimeout="30000ms">
+				/form[@title='Select Recipe File']/?/?/text[@controlid='1148']
+			</item>
 			<basepath>
 				/form[@title='Select Recipe File']
+			</basepath>
+			<icon>
+				iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAOOSURBVDhPbZJ/UNNlHMe/Xd1FAW1EQFfpOKvr
+ImHCxUWCDNDYpjCHMc5tjLEx2HeDMXOATLABDSa5sSQG5NLNgKAWIMsfVH9gGNWpFHecGklpHikY
+6amAJ+7Lu2+wrqvz9d/n7v16P89zz4f4P3KTKUC1uzVBUt5p2KbvdGwpOujYJGsxcLLMCRyOPMAf
+ezCl9c4YdaPXnW8ZnhGbT1Oit89CUDGCdO0glSzrnInf3HQ4NskY44//F02DO73QNjSRZ78Asf0K
+cmxX8ebeKWTWXAKv4hw45AheFXnwcnLjxEsxeq5fW0Fd18wusA39JG//DQrXTSjd88h33UXegQVs
+338bWQ3Xwd01iSTVd3hlczdWra2eYLEk65ZlnY73qNra7yZdkyB7bkPTuwhtnw/Fn1H0TNGF9yFp
+WUCWZRbcsotIkJ7EmtfeR9gzyg4WixVAkCZbAukYntZ8MgvtkUW8dZxC1ZcUTF9QqDxKodhDQXbI
+h2z7HDL2/I4U9Q+ITu9G6HO6mbAwThJRWN9uKHKOUmTXNWh6bqDqxF3s/ZqCZYhC7VcrJX/fRNJ2
+DwLzn0gtOQ925gCeiiyjmMyU3YTKctChcY5Cd+hn7Pz4Giq886ikT981SMFw1Adtrw8FHYuQtM5B
+WH8daaUXwN56DKGRlQgKSnQRqoa2Vu2Ho6junYZ5cB5l3kXoB3wo6feB9NyHsuseZM472G7/AwLT
+JaRqR8HO6EPIqp10QfxHhLxmX3lR2ymqtHsaOzx3oPcsQNezAE3XPAoPz0HhvAVp8yxElilsqTyP
+DcqTiNrowhMRiqXg4CgzITcaE1V270yx6yKK3VNQH7gCleMy8t/7FXnWSeQ1TiCn9hyExjFwdd/j
+dfHn9C9Y8TiTfyMkhMUnsrMTHlO809alsg+hoOkMFPvGILeMQ2Yeh7hmDKKq0xAaToFLHkdy7qdY
+x/8A4c+XIDAozruawQhZ3oUcgyFeWtX+S27tMeTWjUBa9yMkdePIqR6j5W/BJ08gWdqBOJ4VLPYO
+BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
+/+WhlG2SRJ6i/AiffPcmT9OytEnlQJKkCWvT9yw9Gy2/xYxYP0i/m0dnH1lRHgCbzWbGpr2RGZ26
+1fbiekE/K44/EP7ChuYnn44SBQYGhvtjfgjiL7Wu7l4LodGqAAAAAElFTkSuQmCC
+			</icon>
+		</appfolder>
+		<appfolder
+		addcaps="form,nativewindow"
+		capname="form"
+		id="23424671-3a56-4425-84dc-73dc9dbe4a63"
+		isrooted="True"
+		name="KohyoungGUI"
+		refpath="/form[@title='']"
+		searchtimeout="30000ms"
+		usecache="True">
+			<item
+			addcaps="cell"
+			capname="cell"
+			id="96e231d0-1bf3-46a9-95f3-4d9bbfff0396"
+			name="LynnArrayBadMarkKyjob"
+			refimgid="68b3f3dc-7a6b-4578-806f-3c65a92135cc"
+			refpath="/form[@title='']/table/row/cell[@text='Lynn_Array_BadMark.kyjob']"
+			robustPath="/form[@title='']//cell[@text='Lynn_Array_BadMark.kyjob']"
+			searchtimeout="30000ms">
+				/form[@title='']/table[@class='SysListView32']/?/?/cell[@text='Lynn_Array_BadMark.kyjob']
+			</item>
+			<basepath>
+				/form[@title='']
 			</basepath>
 			<icon>
 				iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACx

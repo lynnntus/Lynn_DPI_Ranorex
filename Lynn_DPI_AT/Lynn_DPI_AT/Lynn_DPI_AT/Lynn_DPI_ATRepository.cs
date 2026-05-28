@@ -33,6 +33,7 @@ namespace Lynn_DPI_AT
         Lynn_DPI_ATRepositoryFolders.LynnDPIATAppFolder _lynndpiat;
         Lynn_DPI_ATRepositoryFolders.ExplorerAppFolder _explorer;
         Lynn_DPI_ATRepositoryFolders.SelectRecipeFileAppFolder _selectrecipefile;
+        Lynn_DPI_ATRepositoryFolders.KohyoungGUIAppFolder _kohyounggui;
 
         /// <summary>
         /// Gets the singleton class instance representing the Lynn_DPI_ATRepository element repository.
@@ -55,6 +56,7 @@ namespace Lynn_DPI_AT
             _lynndpiat = new Lynn_DPI_ATRepositoryFolders.LynnDPIATAppFolder(this);
             _explorer = new Lynn_DPI_ATRepositoryFolders.ExplorerAppFolder(this);
             _selectrecipefile = new Lynn_DPI_ATRepositoryFolders.SelectRecipeFileAppFolder(this);
+            _kohyounggui = new Lynn_DPI_ATRepositoryFolders.KohyoungGUIAppFolder(this);
         }
 
 #region Variables
@@ -125,6 +127,15 @@ namespace Lynn_DPI_AT
         public virtual Lynn_DPI_ATRepositoryFolders.SelectRecipeFileAppFolder SelectRecipeFile
         {
             get { return _selectrecipefile; }
+        }
+
+        /// <summary>
+        /// The KohyoungGUI folder.
+        /// </summary>
+        [RepositoryFolder("23424671-3a56-4425-84dc-73dc9dbe4a63")]
+        public virtual Lynn_DPI_ATRepositoryFolders.KohyoungGUIAppFolder KohyoungGUI
+        {
+            get { return _kohyounggui; }
         }
     }
 
@@ -340,6 +351,8 @@ namespace Lynn_DPI_AT
             RepoItemInfo _leftmenuopentooglebuttonInfo;
             RepoItemInfo _someindicatorInfo;
             RepoItemInfo _textInfo;
+            RepoItemInfo _someindicator1Info;
+            RepoItemInfo _sometextInfo;
 
             /// <summary>
             /// Creates a new CCIMainWindow  folder.
@@ -352,6 +365,8 @@ namespace Lynn_DPI_AT
                 _leftmenuopentooglebuttonInfo = new RepoItemInfo(this, "LeftMenuOpenToogleButton", "container[@automationid='WindowTitleBarPanel']/?/?/button[@automationid='LeftMenuOpenToogleButton']", ".//button[@automationid='LeftMenuOpenToogleButton']", 30000, null, "61562d2a-c372-439a-89c4-7b1cc865cf35");
                 _someindicatorInfo = new RepoItemInfo(this, "SomeIndicator", "indicator[1]", "indicator[1]", 30000, null, "9a218138-9e43-4ae1-9552-8a075e56667f");
                 _textInfo = new RepoItemInfo(this, "Text", "container[@automationid='MainView']/?/?/table[@automationid='DevGrid']//cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']", ".//text[@automationid='Text']", 30000, null, "1331a4f5-770d-435c-9543-0d016a69fe0e");
+                _someindicator1Info = new RepoItemInfo(this, "SomeIndicator1", "indicator[2]", "indicator[2]", 30000, null, "bded332f-bdf3-40ec-9168-48857d170949");
+                _sometextInfo = new RepoItemInfo(this, "SomeText", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/text[@caption='']", ".//text[@caption='Lynn_Array_BadMark']/text[@caption='']", 30000, null, "d4b6b860-3698-49af-a31c-7a02f71e64d8");
             }
 
             /// <summary>
@@ -495,6 +510,54 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _textInfo;
+                }
+            }
+
+            /// <summary>
+            /// The SomeIndicator1 item.
+            /// </summary>
+            [RepositoryItem("bded332f-bdf3-40ec-9168-48857d170949")]
+            public virtual Ranorex.Indicator SomeIndicator1
+            {
+                get
+                {
+                    return _someindicator1Info.CreateAdapter<Ranorex.Indicator>(true);
+                }
+            }
+
+            /// <summary>
+            /// The SomeIndicator1 item info.
+            /// </summary>
+            [RepositoryItemInfo("bded332f-bdf3-40ec-9168-48857d170949")]
+            public virtual RepoItemInfo SomeIndicator1Info
+            {
+                get
+                {
+                    return _someindicator1Info;
+                }
+            }
+
+            /// <summary>
+            /// The SomeText item.
+            /// </summary>
+            [RepositoryItem("d4b6b860-3698-49af-a31c-7a02f71e64d8")]
+            public virtual Ranorex.Text SomeText
+            {
+                get
+                {
+                    return _sometextInfo.CreateAdapter<Ranorex.Text>(true);
+                }
+            }
+
+            /// <summary>
+            /// The SomeText item info.
+            /// </summary>
+            [RepositoryItemInfo("d4b6b860-3698-49af-a31c-7a02f71e64d8")]
+            public virtual RepoItemInfo SomeTextInfo
+            {
+                get
+                {
+                    return _sometextInfo;
                 }
             }
         }
@@ -730,6 +793,8 @@ namespace Lynn_DPI_AT
         public partial class SelectRecipeFileAppFolder : RepoGenBaseFolder
         {
             RepoItemInfo _buttonopenInfo;
+            RepoItemInfo _systemitemnamedisplayInfo;
+            RepoItemInfo _text1148Info;
 
             /// <summary>
             /// Creates a new SelectRecipeFile  folder.
@@ -738,6 +803,8 @@ namespace Lynn_DPI_AT
                     base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, true, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
             {
                 _buttonopenInfo = new RepoItemInfo(this, "ButtonOpen", "button[@text='&Open']", "button[@text='&Open']", 30000, null, "829245ec-40d8-4f1c-9839-d7e703858b02");
+                _systemitemnamedisplayInfo = new RepoItemInfo(this, "SystemItemNameDisplay", "element[@class='DUIViewWndClassName']//container[@caption='ShellView']/?/?/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", ".//listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", 30000, null, "56977f94-f427-4225-94f5-476e9cca2afa");
+                _text1148Info = new RepoItemInfo(this, "Text1148", "?/?/text[@controlid='1148']", "?/?/text[@controlid='1148']", 30000, null, "1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe");
             }
 
             /// <summary>
@@ -785,6 +852,120 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _buttonopenInfo;
+                }
+            }
+
+            /// <summary>
+            /// The SystemItemNameDisplay item.
+            /// </summary>
+            [RepositoryItem("56977f94-f427-4225-94f5-476e9cca2afa")]
+            public virtual Ranorex.Text SystemItemNameDisplay
+            {
+                get
+                {
+                    return _systemitemnamedisplayInfo.CreateAdapter<Ranorex.Text>(true);
+                }
+            }
+
+            /// <summary>
+            /// The SystemItemNameDisplay item info.
+            /// </summary>
+            [RepositoryItemInfo("56977f94-f427-4225-94f5-476e9cca2afa")]
+            public virtual RepoItemInfo SystemItemNameDisplayInfo
+            {
+                get
+                {
+                    return _systemitemnamedisplayInfo;
+                }
+            }
+
+            /// <summary>
+            /// The Text1148 item.
+            /// </summary>
+            [RepositoryItem("1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe")]
+            public virtual Ranorex.Text Text1148
+            {
+                get
+                {
+                    return _text1148Info.CreateAdapter<Ranorex.Text>(true);
+                }
+            }
+
+            /// <summary>
+            /// The Text1148 item info.
+            /// </summary>
+            [RepositoryItemInfo("1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe")]
+            public virtual RepoItemInfo Text1148Info
+            {
+                get
+                {
+                    return _text1148Info;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The KohyoungGUIAppFolder folder.
+        /// </summary>
+        [RepositoryFolder("23424671-3a56-4425-84dc-73dc9dbe4a63")]
+        public partial class KohyoungGUIAppFolder : RepoGenBaseFolder
+        {
+            RepoItemInfo _lynnarraybadmarkkyjobInfo;
+
+            /// <summary>
+            /// Creates a new KohyoungGUI  folder.
+            /// </summary>
+            public KohyoungGUIAppFolder(RepoGenBaseFolder parentFolder) :
+                    base("KohyoungGUI", "/form[@title='']", parentFolder, 30000, null, true, "23424671-3a56-4425-84dc-73dc9dbe4a63", "")
+            {
+                _lynnarraybadmarkkyjobInfo = new RepoItemInfo(this, "LynnArrayBadMarkKyjob", "table[@class='SysListView32']/?/?/cell[@text='Lynn_Array_BadMark.kyjob']", ".//cell[@text='Lynn_Array_BadMark.kyjob']", 30000, null, "96e231d0-1bf3-46a9-95f3-4d9bbfff0396");
+            }
+
+            /// <summary>
+            /// The Self item.
+            /// </summary>
+            [RepositoryItem("23424671-3a56-4425-84dc-73dc9dbe4a63")]
+            public virtual Ranorex.Form Self
+            {
+                get
+                {
+                    return _selfInfo.CreateAdapter<Ranorex.Form>(true);
+                }
+            }
+
+            /// <summary>
+            /// The Self item info.
+            /// </summary>
+            [RepositoryItemInfo("23424671-3a56-4425-84dc-73dc9dbe4a63")]
+            public virtual RepoItemInfo SelfInfo
+            {
+                get
+                {
+                    return _selfInfo;
+                }
+            }
+
+            /// <summary>
+            /// The LynnArrayBadMarkKyjob item.
+            /// </summary>
+            [RepositoryItem("96e231d0-1bf3-46a9-95f3-4d9bbfff0396")]
+            public virtual Ranorex.Cell LynnArrayBadMarkKyjob
+            {
+                get
+                {
+                    return _lynnarraybadmarkkyjobInfo.CreateAdapter<Ranorex.Cell>(true);
+                }
+            }
+
+            /// <summary>
+            /// The LynnArrayBadMarkKyjob item info.
+            /// </summary>
+            [RepositoryItemInfo("96e231d0-1bf3-46a9-95f3-4d9bbfff0396")]
+            public virtual RepoItemInfo LynnArrayBadMarkKyjobInfo
+            {
+                get
+                {
+                    return _lynnarraybadmarkkyjobInfo;
                 }
             }
         }

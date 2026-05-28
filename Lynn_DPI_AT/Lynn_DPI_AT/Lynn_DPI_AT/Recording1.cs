@@ -79,6 +79,10 @@ namespace Lynn_DPI_AT
 
             Init();
 
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator1' at 1868;130.", repo.CCIMainWindow.SomeIndicator1Info, new RecordItemIndex(0));
+            repo.CCIMainWindow.SomeIndicator1.Click("1868;130");
+            Delay.Milliseconds(0);
+            
         }
 
 #region Image Feature Data

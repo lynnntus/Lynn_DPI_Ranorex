@@ -170,6 +170,18 @@
       <RepositoryCode>true</RepositoryCode>
       <id>afccfc04-d917-445b-b5c3-d04db13265fb</id>
     </Compile>
+    <Compile Include="OpenFile.cs">
+      <BoundTo>30eee225-f293-4f15-8742-1352a2d9f31c</BoundTo>
+      <DependentUpon>OpenFile.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>857f3ed6-05db-417b-9fb5-14552b053623</id>
+    </Compile>
+    <Compile Include="OpenFile.UserCode.cs">
+      <BoundTo>30eee225-f293-4f15-8742-1352a2d9f31c</BoundTo>
+      <DependentUpon>OpenFile.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>54405134-8864-4a7f-af8c-3b3951edac3b</id>
+    </Compile>
     <Compile Include="Program.cs">
       <id>7181de22-0e81-46b7-9af4-f65fea7f3ba3</id>
     </Compile>
@@ -227,6 +239,11 @@
       <id>b8295835-9fc5-456e-b3bc-19800986597e</id>
       <repoid>414295e6-2100-449c-9668-76146e2e7237</repoid>
       <reporootid>0ee31be8-b7c0-4867-aed4-3f0533789467</reporootid>
+    </None>
+    <None Include="OpenFile.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>30eee225-f293-4f15-8742-1352a2d9f31c</id>
+      <recordtableid>a3004660-da32-4050-b6f0-948f53a8bf8f</recordtableid>
     </None>
     <None Include="Recording1.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
