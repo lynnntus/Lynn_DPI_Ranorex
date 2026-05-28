@@ -23,6 +23,14 @@ mode="Desktop">
 	namespace="Lynn_DPI_AT">
 	</codegen>
 	<variables>
+		<var
+		id="ec772759-a136-470a-a4dc-d70bcba8dcc6"
+		name="RecipeFilePath">
+		</var>
+		<var
+		id="39058ec5-a0e0-45e8-b26d-b8f070d00d63"
+		name="ExpectedFileName">
+		</var>
 	</variables>
 	<recorditems>
 		<mouseitem
@@ -668,7 +676,7 @@ S+ZH/wA8v/HqKiooA//Z
 		action="Down"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="73;203"
 		movetime="300ms"
 		optional="False"
@@ -1304,6 +1312,31 @@ AF626KLgYn/COR/89/8Axz/69H/COR/89/8Axz/69bdFFwMT/hHI/wDnv/45/wDXo/4RyP8A57/+
 Of8A1626KLgYn/COR/8APf8A8c/+vRW3RRcD/9k=
 			</helperscreenshot>
 		</mouseitem>
+		<userrecorditem
+		classname="OpenFile"
+		enabled="True"
+		isexternaltestmethod="False"
+		methodname="OpenRecipeFileByPath"
+		namespace="Lynn_DPI_AT"
+		optional="False">
+			<comment>
+			</comment>
+			<bindings>
+			</bindings>
+			<arguments
+			id="a217d3dc-5294-4ac8-886c-0eeb16db28fa">
+				<argument
+				argname="recipeFilePath"
+				id="22e10637-3211-45a9-8c2c-e68b791b61f3"
+				variable="RecipeFilePath">
+					<argvaluetype>
+						System.String
+					</argvaluetype>
+					<argvalue>
+					</argvalue>
+				</argument>
+			</arguments>
+		</userrecorditem>
 		<mouseitem
 		action="Down"
 		button="Left"
@@ -2293,7 +2326,7 @@ AFFFFABRRRQAUUUUAFFFFABRRRQB/9k=
 		<keysequenceitem
 		KeySequence="ay{LShiftKey down}_{LShiftKey up}BadMark.ky"
 		duration="20ms"
-		enabled="True"
+		enabled="False"
 		optional="False"
 		presstime="20ms"
 		searchpropertyid="210867b1-68fc-46df-8160-354b8e80567b">

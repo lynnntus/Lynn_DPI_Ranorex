@@ -3,14 +3,67 @@
 	<testsuiteentryhierarchy>
 		<flatlistofchildren>
 			<testcase
+			datasource="OpenFile"
 			id="21ad167a-be4e-4564-af1f-cca60a80e8ed"
 			name="OpenFile">
+				<parameters>
+					<param
+					mask="False"
+					name="RecipeFilePath"
+					value="">
+					</param>
+					<param
+					mask="False"
+					name="ExpectedFileName"
+					value="">
+					</param>
+				</parameters>
 			</testcase>
 			<testmodule
 			id="34d391e5-cdae-4239-8ad5-3c270f56ffdd"
 			name="OpenFile"
 			ref="a3004660-da32-4050-b6f0-948f53a8bf8f"
 			type="Recording">
+				<databinding>
+					<var
+					dataname="RecipeFilePath"
+					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
+					variableid="d4e5f6a7-b8c9-0123-def0-123456789013"
+					variablename="RecipeFilePath">
+					</var>
+					<var
+					dataname="ExpectedFileName"
+					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
+					variableid="e5f6a7b8-c9d0-1234-ef01-234567890124"
+					variablename="ExpectedFileName">
+					</var>
+					<var
+					dataname="RecipeFilePath"
+					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
+					variableid="ec772759-a136-470a-a4dc-d70bcba8dcc6"
+					variablename="RecipeFilePath">
+					</var>
+					<var
+					dataname="ExpectedFileName"
+					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
+					variableid="39058ec5-a0e0-45e8-b26d-b8f070d00d63"
+					variablename="ExpectedFileName">
+					</var>
+				</databinding>
+				<missingdatabinding>
+					<var
+					dataname="RecipeFilePath"
+					datasourceid="70f45d65-da1d-474f-8422-a91a17fc3532"
+					variableid="ec772759-a136-470a-a4dc-d70bcba8dcc6"
+					variablename="RecipeFilePath">
+					</var>
+					<var
+					dataname="ExpectedFileName"
+					datasourceid="70f45d65-da1d-474f-8422-a91a17fc3532"
+					variableid="39058ec5-a0e0-45e8-b26d-b8f070d00d63"
+					variablename="ExpectedFileName">
+					</var>
+				</missingdatabinding>
 			</testmodule>
 			<smartfoldernode
 			datarangeset="1,2"
@@ -287,6 +340,36 @@
 				D:\RanorexProjects\Lynn_DPI_Ranorex\TestData\Users.csv
 			</file>
 		</DataSource>
+		<DataSource
+		id="743d05d1-af7c-46c5-9f84-b4c3b5284904"
+		includefile="Unchecked"
+		lastknownrowcount="1"
+		name="OpenFile"
+		type="Ranorex.Core.Data.CsvDataConnector"
+		withheaders="True">
+			<lastknowncolumns>
+				<column>
+					CaseId
+				</column>
+				<column>
+					Enabled
+				</column>
+				<column>
+					RecipeFilePath
+				</column>
+				<column>
+					ExpectedFileName
+				</column>
+				<column>
+					Description
+				</column>
+			</lastknowncolumns>
+			<maskedcolumns>
+			</maskedcolumns>
+			<file>
+				D:\RanorexProjects\Lynn_DPI_Ranorex\TestData\OpenFileData.csv
+			</file>
+		</DataSource>
 	</datasources>
 	<testconfigurations
 	default="TestRun">
@@ -294,6 +377,12 @@
 		name="TestRun">
 			<testcontainer
 			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
+			</testcontainer>
+			<testcontainer
+			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
+			</testcontainer>
+			<testcontainer
+			id="3d1682f4-1614-490d-9714-819edec40d65">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">
