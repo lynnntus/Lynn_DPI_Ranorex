@@ -26,15 +26,17 @@ mode="Desktop">
 		<var
 		id="ec772759-a136-470a-a4dc-d70bcba8dcc6"
 		name="RecipeFilePath">
+			C:\Kohyoung\Job\Lynn_20260516_Stacking\Lynn_Stacking_Underfill.kyjob
 		</var>
 		<var
 		id="39058ec5-a0e0-45e8-b26d-b8f070d00d63"
 		name="ExpectedFileName">
+			Lynn_Stacking_Underfill.kyjob
 		</var>
 	</variables>
 	<recorditems>
 		<mouseitem
-		action="Down"
+		action="Click"
 		button="Left"
 		duration="300ms"
 		enabled="True"
@@ -673,7 +675,7 @@ S+ZH/wA8v/HqKiooA//Z
 			</helperscreenshot>
 		</mouseitem>
 		<mouseitem
-		action="Down"
+		action="Click"
 		button="Left"
 		duration="300ms"
 		enabled="False"
@@ -689,629 +691,27 @@ S+ZH/wA8v/HqKiooA//Z
 			<bindings>
 			</bindings>
 			<info
-			id="61562d2a-c372-439a-89c4-7b1cc865cf35"
+			id="471fd4a3-6be2-453b-9509-13c55c285448"
 			sourcename="Recorder">
-				<element
-				capabilities="wpfelement, wpfgroupelement"
-				dontcache="False"
-				enabled="True"
-				flavor="wpf"
-				hasfocus="False"
-				index="0"
-				prefcap="button"
-				rect="10,8,39,39"
-				role="button"
-				snapElem=""
-				valid="True"
-				visible="True">
-					<attribute
-					name="pressed"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="automationid"
-					type="System.String">
-						LeftMenuOpenToogleButton
-					</attribute>
-					<attribute
-					name="automationproperties_acceleratorkey"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="automationproperties_accesskey"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="automationproperties_helptext"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="automationproperties_iscolumnheader"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="automationproperties_isrequiredforform"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="automationproperties_isrowheader"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="automationproperties_itemstatus"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="automationproperties_itemtype"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="automationproperties_name"
-					type="System.String">
-					</attribute>
-					<attribute
-					name="basetype"
-					type="System.String">
-						System.Windows.Controls.Primitives.ToggleButton
-					</attribute>
-					<attribute
-					name="fulltype"
-					type="System.String">
-						Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton&gt;
-					</attribute>
-					<attribute
-					name="name"
-					type="System.String">
-						LeftMenuOpenToogleButton
-					</attribute>
-					<attribute
-					name="type"
-					type="System.String">
-						DepoGroup&lt;ToggleButton&gt;
-					</attribute>
-					<attribute
-					name="ranorexgroupleaderid"
-					type="System.Guid">
-						5ce22da5-3e09-4f6f-8777-c25a30f2aa34
-					</attribute>
-					<attribute
-					name="ranorexgroupmemberids"
-					type="System.Guid[]">
-						AAEAAAD/////AQAAAAAAAAAHAQAAAAABAAAACAAAAAMLU3lzdGVtLkd1aWQE/v///wtTeXN0ZW0u
-R3VpZAsAAAACX2ECX2ICX2MCX2QCX2UCX2YCX2cCX2gCX2kCX2oCX2sAAAAAAAAAAAAAAAgHBwIC
-AgICAgICpS3iXAk+b0+Hd8JaMPKqNAH9/////v///9+N3NZiUI9AqxpgZgXUxbYB/P////7///9q
-2jIajRV2Spjx6EPYvdclAfv////+////Gzd0ZhtzUkCn7diIgeqLOgH6/////v///7sFo5AlFTlC
-lHGoh1msB0IB+f////7///9AGVLmwD/KRpf+gktoBr3OAfj////+////gXoYqzzJv0ymIktTkiEU
-uQH3/////v////At8FT12vRAv2CSktB6gb8L
-					</attribute>
-					<attribute
-					name="ranorexgroupobjectid"
-					type="System.Guid">
-						52252fd1-b742-4000-a8ce-506d8df69faf
-					</attribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ActualHeight property of type Double."
-					name="ActualHeight"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ActualWidth property of type Double."
-					name="ActualWidth"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.AllowDrop property of type Boolean."
-					name="AllowDrop"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Background property of type Brush."
-					name="Background"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BackgroundColor property of type String."
-					name="BackgroundColor"
-					type="System.String">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BindingGroup property of type BindingGroup."
-					name="BindingGroup"
-					readonly="False"
-					type="System.Windows.Data.BindingGroup, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BitmapEffect property of type BitmapEffect."
-					name="BitmapEffect"
-					readonly="False"
-					type="System.Windows.Media.Effects.BitmapEffect, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BitmapEffectInput property of type BitmapEffectInput."
-					name="BitmapEffectInput"
-					readonly="False"
-					type="System.Windows.Media.Effects.BitmapEffectInput, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BorderBrush property of type Brush."
-					name="BorderBrush"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.BorderColor property of type String."
-					name="BorderColor"
-					type="System.String">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.CacheMode property of type CacheMode."
-					name="CacheMode"
-					readonly="False"
-					type="System.Windows.Media.CacheMode, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ClickMode property of type ClickMode."
-					name="ClickMode"
-					readonly="False"
-					type="System.Windows.Controls.ClickMode, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Clip property of type Geometry."
-					name="Clip"
-					readonly="False"
-					type="System.Windows.Media.Geometry, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ClipToBounds property of type Boolean."
-					name="ClipToBounds"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Column property of type Int32."
-					name="Column"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ColumnSpan property of type Int32."
-					name="ColumnSpan"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.CommandParameter property of type Object."
-					name="CommandParameter"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Content property of type Object."
-					name="Content"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ContentSource property of type String."
-					name="ContentSource"
-					readonly="False"
-					type="System.String">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ContentStringFormat property of type String."
-					name="ContentStringFormat"
-					readonly="False"
-					type="System.String">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ContextMenu property of type ContextMenu."
-					name="ContextMenu"
-					readonly="False"
-					type="System.Windows.Controls.ContextMenu, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Data property of type Geometry."
-					name="Data"
-					readonly="False"
-					type="System.Windows.Media.Geometry, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.DataContext property of type Object."
-					name="DataContext"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.DefaultStyleKey property of type Object."
-					name="DefaultStyleKey"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Effect property of type Effect."
-					name="Effect"
-					readonly="False"
-					type="System.Windows.Media.Effects.Effect, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Fill property of type Brush."
-					name="Fill"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.FlowDirection property of type FlowDirection."
-					name="FlowDirection"
-					readonly="False"
-					type="System.Windows.FlowDirection, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Focusable property of type Boolean."
-					name="Focusable"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.FontSize property of type Double."
-					name="FontSize"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ForceCursor property of type Boolean."
-					name="ForceCursor"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Foreground property of type Brush."
-					name="Foreground"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ForegroundColor property of type String."
-					name="ForegroundColor"
-					type="System.String">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.HasContent property of type Boolean."
-					name="HasContent"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Height property of type Double."
-					name="Height"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.HorizontalAlignment property of type HorizontalAlignment."
-					name="HorizontalAlignment"
-					readonly="False"
-					type="System.Windows.HorizontalAlignment, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.HorizontalContentAlignment property of type HorizontalAlignment."
-					name="HorizontalContentAlignment"
-					readonly="False"
-					type="System.Windows.HorizontalAlignment, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsChecked property of type Nullable`1."
-					name="IsChecked"
-					readonly="False"
-					type="System.Nullable`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsHitTestVisible property of type Boolean."
-					name="IsHitTestVisible"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsItemsHost property of type Boolean."
-					name="IsItemsHost"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsManipulationEnabled property of type Boolean."
-					name="IsManipulationEnabled"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsPressed property of type Boolean."
-					name="IsPressed"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsSharedSizeScope property of type Boolean."
-					name="IsSharedSizeScope"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsTabStop property of type Boolean."
-					name="IsTabStop"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.IsThreeState property of type Boolean."
-					name="IsThreeState"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.LayoutTransform property of type Transform."
-					name="LayoutTransform"
-					readonly="False"
-					type="System.Windows.Media.Transform, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.MaxHeight property of type Double."
-					name="MaxHeight"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.MaxWidth property of type Double."
-					name="MaxWidth"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.MinHeight property of type Double."
-					name="MinHeight"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.MinWidth property of type Double."
-					name="MinWidth"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Opacity property of type Double."
-					name="Opacity"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.OpacityMask property of type Brush."
-					name="OpacityMask"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.OverridesDefaultStyle property of type Boolean."
-					name="OverridesDefaultStyle"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.RecognizesAccessKey property of type Boolean."
-					name="RecognizesAccessKey"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.RenderTransform property of type Transform."
-					name="RenderTransform"
-					readonly="False"
-					type="System.Windows.Media.Transform, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.RenderTransformOrigin property of type Point."
-					name="RenderTransformOrigin"
-					readonly="False"
-					type="System.Windows.Point, WindowsBase, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Row property of type Int32."
-					name="Row"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.RowSpan property of type Int32."
-					name="RowSpan"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ShowGridLines property of type Boolean."
-					name="ShowGridLines"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.SnapsToDevicePixels property of type Boolean."
-					name="SnapsToDevicePixels"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Stretch property of type Stretch."
-					name="Stretch"
-					readonly="False"
-					type="System.Windows.Media.Stretch, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Stroke property of type Brush."
-					name="Stroke"
-					readonly="False"
-					type="System.Windows.Media.Brush, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeDashArray property of type DoubleCollection."
-					name="StrokeDashArray"
-					readonly="False"
-					type="System.Windows.Media.DoubleCollection, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeDashCap property of type PenLineCap."
-					name="StrokeDashCap"
-					readonly="False"
-					type="System.Windows.Media.PenLineCap, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeDashOffset property of type Double."
-					name="StrokeDashOffset"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeEndLineCap property of type PenLineCap."
-					name="StrokeEndLineCap"
-					readonly="False"
-					type="System.Windows.Media.PenLineCap, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeLineJoin property of type PenLineJoin."
-					name="StrokeLineJoin"
-					readonly="False"
-					type="System.Windows.Media.PenLineJoin, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeMiterLimit property of type Double."
-					name="StrokeMiterLimit"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeStartLineCap property of type PenLineCap."
-					name="StrokeStartLineCap"
-					readonly="False"
-					type="System.Windows.Media.PenLineCap, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.StrokeThickness property of type Double."
-					name="StrokeThickness"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.TabIndex property of type Int32."
-					name="TabIndex"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Tag property of type Object."
-					name="Tag"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ToolTip property of type Object."
-					name="ToolTip"
-					readonly="False"
-					type="System.Object">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Uid property of type String."
-					name="Uid"
-					readonly="False"
-					type="System.String"
-					weight="150">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.UseLayoutRounding property of type Boolean."
-					name="UseLayoutRounding"
-					readonly="False"
-					type="System.Boolean">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.VerticalAlignment property of type VerticalAlignment."
-					name="VerticalAlignment"
-					readonly="False"
-					type="System.Windows.VerticalAlignment, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.VerticalContentAlignment property of type VerticalAlignment."
-					name="VerticalContentAlignment"
-					readonly="False"
-					type="System.Windows.VerticalAlignment, PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Visibility property of type Visibility."
-					name="Visibility"
-					readonly="False"
-					type="System.Windows.Visibility, PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.Width property of type Double."
-					name="Width"
-					readonly="False"
-					type="System.Double">
-					</dynamicattribute>
-					<dynamicattribute
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ZIndex property of type Int32."
-					name="ZIndex"
-					readonly="False"
-					type="System.Int32">
-					</dynamicattribute>
-					<dynamicaction
-					description="The WPF Ranorex.Plugin.Wpf.DepoGroup&lt;System.Windows.Controls.Primitives.ToggleButton>.ToString method."
-					displayName="ToString">
-						<returns
-						description="Return value."
-						displayName="returns"
-						type="System.String">
-						</returns>
-					</dynamicaction>
-				</element>
 				<path>
-					/form[@title='CCIMainWindow']/container[@automationid='WindowTitleBarPanel']/?/?/button[@automationid='LeftMenuOpenToogleButton']
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[3]//button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']
 				</path>
 				<robustPath>
 				</robustPath>
 			</info>
-			<helperscreenshot
-			guid="598a84e9-8356-4230-afb0-82805bce66cf">
-				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
-Of8A1626KLgYn/COR/8APf8A8c/+vRW3RRcD/9k=
-			</helperscreenshot>
 		</mouseitem>
+		<keysequenceitem
+		KeySequence="{LControlKey down}o{LControlKey up}"
+		duration="20ms"
+		enabled="True"
+		optional="False"
+		presstime="20ms"
+		searchpropertyid="f5a670ad-5c00-4ba5-acbc-e762173b49e6">
+			<comment>
+			</comment>
+			<bindings>
+			</bindings>
+		</keysequenceitem>
 		<userrecorditem
 		classname="OpenFile"
 		enabled="True"
@@ -1341,7 +741,7 @@ Of8A1626KLgYn/COR/8APf8A8c/+vRW3RRcD/9k=
 		action="Down"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="174;11"
 		movetime="300ms"
 		optional="False"
@@ -1678,7 +1078,7 @@ RRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9k=
 		action="Up"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="174;11"
 		movetime="300ms"
 		optional="False"
@@ -2014,7 +1414,7 @@ RRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9k=
 		<keysequenceitem
 		KeySequence="Ly"
 		duration="20ms"
-		enabled="True"
+		enabled="False"
 		optional="False"
 		presstime="20ms"
 		searchpropertyid="06e2a65b-9d45-483d-94a9-791142f6f153">
@@ -2667,7 +2067,7 @@ BRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9k=
 		action="Click"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="39;11"
 		movetime="300ms"
 		optional="False"

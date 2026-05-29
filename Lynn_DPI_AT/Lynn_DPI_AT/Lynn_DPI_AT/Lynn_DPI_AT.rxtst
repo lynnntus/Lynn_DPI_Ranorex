@@ -28,18 +28,6 @@
 					<var
 					dataname="RecipeFilePath"
 					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
-					variableid="d4e5f6a7-b8c9-0123-def0-123456789013"
-					variablename="RecipeFilePath">
-					</var>
-					<var
-					dataname="ExpectedFileName"
-					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
-					variableid="e5f6a7b8-c9d0-1234-ef01-234567890124"
-					variablename="ExpectedFileName">
-					</var>
-					<var
-					dataname="RecipeFilePath"
-					datasourceid="743d05d1-af7c-46c5-9f84-b4c3b5284904"
 					variableid="ec772759-a136-470a-a4dc-d70bcba8dcc6"
 					variablename="RecipeFilePath">
 					</var>
@@ -377,12 +365,6 @@
 		name="TestRun">
 			<testcontainer
 			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
-			</testcontainer>
-			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">

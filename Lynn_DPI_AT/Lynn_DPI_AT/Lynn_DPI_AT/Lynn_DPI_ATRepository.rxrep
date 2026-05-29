@@ -188,6 +188,17 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			searchtimeout="30000ms">
 				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/text[@caption='']
 			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="471fd4a3-6be2-453b-9509-13c55c285448"
+			name="MenuOpenRecipe"
+			refimgid="2ed255e8-ae69-4c5c-b7cc-3f1cc5681a9c"
+			refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[3]/text[@caption='※ Some menus are disabled while inspection is in progress.']/container[@caption='']/container[@caption='']/button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']"
+			robustPath="/form[@title='CCIMainWindow']//text[@caption>'※ Some menus are disabled']/container[@caption='']/container[@caption='']/button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']"
+			searchtimeout="30000ms">
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[3]//button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']
+			</item>
 			<basepath>
 				/form[@title='CCIMainWindow']
 			</basepath>
