@@ -105,17 +105,17 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.LeftMenuOpenToogleButton' at 22;25.", repo.CCIMainWindow.LeftMenuOpenToogleButtonInfo, new RecordItemIndex(0));
-            repo.CCIMainWindow.LeftMenuOpenToogleButton.Click("22;25");
-            Delay.Milliseconds(0);
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.LeftMenuOpenToogleButton' at 22;25.", repo.CCIMainWindow.LeftMenuOpenToogleButtonInfo, new RecordItemIndex(0));
+            //repo.CCIMainWindow.LeftMenuOpenToogleButton.Click("22;25");
+            //Delay.Milliseconds(0);
             
             //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.MenuOpenRecipe' at 73;203.", repo.CCIMainWindow.MenuOpenRecipeInfo, new RecordItemIndex(1));
             //repo.CCIMainWindow.MenuOpenRecipe.Click("73;203");
             //Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Keyboard", "Key sequence '{LControlKey down}o{LControlKey up}'.", new RecordItemIndex(2));
-            Keyboard.Press("{LControlKey down}o{LControlKey up}");
-            Delay.Milliseconds(0);
+            //Report.Log(ReportLevel.Info, "Keyboard", "Key sequence '{LControlKey down}o{LControlKey up}'.", new RecordItemIndex(2));
+            //Keyboard.Press("{LControlKey down}o{LControlKey up}");
+            //Delay.Milliseconds(0);
             
             OpenRecipeFileByPath(RecipeFilePath);
             Delay.Milliseconds(0);

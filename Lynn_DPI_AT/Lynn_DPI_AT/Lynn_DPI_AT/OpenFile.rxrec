@@ -39,7 +39,7 @@ mode="Desktop">
 		action="Click"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="22;25"
 		movetime="300ms"
 		optional="False"
@@ -703,7 +703,7 @@ S+ZH/wA8v/HqKiooA//Z
 		<keysequenceitem
 		KeySequence="{LControlKey down}o{LControlKey up}"
 		duration="20ms"
-		enabled="True"
+		enabled="False"
 		optional="False"
 		presstime="20ms"
 		searchpropertyid="f5a670ad-5c00-4ba5-acbc-e762173b49e6">
