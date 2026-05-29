@@ -24,7 +24,6 @@ namespace Lynn_DPI_AT
 {
     public partial class OpenFile
     {
-        // Timeout cho Select Recipe File dialog (ms)
         public const int FILE_DIALOG_TIMEOUT_MS = 30000;
 
         // NOTE: RecipeFilePath va ExpectedFileName duoc dinh nghia trong OpenFile.cs #region Variables,
@@ -37,21 +36,74 @@ namespace Lynn_DPI_AT
         private void Init()
         {
             Report.Log(ReportLevel.Info, "OpenFile", "OpenFile bat dau.");
-            // NOTE (R3): Init() KHONG the skip recording steps.
-            // OpenRecipeFileByPath() phai duoc goi tu User Code Action step trong Ranorex Studio.
         }
 
         /// <summary>
-        /// Mo file recipe bang cach paste full path vao o File name cua dialog.
-        /// Goi method nay tu User Code Action step trong recording, sau khi dialog da xuat hien.
+        /// Mo file recipe theo path tu CSV: activate main window, gui Ctrl+O, cho dialog, paste path.
+        /// Goi method nay tu User Code Action step trong recording.
         ///
-        /// Cach them vao recording (Ranorex Studio, May B):
-        ///   1. Disable cac step Text1148 MouseDown/Up, PressKeys, ButtonOpen Click (step 2-6).
-        ///   2. Them User Code Action sau step 1 (LeftMenuOpenToogleButton): goi OpenRecipeFileByPath($RecipeFilePath).
-        ///   3. Bind column RecipeFilePath tu OpenFileData.csv -> module variable RecipeFilePath.
-        ///   4. CSV phai luu bang ANSI (khong dung UTF-8).
+        /// Yeu cau tren May B (Ranorex Studio):
+        ///   1. DISABLE step 0 (LeftMenuOpenToogleButton click).
+        ///   2. DISABLE step 2 (Keyboard Ctrl+O trong recording).
+        ///   3. Cap nhat User Code Action step goi OpenRecipeFileFromCsvPath($RecipeFilePath).
         /// </summary>
-        public void OpenRecipeFileByPath(string recipeFilePath)
+        public void OpenRecipeFileFromCsvPath(string recipeFilePath)
+        {
+            if (string.IsNullOrEmpty(recipeFilePath))
+                throw new ArgumentException("recipeFilePath khong duoc de trong.", "recipeFilePath");
+
+            if (!System.IO.File.Exists(recipeFilePath))
+                throw new System.IO.FileNotFoundException(
+                    string.Format("File khong ton tai: '{0}'", recipeFilePath), recipeFilePath);
+
+            // 1. Wait va activate main window — bat buoc truoc khi gui Ctrl+O
+            Report.Log(ReportLevel.Info, "OpenFile", "Cho CCIMainWindow ton tai (10s)...");
+            if (!repo.CCIMainWindow.SelfInfo.Exists(10000))
+                throw new Exception("CCIMainWindow khong ton tai sau 10s.");
+
+            repo.CCIMainWindow.Self.Activate();
+            Delay.Milliseconds(500);
+
+            // 2. Gui Ctrl+O sau khi focus da chuyen ve main window
+            Report.Log(ReportLevel.Info, "OpenFile", "Gui Ctrl+O de mo Select Recipe File dialog...");
+            Keyboard.Press("{LControlKey down}o{LControlKey up}");
+            Delay.Milliseconds(500);
+
+            // 3. Wait dialog xuat hien
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Cho Select Recipe File dialog (timeout {0}s)...", FILE_DIALOG_TIMEOUT_MS / 1000));
+            if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
+                throw new Exception(string.Format(
+                    "Select Recipe File dialog khong xuat hien sau {0}s. Ctrl+O co the bi intercept hoac focus sai.",
+                    FILE_DIALOG_TIMEOUT_MS / 1000));
+
+            // 4. Activate dialog, focus File name field, paste path
+            repo.SelectRecipeFile.Self.Activate();
+            Delay.Milliseconds(300);
+
+            // Alt+N: standard Windows file dialog shortcut de focus o File name
+            Keyboard.Press("{Alt down}n{Alt up}");
+            Delay.Milliseconds(500);
+
+            // Paste full path qua clipboard — tranh loi ky tu dac biet (\, space, _) khi dung PressKeys
+            Keyboard.Press("{Control down}a{Control up}");
+            Delay.Milliseconds(200);
+            WinForms.Clipboard.SetText(recipeFilePath);
+            Keyboard.Press("{Control down}v{Control up}");
+            Delay.Milliseconds(500);
+
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Da paste path '{0}' vao File name field.", recipeFilePath));
+
+            Keyboard.Press("{Return}");
+            Delay.Milliseconds(500);
+
+            Report.Log(ReportLevel.Success, "OpenFile",
+                string.Format("Da gui Enter de mo file '{0}'.", recipeFilePath));
+        }
+
+        // Kept for reference only — use OpenRecipeFileFromCsvPath() instead.
+        private void OpenRecipeFileByPath(string recipeFilePath)
         {
             if (string.IsNullOrEmpty(recipeFilePath))
                 throw new ArgumentException("recipeFilePath khong duoc de trong.", "recipeFilePath");
@@ -70,12 +122,9 @@ namespace Lynn_DPI_AT
             repo.SelectRecipeFile.Self.Activate();
             Delay.Milliseconds(300);
 
-            // Focus o File name: Alt+N la standard Windows file dialog shortcut
             Keyboard.Press("{Alt down}n{Alt up}");
             Delay.Milliseconds(500);
 
-            // Select all text hien tai, paste full path qua clipboard
-            // Dung clipboard thay vi Keyboard.Press vi path co ky tu dac biet (\, space, _)
             Keyboard.Press("{Control down}a{Control up}");
             Delay.Milliseconds(200);
             WinForms.Clipboard.SetText(recipeFilePath);
@@ -90,8 +139,6 @@ namespace Lynn_DPI_AT
 
             Report.Log(ReportLevel.Success, "OpenFile",
                 string.Format("Da press Enter de mo file '{0}'.", recipeFilePath));
-
-            // TODO: Replace with stable validation after recipe file is loaded.
         }
 
     }
