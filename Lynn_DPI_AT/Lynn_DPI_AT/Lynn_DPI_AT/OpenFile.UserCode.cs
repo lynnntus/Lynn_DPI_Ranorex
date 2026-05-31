@@ -130,9 +130,9 @@ namespace Lynn_DPI_AT
                 // Fallback V3: Ctrl+O bi block boi PCB viewer focus trap — dung menu click thay the
                 Report.Log(ReportLevel.Warn, "OpenFile",
                     "[Fallback V3] Ctrl+O that bai ca V1 va V2 — thu menu click: LeftMenuOpenToogleButton -> MenuOpenRecipe.");
-                repo.CCIMainWindow.LeftMenuOpenToogleButton.Click("22;25");
+                repo.CCIMainWindow.LeftMenuOpenToogleButton.Click();
                 Delay.Milliseconds(500);
-                repo.CCIMainWindow.MenuOpenRecipe.Click("73;203");
+                repo.CCIMainWindow.MenuOpenRecipe.Click();
                 Delay.Milliseconds(500);
 
                 if (repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
