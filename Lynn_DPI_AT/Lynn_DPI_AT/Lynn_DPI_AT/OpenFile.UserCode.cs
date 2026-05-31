@@ -130,7 +130,7 @@ namespace Lynn_DPI_AT
                 Report.Screenshot("OpenFile",
                     "Screenshot: Select Recipe File dialog khong xuat hien sau V1 va V2.");
                 throw new Exception(string.Format(
-                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys) va V2 (global Keyboard.Press). " +
+                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys) va V2 (global Keyboard.Press, cho {0}s). " +
                     "WPF command binding Ctrl+O co the khong duoc route. " +
                     "Fallback manual: thu menu click qua MenuOpenRecipe button trong Ranorex Studio.",
                     FILE_DIALOG_TIMEOUT_MS / 1000));
