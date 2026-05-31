@@ -5,15 +5,15 @@
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
-    <Element value="Login_Pass.UserCode.cs" />
-    <Element value="Login_Pass.rxrec" />
-    <Element value="LoginRetry.cs" />
-    <Element value="Logout.rxrec" />
+    <Element value="OpenFile.rxrec" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">
       <runOnBuild value="False" />
     </Properties>
-    <Array name="recentusercodeselections" />
+    <Array name="recentusercodeselections">
+      <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
+      <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
+    </Array>
   </Properties>
 </Properties>
