@@ -39,8 +39,9 @@ namespace Lynn_DPI_AT
         }
 
         /// <summary>
-        /// Mo file recipe theo path: activate main window, gui Ctrl+O, cho dialog, paste path.
+        /// Mo file recipe theo path: activate main window, reset WPF focus, gui Ctrl+O, cho dialog, paste path.
         /// Duoc goi tu User Code Action step trong recording.
+        /// Thu Ctrl+O theo 2 variant (PressKeys target-based, sau do global Keyboard.Press) truoc khi throw.
         /// </summary>
         public void OpenRecipeFileByPath(string recipeFilePath)
         {
@@ -51,36 +52,100 @@ namespace Lynn_DPI_AT
                 throw new System.IO.FileNotFoundException(
                     string.Format("File khong ton tai: '{0}'", recipeFilePath), recipeFilePath);
 
-            // 1. Wait va activate main window — bat buoc truoc khi gui Ctrl+O
-            Report.Log(ReportLevel.Info, "OpenFile", "Cho CCIMainWindow ton tai (10s)...");
+            // --- Buoc 1: Verify CCIMainWindow ton tai ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 1: Kiem tra CCIMainWindow ton tai (10s)...");
             if (!repo.CCIMainWindow.SelfInfo.Exists(10000))
                 throw new Exception("CCIMainWindow khong ton tai sau 10s.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 1 OK: CCIMainWindow ton tai.");
 
+            // --- Buoc 2: Activate CCIMainWindow (Win32 foreground) ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 2: Activate CCIMainWindow...");
             repo.CCIMainWindow.Self.Activate();
             Delay.Milliseconds(500);
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 2 OK: CCIMainWindow da activate.");
 
-            // 2. Gui Ctrl+O sau khi focus da chuyen ve main window
-            Report.Log(ReportLevel.Info, "OpenFile", "Gui Ctrl+O de mo Select Recipe File dialog...");
-            Keyboard.Press("{LControlKey down}o{LControlKey up}");
+            // --- Buoc 3: Click main window de reset WPF logical focus ---
+            // Activate() chi giai quyet Win32 focus. WPF co the restore focus ve element cu (vi du: title bar button).
+            // Click() tren Self set WPF keyboard focus ve content area — can thiet de Ctrl+O command routing dung.
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click CCIMainWindow de reset WPF logical focus...");
+            repo.CCIMainWindow.Self.Click();
+            Delay.Milliseconds(300);
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3 OK: Da click CCIMainWindow (WPF focus reset).");
+
+            // --- Buoc 4: Gui Ctrl+O — thu tung variant theo thu tu ---
+            // Syntax tu Ranorex recording: {LControlKey down}o{LControlKey up}
+            bool dialogOpened = false;
+
+            // Variant 1: PressKeys target-based tren CCIMainWindow.Self
+            // PressKeys explicit set focus len element qua UI Automation truoc khi gui keystroke.
+            // Tranh Win32 focus vs WPF logical focus gap cua global Keyboard.Press.
+            Report.Log(ReportLevel.Info, "OpenFile",
+                "[Ctrl+O V1] PressKeys target-based tren CCIMainWindow.Self...");
+            repo.CCIMainWindow.Self.PressKeys("{LControlKey down}o{LControlKey up}");
             Delay.Milliseconds(500);
 
-            // 3. Wait dialog xuat hien
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Cho Select Recipe File dialog (timeout {0}s)...", FILE_DIALOG_TIMEOUT_MS / 1000));
-            if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
-                throw new Exception(string.Format(
-                    "Select Recipe File dialog khong xuat hien sau {0}s. Ctrl+O co the bi intercept hoac focus sai.",
-                    FILE_DIALOG_TIMEOUT_MS / 1000));
+            Report.Log(ReportLevel.Info, "OpenFile", "[Ctrl+O V1] Kiem tra Select Recipe File dialog (5s)...");
+            if (repo.SelectRecipeFile.SelfInfo.Exists(5000))
+            {
+                dialogOpened = true;
+                Report.Log(ReportLevel.Success, "OpenFile", "[Ctrl+O V1] THANH CONG: dialog xuat hien.");
+            }
+            else
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile",
+                    "[Ctrl+O V1] Dialog chua xuat hien sau 5s — chuyen sang Variant 2.");
+            }
 
-            // 4. Activate dialog, focus File name field, paste path
+            if (!dialogOpened)
+            {
+                // Variant 2: Re-activate + Click + global Keyboard.Press
+                // Dam bao window la foreground va focus da reset truoc khi dung global send.
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    "[Ctrl+O V2] Re-activate + Self.Click + global Keyboard.Press...");
+                repo.CCIMainWindow.Self.Activate();
+                Delay.Milliseconds(500);
+                repo.CCIMainWindow.Self.Click();
+                Delay.Milliseconds(500);
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    "[Ctrl+O V2] Gui Ctrl+O via global Keyboard.Press...");
+                Keyboard.Press("{LControlKey down}o{LControlKey up}");
+                Delay.Milliseconds(500);
+
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[Ctrl+O V2] Cho Select Recipe File dialog ({0}s)...",
+                        FILE_DIALOG_TIMEOUT_MS / 1000));
+                if (repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
+                {
+                    dialogOpened = true;
+                    Report.Log(ReportLevel.Success, "OpenFile", "[Ctrl+O V2] THANH CONG: dialog xuat hien.");
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Error, "OpenFile", "[Ctrl+O V2] THAT BAI: dialog khong xuat hien.");
+                }
+            }
+
+            if (!dialogOpened)
+            {
+                Report.Screenshot("OpenFile",
+                    "Screenshot: Select Recipe File dialog khong xuat hien sau V1 va V2.");
+                throw new Exception(string.Format(
+                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys) va V2 (global Keyboard.Press). " +
+                    "WPF command binding Ctrl+O co the khong duoc route. " +
+                    "Fallback manual: thu menu click qua MenuOpenRecipe button trong Ranorex Studio.",
+                    FILE_DIALOG_TIMEOUT_MS / 1000));
+            }
+
+            // --- Buoc 5: Activate dialog, focus File name field, paste path ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Activate Select Recipe File dialog va nhap path...");
             repo.SelectRecipeFile.Self.Activate();
             Delay.Milliseconds(300);
 
-            // Alt+N: standard Windows file dialog shortcut de focus o File name
+            // Alt+N: Windows file dialog standard shortcut de focus File name field
             Keyboard.Press("{Alt down}n{Alt up}");
             Delay.Milliseconds(500);
 
-            // Paste full path qua clipboard — tranh loi ky tu dac biet (\, space, _) khi dung PressKeys
+            // Paste qua clipboard — tranh loi ky tu dac biet (\, space, _)
             Keyboard.Press("{Control down}a{Control up}");
             Delay.Milliseconds(200);
             WinForms.Clipboard.SetText(recipeFilePath);
