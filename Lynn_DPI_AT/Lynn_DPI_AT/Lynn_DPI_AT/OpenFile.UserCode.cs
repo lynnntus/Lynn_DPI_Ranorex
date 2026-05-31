@@ -127,12 +127,32 @@ namespace Lynn_DPI_AT
 
             if (!dialogOpened)
             {
-                Report.Screenshot("OpenFile",
-                    "Screenshot: Select Recipe File dialog khong xuat hien sau V1 va V2.");
+                // Fallback V3: Ctrl+O bi block boi PCB viewer focus trap — dung menu click thay the
+                Report.Log(ReportLevel.Warn, "OpenFile",
+                    "[Fallback V3] Ctrl+O that bai ca V1 va V2 — thu menu click: LeftMenuOpenToogleButton -> MenuOpenRecipe.");
+                repo.CCIMainWindow.LeftMenuOpenToogleButton.Click("22;25");
+                Delay.Milliseconds(500);
+                repo.CCIMainWindow.MenuOpenRecipe.Click("73;203");
+                Delay.Milliseconds(500);
+
+                if (repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
+                {
+                    dialogOpened = true;
+                    Report.Log(ReportLevel.Success, "OpenFile",
+                        "[Fallback V3] THANH CONG: dialog xuat hien qua menu click.");
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Error, "OpenFile",
+                        "[Fallback V3] THAT BAI: dialog khong xuat hien.");
+                }
+            }
+
+            if (!dialogOpened)
+            {
                 throw new Exception(string.Format(
-                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys) va V2 (global Keyboard.Press, cho {0}s). " +
-                    "WPF command binding Ctrl+O co the khong duoc route. " +
-                    "Fallback manual: thu menu click qua MenuOpenRecipe button trong Ranorex Studio.",
+                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys), V2 (global Keyboard.Press), va V3 (menu click, cho {0}s). " +
+                    "Kiem tra lai trang thai Neptune va RxPath repository.",
                     FILE_DIALOG_TIMEOUT_MS / 1000));
             }
 
