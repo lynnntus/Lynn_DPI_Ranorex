@@ -138,8 +138,8 @@ namespace Lynn_DPI_AT
             //repo.SelectRecipeFile.Text1148.PressKeys("ay{LShiftKey down}_{LShiftKey up}BadMark.ky");
             //Delay.Milliseconds(0);
             
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'SelectRecipeFile.ButtonOpen' at 39;11.", repo.SelectRecipeFile.ButtonOpenInfo, new RecordItemIndex(8));
-            //repo.SelectRecipeFile.ButtonOpen.Click("39;11");
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'ButtonOpen' at 39;11.", repo.ButtonOpenInfo, new RecordItemIndex(8));
+            //repo.ButtonOpen.Click("39;11");
             //Delay.Milliseconds(0);
             
             Report.Log(ReportLevel.Info, "Wait", "Waiting 30s to exist. Associated repository item: 'CCIMainWindow.SomeIndicator'", repo.CCIMainWindow.SomeIndicatorInfo, new ActionTimeout(30000), new RecordItemIndex(9));

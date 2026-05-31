@@ -34,6 +34,7 @@ namespace Lynn_DPI_AT
         Lynn_DPI_ATRepositoryFolders.ExplorerAppFolder _explorer;
         Lynn_DPI_ATRepositoryFolders.SelectRecipeFileAppFolder _selectrecipefile;
         Lynn_DPI_ATRepositoryFolders.KohyoungGUIAppFolder _kohyounggui;
+        RepoItemInfo _buttonopenInfo;
 
         /// <summary>
         /// Gets the singleton class instance representing the Lynn_DPI_ATRepository element repository.
@@ -57,6 +58,7 @@ namespace Lynn_DPI_AT
             _explorer = new Lynn_DPI_ATRepositoryFolders.ExplorerAppFolder(this);
             _selectrecipefile = new Lynn_DPI_ATRepositoryFolders.SelectRecipeFileAppFolder(this);
             _kohyounggui = new Lynn_DPI_ATRepositoryFolders.KohyoungGUIAppFolder(this);
+            _buttonopenInfo = new RepoItemInfo(this, "ButtonOpen", "/form[@title='Select Recipe File']/button[@text='&Open']", 30000, null, "829245ec-40d8-4f1c-9839-d7e703858b02");
         }
 
 #region Variables
@@ -72,6 +74,30 @@ namespace Lynn_DPI_AT
             get
             {
                 return _selfInfo;
+            }
+        }
+
+        /// <summary>
+        /// The ButtonOpen item.
+        /// </summary>
+        [RepositoryItem("829245ec-40d8-4f1c-9839-d7e703858b02")]
+        public virtual Ranorex.Button ButtonOpen
+        {
+            get
+            {
+                 return _buttonopenInfo.CreateAdapter<Ranorex.Button>(true);
+            }
+        }
+
+        /// <summary>
+        /// The ButtonOpen item info.
+        /// </summary>
+        [RepositoryItemInfo("829245ec-40d8-4f1c-9839-d7e703858b02")]
+        public virtual RepoItemInfo ButtonOpenInfo
+        {
+            get
+            {
+                return _buttonopenInfo;
             }
         }
 
@@ -818,7 +844,6 @@ namespace Lynn_DPI_AT
         [RepositoryFolder("e603f9b6-a8b1-4722-89a2-cfe80a1d5a95")]
         public partial class SelectRecipeFileAppFolder : RepoGenBaseFolder
         {
-            RepoItemInfo _buttonopenInfo;
             RepoItemInfo _systemitemnamedisplayInfo;
             RepoItemInfo _text1148Info;
 
@@ -828,7 +853,6 @@ namespace Lynn_DPI_AT
             public SelectRecipeFileAppFolder(RepoGenBaseFolder parentFolder) :
                     base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, true, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
             {
-                _buttonopenInfo = new RepoItemInfo(this, "ButtonOpen", "button[@text='&Open']", "button[@text='&Open']", 30000, null, "829245ec-40d8-4f1c-9839-d7e703858b02");
                 _systemitemnamedisplayInfo = new RepoItemInfo(this, "SystemItemNameDisplay", "element[@class='DUIViewWndClassName']//container[@caption='ShellView']/?/?/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", ".//listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", 30000, null, "56977f94-f427-4225-94f5-476e9cca2afa");
                 _text1148Info = new RepoItemInfo(this, "Text1148", "?/?/text[@controlid='1148']", "?/?/text[@controlid='1148']", 30000, null, "1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe");
             }
@@ -854,30 +878,6 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _selfInfo;
-                }
-            }
-
-            /// <summary>
-            /// The ButtonOpen item.
-            /// </summary>
-            [RepositoryItem("829245ec-40d8-4f1c-9839-d7e703858b02")]
-            public virtual Ranorex.Button ButtonOpen
-            {
-                get
-                {
-                    return _buttonopenInfo.CreateAdapter<Ranorex.Button>(true);
-                }
-            }
-
-            /// <summary>
-            /// The ButtonOpen item info.
-            /// </summary>
-            [RepositoryItemInfo("829245ec-40d8-4f1c-9839-d7e703858b02")]
-            public virtual RepoItemInfo ButtonOpenInfo
-            {
-                get
-                {
-                    return _buttonopenInfo;
                 }
             }
 

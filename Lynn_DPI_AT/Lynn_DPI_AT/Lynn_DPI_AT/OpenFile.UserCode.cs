@@ -173,7 +173,7 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Da paste path '{0}' vao File name field.", recipeFilePath));
 
-            repo.SelectRecipeFile.ButtonOpen.Click();
+            repo.ButtonOpen.Click();
             Delay.Milliseconds(500);
 
             Report.Log(ReportLevel.Success, "OpenFile",
