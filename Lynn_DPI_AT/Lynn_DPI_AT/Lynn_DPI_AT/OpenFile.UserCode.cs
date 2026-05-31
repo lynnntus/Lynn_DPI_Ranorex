@@ -164,10 +164,10 @@ namespace Lynn_DPI_AT
             repo.SelectRecipeFile.Text1148.Click();
             Delay.Milliseconds(300);
 
-            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}a{Control up}");
+            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}{a}{Control up}");
             Delay.Milliseconds(200);
             WinForms.Clipboard.SetText(recipeFilePath);
-            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}v{Control up}");
+            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}{v}{Control up}");
             Delay.Milliseconds(500);
 
             Report.Log(ReportLevel.Info, "OpenFile",
