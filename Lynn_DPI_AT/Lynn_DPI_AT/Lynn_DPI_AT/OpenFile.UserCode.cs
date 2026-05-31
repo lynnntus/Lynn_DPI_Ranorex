@@ -156,30 +156,28 @@ namespace Lynn_DPI_AT
                     FILE_DIALOG_TIMEOUT_MS / 1000));
             }
 
-            // --- Buoc 5: Activate dialog, focus File name field, paste path ---
+            // --- Buoc 5: Activate dialog, click File name field, paste path, click Open ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Activate Select Recipe File dialog va nhap path...");
             repo.SelectRecipeFile.Self.Activate();
             Delay.Milliseconds(300);
 
-            // Alt+N: Windows file dialog standard shortcut de focus File name field
-            Keyboard.Press("{Alt down}n{Alt up}");
-            Delay.Milliseconds(500);
+            repo.SelectRecipeFile.Text1148.Click();
+            Delay.Milliseconds(300);
 
-            // Paste qua clipboard — tranh loi ky tu dac biet (\, space, _)
-            Keyboard.Press("{Control down}a{Control up}");
+            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}a{Control up}");
             Delay.Milliseconds(200);
             WinForms.Clipboard.SetText(recipeFilePath);
-            Keyboard.Press("{Control down}v{Control up}");
+            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}v{Control up}");
             Delay.Milliseconds(500);
 
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Da paste path '{0}' vao File name field.", recipeFilePath));
 
-            Keyboard.Press("{Return}");
+            repo.SelectRecipeFile.ButtonOpen.Click();
             Delay.Milliseconds(500);
 
             Report.Log(ReportLevel.Success, "OpenFile",
-                string.Format("Da gui Enter de mo file '{0}'.", recipeFilePath));
+                string.Format("Da click Open de mo file '{0}'.", recipeFilePath));
         }
 
         // Alias for OpenRecipeFileByPath — kept for backward compatibility.
