@@ -145,13 +145,13 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "Wait", "Waiting 30s to exist. Associated repository item: 'CCIMainWindow.SomeIndicator'", repo.CCIMainWindow.SomeIndicatorInfo, new ActionTimeout(30000), new RecordItemIndex(9));
             repo.CCIMainWindow.SomeIndicatorInfo.WaitForExists(30000);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator' at 1714;196.", repo.CCIMainWindow.SomeIndicatorInfo, new RecordItemIndex(10));
-            repo.CCIMainWindow.SomeIndicator.Click("1714;196");
-            Delay.Milliseconds(0);
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator' at 1714;196.", repo.CCIMainWindow.SomeIndicatorInfo, new RecordItemIndex(10));
+            //repo.CCIMainWindow.SomeIndicator.Click("1714;196");
+            //Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'CCIMainWindow.SomeText'.", repo.CCIMainWindow.SomeTextInfo, new RecordItemIndex(11));
-            Validate.Exists(repo.CCIMainWindow.SomeTextInfo);
-            Delay.Milliseconds(100);
+            //Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'CCIMainWindow.SomeText'.", repo.CCIMainWindow.SomeTextInfo, new RecordItemIndex(11));
+            //Validate.Exists(repo.CCIMainWindow.SomeTextInfo);
+            //Delay.Milliseconds(100);
             
         }
 

@@ -183,10 +183,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="d4b6b860-3698-49af-a31c-7a02f71e64d8"
 			name="SomeText"
 			refimgid="41a8aefe-2787-46e8-8d94-aee48fd1c4e1"
-			refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[1]/container[@automationid='View']/container[@caption='']/container[@caption='']/text[@caption='Lynn_Array_BadMark']/text[@caption='']"
-			robustPath="/form[@title='CCIMainWindow']//text[@caption='Lynn_Array_BadMark']/text[@caption='']"
+			robustPath=""
 			searchtimeout="30000ms">
-				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/text[@caption='']
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill.kyjob']/text[@caption='']
 			</item>
 			<item
 			addcaps="text,wpfelement"
@@ -360,17 +359,6 @@ j0QigXQ6DZoLgsDvWK/XBzc6hsu1BRMfpP7Bj/TsAAAAAElFTkSuQmCC
 		searchtimeout="30000ms"
 		usecache="True">
 			<item
-			addcaps="button,nativewindow"
-			capname="button"
-			id="829245ec-40d8-4f1c-9839-d7e703858b02"
-			name="ButtonOpen"
-			refimgid="ca5e8844-1552-4c8b-b338-156ea3a238cd"
-			refpath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
-			robustPath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
-			searchtimeout="30000ms">
-				/form[@title='Select Recipe File']/button[@text='&amp;Open']
-			</item>
-			<item
 			addcaps="text,uiautomation,uiautomationvalue"
 			capname="text"
 			id="56977f94-f427-4225-94f5-476e9cca2afa"
@@ -460,6 +448,17 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 1fbiekE/K44/EP7ChuYnn44SBQYGhvtjfgjiL7Wu7l4LodGqAAAAAElFTkSuQmCC
 			</icon>
 		</appfolder>
+		<item
+		addcaps="button,nativewindow"
+		capname="button"
+		id="829245ec-40d8-4f1c-9839-d7e703858b02"
+		name="ButtonOpen"
+		refimgid="ca5e8844-1552-4c8b-b338-156ea3a238cd"
+		refpath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
+		robustPath="/form[@title='Select Recipe File']/button[@text='&amp;Open']"
+		searchtimeout="30000ms">
+			/form[@title='Select Recipe File']/button[@text='&amp;Open']
+		</item>
 		<basepath>
 		</basepath>
 	</rootfolder>

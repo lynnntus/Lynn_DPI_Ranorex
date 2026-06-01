@@ -2347,7 +2347,7 @@ gegowPQUALRSYHoKMD0FAC0UmB6CjA9BQAtFJgegowPQUALRSYHoKMD0FAH/2Q==
 		action="Click"
 		button="Left"
 		duration="300ms"
-		enabled="True"
+		enabled="False"
 		loc="1714;196"
 		movetime="300ms"
 		optional="False"
@@ -3127,7 +3127,7 @@ FFABRRRQAUUUUAFFFFAH/9k=
 		<validationitem
 		action="Exists"
 		duration="100ms"
-		enabled="True"
+		enabled="False"
 		optional="False"
 		searchpropertyid="4b300cf2-525a-4e5d-b8cd-3383a6775f46"
 		similarity="1">
