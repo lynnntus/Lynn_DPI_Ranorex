@@ -24,7 +24,7 @@ namespace Lynn_DPI_AT
 {
     public partial class OpenFile
     {
-        public const int FILE_DIALOG_TIMEOUT_MS = 30000;
+        public const int FILE_DIALOG_TIMEOUT_MS = 15000;
 
         // NOTE: RecipeFilePath va ExpectedFileName duoc dinh nghia trong OpenFile.cs #region Variables,
         // auto-generated boi Ranorex Studio tu .rxrec. KHONG khai bao lai o day — gay CS0102.
@@ -39,9 +39,7 @@ namespace Lynn_DPI_AT
         }
 
         /// <summary>
-        /// Mo file recipe theo path: activate main window, reset WPF focus, gui Ctrl+O, cho dialog, paste path.
-        /// Duoc goi tu User Code Action step trong recording.
-        /// Thu Ctrl+O theo 2 variant (PressKeys target-based, sau do global Keyboard.Press) truoc khi throw.
+        /// Mo file recipe theo path: activate main window, menu click mo dialog, paste path, click Open.
         /// </summary>
         public void OpenRecipeFileByPath(string recipeFilePath)
         {
@@ -58,106 +56,32 @@ namespace Lynn_DPI_AT
                 throw new Exception("CCIMainWindow khong ton tai sau 10s.");
             Report.Log(ReportLevel.Success, "OpenFile", "Buoc 1 OK: CCIMainWindow ton tai.");
 
-            // --- Buoc 2: Activate CCIMainWindow (Win32 foreground) ---
+            // --- Buoc 2: Activate CCIMainWindow ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 2: Activate CCIMainWindow...");
             repo.CCIMainWindow.Self.Activate();
             Delay.Milliseconds(500);
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 2 OK: CCIMainWindow da activate.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 2 OK: CCIMainWindow da activate.");
 
-            // --- Buoc 3: Click main window de reset WPF logical focus ---
-            // Activate() chi giai quyet Win32 focus. WPF co the restore focus ve element cu (vi du: title bar button).
-            // Click() tren Self set WPF keyboard focus ve content area — can thiet de Ctrl+O command routing dung.
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click CCIMainWindow de reset WPF logical focus...");
-            repo.CCIMainWindow.Self.Click();
-            Delay.Milliseconds(300);
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3 OK: Da click CCIMainWindow (WPF focus reset).");
-
-            // --- Buoc 4: Gui Ctrl+O — thu tung variant theo thu tu ---
-            // Syntax tu Ranorex recording: {LControlKey down}o{LControlKey up}
-            bool dialogOpened = false;
-
-            // Variant 1: PressKeys target-based tren CCIMainWindow.Self
-            // PressKeys explicit set focus len element qua UI Automation truoc khi gui keystroke.
-            // Tranh Win32 focus vs WPF logical focus gap cua global Keyboard.Press.
-            Report.Log(ReportLevel.Info, "OpenFile",
-                "[Ctrl+O V1] PressKeys target-based tren CCIMainWindow.Self...");
-            repo.CCIMainWindow.Self.PressKeys("{LControlKey down}o{LControlKey up}");
+            // --- Buoc 3: Menu click mo Select Recipe File dialog ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click LeftMenuOpenToogleButton -> MenuOpenRecipe...");
+            repo.CCIMainWindow.LeftMenuOpenToogleButton.Click();
+            Delay.Milliseconds(500);
+            repo.CCIMainWindow.MenuOpenRecipe.Click();
             Delay.Milliseconds(500);
 
-            Report.Log(ReportLevel.Info, "OpenFile", "[Ctrl+O V1] Kiem tra Select Recipe File dialog (5s)...");
-            if (repo.SelectRecipeFile.SelfInfo.Exists(5000))
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Buoc 3: Cho Select Recipe File dialog ({0}s)...", FILE_DIALOG_TIMEOUT_MS / 1000));
+            if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
             {
-                dialogOpened = true;
-                Report.Log(ReportLevel.Success, "OpenFile", "[Ctrl+O V1] THANH CONG: dialog xuat hien.");
-            }
-            else
-            {
-                Report.Log(ReportLevel.Warn, "OpenFile",
-                    "[Ctrl+O V1] Dialog chua xuat hien sau 5s — chuyen sang Variant 2.");
-            }
-
-            if (!dialogOpened)
-            {
-                // Variant 2: Re-activate + Click + global Keyboard.Press
-                // Dam bao window la foreground va focus da reset truoc khi dung global send.
-                Report.Log(ReportLevel.Info, "OpenFile",
-                    "[Ctrl+O V2] Re-activate + Self.Click + global Keyboard.Press...");
-                repo.CCIMainWindow.Self.Activate();
-                Delay.Milliseconds(500);
-                repo.CCIMainWindow.Self.Click();
-                Delay.Milliseconds(500);
-                Report.Log(ReportLevel.Info, "OpenFile",
-                    "[Ctrl+O V2] Gui Ctrl+O via global Keyboard.Press...");
-                Keyboard.Press("{LControlKey down}o{LControlKey up}");
-                Delay.Milliseconds(500);
-
-                Report.Log(ReportLevel.Info, "OpenFile",
-                    string.Format("[Ctrl+O V2] Cho Select Recipe File dialog ({0}s)...",
-                        FILE_DIALOG_TIMEOUT_MS / 1000));
-                if (repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
-                {
-                    dialogOpened = true;
-                    Report.Log(ReportLevel.Success, "OpenFile", "[Ctrl+O V2] THANH CONG: dialog xuat hien.");
-                }
-                else
-                {
-                    Report.Log(ReportLevel.Error, "OpenFile", "[Ctrl+O V2] THAT BAI: dialog khong xuat hien.");
-                }
-            }
-
-            if (!dialogOpened)
-            {
-                // Fallback V3: Ctrl+O bi block boi PCB viewer focus trap — dung menu click thay the
-                Report.Log(ReportLevel.Warn, "OpenFile",
-                    "[Fallback V3] Ctrl+O that bai ca V1 va V2 — thu menu click: LeftMenuOpenToogleButton -> MenuOpenRecipe.");
-                repo.CCIMainWindow.LeftMenuOpenToogleButton.Click();
-                Delay.Milliseconds(500);
-                repo.CCIMainWindow.MenuOpenRecipe.Click();
-                Delay.Milliseconds(500);
-
-                if (repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
-                {
-                    dialogOpened = true;
-                    Report.Log(ReportLevel.Success, "OpenFile",
-                        "[Fallback V3] THANH CONG: dialog xuat hien qua menu click.");
-                }
-                else
-                {
-                    Report.Log(ReportLevel.Error, "OpenFile",
-                        "[Fallback V3] THAT BAI: dialog khong xuat hien.");
-                }
-            }
-
-            if (!dialogOpened)
-            {
+                Report.Log(ReportLevel.Error, "OpenFile", "Buoc 3 THAT BAI: dialog khong xuat hien.");
                 throw new Exception(string.Format(
-                    "Select Recipe File dialog khong xuat hien sau ca V1 (PressKeys), V2 (global Keyboard.Press), va V3 (menu click, cho {0}s). " +
-                    "Kiem tra lai trang thai Neptune va RxPath repository.",
+                    "Select Recipe File dialog khong xuat hien sau {0}s. Kiem tra trang thai Neptune va RxPath repository.",
                     FILE_DIALOG_TIMEOUT_MS / 1000));
             }
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 3 OK: Select Recipe File dialog da xuat hien.");
 
-            // --- Buoc 5: Activate dialog, click File name field, paste path, click Open ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Activate Select Recipe File dialog va nhap path...");
+            // --- Buoc 4: Activate dialog, click File name field, paste path, click Open ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 4: Nhap path vao File name field...");
             repo.SelectRecipeFile.Self.Activate();
             Delay.Milliseconds(300);
 
@@ -180,10 +104,14 @@ namespace Lynn_DPI_AT
                 string.Format("Da click Open de mo file '{0}'.", recipeFilePath));
         }
 
-        // Alias for OpenRecipeFileByPath — kept for backward compatibility.
-        private void OpenRecipeFileFromCsvPath(string recipeFilePath)
+        private void Finish()
         {
-            OpenRecipeFileByPath(recipeFilePath);
+            if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile", "Finish: Select Recipe File dialog con mo — dang dong...");
+                repo.SelectRecipeFile.Self.Close();
+                Delay.Milliseconds(500);
+            }
         }
     }
 }
