@@ -25,22 +25,17 @@ namespace Lynn_DPI_AT
     public partial class OpenFile
     {
         public const int FILE_DIALOG_TIMEOUT_MS = 15000;
+        public const int DIALOG_CLOSE_TIMEOUT_MS = 5000;
 
-        // NOTE: RecipeFilePath va ExpectedFileName duoc dinh nghia trong OpenFile.cs #region Variables,
-        // auto-generated boi Ranorex Studio tu .rxrec. KHONG khai bao lai o day — gay CS0102.
-
-        /// <summary>
-        /// This method gets called right after the recording has been started.
-        /// It can be used to execute recording specific initialization code.
-        /// </summary>
         private void Init()
         {
             Report.Log(ReportLevel.Info, "OpenFile", "OpenFile bat dau.");
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("RecipeFilePath = '{0}'", RecipeFilePath));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("ExpectedFileName = '{0}'", ExpectedFileName));
         }
 
-        /// <summary>
-        /// Mo file recipe theo path: activate main window, menu click mo dialog, paste path, click Open.
-        /// </summary>
         public void OpenRecipeFileByPath(string recipeFilePath)
         {
             if (string.IsNullOrEmpty(recipeFilePath))
@@ -48,69 +43,163 @@ namespace Lynn_DPI_AT
 
             if (!System.IO.File.Exists(recipeFilePath))
                 throw new System.IO.FileNotFoundException(
-                    string.Format("File khong ton tai: '{0}'", recipeFilePath), recipeFilePath);
+                    string.Format("File khong ton tai tren disk: '{0}'", recipeFilePath), recipeFilePath);
 
-            // --- Buoc 1: Verify CCIMainWindow ton tai ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 1: Kiem tra CCIMainWindow ton tai (10s)...");
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Target file: '{0}'", recipeFilePath));
+
+            // --- Buoc 1: Verify CCIMainWindow ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 1: Kiem tra CCIMainWindow...");
             if (!repo.CCIMainWindow.SelfInfo.Exists(10000))
                 throw new Exception("CCIMainWindow khong ton tai sau 10s.");
-            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 1 OK: CCIMainWindow ton tai.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 1 OK.");
 
-            // --- Buoc 2: Activate CCIMainWindow ---
+            // --- Buoc 2: Activate ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 2: Activate CCIMainWindow...");
             repo.CCIMainWindow.Self.Activate();
             Delay.Milliseconds(500);
-            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 2 OK: CCIMainWindow da activate.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 2 OK.");
 
-            // --- Buoc 3: Menu click mo Select Recipe File dialog ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click LeftMenuOpenToogleButton -> MenuOpenRecipe...");
+            // --- Buoc 3: Menu click ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Menu click...");
             repo.CCIMainWindow.LeftMenuOpenToogleButton.Click();
             Delay.Milliseconds(500);
             repo.CCIMainWindow.MenuOpenRecipe.Click();
             Delay.Milliseconds(500);
 
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Buoc 3: Cho Select Recipe File dialog ({0}s)...", FILE_DIALOG_TIMEOUT_MS / 1000));
             if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
             {
                 Report.Log(ReportLevel.Error, "OpenFile", "Buoc 3 THAT BAI: dialog khong xuat hien.");
-                throw new Exception(string.Format(
-                    "Select Recipe File dialog khong xuat hien sau {0}s. Kiem tra trang thai Neptune va RxPath repository.",
-                    FILE_DIALOG_TIMEOUT_MS / 1000));
+                throw new Exception("Select Recipe File dialog khong xuat hien.");
             }
-            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 3 OK: Select Recipe File dialog da xuat hien.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Buoc 3 OK: dialog xuat hien.");
 
-            // --- Buoc 4: Activate dialog, click File name field, paste path, click Open ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 4: Nhap path vao File name field...");
+            // --- Buoc 4: Nhap path vao File name ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 4: Nhap path...");
+            EnterPathIntoFileNameField(recipeFilePath);
+
+            // --- Buoc 5: Click Open ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Click Open...");
+            repo.ButtonOpen.Click();
+            Delay.Milliseconds(1000);
+
+            // --- Buoc 6: Verify dialog da dong (file duoc chap nhan) ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 6: Verify dialog da dong...");
+            if (repo.SelectRecipeFile.SelfInfo.Exists(DIALOG_CLOSE_TIMEOUT_MS))
+            {
+                string fieldAfterError = ReadFileNameField();
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    string.Format("Buoc 6 THAT BAI: dialog van mo. Field text = '{0}'. File co the khong ton tai hoac path sai.", fieldAfterError));
+
+                Keyboard.Press("{Escape}");
+                Delay.Milliseconds(500);
+                if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
+                {
+                    Keyboard.Press("{Escape}");
+                    Delay.Milliseconds(500);
+                }
+
+                throw new Exception(string.Format(
+                    "File khong duoc mo. Dialog van hien thi sau khi click Open. Path trong field: '{0}', expected: '{1}'",
+                    fieldAfterError, recipeFilePath));
+            }
+            Report.Log(ReportLevel.Success, "OpenFile",
+                string.Format("Buoc 6 OK: Dialog da dong — file '{0}' da duoc chap nhan.", recipeFilePath));
+        }
+
+        private void EnterPathIntoFileNameField(string path)
+        {
             repo.SelectRecipeFile.Self.Activate();
             Delay.Milliseconds(300);
-
             repo.SelectRecipeFile.Text1148.Click();
             Delay.Milliseconds(300);
 
-            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}{a}{Control up}");
+            // Clear field — R1 pattern (proven reliable, khong phu thuoc Ctrl+A)
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(50);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(50);
+            Keyboard.Press("{Delete}");
             Delay.Milliseconds(200);
-            WinForms.Clipboard.SetText(recipeFilePath);
-            repo.SelectRecipeFile.Text1148.PressKeys("{Control down}{v}{Control up}");
+
+            // Paste path tu clipboard bang global Keyboard (khong dung element.PressKeys)
+            WinForms.Clipboard.SetText(path);
+            Delay.Milliseconds(100);
+            Keyboard.Press("{LControlKey down}v{LControlKey up}");
             Delay.Milliseconds(500);
 
+            // Verify noi dung field
+            string fieldText = ReadFileNameField();
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Da paste path '{0}' vao File name field.", recipeFilePath));
+                string.Format("Field text sau paste: '{0}'", fieldText));
 
-            repo.ButtonOpen.Click();
-            Delay.Milliseconds(500);
+            string expectedName = System.IO.Path.GetFileName(path);
+            if (!string.IsNullOrEmpty(fieldText) && fieldText.Contains(expectedName))
+            {
+                Report.Log(ReportLevel.Success, "OpenFile", "Path nhap dung.");
+                return;
+            }
 
-            Report.Log(ReportLevel.Success, "OpenFile",
-                string.Format("Da click Open de mo file '{0}'.", recipeFilePath));
+            // Retry lan 1: clear va paste lai
+            Report.Log(ReportLevel.Warn, "OpenFile",
+                string.Format("Field text khong khop (expected chua '{0}'). Retry...", expectedName));
+
+            repo.SelectRecipeFile.Text1148.Click();
+            Delay.Milliseconds(200);
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(50);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(50);
+            Keyboard.Press("{Delete}");
+            Delay.Milliseconds(200);
+            WinForms.Clipboard.SetText(path);
+            Delay.Milliseconds(100);
+            Keyboard.Press("{LControlKey down}v{LControlKey up}");
+            Delay.Milliseconds(800);
+
+            fieldText = ReadFileNameField();
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Retry: field text = '{0}'", fieldText));
+
+            if (string.IsNullOrEmpty(fieldText) || !fieldText.Contains(expectedName))
+            {
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    string.Format("THAT BAI sau retry. Field = '{0}', expected chua '{1}'", fieldText, expectedName));
+                throw new Exception(string.Format(
+                    "Khong the nhap path vao File name field. Actual: '{0}', Expected chua: '{1}'",
+                    fieldText, expectedName));
+            }
+            Report.Log(ReportLevel.Success, "OpenFile", "Retry OK: path nhap dung.");
+        }
+
+        private string ReadFileNameField()
+        {
+            try
+            {
+                return repo.SelectRecipeFile.Text1148.TextValue;
+            }
+            catch
+            {
+                try
+                {
+                    return repo.SelectRecipeFile.Text1148.Element.GetAttributeValueText("WindowText");
+                }
+                catch
+                {
+                    return "(khong doc duoc)";
+                }
+            }
         }
 
         private void Finish()
         {
             if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
             {
-                Report.Log(ReportLevel.Warn, "OpenFile", "Finish: Select Recipe File dialog con mo — dang dong...");
-                repo.SelectRecipeFile.Self.Close();
+                Report.Log(ReportLevel.Warn, "OpenFile", "Finish: dialog con mo — dang dong...");
+                Keyboard.Press("{Escape}");
                 Delay.Milliseconds(500);
+                if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
+                    repo.SelectRecipeFile.Self.Close();
             }
         }
     }

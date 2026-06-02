@@ -1,5 +1,17 @@
 # Change History
 
+## 2026-06-02
+
+### ~09:30 - Fix OpenFile: paste path + verification
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - Root cause: `element.PressKeys("{Control down}{a/v}{Control up}")` gõ literal "av" thay vì Ctrl+A/Ctrl+V (DefaultKeyPressTime=20ms quá nhanh)
+  - Root cause: Report.Success ngay sau Click Open, không verify dialog đã đóng
+  - Fix: Thay bằng R1 pattern (`{Home}{Shift+End}{Delete}`) + global `Keyboard.Press` cho Ctrl+V
+  - Fix: Thêm `ReadFileNameField()` verify nội dung field sau paste
+  - Fix: Thêm Buoc 6 verify dialog đã đóng, throw nếu còn mở
+  - Fix: Thêm retry 1 lần nếu paste lần đầu fail
+  - Fix: Log `RecipeFilePath` giá trị thực tế trong `Init()` để debug binding
+
 ## 2026-05-26
 
 ### ~23:00 - Project Cleanup
