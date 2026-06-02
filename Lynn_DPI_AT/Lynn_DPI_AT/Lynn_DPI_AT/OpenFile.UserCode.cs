@@ -114,62 +114,41 @@ namespace Lynn_DPI_AT
             repo.SelectRecipeFile.Text1148.Click();
             Delay.Milliseconds(300);
 
-            // Clear field — R1 pattern (proven reliable, khong phu thuoc Ctrl+A)
-            Keyboard.Press("{Home}");
-            Delay.Milliseconds(50);
-            Keyboard.Press("{Shift down}{End}{Shift up}");
-            Delay.Milliseconds(50);
-            Keyboard.Press("{Delete}");
-            Delay.Milliseconds(200);
+            // Set WindowText truc tiep — khong dung keyboard (Ctrl+V chi go literal 'v')
+            Report.Log(ReportLevel.Info, "OpenFile", "Set WindowText truc tiep...");
+            repo.SelectRecipeFile.Text1148.Element.SetAttributeValue("WindowText", path);
+            Delay.Milliseconds(300);
 
-            // Paste path tu clipboard bang global Keyboard (khong dung element.PressKeys)
-            WinForms.Clipboard.SetText(path);
-            Delay.Milliseconds(100);
-            Keyboard.Press("{LControlKey down}v{LControlKey up}");
-            Delay.Milliseconds(500);
-
-            // Verify noi dung field
+            // Doc lai de verify
             string fieldText = ReadFileNameField();
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Field text sau paste: '{0}'", fieldText));
+                string.Format("Field text sau set: '{0}'", fieldText));
 
-            string expectedName = System.IO.Path.GetFileName(path);
-            if (!string.IsNullOrEmpty(fieldText) && fieldText.Contains(expectedName))
+            if (!string.IsNullOrEmpty(fieldText) && fieldText.Equals(path, StringComparison.OrdinalIgnoreCase))
             {
-                Report.Log(ReportLevel.Success, "OpenFile", "Path nhap dung.");
+                Report.Log(ReportLevel.Success, "OpenFile", "Path set dung.");
                 return;
             }
 
-            // Retry lan 1: clear va paste lai
+            // Fallback: thu Text attribute
             Report.Log(ReportLevel.Warn, "OpenFile",
-                string.Format("Field text khong khop (expected chua '{0}'). Retry...", expectedName));
-
-            repo.SelectRecipeFile.Text1148.Click();
-            Delay.Milliseconds(200);
-            Keyboard.Press("{Home}");
-            Delay.Milliseconds(50);
-            Keyboard.Press("{Shift down}{End}{Shift up}");
-            Delay.Milliseconds(50);
-            Keyboard.Press("{Delete}");
-            Delay.Milliseconds(200);
-            WinForms.Clipboard.SetText(path);
-            Delay.Milliseconds(100);
-            Keyboard.Press("{LControlKey down}v{LControlKey up}");
-            Delay.Milliseconds(800);
+                string.Format("WindowText khong khop. Thu set Text attribute..."));
+            repo.SelectRecipeFile.Text1148.Element.SetAttributeValue("Text", path);
+            Delay.Milliseconds(300);
 
             fieldText = ReadFileNameField();
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Retry: field text = '{0}'", fieldText));
+                string.Format("Field text sau set Text: '{0}'", fieldText));
 
-            if (string.IsNullOrEmpty(fieldText) || !fieldText.Contains(expectedName))
+            if (string.IsNullOrEmpty(fieldText) || !fieldText.Equals(path, StringComparison.OrdinalIgnoreCase))
             {
                 Report.Log(ReportLevel.Error, "OpenFile",
-                    string.Format("THAT BAI sau retry. Field = '{0}', expected chua '{1}'", fieldText, expectedName));
+                    string.Format("THAT BAI: field = '{0}', expected = '{1}'", fieldText, path));
                 throw new Exception(string.Format(
-                    "Khong the nhap path vao File name field. Actual: '{0}', Expected chua: '{1}'",
-                    fieldText, expectedName));
+                    "Khong the set path vao File name field. Actual: '{0}', Expected: '{1}'",
+                    fieldText, path));
             }
-            Report.Log(ReportLevel.Success, "OpenFile", "Retry OK: path nhap dung.");
+            Report.Log(ReportLevel.Success, "OpenFile", "Path set dung (qua Text attribute).");
         }
 
         private string ReadFileNameField()
