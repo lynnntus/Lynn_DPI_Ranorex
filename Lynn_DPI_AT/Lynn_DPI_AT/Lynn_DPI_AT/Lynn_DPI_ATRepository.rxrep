@@ -146,14 +146,13 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			</item>
 			<item
 			addcaps="indicator,wpfelement,wpfgroupelement"
-			capname="indicator"
+			capname="text"
 			id="9a218138-9e43-4ae1-9552-8a075e56667f"
 			name="SomeIndicator"
 			refimgid="1963418a-e530-45cf-be5c-861b3cc3c11d"
-			refpath="/form[@title='CCIMainWindow']/indicator[1]"
-			robustPath="/form[@title='CCIMainWindow']/indicator[1]"
+			robustPath=""
 			searchtimeout="30000ms">
-				/form[@title='CCIMainWindow']/indicator[1]
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
@@ -183,9 +182,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="d4b6b860-3698-49af-a31c-7a02f71e64d8"
 			name="SomeText"
 			refimgid="41a8aefe-2787-46e8-8d94-aee48fd1c4e1"
-			robustPath=""
+			robustPath="/form[@title='CCIMainWindow']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']"
 			searchtimeout="30000ms">
-				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill.kyjob']/text[@caption='']
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']
 			</item>
 			<item
 			addcaps="text,wpfelement"
