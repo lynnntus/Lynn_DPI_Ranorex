@@ -130,33 +130,19 @@ namespace Lynn_DPI_AT
             repo.SelectRecipeFile.Text1148.Click();
             Delay.Milliseconds(300);
 
-            // Set WindowText truc tiep — khong dung keyboard (Ctrl+V chi go literal 'v')
-            Report.Log(ReportLevel.Info, "OpenFile", "Set WindowText truc tiep...");
-            repo.SelectRecipeFile.Text1148.Element.SetAttributeValue("WindowText", path);
-            Delay.Milliseconds(300);
+            Report.Log(ReportLevel.Info, "OpenFile", "Thu set TextValue truc tiep...");
+            repo.SelectRecipeFile.Text1148.TextValue = path;
+            Delay.Milliseconds(500);
 
-            // Doc lai de verify
             string fieldText = ReadFileNameField();
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Field text sau set: '{0}'", fieldText));
+                string.Format("Field text sau set TextValue: '{0}'", fieldText));
 
-            if (!string.IsNullOrEmpty(fieldText) && fieldText.Equals(path, StringComparison.OrdinalIgnoreCase))
-            {
-                Report.Log(ReportLevel.Success, "OpenFile", "Path set dung.");
-                return;
-            }
+            bool match = !string.IsNullOrEmpty(fieldText)
+                && (fieldText.Equals(path, StringComparison.OrdinalIgnoreCase)
+                    || path.EndsWith(fieldText, StringComparison.OrdinalIgnoreCase));
 
-            // Fallback: thu Text attribute
-            Report.Log(ReportLevel.Warn, "OpenFile",
-                string.Format("WindowText khong khop. Thu set Text attribute..."));
-            repo.SelectRecipeFile.Text1148.Element.SetAttributeValue("Text", path);
-            Delay.Milliseconds(300);
-
-            fieldText = ReadFileNameField();
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Field text sau set Text: '{0}'", fieldText));
-
-            if (string.IsNullOrEmpty(fieldText) || !fieldText.Equals(path, StringComparison.OrdinalIgnoreCase))
+            if (!match)
             {
                 Report.Log(ReportLevel.Error, "OpenFile",
                     string.Format("THAT BAI: field = '{0}', expected = '{1}'", fieldText, path));
@@ -164,7 +150,8 @@ namespace Lynn_DPI_AT
                     "Khong the set path vao File name field. Actual: '{0}', Expected: '{1}'",
                     fieldText, path));
             }
-            Report.Log(ReportLevel.Success, "OpenFile", "Path set dung (qua Text attribute).");
+            Report.Log(ReportLevel.Success, "OpenFile",
+                string.Format("Path set dung: '{0}'", fieldText));
         }
 
         private string ReadFileNameField()

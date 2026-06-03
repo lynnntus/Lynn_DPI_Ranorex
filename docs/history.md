@@ -1,5 +1,29 @@
 # Change History
 
+## 2026-06-03
+
+### ~14:00 - OpenFile: thay approach nhập path — TextValue thay SetAttributeValue
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - Method: `EnterPathIntoFileNameField()`
+  - Thay `SetAttributeValue("WindowText")` + fallback `SetAttributeValue("Text")` bằng `TextValue = path`
+  - Giữ nguyên: Focus + Click Text1148, đọc lại field verify, throw nếu không khớp
+  - Giữ nguyên: Buoc 5 (Click Open), Buoc 6 (verify dialog đóng)
+  - Build: PASS (Debug x86)
+  - Chưa test thực tế. Chưa commit.
+
+### ~09:30 - Tạo OpenFile Knowledge Base + Session Handover
+- **Created**: `docs/OpenFile_KNOWLEDGE.md` — Lưu toàn bộ facts đã chứng minh, giả thuyết đã loại bỏ, current blocker, và rules cho debug OpenFile module
+- **Created**: `docs/HANDOVER_OpenFile_20260603.md` — Session starter cho session tiếp theo
+
+### ~09:00 - Fix regression: MenuOpenRecipe "Element is not visible"
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - Root cause: Code mới bỏ warm-up, click MenuOpenRecipe quá sớm sau LeftMenuOpenToogleButton (chỉ 500ms)
+  - Fix: Thêm `WaitForMenuOpenRecipeClickable()` polling wait (max 50s, poll 400ms)
+  - Fix: Kiểm tra Exists + Visible + Enabled trước khi click
+  - Fix: EnsureVisible() khi element sẵn sàng
+  - Fix: Screenshot + Error log nếu timeout
+  - Build: PASS (Debug x86)
+
 ## 2026-06-02
 
 ### ~09:30 - Fix OpenFile: paste path + verification
