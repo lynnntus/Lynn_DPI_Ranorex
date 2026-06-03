@@ -68,29 +68,21 @@
 
 ## 4. Current Blocker
 
-- **Chưa có cách ổn định để set/input full `RecipeFilePath` vào `Text1148` Win32 Edit control.**
+- ~~**Chưa có cách ổn định để set/input full `RecipeFilePath` vào `Text1148` Win32 Edit control.**~~ → **RESOLVED** bằng `TextValue`.
 - Các approach đã thử và fail:
   1. Clipboard + Ctrl+V → gõ literal "v"
   2. Ctrl+A để select all → gõ literal "a"
   3. SetAttributeValue("WindowText") → "The operation is not supported"
+- **Approach PASS**: `repo.SelectRecipeFile.Text1148.TextValue = recipeFilePath`
 - Chỉ được click Open **sau khi verify** field text chứa đúng full path hoặc `ExpectedFileName`.
 
 ---
 
 ## 5. Next Action
 
-Đánh giá và chọn 1 trong các hướng xử lý (theo thứ tự ưu tiên):
-
-| # | Approach | Mô tả | Rủi ro |
-|---|---|---|---|
-| 1 | `TextValue = path` | Set property trực tiếp qua Ranorex adapter | Có thể read-only |
-| 2 | `PressKeys(fullPath)` | Gõ từng ký tự path trực tiếp, không modifier keys | Ký tự đặc biệt (`\`, `:`) có thể bị interpret sai |
-| 3 | `Keyboard.Press(fullPath)` | Gõ global từng ký tự | Cần focus đúng element, ký tự đặc biệt |
-| 4 | `WM_SETTEXT` (P/Invoke) | Gửi Win32 message trực tiếp đến control handle | Cần P/Invoke, phức tạp hơn |
-
-Lưu ý cho approach 2 và 3:
-- Ranorex `PressKeys` interpret `{}` và modifier keys — path chứa `\` cần escape.
-- Cần clear field trước khi gõ (triple-click hoặc Home+Shift+End để select all).
+- Bug nhập path đã RESOLVED. Xem **Section 7: Lesson Learned**.
+- Tiếp theo: test thực tế toàn bộ flow OpenFile (Buoc 1–6) trong Ranorex Studio.
+- Nếu PASS: bind CSV data source (`TestData/OpenFileData.csv`) trong Ranorex Studio.
 
 ---
 
@@ -109,6 +101,38 @@ Lưu ý cho approach 2 và 3:
 - Verify **không có popup** "file does not exist".
 - Chỉ sửa `*.UserCode.cs`.
 - Không commit/push khi chưa được yêu cầu.
+
+---
+
+## 7. Lesson Learned — File name input
+
+### Bug ban đầu
+Không nhập được full `RecipeFilePath` vào ô File name của `Select Recipe File` dialog.
+
+### Evidence đã chứng minh
+
+- `Select Recipe File` dialog đã mở được.
+- Spy xác nhận `Text1148` là Win32 Edit control:
+  - Class = Edit
+  - ControlId = 1148
+  - AccessibleName = File name:
+  - AccessibleRole = Text
+  - Focusable = True
+- Ctrl+A/Ctrl+V hoặc clipboard approach fail — field chỉ nhận literal `v` hoặc `av`.
+- `SetAttributeValue("WindowText", path)` fail với lỗi: `The operation is not supported`.
+- **`TextValue = recipeFilePath` hoạt động.**
+- Report chứng minh:
+  - `Field text sau set TextValue = C:\Kohyoung\Job\Lynn_20260516_Stacking\Lynn_Stacking_Underfill.kyjob`
+  - `Path set dung`
+
+### Kết luận
+
+- Bug nhập path vào File name đã được **RESOLVED** bằng `TextValue`.
+- **KHÔNG quay lại** các hướng đã fail:
+  - Ctrl+A/Ctrl+V
+  - Clipboard paste
+  - `SetAttributeValue("WindowText")`
+- **Rule mới**: Với Win32 Edit control trong Ranorex, ưu tiên dùng adapter property `TextValue` trước khi thử keyboard hoặc Win32 message.
 
 ---
 

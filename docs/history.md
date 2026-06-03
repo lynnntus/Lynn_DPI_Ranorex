@@ -2,6 +2,12 @@
 
 ## 2026-06-03
 
+### ~14:30 - Cập nhật OpenFile_KNOWLEDGE.md — Lesson Learned
+- **Modified**: `docs/OpenFile_KNOWLEDGE.md`
+  - Section 4: Current Blocker đánh dấu RESOLVED
+  - Section 5: Next Action cập nhật — chuyển sang test thực tế + bind CSV
+  - Section 7: Thêm mới — Lesson Learned: File name input (evidence, kết luận, rule mới)
+
 ### ~14:00 - OpenFile: thay approach nhập path — TextValue thay SetAttributeValue
 - **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
   - Method: `EnterPathIntoFileNameField()`
