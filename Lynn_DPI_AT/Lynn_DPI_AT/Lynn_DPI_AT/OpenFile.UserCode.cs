@@ -221,105 +221,87 @@ namespace Lynn_DPI_AT
                     repo.SelectRecipeFile.Self.Close();
             }
 
-            SpyModelNameElement();
+            ValidateModelName();
         }
 
-        private void SpyModelNameElement()
+        private void ValidateModelName()
         {
-            Report.Log(ReportLevel.Info, "OpenFile", "=== SPY MODEL NAME ELEMENT ===");
+            string expectedModelName = this.ModelName;
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("=== VALIDATE MODEL NAME === Expected: '{0}'", expectedModelName));
 
+            if (string.IsNullOrEmpty(expectedModelName))
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile",
+                    "ModelName variable rong hoac null — bo qua validation.");
+                return;
+            }
+
+            if (!repo.CCIMainWindow.SomeTextInfo.Exists(5000))
+            {
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    "SomeText KHONG ton tai sau 5s — khong the doc Model Name tu UI.");
+                throw new Exception("Khong the validate Model Name: SomeText element khong ton tai.");
+            }
+
+            string actualModelName = ReadModelNameFromUI();
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Actual Model Name (UI) = '{0}'", actualModelName));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Expected Model Name (CSV) = '{0}'", expectedModelName));
+
+            bool match = !string.IsNullOrEmpty(actualModelName)
+                && actualModelName.Trim().Equals(expectedModelName.Trim(), StringComparison.OrdinalIgnoreCase);
+
+            if (match)
+            {
+                Report.Log(ReportLevel.Success, "OpenFile",
+                    string.Format("Model Name PASS: UI='{0}' == CSV='{1}'",
+                        actualModelName, expectedModelName));
+            }
+            else
+            {
+                string msg = string.Format(
+                    "Model Name FAIL: UI='{0}' != CSV='{1}'",
+                    actualModelName, expectedModelName);
+                Report.Log(ReportLevel.Error, "OpenFile", msg);
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+                throw new Exception(msg);
+            }
+        }
+
+        private string ReadModelNameFromUI()
+        {
             try
             {
-                if (!repo.CCIMainWindow.SomeTextInfo.Exists(5000))
-                {
-                    Report.Log(ReportLevel.Warn, "OpenFile", "SomeText KHONG ton tai sau 5s.");
-                    return;
-                }
-
                 var childElement = repo.CCIMainWindow.SomeText.Element;
-                Report.Log(ReportLevel.Info, "OpenFile",
-                    string.Format("CHILD element: ClassName='{0}', ControlType='{1}'",
-                        childElement.GetAttributeValueText("ClassName"),
-                        childElement.GetAttributeValueText("ControlType")));
-
-                string[] attrs = { "Caption", "Text", "WindowText", "AccessibleName", "AccessibleValue", "Name" };
-                foreach (string attr in attrs)
-                {
-                    try
-                    {
-                        string val = childElement.GetAttributeValueText(attr);
-                        Report.Log(ReportLevel.Info, "OpenFile",
-                            string.Format("CHILD.{0} = '{1}'", attr, val));
-                    }
-                    catch (Exception ex)
-                    {
-                        Report.Log(ReportLevel.Debug, "OpenFile",
-                            string.Format("CHILD.{0} — error: {1}", attr, ex.Message));
-                    }
-                }
-
                 var parentElement = childElement.Parent;
-                if (parentElement != null)
+
+                if (parentElement == null)
                 {
-                    Report.Log(ReportLevel.Info, "OpenFile",
-                        string.Format("PARENT element: ClassName='{0}', ControlType='{1}'",
-                            parentElement.GetAttributeValueText("ClassName"),
-                            parentElement.GetAttributeValueText("ControlType")));
-
-                    foreach (string attr in attrs)
-                    {
-                        try
-                        {
-                            string val = parentElement.GetAttributeValueText(attr);
-                            Report.Log(ReportLevel.Info, "OpenFile",
-                                string.Format("PARENT.{0} = '{1}'", attr, val));
-                        }
-                        catch (Exception ex)
-                        {
-                            Report.Log(ReportLevel.Debug, "OpenFile",
-                                string.Format("PARENT.{0} — error: {1}", attr, ex.Message));
-                        }
-                    }
-
-                    var grandParent = parentElement.Parent;
-                    if (grandParent != null)
-                    {
-                        Report.Log(ReportLevel.Info, "OpenFile",
-                            string.Format("GRANDPARENT element: ClassName='{0}', ControlType='{1}'",
-                                grandParent.GetAttributeValueText("ClassName"),
-                                grandParent.GetAttributeValueText("ControlType")));
-
-                        foreach (string attr in attrs)
-                        {
-                            try
-                            {
-                                string val = grandParent.GetAttributeValueText(attr);
-                                Report.Log(ReportLevel.Info, "OpenFile",
-                                    string.Format("GRANDPARENT.{0} = '{1}'", attr, val));
-                            }
-                            catch (Exception ex)
-                            {
-                                Report.Log(ReportLevel.Debug, "OpenFile",
-                                    string.Format("GRANDPARENT.{0} — error: {1}", attr, ex.Message));
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Report.Log(ReportLevel.Warn, "OpenFile", "PARENT la null.");
+                    Report.Log(ReportLevel.Warn, "OpenFile",
+                        "SomeText parent element la null — thu doc tu child.");
+                    return childElement.GetAttributeValueText("Caption");
                 }
 
-                Report.Log(ReportLevel.Info, "OpenFile",
-                    string.Format("Expected ModelName (CSV/default) = '{0}'", this.ModelName));
+                string parentCaption = parentElement.GetAttributeValueText("Caption");
+                Report.Log(ReportLevel.Debug, "OpenFile",
+                    string.Format("Parent Caption = '{0}'", parentCaption));
+
+                if (!string.IsNullOrEmpty(parentCaption))
+                    return parentCaption;
+
+                string childCaption = childElement.GetAttributeValueText("Caption");
+                Report.Log(ReportLevel.Debug, "OpenFile",
+                    string.Format("Child Caption = '{0}' (fallback)", childCaption));
+                return childCaption;
             }
             catch (Exception ex)
             {
                 Report.Log(ReportLevel.Error, "OpenFile",
-                    string.Format("SpyModelNameElement exception: {0}", ex.Message));
+                    string.Format("ReadModelNameFromUI exception: {0}", ex.Message));
+                return "(khong doc duoc)";
             }
-
-            Report.Log(ReportLevel.Info, "OpenFile", "=== END SPY MODEL NAME ===");
         }
     }
 }
