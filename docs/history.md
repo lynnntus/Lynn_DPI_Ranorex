@@ -2,6 +2,28 @@
 
 ## 2026-06-03
 
+### ~16:30 - Tạo file BAT đồng bộ cho Máy A
+- **Created**: `push_macA.bat` — Script commit/push code từ máy A lên Git
+- **Created**: `sync_macA.bat` — Script pull/sync code mới nhất về máy A
+- Dựa trên logic của `push_macB.bat` / `sync_macB.bat` (file cũ dành cho máy B)
+- Điều chỉnh: path `F:\RanorexProjects\Lynn_DPI_AT`, giữ HTTPS remote, thêm hiển thị branch/status, thêm stash option trong sync
+
+### ~15:00 - Chốt session — Update KNOWLEDGE + Tạo handover ModelName validation
+- **Modified**: `docs/OpenFile_KNOWLEDGE.md`
+  - Section 1: Cập nhật Current Status — các PASS đã xác nhận, Known Issue, Next Goal
+  - Section 2: MenuOpenRecipe đánh dấu đã test thực tế PASS
+  - Section 2: Thêm mục "Bước 6 verify dialog closed — gây false failure (đã loại bỏ)"
+  - Section 5: Next Action cập nhật — hướng sang ModelName validation
+  - Section 6: Rules cập nhật — bỏ "Verify dialog đã đóng" khỏi BẮT BUỘC
+- **Created**: `docs/HANDOVER_OpenFile_ModelNameValidation.md` — Session starter cho ModelName validation
+
+### ~14:45 - Bỏ false failure Bước 6 verify dialog closed
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - Bỏ: verify dialog closed, đọc field sau Open, throw exception, Escape cleanup
+  - Thay bằng: `Delay(2000)` + `Report.Info` để tránh false failure
+  - Build: PASS (Debug x86)
+  - Chưa commit.
+
 ### ~14:30 - Cập nhật OpenFile_KNOWLEDGE.md — Lesson Learned
 - **Modified**: `docs/OpenFile_KNOWLEDGE.md`
   - Section 4: Current Blocker đánh dấu RESOLVED
