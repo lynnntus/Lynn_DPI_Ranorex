@@ -26,6 +26,8 @@ namespace Lynn_DPI_AT
     {
         public const int FILE_DIALOG_TIMEOUT_MS = 15000;
         public const int DIALOG_CLOSE_TIMEOUT_MS = 5000;
+        public const int MENU_OPEN_RECIPE_TIMEOUT_MS = 50000;
+        public const int MENU_POLL_INTERVAL_MS = 400;
 
         private void Init()
         {
@@ -61,16 +63,30 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Success, "OpenFile", "Buoc 2 OK.");
 
             // --- Buoc 3: Menu click ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Menu click...");
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click LeftMenuOpenToogleButton...");
             repo.CCIMainWindow.LeftMenuOpenToogleButton.Click();
-            Delay.Milliseconds(500);
+            Delay.Milliseconds(300);
+
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Cho MenuOpenRecipe san sang (max 50s)...");
+            bool menuReady = WaitForMenuOpenRecipeClickable(MENU_OPEN_RECIPE_TIMEOUT_MS, MENU_POLL_INTERVAL_MS);
+            if (!menuReady)
+            {
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    string.Format("Buoc 3 THAT BAI: MenuOpenRecipe khong visible/clickable sau {0}s.", MENU_OPEN_RECIPE_TIMEOUT_MS / 1000));
+                throw new Exception(string.Format(
+                    "MenuOpenRecipe khong san sang sau {0}s. Menu sidebar co the chua mo hoac element khong visible.", MENU_OPEN_RECIPE_TIMEOUT_MS / 1000));
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 3: Click MenuOpenRecipe...");
             repo.CCIMainWindow.MenuOpenRecipe.Click();
             Delay.Milliseconds(500);
 
             if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
             {
-                Report.Log(ReportLevel.Error, "OpenFile", "Buoc 3 THAT BAI: dialog khong xuat hien.");
-                throw new Exception("Select Recipe File dialog khong xuat hien.");
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+                Report.Log(ReportLevel.Error, "OpenFile", "Buoc 3 THAT BAI: dialog khong xuat hien sau khi click MenuOpenRecipe.");
+                throw new Exception("Select Recipe File dialog khong xuat hien sau khi click MenuOpenRecipe.");
             }
             Report.Log(ReportLevel.Success, "OpenFile", "Buoc 3 OK: dialog xuat hien.");
 
@@ -168,6 +184,60 @@ namespace Lynn_DPI_AT
                     return "(khong doc duoc)";
                 }
             }
+        }
+
+        private bool WaitForMenuOpenRecipeClickable(int timeoutMs, int pollIntervalMs)
+        {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            int attempt = 0;
+
+            while (stopwatch.ElapsedMilliseconds < timeoutMs)
+            {
+                attempt++;
+                try
+                {
+                    if (repo.CCIMainWindow.MenuOpenRecipeInfo.Exists(0))
+                    {
+                        var element = repo.CCIMainWindow.MenuOpenRecipe;
+                        bool visible = element.Visible;
+                        bool enabled = element.Enabled;
+
+                        Report.Log(ReportLevel.Debug, "OpenFile",
+                            string.Format("Poll #{0} ({1}ms): Exists=True, Visible={2}, Enabled={3}",
+                                attempt, stopwatch.ElapsedMilliseconds, visible, enabled));
+
+                        if (visible && enabled)
+                        {
+                            element.EnsureVisible();
+                            Delay.Milliseconds(200);
+                            Report.Log(ReportLevel.Info, "OpenFile",
+                                string.Format("MenuOpenRecipe san sang sau {0}ms (poll #{1}).",
+                                    stopwatch.ElapsedMilliseconds, attempt));
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (attempt <= 3 || attempt % 10 == 0)
+                            Report.Log(ReportLevel.Debug, "OpenFile",
+                                string.Format("Poll #{0} ({1}ms): MenuOpenRecipe chua Exists.",
+                                    attempt, stopwatch.ElapsedMilliseconds));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Report.Log(ReportLevel.Debug, "OpenFile",
+                        string.Format("Poll #{0} ({1}ms): Exception — {2}",
+                            attempt, stopwatch.ElapsedMilliseconds, ex.Message));
+                }
+
+                Delay.Milliseconds(pollIntervalMs);
+            }
+
+            Report.Log(ReportLevel.Error, "OpenFile",
+                string.Format("MenuOpenRecipe KHONG san sang sau {0}ms ({1} polls).",
+                    stopwatch.ElapsedMilliseconds, attempt));
+            return false;
         }
 
         private void Finish()
