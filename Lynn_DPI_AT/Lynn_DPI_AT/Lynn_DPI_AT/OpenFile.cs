@@ -43,6 +43,7 @@ namespace Lynn_DPI_AT
         {
             RecipeFilePath = "C:\\Kohyoung\\Job\\Lynn_20260516_Stacking\\Lynn_Stacking_Underfill.kyjob";
             ExpectedFileName = "Lynn_Stacking_Underfill.kyjob";
+            ModelName = "Lynn_Stacking_Underfill";
         }
 
         /// <summary>
@@ -79,6 +80,18 @@ namespace Lynn_DPI_AT
             set { _ExpectedFileName = value; }
         }
 
+        string _ModelName;
+
+        /// <summary>
+        /// Gets or sets the value of variable ModelName.
+        /// </summary>
+        [TestVariable("c3f81406-c27d-40fb-96f5-1a908854c0b9")]
+        public string ModelName
+        {
+            get { return _ModelName; }
+            set { _ModelName = value; }
+        }
+
 #endregion
 
         /// <summary>
@@ -105,51 +118,17 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.LeftMenuOpenToogleButton' at 22;25.", repo.CCIMainWindow.LeftMenuOpenToogleButtonInfo, new RecordItemIndex(0));
-            //repo.CCIMainWindow.LeftMenuOpenToogleButton.Click("22;25");
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.MenuOpenRecipe' at 73;203.", repo.CCIMainWindow.MenuOpenRecipeInfo, new RecordItemIndex(1));
-            //repo.CCIMainWindow.MenuOpenRecipe.Click("73;203");
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Keyboard", "Key sequence '{LControlKey down}o{LControlKey up}'.", new RecordItemIndex(2));
-            //Keyboard.Press("{LControlKey down}o{LControlKey up}");
-            //Delay.Milliseconds(0);
-            
             OpenRecipeFileByPath(RecipeFilePath);
             Delay.Milliseconds(0);
             
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Down item 'SelectRecipeFile.Text1148' at 174;11.", repo.SelectRecipeFile.Text1148Info, new RecordItemIndex(4));
-            //repo.SelectRecipeFile.Text1148.MoveTo("174;11");
-            //Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Up item 'SelectRecipeFile.Text1148' at 174;11.", repo.SelectRecipeFile.Text1148Info, new RecordItemIndex(5));
-            //repo.SelectRecipeFile.Text1148.MoveTo("174;11");
-            //Mouse.ButtonUp(System.Windows.Forms.MouseButtons.Left);
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Keyboard", "Key sequence 'Ly' with focus on 'SelectRecipeFile.Text1148'.", repo.SelectRecipeFile.Text1148Info, new RecordItemIndex(6));
-            //repo.SelectRecipeFile.Text1148.PressKeys("Ly");
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Keyboard", "Key sequence 'ay{LShiftKey down}_{LShiftKey up}BadMark.ky' with focus on 'SelectRecipeFile.Text1148'.", repo.SelectRecipeFile.Text1148Info, new RecordItemIndex(7));
-            //repo.SelectRecipeFile.Text1148.PressKeys("ay{LShiftKey down}_{LShiftKey up}BadMark.ky");
-            //Delay.Milliseconds(0);
-            
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'ButtonOpen' at 39;11.", repo.ButtonOpenInfo, new RecordItemIndex(8));
-            //repo.ButtonOpen.Click("39;11");
-            //Delay.Milliseconds(0);
-            
-            Report.Log(ReportLevel.Info, "Wait", "Waiting 30s to exist. Associated repository item: 'CCIMainWindow.SomeIndicator'", repo.CCIMainWindow.SomeIndicatorInfo, new ActionTimeout(30000), new RecordItemIndex(9));
+            Report.Log(ReportLevel.Info, "Wait", "Waiting 30s to exist. Associated repository item: 'CCIMainWindow.SomeIndicator'", repo.CCIMainWindow.SomeIndicatorInfo, new ActionTimeout(30000), new RecordItemIndex(1));
             repo.CCIMainWindow.SomeIndicatorInfo.WaitForExists(30000);
             
-            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator' at 1714;196.", repo.CCIMainWindow.SomeIndicatorInfo, new RecordItemIndex(10));
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator' at 1714;196.", repo.CCIMainWindow.SomeIndicatorInfo, new RecordItemIndex(2));
             //repo.CCIMainWindow.SomeIndicator.Click("1714;196");
             //Delay.Milliseconds(0);
             
-            //Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'CCIMainWindow.SomeText'.", repo.CCIMainWindow.SomeTextInfo, new RecordItemIndex(11));
+            //Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'CCIMainWindow.SomeText'.", repo.CCIMainWindow.SomeTextInfo, new RecordItemIndex(3));
             //Validate.Exists(repo.CCIMainWindow.SomeTextInfo);
             //Delay.Milliseconds(100);
             

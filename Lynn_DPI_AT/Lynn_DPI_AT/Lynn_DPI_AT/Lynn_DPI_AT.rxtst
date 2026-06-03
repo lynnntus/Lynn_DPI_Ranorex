@@ -349,7 +349,7 @@
 					ExpectedFileName
 				</column>
 				<column>
-					Description
+					Model Name
 				</column>
 			</lastknowncolumns>
 			<maskedcolumns>
@@ -365,6 +365,12 @@
 		name="TestRun">
 			<testcontainer
 			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
+			</testcontainer>
+			<testcontainer
+			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
+			</testcontainer>
+			<testcontainer
+			id="3d1682f4-1614-490d-9714-819edec40d65">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">

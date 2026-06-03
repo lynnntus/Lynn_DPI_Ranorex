@@ -390,10 +390,10 @@ namespace Lynn_DPI_AT
                 _createoropenrecipeInfo = new RepoItemInfo(this, "CreateOrOpenRecipe", "container[@automationid='MainView']/?/?/text[@caption='Create or open recipe.']", "", 30000, null, "1ca25c88-a5ce-4306-aacd-c575283c4707");
                 _somebuttonInfo = new RepoItemInfo(this, "SomeButton", "container[@automationid='WindowTitleBarPanel']/text/button[7]", "", 30000, null, "08c38375-1b37-4ad7-bdc9-8b2c5e396379");
                 _leftmenuopentooglebuttonInfo = new RepoItemInfo(this, "LeftMenuOpenToogleButton", "container[@automationid='WindowTitleBarPanel']/?/?/button[@automationid='LeftMenuOpenToogleButton']", ".//button[@automationid='LeftMenuOpenToogleButton']", 30000, null, "61562d2a-c372-439a-89c4-7b1cc865cf35");
-                _someindicatorInfo = new RepoItemInfo(this, "SomeIndicator", "indicator[1]", "indicator[1]", 30000, null, "9a218138-9e43-4ae1-9552-8a075e56667f");
+                _someindicatorInfo = new RepoItemInfo(this, "SomeIndicator", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", "", 30000, null, "9a218138-9e43-4ae1-9552-8a075e56667f");
                 _textInfo = new RepoItemInfo(this, "Text", "container[@automationid='MainView']/?/?/table[@automationid='DevGrid']//cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']", ".//text[@automationid='Text']", 30000, null, "1331a4f5-770d-435c-9543-0d016a69fe0e");
                 _someindicator1Info = new RepoItemInfo(this, "SomeIndicator1", "indicator[2]", "indicator[2]", 30000, null, "bded332f-bdf3-40ec-9168-48857d170949");
-                _sometextInfo = new RepoItemInfo(this, "SomeText", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill.kyjob']/text[@caption='']", "", 30000, null, "d4b6b860-3698-49af-a31c-7a02f71e64d8");
+                _sometextInfo = new RepoItemInfo(this, "SomeText", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", ".//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", 30000, null, "d4b6b860-3698-49af-a31c-7a02f71e64d8");
                 _menuopenrecipeInfo = new RepoItemInfo(this, "MenuOpenRecipe", "container[@automationid='MainView']/container[3]//button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']", ".//text[@caption>'※ Some menus are disabled']/container[@caption='']/container[@caption='']/button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']", 30000, null, "471fd4a3-6be2-453b-9509-13c55c285448");
             }
 
@@ -497,11 +497,11 @@ namespace Lynn_DPI_AT
             /// The SomeIndicator item.
             /// </summary>
             [RepositoryItem("9a218138-9e43-4ae1-9552-8a075e56667f")]
-            public virtual Ranorex.Indicator SomeIndicator
+            public virtual Ranorex.Text SomeIndicator
             {
                 get
                 {
-                    return _someindicatorInfo.CreateAdapter<Ranorex.Indicator>(true);
+                    return _someindicatorInfo.CreateAdapter<Ranorex.Text>(true);
                 }
             }
 
