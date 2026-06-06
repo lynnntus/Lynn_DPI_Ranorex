@@ -221,87 +221,132 @@ namespace Lynn_DPI_AT
                     repo.SelectRecipeFile.Self.Close();
             }
 
-            ValidateModelName();
+            InvestigateModelNameElement();
         }
 
-        private void ValidateModelName()
+        // =====================================================================
+        // PHASE 1 INVESTIGATION — temporary, will be removed after investigation
+        // =====================================================================
+        private static readonly string[] PROBE_ATTRS = {
+            "Caption", "Text", "WindowText",
+            "AccessibleName", "AccessibleValue",
+            "Name", "Value",
+            "AutomationId", "ClassName", "ControlType",
+            "TagName", "InnerText", "OuterText"
+        };
+
+        private void InvestigateModelNameElement()
         {
-            string expectedModelName = this.ModelName;
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("=== VALIDATE MODEL NAME === Expected: '{0}'", expectedModelName));
-
-            if (string.IsNullOrEmpty(expectedModelName))
-            {
-                Report.Log(ReportLevel.Warn, "OpenFile",
-                    "ModelName variable rong hoac null — bo qua validation.");
-                return;
-            }
-
-            if (!repo.CCIMainWindow.SomeTextInfo.Exists(5000))
-            {
-                Report.Log(ReportLevel.Error, "OpenFile",
-                    "SomeText KHONG ton tai sau 5s — khong the doc Model Name tu UI.");
-                throw new Exception("Khong the validate Model Name: SomeText element khong ton tai.");
-            }
-
-            string actualModelName = ReadModelNameFromUI();
+                "=== INVESTIGATE MODEL NAME ELEMENT START ===");
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Actual Model Name (UI) = '{0}'", actualModelName));
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Expected Model Name (CSV) = '{0}'", expectedModelName));
+                string.Format("Expected ModelName (CSV/default) = '{0}'", this.ModelName));
 
-            bool match = !string.IsNullOrEmpty(actualModelName)
-                && actualModelName.Trim().Equals(expectedModelName.Trim(), StringComparison.OrdinalIgnoreCase);
-
-            if (match)
-            {
-                Report.Log(ReportLevel.Success, "OpenFile",
-                    string.Format("Model Name PASS: UI='{0}' == CSV='{1}'",
-                        actualModelName, expectedModelName));
-            }
-            else
-            {
-                string msg = string.Format(
-                    "Model Name FAIL: UI='{0}' != CSV='{1}'",
-                    actualModelName, expectedModelName);
-                Report.Log(ReportLevel.Error, "OpenFile", msg);
-                Report.Screenshot(repo.CCIMainWindow.Self, true);
-                throw new Exception(msg);
-            }
-        }
-
-        private string ReadModelNameFromUI()
-        {
             try
             {
-                var childElement = repo.CCIMainWindow.SomeText.Element;
-                var parentElement = childElement.Parent;
-
-                if (parentElement == null)
+                // --- SomeText exists check ---
+                bool exists = repo.CCIMainWindow.SomeTextInfo.Exists(5000);
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[PROBE] SomeText.Exists(5s) = {0}", exists));
+                if (!exists)
                 {
                     Report.Log(ReportLevel.Warn, "OpenFile",
-                        "SomeText parent element la null — thu doc tu child.");
-                    return childElement.GetAttributeValueText("Caption");
+                        "[PROBE] SomeText khong ton tai — ket thuc investigation.");
+                    return;
                 }
 
-                string parentCaption = parentElement.GetAttributeValueText("Caption");
-                Report.Log(ReportLevel.Debug, "OpenFile",
-                    string.Format("Parent Caption = '{0}'", parentCaption));
+                var child = repo.CCIMainWindow.SomeText.Element;
+                LogElement(child, "SomeText(CHILD)");
 
-                if (!string.IsNullOrEmpty(parentCaption))
-                    return parentCaption;
+                // --- Traverse UP 4 levels ---
+                var cur = child.Parent;
+                for (int level = 1; level <= 4 && cur != null; level++)
+                {
+                    LogElement(cur, string.Format("ANCESTOR_L{0}", level));
 
-                string childCaption = childElement.GetAttributeValueText("Caption");
-                Report.Log(ReportLevel.Debug, "OpenFile",
-                    string.Format("Child Caption = '{0}' (fallback)", childCaption));
-                return childCaption;
+                    // Log tat ca children cua ancestor nay
+                    LogChildren(cur, string.Format("ANCESTOR_L{0}", level));
+
+                    cur = cur.Parent;
+                }
             }
             catch (Exception ex)
             {
                 Report.Log(ReportLevel.Error, "OpenFile",
-                    string.Format("ReadModelNameFromUI exception: {0}", ex.Message));
-                return "(khong doc duoc)";
+                    string.Format("[PROBE] Exception: {0}", ex.Message));
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile",
+                "=== INVESTIGATE MODEL NAME ELEMENT END ===");
+        }
+
+        private void LogElement(Ranorex.Core.Element el, string label)
+        {
+            if (el == null)
+            {
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[{0}] element = null", label));
+                return;
+            }
+
+            foreach (string attr in PROBE_ATTRS)
+            {
+                try
+                {
+                    string val = el.GetAttributeValueText(attr);
+                    if (val == null)
+                        Report.Log(ReportLevel.Info, "OpenFile",
+                            string.Format("[{0}] {1} = (null)", label, attr));
+                    else
+                        Report.Log(ReportLevel.Info, "OpenFile",
+                            string.Format("[{0}] {1} = '{2}'", label, attr, val));
+                }
+                catch
+                {
+                    // attribute khong ton tai tren element nay — bo qua
+                }
             }
         }
+
+        private void LogChildren(Ranorex.Core.Element parent, string parentLabel)
+        {
+            try
+            {
+                var children = parent.Children;
+                if (children == null || children.Count == 0)
+                {
+                    Report.Log(ReportLevel.Info, "OpenFile",
+                        string.Format("[{0}] Children.Count = 0", parentLabel));
+                    return;
+                }
+
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[{0}] Children.Count = {1}", parentLabel, children.Count));
+
+                for (int i = 0; i < Math.Min(children.Count, 10); i++)
+                {
+                    var ch = children[i];
+                    string cap = SafeAttr(ch, "Caption");
+                    string txt = SafeAttr(ch, "Text");
+                    string cls = SafeAttr(ch, "ClassName");
+                    string aid = SafeAttr(ch, "AutomationId");
+                    Report.Log(ReportLevel.Info, "OpenFile",
+                        string.Format("[{0}] Child[{1}]: Caption='{2}' Text='{3}' Class='{4}' AutomationId='{5}'",
+                            parentLabel, i, cap, txt, cls, aid));
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[{0}] LogChildren exception: {1}", parentLabel, ex.Message));
+            }
+        }
+
+        private string SafeAttr(Ranorex.Core.Element el, string attr)
+        {
+            try { return el.GetAttributeValueText(attr) ?? "(null)"; }
+            catch { return "(n/a)"; }
+        }
+
     }
 }
