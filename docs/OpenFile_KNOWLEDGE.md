@@ -1,24 +1,34 @@
 # OpenFile Module — Knowledge Base
 
-> Cập nhật: 2026-06-03 (session cuối — chốt trước ModelName validation)
+> Cập nhật: 2026-06-06 (session chốt — ValidateModelName implemented, Repository issue phát hiện)
 > Mục đích: Lưu lại các fact đã chứng minh trong quá trình debug OpenFile module, tránh mất context giữa các session.
 
 ---
 
-## 1. Current Status (chốt session 2026-06-03)
+## 1. Current Status (chốt session 2026-06-06)
 
 **PASS:**
 - Open Recipe dialog mở thành công qua `LeftMenuOpenToogleButton` → `MenuOpenRecipe`.
 - `MenuOpenRecipe` polling wait hoạt động (max 50s, poll 400ms).
 - `RecipeFilePath` nhập vào `Text1148` thành công bằng `TextValue`.
 - File được mở thực tế trong Neptune application.
+- `ValidateModelName()` đã implement trong `OpenFile.UserCode.cs` — dùng `Validate.AreEqual`.
+- CSV đã có cột `ModelName`, data binding hoạt động.
+- Validation lấy actual từ `SomeText.Element.Parent.Caption` (ANCESTOR_L1), so sánh với `this.ModelName`.
+- Với recipe `Lynn_Stacking_Underfill` — validation PASS.
 
 **Known Issue đã xử lý:**
 - Bước 6 (verify dialog closed sau click Open) gây false failure — đã loại bỏ tạm thời.
 
+**Known Issue MỚI (CHƯA xử lý) — Repository Hardcode:**
+- Repository item `CCIMainWindow.SomeText` hardcode `@caption='Lynn_Stacking_Underfill'` trong RxPath.
+- Khi đổi TestData sang model khác (ví dụ `Lynn_Array_BadMark`), `SomeText.Exists()` = False → validation fail.
+- Root cause: Repository selector, KHÔNG phải logic validation.
+- Xem handover: `docs/HANDOVER_OpenFile_RepositoryIssue.md`
+
 **Next Goal:**
-- Validate `ModelName` sau khi recipe load xong.
-- CSV đã có cột `ModelName` sẵn sàng (`TestData/OpenFileData.csv`).
+- Phân tích và re-spy Repository selector — loại bỏ dependency vào giá trị model cụ thể.
+- Làm cho selector hoạt động với mọi ModelName trong CSV.
 
 ---
 
@@ -104,9 +114,10 @@
 
 - Bug nhập path đã RESOLVED. Xem **Section 7: Lesson Learned**.
 - Flow OpenFile đã test thực tế — file mở được trong Neptune.
-- **Next**: Implement ModelName validation sau khi recipe load xong.
-  - Xem handover: `docs/HANDOVER_OpenFile_ModelNameValidation.md`
-  - Cần investigate: repository item nào đại diện Model Name trong Recipe Information panel.
+- ~~**Next**: Implement ModelName validation~~ → **DONE** (session 2026-06-06).
+- **Next**: Re-spy Repository selector để loại bỏ hardcode `@caption='Lynn_Stacking_Underfill'`.
+  - Xem handover: `docs/HANDOVER_OpenFile_RepositoryIssue.md`
+  - Mục tiêu: selector hoạt động với mọi ModelName — hỗ trợ multi-recipe testing.
 
 ---
 
@@ -117,6 +128,7 @@
 - Ctrl+A / Ctrl+V / clipboard approach trên Text1148.
 - `SetAttributeValue("WindowText", ...)` trên Text1148.
 - `Report.Success` ngay sau click Open mà không verify.
+- KHÔNG sửa `ValidateModelName()` logic — đã hoạt động đúng.
 
 ### BẮT BUỘC
 
@@ -124,8 +136,9 @@
 - Verify **không có popup** "file does not exist".
 - Chỉ sửa `*.UserCode.cs`.
 - Không commit/push khi chưa được yêu cầu.
+- Repository issue phải giải quyết trong Ranorex Studio (re-spy), KHÔNG sửa `.rxrep` bằng tay.
 
-> Note: Verify dialog closed tạm thời bị loại bỏ — sẽ thay bằng ModelName validation.
+> Note: Verify dialog closed đã thay bằng ModelName validation (Validate.AreEqual).
 
 ---
 
@@ -180,3 +193,41 @@ Không nhập được full `RecipeFilePath` vào ô File name của `Select Rec
 | `CCIMainWindow.SomeIndicator` | `indicator[1]` | Chỉ báo file load (active step trong OpenFile.cs:145-146) |
 | `CCIMainWindow.LeftMenuOpenToogleButton` | (xem repository) | Nút mở menu sidebar |
 | `CCIMainWindow.MenuOpenRecipe` | `button[@text='Open Recipe']` | Mục Open Recipe trong menu |
+| `CCIMainWindow.SomeText` | `//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']` | **HARDCODED** — cần re-spy |
+
+---
+
+## 8. ModelName Validation — Facts (session 2026-06-06)
+
+### Investigation Results
+
+- `SomeText` (CHILD element) — `Caption = ''`, `Text = null`, tất cả attribute khác null.
+- `SomeText.Element.Parent` (ANCESTOR_L1) — `Caption = 'Lynn_Stacking_Underfill'`, `Text = 'Lynn_Stacking_Underfill'`.
+- **Kết luận**: Actual Model Name nằm ở ANCESTOR_L1 (parent của SomeText), attribute `Caption`.
+
+### Implementation
+
+- Method `ValidateModelName()` trong `OpenFile.UserCode.cs`.
+- Đọc actual: `repo.CCIMainWindow.SomeText.Element.Parent` → `Caption` (fallback `Text`).
+- Expected: `this.ModelName` (từ CSV/default).
+- Validation: `Validate.AreEqual(actual, expected)` — chuẩn Ranorex, hiển thị đúng trong report.
+- Screenshot tự động trước validation nếu phát hiện mismatch.
+
+### Call Chain
+
+```
+ITestModule.Run()
+  └─ OpenRecipeFileByPath()
+       └─ Buoc 7:
+            SomeTextInfo.Exists(30s)
+            InvestigateModelNameElement()   ← phase 1 investigation logs (giữ tạm)
+            ValidateModelName()             ← validation chính thức
+```
+
+### Repository Hardcode Issue
+
+- RxPath của `SomeText` và `SomeIndicator` chứa `@caption='Lynn_Stacking_Underfill'`.
+- Chỉ match khi recipe có model name = `Lynn_Stacking_Underfill`.
+- Với recipe khác → `SomeText.Exists()` = False → validation fail trước khi đến logic so sánh.
+- **Đây KHÔNG phải lỗi validation** — root cause nằm ở Repository selector.
+- Cần re-spy trong Ranorex Studio để tạo dynamic selector.

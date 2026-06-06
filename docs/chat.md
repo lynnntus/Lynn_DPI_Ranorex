@@ -1,5 +1,27 @@
 # Chat History
 
+## 2026-06-06
+
+### ~19:50 — ValidateModelName: dynamic RxPath thay thế hardcode repository
+- **Yêu cầu**: Bỏ dependency vào `repo.CCIMainWindow.SomeText` (hardcode `@caption='Lynn_Stacking_Underfill'`), chuyển sang dynamic RxPath dựa trên `this.ModelName` từ CSV
+- **Điều tra trước đó**: Spy trong Ranorex Studio xác nhận node PARENT không có `AutomationId`, `ClassName`, `Name` — chỉ có `caption` thay đổi theo recipe. Bỏ tick caption thì selector quá rộng (wildcard)
+- **Kết quả**: Viết lại `ValidateModelName()` dùng `Host.Local.FindSingle<Ranorex.Text>(rxPath, 30000)` với RxPath = `/form[@title='CCIMainWindow']//text[@caption='{ModelName}']`
+- **Files**: `OpenFile.UserCode.cs`
+- **Build**: PASS
+
+### ~session — ModelName Validation: Implementation + Repository Issue Discovery
+- **Request**: Tiếp tục từ session trước — implement ValidateModelName() theo proposal đã duyệt, chốt session với knowledge base update và handover
+- **Result**: 
+  - `ValidateModelName()` implement thành công dùng `Validate.AreEqual`
+  - Build PASS (Debug x86)
+  - Phát hiện Repository hardcode issue: `SomeText` / `SomeIndicator` chứa `@caption='Lynn_Stacking_Underfill'` → chỉ hoạt động với 1 recipe
+  - Chốt session: cập nhật OpenFile_KNOWLEDGE.md, history.md, tạo HANDOVER_OpenFile_RepositoryIssue.md
+- **Related files**: 
+  - `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs` (modified — thêm ValidateModelName())
+  - `docs/OpenFile_KNOWLEDGE.md` (updated — Section 1, 5, 6, 8)
+  - `docs/HANDOVER_OpenFile_RepositoryIssue.md` (created)
+  - `docs/history.md` (updated)
+
 ## 2026-05-26
 
 ### ~23:00 - Project Cleanup

@@ -105,12 +105,8 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Buoc 6 INFO: Click Open hoan tat. File target: '{0}'", recipeFilePath));
 
-            // --- Buoc 7: Investigation (PHASE 1 — tam thoi) ---
-            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 7: Cho SomeText xuat hien de investigate...");
-            bool someTextAppeared = repo.CCIMainWindow.SomeTextInfo.Exists(30000);
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Buoc 7: SomeText.Exists(30s) = {0}", someTextAppeared));
-            InvestigateModelNameElement();
+            // --- Buoc 7: Validate ModelName (dynamic RxPath) ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 7: Validate ModelName bang dynamic RxPath...");
             ValidateModelName();
         }
 
@@ -221,51 +217,39 @@ namespace Lynn_DPI_AT
         private void ValidateModelName()
         {
             string expected = this.ModelName;
-
-            if (!repo.CCIMainWindow.SomeTextInfo.Exists(3000))
-            {
-                Report.Log(ReportLevel.Error, "OpenFile",
-                    "ValidateModelName: SomeText khong ton tai — khong the lay Actual ModelName.");
-                throw new Exception("ValidateModelName: SomeText khong ton tai.");
-            }
-
-            var parent = repo.CCIMainWindow.SomeText.Element.Parent;
-
-            string actual   = null;
-            string attrUsed = null;
-
-            string captionVal = SafeAttr(parent, "Caption");
-            if (!string.IsNullOrEmpty(captionVal)
-                && captionVal != "(null)" && captionVal != "(n/a)")
-            {
-                actual   = captionVal;
-                attrUsed = "Caption";
-            }
-            else
-            {
-                string textVal = SafeAttr(parent, "Text");
-                if (!string.IsNullOrEmpty(textVal)
-                    && textVal != "(null)" && textVal != "(n/a)")
-                {
-                    actual   = textVal;
-                    attrUsed = "Text";
-                }
-            }
+            string rxPath = string.Format(
+                "/form[@title='CCIMainWindow']//text[@caption='{0}']", expected);
 
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Expected ModelName = '{0}'", expected));
             Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Actual ModelName   = '{0}'", actual));
-            Report.Log(ReportLevel.Info, "OpenFile",
-                "Source element = SomeText.Parent / ANCESTOR_L1");
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Attribute used = '{0}'", attrUsed ?? "(none)"));
+                string.Format("Dynamic RxPath = '{0}'", rxPath));
 
-            bool willFail = !string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase);
-            if (willFail)
+            Ranorex.Text foundElement = null;
+            try
+            {
+                foundElement = Host.Local.FindSingle<Ranorex.Text>(rxPath, 30000);
+            }
+            catch (Ranorex.ElementNotFoundException)
+            {
+                foundElement = null;
+            }
+
+            if (foundElement != null)
+            {
+                Report.Log(ReportLevel.Success, "OpenFile",
+                    string.Format("ModelName matched: '{0}'", expected));
+            }
+            else
+            {
                 Report.Screenshot(repo.CCIMainWindow.Self, true);
-
-            Validate.AreEqual(actual, expected);
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    string.Format("ModelName KHONG tim thay trong UI. Expected: '{0}', RxPath: '{1}'",
+                        expected, rxPath));
+                throw new Exception(string.Format(
+                    "ValidateModelName FAIL: Khong tim thay text[@caption='{0}'] trong CCIMainWindow sau 30s.",
+                    expected));
+            }
         }
 
         private void Finish()

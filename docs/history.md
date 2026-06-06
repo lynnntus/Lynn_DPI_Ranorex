@@ -1,5 +1,40 @@
 # Change History
 
+## 2026-06-06
+
+### ~19:50 — ValidateModelName: chuyển sang dynamic RxPath, bỏ dependency repo.SomeText
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - `ValidateModelName()`: viết lại hoàn toàn — dùng `Host.Local.FindSingle<Ranorex.Text>()` với dynamic RxPath
+  - RxPath: `/form[@title='CCIMainWindow']//text[@caption='{ModelName}']` (ModelName từ CSV runtime)
+  - Bỏ toàn bộ dependency vào `repo.CCIMainWindow.SomeText` / `SomeTextInfo`
+  - Wait 30s cho element, Report.Success nếu found, screenshot + throw nếu không
+  - Buoc 7: đơn giản hóa — bỏ `SomeTextInfo.Exists(30000)`, bỏ gọi `InvestigateModelNameElement()`
+  - Build: PASS (Debug x86)
+  - Chưa commit/push
+
+### ~session — Chốt session: ValidateModelName implemented, Repository issue phát hiện
+
+**Code changes (session trước, build PASS):**
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`
+  - Thêm method `ValidateModelName()` — dùng `Validate.AreEqual(actual, expected)`
+  - Đọc actual Model Name từ `SomeText.Element.Parent.Caption` (ANCESTOR_L1)
+  - Fallback sang attribute `Text` nếu `Caption` rỗng
+  - Screenshot tự động trước validation khi phát hiện mismatch
+  - Thêm gọi `ValidateModelName()` cuối Buoc 7 trong `OpenRecipeFileByPath()`
+  - Investigation code (`InvestigateModelNameElement()`, helpers) giữ nguyên tạm thời
+  - Build: PASS (Debug x86)
+
+**Knowledge issue phát hiện:**
+- Repository item `SomeText` / `SomeIndicator` hardcode `@caption='Lynn_Stacking_Underfill'` trong RxPath
+- Selector chỉ match 1 model name cụ thể — khi đổi sang model khác, `Exists()` = False
+- Root cause: Repository selector, KHÔNG phải logic validation
+
+**Documentation updates:**
+- **Modified**: `docs/OpenFile_KNOWLEDGE.md` — Section 1 (status), Section 5 (next action), Section 6 (rules), thêm Section 8 (ModelName Validation facts)
+- **Modified**: `docs/history.md` — Thêm entry session 2026-06-06
+- **Modified**: `docs/chat.md` — Thêm entry session 2026-06-06
+- **Created**: `docs/HANDOVER_OpenFile_RepositoryIssue.md` — Handover cho session re-spy Repository
+
 ## 2026-06-03
 
 ### ~16:30 - Tạo file BAT đồng bộ cho Máy A
