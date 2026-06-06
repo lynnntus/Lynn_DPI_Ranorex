@@ -111,6 +111,7 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Buoc 7: SomeText.Exists(30s) = {0}", someTextAppeared));
             InvestigateModelNameElement();
+            ValidateModelName();
         }
 
         private void EnterPathIntoFileNameField(string path)
@@ -215,6 +216,56 @@ namespace Lynn_DPI_AT
                 string.Format("MenuOpenRecipe KHONG san sang sau {0}ms ({1} polls).",
                     stopwatch.ElapsedMilliseconds, attempt));
             return false;
+        }
+
+        private void ValidateModelName()
+        {
+            string expected = this.ModelName;
+
+            if (!repo.CCIMainWindow.SomeTextInfo.Exists(3000))
+            {
+                Report.Log(ReportLevel.Error, "OpenFile",
+                    "ValidateModelName: SomeText khong ton tai — khong the lay Actual ModelName.");
+                throw new Exception("ValidateModelName: SomeText khong ton tai.");
+            }
+
+            var parent = repo.CCIMainWindow.SomeText.Element.Parent;
+
+            string actual   = null;
+            string attrUsed = null;
+
+            string captionVal = SafeAttr(parent, "Caption");
+            if (!string.IsNullOrEmpty(captionVal)
+                && captionVal != "(null)" && captionVal != "(n/a)")
+            {
+                actual   = captionVal;
+                attrUsed = "Caption";
+            }
+            else
+            {
+                string textVal = SafeAttr(parent, "Text");
+                if (!string.IsNullOrEmpty(textVal)
+                    && textVal != "(null)" && textVal != "(n/a)")
+                {
+                    actual   = textVal;
+                    attrUsed = "Text";
+                }
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Expected ModelName = '{0}'", expected));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Actual ModelName   = '{0}'", actual));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                "Source element = SomeText.Parent / ANCESTOR_L1");
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Attribute used = '{0}'", attrUsed ?? "(none)"));
+
+            bool willFail = !string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase);
+            if (willFail)
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+
+            Validate.AreEqual(actual, expected);
         }
 
         private void Finish()
