@@ -104,6 +104,13 @@ namespace Lynn_DPI_AT
             Delay.Milliseconds(2000);
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Buoc 6 INFO: Click Open hoan tat. File target: '{0}'", recipeFilePath));
+
+            // --- Buoc 7: Investigation (PHASE 1 — tam thoi) ---
+            Report.Log(ReportLevel.Info, "OpenFile", "Buoc 7: Cho SomeText xuat hien de investigate...");
+            bool someTextAppeared = repo.CCIMainWindow.SomeTextInfo.Exists(30000);
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Buoc 7: SomeText.Exists(30s) = {0}", someTextAppeared));
+            InvestigateModelNameElement();
         }
 
         private void EnterPathIntoFileNameField(string path)
@@ -220,8 +227,6 @@ namespace Lynn_DPI_AT
                 if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
                     repo.SelectRecipeFile.Self.Close();
             }
-
-            InvestigateModelNameElement();
         }
 
         // =====================================================================
@@ -251,23 +256,21 @@ namespace Lynn_DPI_AT
                 if (!exists)
                 {
                     Report.Log(ReportLevel.Warn, "OpenFile",
-                        "[PROBE] SomeText khong ton tai — ket thuc investigation.");
-                    return;
+                        "[PROBE] SomeText khong ton tai — chi log START/END, khong co du lieu.");
                 }
-
-                var child = repo.CCIMainWindow.SomeText.Element;
-                LogElement(child, "SomeText(CHILD)");
-
-                // --- Traverse UP 4 levels ---
-                var cur = child.Parent;
-                for (int level = 1; level <= 4 && cur != null; level++)
+                else
                 {
-                    LogElement(cur, string.Format("ANCESTOR_L{0}", level));
+                    var child = repo.CCIMainWindow.SomeText.Element;
+                    LogElement(child, "SomeText(CHILD)");
 
-                    // Log tat ca children cua ancestor nay
-                    LogChildren(cur, string.Format("ANCESTOR_L{0}", level));
-
-                    cur = cur.Parent;
+                    // --- Traverse UP 4 levels ---
+                    var cur = child.Parent;
+                    for (int level = 1; level <= 4 && cur != null; level++)
+                    {
+                        LogElement(cur, string.Format("ANCESTOR_L{0}", level));
+                        LogChildren(cur, string.Format("ANCESTOR_L{0}", level));
+                        cur = cur.Parent;
+                    }
                 }
             }
             catch (Exception ex)
