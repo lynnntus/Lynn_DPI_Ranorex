@@ -121,7 +121,7 @@ namespace Lynn_DPI_AT
             OpenRecipeFileByPath(RecipeFilePath);
             Delay.Milliseconds(0);
             
-            Report.Screenshot(ReportLevel.Info, "User", "", repo.CCIMainWindow.Self, false, new RecordItemIndex(1));
+            Report.Screenshot(ReportLevel.Success, "User", "", repo.CCIMainWindow.Self, false, new RecordItemIndex(1));
             
         }
 

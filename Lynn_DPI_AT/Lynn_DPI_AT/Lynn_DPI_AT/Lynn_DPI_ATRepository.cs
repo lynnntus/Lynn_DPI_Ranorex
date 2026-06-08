@@ -851,7 +851,7 @@ namespace Lynn_DPI_AT
             /// Creates a new SelectRecipeFile  folder.
             /// </summary>
             public SelectRecipeFileAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, true, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
+                    base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, false, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
             {
                 _systemitemnamedisplayInfo = new RepoItemInfo(this, "SystemItemNameDisplay", "element[@class='DUIViewWndClassName']//container[@caption='ShellView']/?/?/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", ".//listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", 30000, null, "56977f94-f427-4225-94f5-476e9cca2afa");
                 _text1148Info = new RepoItemInfo(this, "Text1148", "?/?/text[@controlid='1148']", "?/?/text[@controlid='1148']", 30000, null, "1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe");

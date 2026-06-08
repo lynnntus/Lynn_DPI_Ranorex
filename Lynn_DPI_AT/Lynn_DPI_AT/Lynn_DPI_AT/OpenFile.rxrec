@@ -71,8 +71,8 @@ mode="Desktop">
 		enabled="True"
 		message=""
 		optional="False"
-		reportlevel="Info;20"
-		searchpropertyid="42e4a44a-4201-4470-891c-b6b09aa0c32f">
+		reportlevel="Success;110"
+		searchpropertyid="7857b9fb-da50-4a1f-97cb-f1f580b03d20">
 			<comment>
 			</comment>
 			<bindings>

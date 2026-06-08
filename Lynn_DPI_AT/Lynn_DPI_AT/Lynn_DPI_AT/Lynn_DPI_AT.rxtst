@@ -331,7 +331,7 @@
 		<DataSource
 		id="743d05d1-af7c-46c5-9f84-b4c3b5284904"
 		includefile="Unchecked"
-		lastknownrowcount="1"
+		lastknownrowcount="3"
 		name="OpenFile"
 		type="Ranorex.Core.Data.CsvDataConnector"
 		withheaders="True">

@@ -356,7 +356,7 @@ j0QigXQ6DZoLgsDvWK/XBzc6hsu1BRMfpP7Bj/TsAAAAAElFTkSuQmCC
 		name="SelectRecipeFile"
 		refpath="/form[@title='Select Recipe File']"
 		searchtimeout="30000ms"
-		usecache="True">
+		usecache="False">
 			<item
 			addcaps="text,uiautomation,uiautomationvalue"
 			capname="text"
