@@ -178,13 +178,13 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
-			capname="text"
+			capname="unknown"
 			id="d4b6b860-3698-49af-a31c-7a02f71e64d8"
 			name="SomeText"
 			refimgid="41a8aefe-2787-46e8-8d94-aee48fd1c4e1"
-			robustPath="/form[@title='CCIMainWindow']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']"
+			robustPath=""
 			searchtimeout="30000ms">
-				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']
+				/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/?
 			</item>
 			<item
 			addcaps="text,wpfelement"
@@ -356,7 +356,7 @@ j0QigXQ6DZoLgsDvWK/XBzc6hsu1BRMfpP7Bj/TsAAAAAElFTkSuQmCC
 		name="SelectRecipeFile"
 		refpath="/form[@title='Select Recipe File']"
 		searchtimeout="30000ms"
-		usecache="True">
+		usecache="False">
 			<item
 			addcaps="text,uiautomation,uiautomationvalue"
 			capname="text"
@@ -409,6 +409,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		id="23424671-3a56-4425-84dc-73dc9dbe4a63"
 		isrooted="True"
 		name="KohyoungGUI"
+		refimgid="dd533d9b-4f7a-4941-9ba2-10345e890874"
 		refpath="/form[@title='']"
 		searchtimeout="30000ms"
 		usecache="True">

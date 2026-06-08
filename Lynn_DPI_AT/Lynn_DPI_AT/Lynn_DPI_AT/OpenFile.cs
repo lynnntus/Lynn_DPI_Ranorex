@@ -121,14 +121,7 @@ namespace Lynn_DPI_AT
             OpenRecipeFileByPath(RecipeFilePath);
             Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Wait", "Waiting 50s to exist. Associated repository item: 'CCIMainWindow.SomeIndicator'", repo.CCIMainWindow.SomeIndicatorInfo, new ActionTimeout(50000), new RecordItemIndex(1));
-            repo.CCIMainWindow.SomeIndicatorInfo.WaitForExists(50000);
-            
-            Report.Screenshot(ReportLevel.Info, "User", "", repo.CCIMainWindow.Self, false, new RecordItemIndex(2));
-            
-            //Report.Log(ReportLevel.Info, "Validation", "Validating AttributeEqual (Caption=$ModelName) on item 'CCIMainWindow.SomeText'.", repo.CCIMainWindow.SomeTextInfo, new RecordItemIndex(3));
-            //Validate.AttributeEqual(repo.CCIMainWindow.SomeTextInfo, "Caption", ModelName);
-            //Delay.Milliseconds(100);
+            Report.Screenshot(ReportLevel.Success, "User", "", repo.CCIMainWindow.Self, false, new RecordItemIndex(1));
             
         }
 

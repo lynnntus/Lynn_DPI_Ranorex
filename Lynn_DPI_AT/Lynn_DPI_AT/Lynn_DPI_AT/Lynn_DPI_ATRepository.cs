@@ -393,7 +393,7 @@ namespace Lynn_DPI_AT
                 _someindicatorInfo = new RepoItemInfo(this, "SomeIndicator", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", "", 30000, null, "9a218138-9e43-4ae1-9552-8a075e56667f");
                 _textInfo = new RepoItemInfo(this, "Text", "container[@automationid='MainView']/?/?/table[@automationid='DevGrid']//cell[@automationid='PART_CellEditor']/checkbox[@automationid='tbxConnect']/text[@automationid='Text']", ".//text[@automationid='Text']", 30000, null, "1331a4f5-770d-435c-9543-0d016a69fe0e");
                 _someindicator1Info = new RepoItemInfo(this, "SomeIndicator1", "indicator[2]", "indicator[2]", 30000, null, "bded332f-bdf3-40ec-9168-48857d170949");
-                _sometextInfo = new RepoItemInfo(this, "SomeText", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", ".//text[@caption='Lynn_Stacking_Underfill']/text[@caption='']", 30000, null, "d4b6b860-3698-49af-a31c-7a02f71e64d8");
+                _sometextInfo = new RepoItemInfo(this, "SomeText", "container[@automationid='MainView']/?/?/container[@automationid='View']//text[@caption='Lynn_Array_BadMark']/?", "", 30000, null, "d4b6b860-3698-49af-a31c-7a02f71e64d8");
                 _menuopenrecipeInfo = new RepoItemInfo(this, "MenuOpenRecipe", "container[@automationid='MainView']/container[3]//button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']", ".//text[@caption>'※ Some menus are disabled']/container[@caption='']/container[@caption='']/button[@text='Open Recipe']/text[@automationid='HeaderTextBlock']", 30000, null, "471fd4a3-6be2-453b-9509-13c55c285448");
             }
 
@@ -569,11 +569,11 @@ namespace Lynn_DPI_AT
             /// The SomeText item.
             /// </summary>
             [RepositoryItem("d4b6b860-3698-49af-a31c-7a02f71e64d8")]
-            public virtual Ranorex.Text SomeText
+            public virtual Ranorex.Unknown SomeText
             {
                 get
                 {
-                    return _sometextInfo.CreateAdapter<Ranorex.Text>(true);
+                    return _sometextInfo.CreateAdapter<Ranorex.Unknown>(true);
                 }
             }
 
@@ -851,7 +851,7 @@ namespace Lynn_DPI_AT
             /// Creates a new SelectRecipeFile  folder.
             /// </summary>
             public SelectRecipeFileAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, true, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
+                    base("SelectRecipeFile", "/form[@title='Select Recipe File']", parentFolder, 30000, null, false, "e603f9b6-a8b1-4722-89a2-cfe80a1d5a95", "")
             {
                 _systemitemnamedisplayInfo = new RepoItemInfo(this, "SystemItemNameDisplay", "element[@class='DUIViewWndClassName']//container[@caption='ShellView']/?/?/listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", ".//listitem[@automationid='2']/text[@automationid='System.ItemNameDisplay']", 30000, null, "56977f94-f427-4225-94f5-476e9cca2afa");
                 _text1148Info = new RepoItemInfo(this, "Text1148", "?/?/text[@controlid='1148']", "?/?/text[@controlid='1148']", 30000, null, "1dbcab17-d3f0-4a5a-88ea-668c4b0ef9fe");
