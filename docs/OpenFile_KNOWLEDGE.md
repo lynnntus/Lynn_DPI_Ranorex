@@ -118,6 +118,7 @@
 - **Next**: Re-spy Repository selector để loại bỏ hardcode `@caption='Lynn_Stacking_Underfill'`.
   - Xem handover: `docs/HANDOVER_OpenFile_RepositoryIssue.md`
   - Mục tiêu: selector hoạt động với mọi ModelName — hỗ trợ multi-recipe testing.
+- **Lesson Learn**: Xem `docs/lessons/openfile-dynamic-rxpath-lesson.md` — tổng hợp kinh nghiệm dynamic RxPath, investigation flow, anti-patterns, checklist.
 
 ---
 

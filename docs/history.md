@@ -1,6 +1,24 @@
 # Change History
 
+## 2026-06-08
+
+### ~23:30 — Audit CLAUDE.md + Tạo Final Handover DynamicRxPath
+- **Modified**: `CLAUDE.md` — Viết lại hoàn toàn (73 → 176 dòng): thêm Project Overview, Commands, Known Gotchas, Do Not, cải thiện File Safety và Coding Conventions
+- **Created**: `docs/HANDOVER_DynamicRxPath_FinalStatus.md` — Handover cuối cùng cho topic DynamicRxPath: Confirmed Findings, Rejected Hypotheses, Implementation Status, Timing Investigation Status, Open Issues, Next Actions, Lessons Learned
+- **Modified**: `docs/history.md` — Thêm entry session 2026-06-08 (audit + handover)
+- **Modified**: `docs/chat.md` — Thêm entry session 2026-06-08 (audit + handover)
+
+### ~21:50 — Tạo Lesson Learn: Dynamic RxPath
+- **Created**: `docs/lessons/openfile-dynamic-rxpath-lesson.md` — Bài học xử lý Repository hard-code selector, investigation flow, wait/validate pattern, anti-patterns, checklist
+- **Modified**: `CLAUDE.md` — Thêm reference đến lesson mới trong mục "Bài học"
+- **Modified**: `docs/history.md` — Thêm entry session 2026-06-08
+- **Modified**: `docs/chat.md` — Thêm entry session 2026-06-08
+- **Modified**: `docs/OpenFile_KNOWLEDGE.md` — Thêm reference đến lesson trong Section 5
+
 ## 2026-06-06
+
+### ~20:30 — Tạo Session Handover: DynamicRxPath & Timing Investigation
+- **Created**: `docs/HANDOVER_DynamicRxPath_TimingInvestigation.md` — Handover đầy đủ cho session tiếp theo
 
 ### ~19:50 — ValidateModelName: chuyển sang dynamic RxPath, bỏ dependency repo.SomeText
 - **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs`

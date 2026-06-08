@@ -94,6 +94,9 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 4: Nhap path...");
             EnterPathIntoFileNameField(recipeFilePath);
 
+            // --- Buoc 4.5: PROBE — kiem tra View container TRUOC khi Open ---
+            ProbeSignals("BEFORE_OPEN");
+
             // --- Buoc 5: Click Open ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Click Open...");
             repo.ButtonOpen.Click();
@@ -105,7 +108,7 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Buoc 6 INFO: Click Open hoan tat. File target: '{0}'", recipeFilePath));
 
-            // --- Buoc 7: Validate ModelName (dynamic RxPath) ---
+            // --- Buoc 7: Validate ModelName (dynamic RxPath — investigation) ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 7: Validate ModelName bang dynamic RxPath...");
             ValidateModelName();
         }
@@ -217,23 +220,75 @@ namespace Lynn_DPI_AT
         private void ValidateModelName()
         {
             string expected = this.ModelName;
-            string rxPath = string.Format(
+            string viewRxPath = "/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']";
+            string modelRxPath = string.Format(
                 "/form[@title='CCIMainWindow']//text[@caption='{0}']", expected);
 
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("Expected ModelName = '{0}'", expected));
-            Report.Log(ReportLevel.Info, "OpenFile",
-                string.Format("Dynamic RxPath = '{0}'", rxPath));
 
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+
+            // --- Phase A: Poll cho View container (max 60s, poll 2s) ---
+            Report.Log(ReportLevel.Info, "OpenFile", "[SIGNAL] Bat dau cho View container...");
+            bool viewFound = false;
+            while (sw.ElapsedMilliseconds < 60000)
+            {
+                try
+                {
+                    Host.Local.FindSingle<Ranorex.Container>(viewRxPath, 0);
+                    viewFound = true;
+                    Report.Log(ReportLevel.Info, "OpenFile",
+                        string.Format("[SIGNAL] View container FOUND tai {0}ms", sw.ElapsedMilliseconds));
+                    break;
+                }
+                catch (Ranorex.ElementNotFoundException) { }
+
+                Delay.Milliseconds(2000);
+            }
+
+            if (!viewFound)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile",
+                    string.Format("[SIGNAL] View container KHONG xuat hien sau {0}ms", sw.ElapsedMilliseconds));
+            }
+
+            // --- Phase B: Poll cho ModelName text (max 60s tiep, poll 2s) ---
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("[SIGNAL] Bat dau cho ModelName text tai {0}ms...", sw.ElapsedMilliseconds));
             Ranorex.Text foundElement = null;
-            try
+            long modelFoundAt = 0;
+            while (sw.ElapsedMilliseconds < 120000)
             {
-                foundElement = Host.Local.FindSingle<Ranorex.Text>(rxPath, 30000);
+                try
+                {
+                    foundElement = Host.Local.FindSingle<Ranorex.Text>(modelRxPath, 0);
+                    modelFoundAt = sw.ElapsedMilliseconds;
+                    Report.Log(ReportLevel.Info, "OpenFile",
+                        string.Format("[SIGNAL] ModelName text FOUND tai {0}ms", modelFoundAt));
+                    break;
+                }
+                catch (Ranorex.ElementNotFoundException) { }
+
+                if (sw.ElapsedMilliseconds % 10000 < 2000)
+                {
+                    Report.Log(ReportLevel.Info, "OpenFile",
+                        string.Format("[SIGNAL] ModelName text chua xuat hien... ({0}ms)", sw.ElapsedMilliseconds));
+                }
+
+                Delay.Milliseconds(2000);
             }
-            catch (Ranorex.ElementNotFoundException)
-            {
-                foundElement = null;
-            }
+
+            sw.Stop();
+
+            // --- Report ket qua ---
+            Report.Log(ReportLevel.Info, "OpenFile", "=== SIGNAL TIMING SUMMARY ===");
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("View container: {0}", viewFound ? "FOUND" : "NOT FOUND"));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("ModelName text: {0}", foundElement != null ? string.Format("FOUND tai {0}ms", modelFoundAt) : "NOT FOUND"));
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Total elapsed: {0}ms", sw.ElapsedMilliseconds));
 
             if (foundElement != null)
             {
@@ -244,12 +299,32 @@ namespace Lynn_DPI_AT
             {
                 Report.Screenshot(repo.CCIMainWindow.Self, true);
                 Report.Log(ReportLevel.Error, "OpenFile",
-                    string.Format("ModelName KHONG tim thay trong UI. Expected: '{0}', RxPath: '{1}'",
-                        expected, rxPath));
+                    string.Format("ModelName KHONG tim thay. Expected: '{0}', RxPath: '{1}'",
+                        expected, modelRxPath));
                 throw new Exception(string.Format(
-                    "ValidateModelName FAIL: Khong tim thay text[@caption='{0}'] trong CCIMainWindow sau 30s.",
+                    "ValidateModelName FAIL: text[@caption='{0}'] khong xuat hien sau 120s.",
                     expected));
             }
+        }
+
+        private void ProbeSignals(string phase)
+        {
+            string viewRxPath = "/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='View']";
+            string modelRxPath = string.Format(
+                "/form[@title='CCIMainWindow']//text[@caption='{0}']", this.ModelName);
+
+            bool viewExists = false;
+            bool modelExists = false;
+
+            try { Host.Local.FindSingle<Ranorex.Container>(viewRxPath, 3000); viewExists = true; }
+            catch (Ranorex.ElementNotFoundException) { }
+
+            try { Host.Local.FindSingle<Ranorex.Text>(modelRxPath, 1000); modelExists = true; }
+            catch (Ranorex.ElementNotFoundException) { }
+
+            Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("[PROBE {0}] View container = {1}, ModelName text = {2}",
+                    phase, viewExists, modelExists));
         }
 
         private void Finish()
