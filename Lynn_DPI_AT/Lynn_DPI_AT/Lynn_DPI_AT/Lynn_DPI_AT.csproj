@@ -137,6 +137,7 @@
       <UserCode>true</UserCode>
       <id>e1b6e45b-1e4d-4083-95a7-2c013198f3f5</id>
     </Compile>
+    <Compile Include="AutomationMetadata.cs" />
     <Compile Include="LoginRetry.cs">
       <id>a1b2c3d4-e5f6-7890-abcd-ef1234567890</id>
     </Compile>

@@ -36,6 +36,7 @@ namespace Lynn_DPI_AT
 
             try
             {
+                AutomationMetadata.LogToReport();
                 error = TestSuiteRunner.Run(typeof(Program), Environment.CommandLine);
             }
             catch (Exception e)
