@@ -33,6 +33,8 @@ namespace Lynn_DPI_AT
         {
             Report.Log(ReportLevel.Info, "OpenFile", "OpenFile bat dau.");
             Report.Log(ReportLevel.Info, "OpenFile",
+                string.Format("Enable = '{0}'", Enable));
+            Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("RecipeFilePath = '{0}'", RecipeFilePath));
             Report.Log(ReportLevel.Info, "OpenFile",
                 string.Format("ExpectedFileName = '{0}'", ExpectedFileName));
@@ -40,6 +42,14 @@ namespace Lynn_DPI_AT
 
         public void OpenRecipeFileByPath(string recipeFilePath)
         {
+            // --- Check Enable flag ---
+            if (!string.Equals(this.Enable, "Y", StringComparison.OrdinalIgnoreCase))
+            {
+                Report.Log(ReportLevel.Info, "OpenFile",
+                    string.Format("[SKIP] Enable='{0}' — bo qua row nay.", this.Enable));
+                return;
+            }
+
             if (string.IsNullOrEmpty(recipeFilePath))
                 throw new ArgumentException("recipeFilePath khong duoc de trong.", "recipeFilePath");
 
