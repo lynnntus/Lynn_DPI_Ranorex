@@ -44,6 +44,7 @@ namespace Lynn_DPI_AT
             RecipeFilePath = "C:\\Kohyoung\\Job\\Lynn_20260516_Stacking\\Lynn_Stacking_Underfill.kyjob";
             ExpectedFileName = "Lynn_Stacking_Underfill.kyjob";
             ModelName = "Lynn_Stacking_Underfill";
+            Enable = "Y";
         }
 
         /// <summary>
@@ -90,6 +91,18 @@ namespace Lynn_DPI_AT
         {
             get { return _ModelName; }
             set { _ModelName = value; }
+        }
+
+        string _Enable;
+
+        /// <summary>
+        /// Gets or sets the value of variable Enable.
+        /// </summary>
+        [TestVariable("1c38854e-05c3-4d4e-b222-0bf39aa6d13b")]
+        public string Enable
+        {
+            get { return _Enable; }
+            set { _Enable = value; }
         }
 
 #endregion

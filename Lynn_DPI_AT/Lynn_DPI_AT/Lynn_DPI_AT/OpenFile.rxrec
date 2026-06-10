@@ -38,6 +38,11 @@ mode="Desktop">
 		name="ModelName">
 			Lynn_Stacking_Underfill
 		</var>
+		<var
+		id="1c38854e-05c3-4d4e-b222-0bf39aa6d13b"
+		name="Enable">
+			Y
+		</var>
 	</variables>
 	<recorditems>
 		<userrecorditem
