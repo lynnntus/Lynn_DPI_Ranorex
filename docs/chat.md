@@ -1,5 +1,18 @@
 # Chat History
 
+## 2026-06-21
+
+### ~PM — Implement OpenFile_FromProduction UserCode
+- **Yêu cầu**: Implement `OpenFile_FromProduction.UserCode.cs` — mở file từ tab Production, validate ModelName ở vùng TOP. Reuse dialog logic từ OpenFile, không sửa OpenFile.
+- **Kết quả**: Implement hoàn chỉnh với 6 methods: `Init()`, `OpenRecipeFileByPath()`, `EnterPathIntoFileNameField()`, `ReadFileNameField()`, `ValidateTopModelName()`, `CleanupDialog()`
+- **Điểm chính**:
+  - try/finally đảm bảo dialog luôn được cleanup
+  - ValidateTopModelName dùng repo item `TopTextRecipeName` (Contains check), guard ModelName rỗng
+  - Phát hiện và sửa typo `BtnOpenInDialogialog` → `BtnOpenInDialog` trong OpenFile.UserCode.cs (lỗi tồn tại từ trước, chặn build)
+- **Build**: PASS
+- **Files thay đổi**: `OpenFile_FromProduction.UserCode.cs` (implement), `OpenFile.UserCode.cs` (fix typo 1 dòng)
+- **Cần làm tiếp**: Bind CSV `Production_OpenFileData.csv` trong Ranorex Studio (ModeName → ModelName)
+
 ## 2026-06-08
 
 ### ~23:30 — Audit CLAUDE.md + Final Handover DynamicRxPath

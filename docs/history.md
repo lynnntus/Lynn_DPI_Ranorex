@@ -1,5 +1,13 @@
 # Change History
 
+## 2026-06-21
+
+### ~PM — Implement OpenFile_FromProduction + Fix typo OpenFile
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs` — Implement toàn bộ logic: Enable check, click BtnOpenFileFromProduction, dialog handling (TextValue), ValidateTopModelName (poll TopTextRecipeName), try/finally + CleanupDialog
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs` — Fix typo dòng 112: `BtnOpenInDialogialog` → `BtnOpenInDialog` (lỗi tồn tại từ trước, chặn build)
+- **Modified**: `docs/chat.md` — Thêm entry 2026-06-21
+- **Modified**: `docs/history.md` — Thêm entry 2026-06-21
+
 ## 2026-06-08
 
 ### ~23:30 — Audit CLAUDE.md + Tạo Final Handover DynamicRxPath
