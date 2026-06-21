@@ -122,6 +122,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apply_File_FromRecipe.cs">
+      <BoundTo>2c9e6da5-210b-4882-967b-272444b95d23</BoundTo>
+      <DependentUpon>Apply_File_FromRecipe.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>2410a1c0-584f-47ee-82fc-ccecba7770a0</id>
+    </Compile>
+    <Compile Include="Apply_File_FromRecipe.UserCode.cs">
+      <BoundTo>2c9e6da5-210b-4882-967b-272444b95d23</BoundTo>
+      <DependentUpon>Apply_File_FromRecipe.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>eea06a4a-4ecc-406e-b3ef-e4f933accc21</id>
+    </Compile>
     <Compile Include="AssemblyInfo.cs">
       <id>285e8786-8e66-4d6b-a579-ba3485663053</id>
     </Compile>
@@ -137,7 +149,9 @@
       <UserCode>true</UserCode>
       <id>e1b6e45b-1e4d-4083-95a7-2c013198f3f5</id>
     </Compile>
-    <Compile Include="AutomationMetadata.cs" />
+    <Compile Include="AutomationMetadata.cs">
+      <id>98a4d7ab-0265-4a44-9965-5a26adcaf1e4</id>
+    </Compile>
     <Compile Include="LoginRetry.cs">
       <id>a1b2c3d4-e5f6-7890-abcd-ef1234567890</id>
     </Compile>
@@ -183,6 +197,18 @@
       <UserCode>true</UserCode>
       <id>54405134-8864-4a7f-af8c-3b3951edac3b</id>
     </Compile>
+    <Compile Include="OpenFile_FromProduction.cs">
+      <BoundTo>62e53c6f-d744-4239-8793-14d8a233a8f4</BoundTo>
+      <DependentUpon>OpenFile_FromProduction.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>a90ba937-2198-42f4-9933-8df44d87e9b2</id>
+    </Compile>
+    <Compile Include="OpenFile_FromProduction.UserCode.cs">
+      <BoundTo>62e53c6f-d744-4239-8793-14d8a233a8f4</BoundTo>
+      <DependentUpon>OpenFile_FromProduction.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>37867210-1f57-4ceb-b7c9-f2c02c92e51c</id>
+    </Compile>
     <Compile Include="Program.cs">
       <id>7181de22-0e81-46b7-9af4-f65fea7f3ba3</id>
     </Compile>
@@ -215,6 +241,11 @@
     <None Include="app.config">
       <id>412bca01-7441-4951-b1db-78ac1ecf3717</id>
     </None>
+    <None Include="Apply_File_FromRecipe.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>2c9e6da5-210b-4882-967b-272444b95d23</id>
+      <recordtableid>2892bd97-ec61-4d32-9efb-226ca7a6a018</recordtableid>
+    </None>
     <None Include="CloseAUT.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
       <id>e67e3f69-b1f1-4af1-84a5-f4ea0a8b1ddc</id>
@@ -245,6 +276,11 @@
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
       <id>30eee225-f293-4f15-8742-1352a2d9f31c</id>
       <recordtableid>a3004660-da32-4050-b6f0-948f53a8bf8f</recordtableid>
+    </None>
+    <None Include="OpenFile_FromProduction.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>62e53c6f-d744-4239-8793-14d8a233a8f4</id>
+      <recordtableid>1699bbc7-0bf7-487d-b1e6-ae42362f94ed</recordtableid>
     </None>
     <None Include="Recording1.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>

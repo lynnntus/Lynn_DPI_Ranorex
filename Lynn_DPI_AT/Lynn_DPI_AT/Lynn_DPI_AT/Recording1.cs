@@ -79,8 +79,56 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'CCIMainWindow.SomeIndicator1' at 1868;130.", repo.CCIMainWindow.SomeIndicator1Info, new RecordItemIndex(0));
-            repo.CCIMainWindow.SomeIndicator1.Click("1868;130");
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Down item 'InspectionRegionSettings.LOTProduction' at 70;8.", repo.InspectionRegionSettings.LOTProductionInfo, new RecordItemIndex(0));
+            repo.InspectionRegionSettings.LOTProduction.MoveTo("70;8");
+            Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.Settings' at 28;15.", repo.KohyoungGUI1.SettingsInfo, new RecordItemIndex(1));
+            repo.KohyoungGUI1.Settings.Click("28;15");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.PARTContentHost' at 57;4.", repo.KohyoungGUI1.PARTContentHostInfo, new RecordItemIndex(2));
+            repo.KohyoungGUI1.PARTContentHost.Click("57;4");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Keyboard", "Key sequence '{LShiftKey down}{RShiftKey down}L{LShiftKey up}{RShiftKey up}{LShiftKey up}ynn{LShiftKey down}_{LShiftKey up}NT{LShiftKey down}_{LShiftKey up}LOT' with focus on 'KohyoungGUI1'.", repo.KohyoungGUI1.SelfInfo, new RecordItemIndex(3));
+            repo.KohyoungGUI1.Self.EnsureVisible();
+            Keyboard.Press("{LShiftKey down}{RShiftKey down}L{LShiftKey up}{RShiftKey up}{LShiftKey up}ynn{LShiftKey down}_{LShiftKey up}NT{LShiftKey down}_{LShiftKey up}LOT");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.PARTContentHost1' at 39;10.", repo.KohyoungGUI1.PARTContentHost1Info, new RecordItemIndex(4));
+            repo.KohyoungGUI1.PARTContentHost1.Click("39;10");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Keyboard", "Key sequence '21' with focus on 'KohyoungGUI1'.", repo.KohyoungGUI1.SelfInfo, new RecordItemIndex(5));
+            repo.KohyoungGUI1.Self.EnsureVisible();
+            Keyboard.Press("21");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.Apply' at 61;13.", repo.KohyoungGUI1.ApplyInfo, new RecordItemIndex(6));
+            repo.KohyoungGUI1.Apply.Click("61;13");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Down item 'InspectionRegionSettings.ProductionStopsWhenAllLOTInspection' at 13;12.", repo.InspectionRegionSettings.ProductionStopsWhenAllLOTInspectionInfo, new RecordItemIndex(7));
+            repo.InspectionRegionSettings.ProductionStopsWhenAllLOTInspection.MoveTo("13;12");
+            Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.Apply' at 56;16.", repo.InspectionRegionSettings.ApplyInfo, new RecordItemIndex(8));
+            repo.InspectionRegionSettings.Apply.Click("56;16");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.Continue' at 64;19.", repo.KohyoungGUI1.ContinueInfo, new RecordItemIndex(9));
+            repo.KohyoungGUI1.Continue.Click("64;19");
+            Delay.Milliseconds(0);
+            
+            Report.Log(ReportLevel.Info, "Validation", "Validating AttributeEqual (Text='Lynn_Stacking_Underfill') on item 'CCIMainWindow.Area1.TopTextRecipeName'.", repo.CCIMainWindow.Area1.TopTextRecipeNameInfo, new RecordItemIndex(10));
+            Validate.AttributeEqual(repo.CCIMainWindow.Area1.TopTextRecipeNameInfo, "Text", "Lynn_Stacking_Underfill");
+            Delay.Milliseconds(100);
+            
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'BtnOpenInDialog' at 31;13.", repo.BtnOpenInDialogInfo, new RecordItemIndex(11));
+            repo.BtnOpenInDialog.Click("31;13");
             Delay.Milliseconds(0);
             
         }

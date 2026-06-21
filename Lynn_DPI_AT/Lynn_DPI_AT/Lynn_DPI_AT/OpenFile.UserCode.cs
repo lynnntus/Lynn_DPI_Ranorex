@@ -109,7 +109,7 @@ namespace Lynn_DPI_AT
 
             // --- Buoc 5: Click Open ---
             Report.Log(ReportLevel.Info, "OpenFile", "Buoc 5: Click Open...");
-            repo.ButtonOpen.Click();
+            repo.BtnOpenInDialogialog.Click();
             Delay.Milliseconds(1000);
 
             // --- Buoc 6: Cho app load (tam thoi khong verify dialog — tranh fail ao) ---

@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<recordtable
+embeddedrepository="False"
+id="2892bd97-ec61-4d32-9efb-226ca7a6a018"
+mode="Desktop">
+	<repeatcount>
+		1
+	</repeatcount>
+	<turbomode>
+		False
+	</turbomode>
+	<genreport>
+		True
+	</genreport>
+	<speedfactor>
+		1
+	</speedfactor>
+	<useDefaultItemLogging>
+		True
+	</useDefaultItemLogging>
+	<codegen
+	classname="Apply_File_FromRecipe"
+	namespace="Lynn_DPI_AT">
+	</codegen>
+	<variables>
+	</variables>
+	<recorditems>
+		<mouseitem
+		action="Down"
+		button="Left"
+		duration="300ms"
+		enabled="True"
+		loc="45;3"
+		movetime="300ms"
+		optional="False"
+		searchpropertyid="14bc9e7b-ee14-42e7-ac00-9c40cc4370af"
+		sx="546"
+		sy="21"
+		warnoutofbounds="False">
+			<comment>
+			</comment>
+			<bindings>
+			</bindings>
+			<info
+			id="391ca643-8351-4c0d-b83c-21ff839e91e2"
+			sourcename="Recorder">
+				<element
+				capabilities="uiautomation"
+				dontcache="False"
+				enabled="True"
+				flavor="uia"
+				hasfocus="False"
+				index="0"
+				prefcap="text"
+				rect="501,18,70,20"
+				role="text"
+				snapElem=""
+				valid="True"
+				visible="True">
+					<attribute
+					name="backgroundcolor"
+					type="System.String">
+						Production
+					</attribute>
+					<attribute
+					name="caption"
+					type="System.String">
+						Production
+					</attribute>
+					<attribute
+					name="text"
+					type="System.String">
+						Production
+					</attribute>
+					<attribute
+					name="textcolor"
+					type="System.String">
+						Production
+					</attribute>
+					<attribute
+					name="automationid"
+					type="System.String">
+						HeaderTextBlock
+					</attribute>
+					<attribute
+					name="classname"
+					type="System.String">
+						TextBlock
+					</attribute>
+					<attribute
+					name="controltype"
+					type="System.String">
+						Text
+					</attribute>
+					<attribute
+					name="frameworkid"
+					type="System.String">
+						WPF
+					</attribute>
+					<attribute
+					name="iscontentelement"
+					type="System.Boolean">
+						True
+					</attribute>
+					<attribute
+					name="iscontrolelement"
+					type="System.Boolean">
+						True
+					</attribute>
+					<attribute
+					name="iskeyboardfocusable"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="ispassword"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="isrequiredforform"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="localizedcontroltype"
+					type="System.String">
+						text
+					</attribute>
+					<attribute
+					name="name"
+					type="System.String">
+						Production
+					</attribute>
+					<attribute
+					name="orientation"
+					type="System.Windows.Automation.OrientationType, UIAutomationTypes, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+						None
+					</attribute>
+					<attribute
+					name="processid"
+					type="System.Int32">
+						6532
+					</attribute>
+				</element>
+				<path>
+					/form[@processname='KohyoungGUI']/?/?/radiobutton[@name='Production']/text[@automationid='HeaderTextBlock']
+				</path>
+				<robustPath>
+				</robustPath>
+			</info>
+			<helperscreenshot
+			guid="b58c944f-3ac4-430b-9f74-c5d3dabbbb5c">
+				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
+			</helperscreenshot>
+		</mouseitem>
+		<mouseitem
+		action="Click"
+		button="Left"
+		duration="300ms"
+		enabled="True"
+		loc="18;9"
+		movetime="300ms"
+		optional="False"
+		searchpropertyid="5cb2d609-f383-4847-b416-e1507f9170c9"
+		sx="1059"
+		sy="865"
+		warnoutofbounds="False">
+			<comment>
+			</comment>
+			<bindings>
+			</bindings>
+			<info
+			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
+			sourcename="Recorder">
+				<element
+				capabilities="uiautomation"
+				dontcache="False"
+				enabled="True"
+				flavor="uia"
+				hasfocus="False"
+				index="0"
+				prefcap="text"
+				rect="1041,856,34,17"
+				role="text"
+				snapElem=""
+				valid="True"
+				visible="True">
+					<attribute
+					name="backgroundcolor"
+					type="System.String">
+						Apply
+					</attribute>
+					<attribute
+					name="caption"
+					type="System.String">
+						Apply
+					</attribute>
+					<attribute
+					name="text"
+					type="System.String">
+						Apply
+					</attribute>
+					<attribute
+					name="textcolor"
+					type="System.String">
+						Apply
+					</attribute>
+					<attribute
+					name="classname"
+					type="System.String">
+						TextBlock
+					</attribute>
+					<attribute
+					name="controltype"
+					type="System.String">
+						Text
+					</attribute>
+					<attribute
+					name="frameworkid"
+					type="System.String">
+						WPF
+					</attribute>
+					<attribute
+					name="iscontentelement"
+					type="System.Boolean">
+						True
+					</attribute>
+					<attribute
+					name="iscontrolelement"
+					type="System.Boolean">
+						True
+					</attribute>
+					<attribute
+					name="iskeyboardfocusable"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="ispassword"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="isrequiredforform"
+					type="System.Boolean">
+						False
+					</attribute>
+					<attribute
+					name="localizedcontroltype"
+					type="System.String">
+						text
+					</attribute>
+					<attribute
+					name="name"
+					type="System.String">
+						Apply
+					</attribute>
+					<attribute
+					name="orientation"
+					type="System.Windows.Automation.OrientationType, UIAutomationTypes, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+						None
+					</attribute>
+					<attribute
+					name="processid"
+					type="System.Int32">
+						6532
+					</attribute>
+				</element>
+				<path>
+					/form[@processname='KohyoungGUI']/?/?/text[@name='Apply']
+				</path>
+				<robustPath>
+				</robustPath>
+			</info>
+			<helperscreenshot
+			guid="f4e85e16-6e5d-4f02-b047-cda3a5120f3e">
+				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
+			</helperscreenshot>
+		</mouseitem>
+	</recorditems>
+	<repository
+	id="414295e6-2100-449c-9668-76146e2e7237"
+	name="Lynn_DPI_ATRepository"
+	relativepath="Lynn_DPI_ATRepository.rxrep">
+		<codegen
+		classname="Lynn_DPI_ATRepository"
+		namespace="Lynn_DPI_AT">
+		</codegen>
+		<rootfolder
+		id="0ee31be8-b7c0-4867-aed4-3f0533789467"
+		name="_rootdummy_">
+		</rootfolder>
+	</repository>
+	<usercodefile
+	lang="CSharp">
+		Apply_File_FromRecipe.UserCode.cs
+	</usercodefile>
+	<references>
+	</references>
+</recordtable>

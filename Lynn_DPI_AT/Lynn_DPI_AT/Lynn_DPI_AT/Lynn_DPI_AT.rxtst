@@ -20,6 +20,38 @@
 				</parameters>
 			</testcase>
 			<testmodule
+			id="33de9e53-27f4-4344-b1d0-3f8cee1c4b56"
+			name="OpenFile_FromProduction"
+			ref="1699bbc7-0bf7-487d-b1e6-ae42362f94ed"
+			type="Recording">
+				<databinding>
+					<var
+					dataname="Enabled"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="4cf1d1c7-b805-47e1-9648-0d52ff514235"
+					variablename="Enable">
+					</var>
+					<var
+					dataname="RecipeFilePath"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="1c6ffe83-192b-4e2c-98cf-c42d51e4ad9c"
+					variablename="RecipeFilePath">
+					</var>
+					<var
+					dataname="ExpectedFileName"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="f54f5de0-feb9-47c2-870b-196f148b8ae7"
+					variablename="ExpectedFileName">
+					</var>
+					<var
+					dataname="ModeName"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="d9113e36-b4f0-48e3-b626-d37b530aa139"
+					variablename="ModelName">
+					</var>
+				</databinding>
+			</testmodule>
+			<testmodule
 			id="34d391e5-cdae-4239-8ad5-3c270f56ffdd"
 			name="OpenFile"
 			ref="a3004660-da32-4050-b6f0-948f53a8bf8f"
@@ -166,6 +198,11 @@
 			ref="9c64181c-7a09-48fb-99df-ff91dc9385fd"
 			type="Recording">
 			</testmodule>
+			<smartfoldernode
+			datasource="Production_OpenFile"
+			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
+			name="Production_OpenFile">
+			</smartfoldernode>
 			<testsuite
 			ExportColumnList="None"
 			ReportTime="RelativeToTestSuiteStartTime"
@@ -204,6 +241,10 @@
 			ref="4cb11b5a-7d21-442d-af8e-dc1bab920931"
 			type="Recording">
 			</testmodule>
+			<testcase
+			id="e3c00646-e4a8-4447-bca3-db0ca47b0c38"
+			name="Production_OpenFile">
+			</testcase>
 			<testmodule
 			id="e93f4f7a-2228-411a-afec-b8e1de8c6ad8"
 			name="StartAUT"
@@ -301,6 +342,18 @@
 						</testmodule>
 					</testcase>
 					<testcase
+					id="e3c00646-e4a8-4447-bca3-db0ca47b0c38"
+					name="Production_OpenFile">
+						<smartfoldernode
+						id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
+						name="Production_OpenFile">
+							<testmodule
+							id="33de9e53-27f4-4344-b1d0-3f8cee1c4b56"
+							name="OpenFile_FromProduction">
+							</testmodule>
+						</smartfoldernode>
+					</testcase>
+					<testcase
 					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
 					name="Logout">
 						<testmodule
@@ -364,6 +417,36 @@
 				D:\RanorexProjects\Lynn_DPI_Ranorex\TestData\OpenFileData.csv
 			</file>
 		</DataSource>
+		<DataSource
+		id="80a8d855-407c-4c04-814b-f7785a0691ce"
+		includefile="Unchecked"
+		lastknownrowcount="3"
+		name="Production_OpenFile"
+		type="Ranorex.Core.Data.CsvDataConnector"
+		withheaders="True">
+			<lastknowncolumns>
+				<column>
+					CaseId
+				</column>
+				<column>
+					Enabled
+				</column>
+				<column>
+					RecipeFilePath
+				</column>
+				<column>
+					ExpectedFileName
+				</column>
+				<column>
+					ModeName
+				</column>
+			</lastknowncolumns>
+			<maskedcolumns>
+			</maskedcolumns>
+			<file>
+				D:\RanorexProjects\Lynn_DPI_Ranorex\TestData\Production_OpenFileData.csv
+			</file>
+		</DataSource>
 	</datasources>
 	<testconfigurations
 	default="TestRun">
@@ -371,6 +454,18 @@
 		name="TestRun">
 			<testcontainer
 			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
+			</testcontainer>
+			<testcontainer
+			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
+			</testcontainer>
+			<testcontainer
+			id="3d1682f4-1614-490d-9714-819edec40d65">
+			</testcontainer>
+			<testcontainer
+			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">
+			</testcontainer>
+			<testcontainer
+			id="e3c00646-e4a8-4447-bca3-db0ca47b0c38">
 			</testcontainer>
 			<testcontainer
 			id="f5bb101f-1823-40dd-8d94-93565696bdae">
