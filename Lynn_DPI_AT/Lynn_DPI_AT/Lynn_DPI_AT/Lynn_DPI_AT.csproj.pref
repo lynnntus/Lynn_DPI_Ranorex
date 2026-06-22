@@ -1,11 +1,11 @@
 ﻿<Properties>
   <Array name="active">
-    <Element value="Recording1.rxrec" />
+    <Element value="Lynn_DPI_AT.rxtst" />
   </Array>
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
-    <Element value="Recording1.rxrec" />
+    <Element value="Apply_File_FromRecipe.rxrec" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">
@@ -13,6 +13,7 @@
     </Properties>
     <Array name="recentusercodeselections">
       <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
+      <Element value="Lynn_DPI_AT.OpenFile_FromProduction.OpenRecipeFileByPath()" />
       <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
     </Array>
   </Properties>

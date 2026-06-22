@@ -193,6 +193,12 @@
 			name="Logout">
 			</testcase>
 			<testmodule
+			id="c3e8fd78-d9aa-4eec-b37c-2ab49d58ca07"
+			name="Apply_File_FromRecipe"
+			ref="2892bd97-ec61-4d32-9efb-226ca7a6a018"
+			type="Recording">
+			</testmodule>
+			<testmodule
 			id="c8b4181e-077b-4542-9417-2eda02ae4181"
 			name="StartAUT"
 			ref="9c64181c-7a09-48fb-99df-ff91dc9385fd"
@@ -352,6 +358,10 @@
 							name="OpenFile_FromProduction">
 							</testmodule>
 						</smartfoldernode>
+						<testmodule
+						id="c3e8fd78-d9aa-4eec-b37c-2ab49d58ca07"
+						name="Apply_File_FromRecipe">
+						</testmodule>
 					</testcase>
 					<testcase
 					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
@@ -420,7 +430,7 @@
 		<DataSource
 		id="80a8d855-407c-4c04-814b-f7785a0691ce"
 		includefile="Unchecked"
-		lastknownrowcount="3"
+		lastknownrowcount="4"
 		name="Production_OpenFile"
 		type="Ranorex.Core.Data.CsvDataConnector"
 		withheaders="True">

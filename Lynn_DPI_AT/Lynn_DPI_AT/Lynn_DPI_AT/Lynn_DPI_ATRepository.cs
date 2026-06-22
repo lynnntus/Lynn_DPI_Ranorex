@@ -1458,7 +1458,7 @@ namespace Lynn_DPI_AT
             RepoItemInfo _tabproductionInfo;
             RepoItemInfo _continueInfo;
             RepoItemInfo _headertextblock1Info;
-            RepoItemInfo _apply1Info;
+            RepoItemInfo _btnapplyproductionpresettingInfo;
             RepoItemInfo _settingsInfo;
             RepoItemInfo _partcontenthostInfo;
             RepoItemInfo _partcontenthost1Info;
@@ -1475,7 +1475,7 @@ namespace Lynn_DPI_AT
                 _tabproductionInfo = new RepoItemInfo(this, "TabProduction", "container[@automationid='WindowTitleBarPanel']//radiobutton[@text='Production']/text[@automationid='HeaderTextBlock']", ".//radiobutton[@text='Production']/text[@automationid='HeaderTextBlock']", 30000, null, "d7854f56-5fe3-4f77-a14f-99c5af680dba");
                 _continueInfo = new RepoItemInfo(this, "Continue", "?/?/button[@text='Continue']", "?/?/button[@text='Continue']", 30000, null, "46983a4d-b8cb-4427-833d-e8709e51779f");
                 _headertextblock1Info = new RepoItemInfo(this, "HeaderTextBlock1", "?/?/radiobutton[@name='Production']/text[@automationid='HeaderTextBlock']", ".//text[@name='Production']", 30000, null, "391ca643-8351-4c0d-b83c-21ff839e91e2");
-                _apply1Info = new RepoItemInfo(this, "Apply1", "?/?/text[@name='Apply']", "?/?/text[@name='Apply']", 30000, null, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
+                _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", "container[@caption='']/button[@text='Apply']", "?/?/button[@text='Apply']", 30000, null, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
                 _settingsInfo = new RepoItemInfo(this, "Settings", "?/?/text[@name='Settings']", "?/?/text[@name='Settings']", 30000, null, "b8b1b48d-4f65-4067-aefd-1217909bfb9c");
                 _partcontenthostInfo = new RepoItemInfo(this, "PARTContentHost", "?/?/text[@automationid='lotIDTextBox']/container[@automationid='PART_ContentHost']", ".//container[@automationid='PART_ContentHost']", 30000, null, "934312b9-5385-4f03-9fb7-efc6e91b1813");
                 _partcontenthost1Info = new RepoItemInfo(this, "PARTContentHost1", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", 30000, null, "cd72e252-5db7-46c4-aaef-c25a001b7564");
@@ -1650,26 +1650,26 @@ namespace Lynn_DPI_AT
             }
 
             /// <summary>
-            /// The Apply1 item.
+            /// The BtnApplyProductionPresetting item.
             /// </summary>
             [RepositoryItem("d3124fd6-d55f-4ce9-a842-9704dd0a508c")]
-            public virtual Ranorex.Text Apply1
+            public virtual Ranorex.Button BtnApplyProductionPresetting
             {
                 get
                 {
-                    return _apply1Info.CreateAdapter<Ranorex.Text>(true);
+                    return _btnapplyproductionpresettingInfo.CreateAdapter<Ranorex.Button>(true);
                 }
             }
 
             /// <summary>
-            /// The Apply1 item info.
+            /// The BtnApplyProductionPresetting item info.
             /// </summary>
             [RepositoryItemInfo("d3124fd6-d55f-4ce9-a842-9704dd0a508c")]
-            public virtual RepoItemInfo Apply1Info
+            public virtual RepoItemInfo BtnApplyProductionPresettingInfo
             {
                 get
                 {
-                    return _apply1Info;
+                    return _btnapplyproductionpresettingInfo;
                 }
             }
 

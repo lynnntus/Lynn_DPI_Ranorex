@@ -1030,7 +1030,6 @@ gdvSgBaKKKAP/9k=
 					/form[@processname='KohyoungGUI']/?/?/text[@name='Settings']
 				</path>
 				<robustPath>
-					/form[@name='Production Presetting']/?/?/text[@name='Settings']
 				</robustPath>
 			</info>
 			<helperscreenshot
@@ -1159,7 +1158,6 @@ y5bgZwBk8Dk0UUAT0UUUAFFFFABRRRQB/9k=
 					/form[@processname='KohyoungGUI']/?/?/text[@automationid='lotIDTextBox']/container[@automationid='PART_ContentHost']
 				</path>
 				<robustPath>
-					/form[@classname='Window']//container[@automationid='PART_ContentHost']
 				</robustPath>
 			</info>
 			<helperscreenshot
@@ -1241,24 +1239,23 @@ RRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9k=
 					name="appicon"
 					type="System.Drawing.Icon, System.Drawing, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
 						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
-jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAPPSURBVDhPNZJ7TJN3FIZ/bibDjcLXQYrZgpCx
-GdSVuk4dG1ihbm25CtMS2wKFXtIbFUaxFsFxSaEQCp2XAsJCUWCwISB4Y5cEprItQxwJUcdk0xmm
-4JhGBYzYj3cV9PnvJOd5z0nOIS84+jYhuoIqYjSbvVT768Nl5hbTzpxWZ7ymyflJ2hFT1Kdl4XxR
-thcvroCcSPR7bj3Hkqsk/gDJKWsI01aeas6ouDAttQ7T4s8vIdE8BKGhn+altU5vias5xuVZwogB
-JHqbelk2ZMmJ/gcQQ5lLoK4eHE93XIPEcQsp1bexs2ISCcU3IDJfwTbtEDaJO7GOVzm+NixbSNh9
-JCI8lRCNrZVoig9zlDUDv8vr/0am6z4UzXPIcD1GesM8dh98iOTyuxDum0Ck6mdsiG1HILtwfE2Q
-bGNAoNIToIh9RWPvada6JqDteAhd1wL03W4YTtCemvYEPoX0yDySbTMQ5l1HuGwQb31wGKw3lC3s
-kDAvz/SqcG3t+Snd1zPQn1zAZ2dpFHxHo+hbGpbTNAydNNKa3NjlmEX8gX8QpbkMtqAd/oHGaZZ/
-dCRRl9ebNI2XaW3bHeg67qHg3GNU/EjDNkCj5PvlkGebSOueINH6H6KzroKT0Av/4L00RUXtJ+qK
-JqeucQTGpj+Q+9UdmPvmYPFM39dPw3TaDX2XG8qWBUhrZ5FUdhf8PdfA2XEGfsEWMBgRLqIqr6vV
-fzmCwq4pWPvnkNe3gOxeN7J63NB2PoWi7QnSGh9ht+NfJBbdQLR+BJz4bjADc+Htvfk4ySi279XU
-XaT3tE8hp/MRsjvnYeyYh65tDupjs8hsfADZoRmIbZOIs1zFVsUg1m93wScgc9GHsd5K5Pn5EWpH
-37TBdR2G5kloGm5B5byJjC/+Qrp9AumV40gpuYKk/FEIjb/gQ8kpzxXseI2Kvfc6FRRDUuSRqxTW
-ujaVYwDKmmFkVo1CbhtDmnUMkuJRiAt+RZLpAoTas+ClfoONMUfBCsmCN4Pbt5rlzSTphTYiyTVt
-lhXW/5lacgappUOQlf4GaekYUgpHPfJPiNGeA0/WAq7IjiBODhh+/EkmtWY7k9pECE+wZemld2iM
-yck59pvi/G6PfBGp1kuQFA0jKe88+IoecOMPIvg9PagA/m1fKiQjwJ+8zGQyllzCeT+UUISsiN4l
-iRBlmk/G6qrui3TOxY9VTkRKa/Cu4MDim2HyB9Tqj/opKkjE9CErmdSry/ILXlpBiEAmIaGcUIrL
-FySw+UnVayMSe4K4Mb2sd7YeYgasE/syfFnPeletXFI8EPI/C6AEwo/HnUcAAAAASUVORK5CYII=
+jwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAOLSURBVDhPbZN7TJNXHIZbCuVDpaxcKiCkSKfZ
+sKPIxoZpJ1YGBcc12oaWcqtVewFkFrEOHIJVMEPrrWwDY9GGgesAYSps+8MrXsGREHVMNp1hCo5p
+VMCI/Xj3CTVmi89/J3mf95yT3zm0/8NwdSU48+ZHvxu1whAhzrXwRUoLNyzWwPIOjnZxYRDO2Jvx
+9Q8KF8uKGjLKOkbk2y6T0i96kFLSjXhdJ7lEWjsSKlAc9pjNCXfG/0vwAn68zGgbyDbfhNx8F7Jd
+97CyegjJW28joeQ6YjTd+EBqBy9q48BsT67Eqc3g4z9PsMp45Necr/9EnvURVA3jyLU+Q3bdBDL2
+PkH6jgeQbBqESH0Ri1Y0IWChboDJZEdMywyGi7s4o7BBYx2EpvkJtC2T0LU6oP+epNYkVfgCigMT
+SK8ahaT4FqIzTyP0o/1gsWNsdDqdoM0N4kbnVLcPa4+OQndsEp+dJFH6E4nyH0kYj5PQ20lkHXJg
+lXkMSVv+wrJ11/BefBO8A9Ujbm5eIlq4KM6wtq6H1DTeh7b5IUo7n6H6DImqUyQqfp4peXkSxVfP
+kWL6B+L8GxAkt8M3pJgkCO7nNGGq0qKt70XBod+w4dv7KOkYh5HafVMXCcNxB3QtDqy2TUJRO4a0
+7Q+wvPAmBKkn4BNiBEEssFIF8lrdwV6UtQzD1DWO4o5JrG93IL/NAY39BVSNz5FV/xQZ5r+RUn4b
+Yl0vBEmtYAdvoApCj9D4wmUb19aeJQubhlFkf4r19gkUNE9A2ziONYfHkFf/GJn7RiGtGsKnxhv4
+WHUaYbFWsObmTbm7c0w0TlCQULnNNqK33oK+YQjr6u5CbbmD3D1/ILtmENk7ByCruI60zX2QFFzC
+EvkP1BRqMMsr7qGbm0fiyzF6xEhVjWrzKazefRV5X/Yhp6ofWaZ+yLf2QVp6BWmGc5BoTmKp8jtE
+JH4DDi8fhAevw4VOZ0+/BW9//6hUvel3ZcUJKCu7kVn5CxSV/ZCV9VHyBSRqOrE004bIhBpwBUWY
+wxYOUV8mdlp+RcB8XrpEVXpHurmVks9DaeqBvPwq0orPYrmqDZFJexGyWAeWn+gek+mZSymMGfM1
+dC8fP2FkbPqxOFXlowTtgalP1BaIFLvBj98yFbhI8XgOO6yLuncClXWdUd4Ag8F4y8vXLzngbf6u
+wHc+bOPw3m/39OPtYxIsKfV0Oc6YExrtXw5ez9H3I+bYAAAAAElFTkSuQmCC
 					</attribute>
 					<attribute
 					name="state"
@@ -1388,7 +1385,6 @@ Exception while setting-up managed injection endpoint: System.Threading.ThreadAb
 					/form[@processname='KohyoungGUI']
 				</path>
 				<robustPath>
-					/form[@classname='Window']
 				</robustPath>
 			</info>
 			<helperscreenshot
@@ -1755,7 +1751,6 @@ AKKKKACiiigAooooAKKKKACiiigD/9k=
 					/form[@processname='KohyoungGUI']/?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']
 				</path>
 				<robustPath>
-					/form[@classname='Window']/?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']
 				</robustPath>
 			</info>
 			<helperscreenshot
@@ -1875,24 +1870,23 @@ p9FADPJi/wCeSf8AfIp4AAwBge1FFABRSjrRQM//2Q==
 					name="appicon"
 					type="System.Drawing.Icon, System.Drawing, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
 						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
-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
+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
 					</attribute>
 					<attribute
 					name="state"
@@ -2022,7 +2016,6 @@ Exception while setting-up managed injection endpoint: System.Threading.ThreadAb
 					/form[@processname='KohyoungGUI']
 				</path>
 				<robustPath>
-					/form[@classname='Window']
 				</robustPath>
 			</info>
 			<helperscreenshot
@@ -6233,7 +6226,6 @@ QBj0UUV3nCf/2Q==
 					/form[@title='Select Recipe File']/button[@text='&amp;Open']
 				</path>
 				<robustPath>
-					/form[@title='Select Recipe File']/button[@text='&amp;Open']
 				</robustPath>
 			</info>
 			<helperscreenshot

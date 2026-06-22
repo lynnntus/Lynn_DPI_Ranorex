@@ -79,13 +79,13 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Down item 'KohyoungGUI1.HeaderTextBlock1' at 45;3.", repo.KohyoungGUI1.HeaderTextBlock1Info, new RecordItemIndex(0));
-            repo.KohyoungGUI1.HeaderTextBlock1.MoveTo("45;3");
-            Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
-            Delay.Milliseconds(0);
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Down item 'KohyoungGUI1.HeaderTextBlock1' at 45;3.", repo.KohyoungGUI1.HeaderTextBlock1Info, new RecordItemIndex(0));
+            //repo.KohyoungGUI1.HeaderTextBlock1.MoveTo("45;3");
+            //Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
+            //Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.Apply1' at 18;9.", repo.KohyoungGUI1.Apply1Info, new RecordItemIndex(1));
-            repo.KohyoungGUI1.Apply1.Click("18;9");
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.BtnApplyProductionPresetting' at 18;9.", repo.KohyoungGUI1.BtnApplyProductionPresettingInfo, new RecordItemIndex(1));
+            repo.KohyoungGUI1.BtnApplyProductionPresetting.Click("18;9");
             Delay.Milliseconds(0);
             
         }

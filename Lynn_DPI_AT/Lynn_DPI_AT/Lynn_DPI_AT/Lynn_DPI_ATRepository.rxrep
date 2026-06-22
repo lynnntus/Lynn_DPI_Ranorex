@@ -760,14 +760,13 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			</item>
 			<item
 			addcaps="text,uiautomation"
-			capname="text"
+			capname="button"
 			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
-			name="Apply1"
+			name="BtnApplyProductionPresetting"
 			refimgid="e45924fc-b174-4bfc-8ae3-93064267fe15"
-			refpath="/form[@name='Production Presetting']/button[@name='Apply']/text[@name='Apply']"
-			robustPath="/form[@processname='KohyoungGUI']/?/?/text[@name='Apply']"
+			robustPath="/form[@name='Popup']/?/?/button[@text='Apply']"
 			searchtimeout="30000ms">
-				/form[@processname='KohyoungGUI']/?/?/text[@name='Apply']
+				/form[@processname='KohyoungGUI']/container[@caption='']/button[@text='Apply']
 			</item>
 			<item
 			addcaps="text,uiautomation"

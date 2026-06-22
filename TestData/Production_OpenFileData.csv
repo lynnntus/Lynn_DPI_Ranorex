@@ -1,4 +1,5 @@
 CaseId,Enabled,RecipeFilePath,ExpectedFileName,ModeName
-OF_001,Y,C:\Kohyoung\Job\Lynn_20251204_CreateNewPCB(160_145)\Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good
+OF_001,N,C:\Kohyoung\Job\Lynn_20251204_CreateNewPCB(160_145)\Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good
 OF_002,N,C:\Kohyoung\Job\Lynn_20251204_CreateNewPCB(160_145)\Lynn_20251204_CreateNewPCB(160_145).kyjob,Lynn_20251204_CreateNewPCB(160_145).kyjob,Lynn_20251204_CreateNewPCB(160_145)
 OF_003,Y,C:\Kohyoung\Job\Lynn_20260516_Stacking\Lynn_Stacking_Underfill.kyjob,Lynn_Stacking_Underfill.kyjob,Lynn_Stacking_Underfill
+OF_004,Y,C:\Kohyoung\Job\KYE_Ver9_3_Job remake_1\KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_1
