@@ -7,6 +7,7 @@
 - **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile.UserCode.cs` — Fix typo dòng 112: `BtnOpenInDialogialog` → `BtnOpenInDialog` (lỗi tồn tại từ trước, chặn build)
 - **Modified**: `docs/chat.md` — Thêm entry 2026-06-21
 - **Modified**: `docs/history.md` — Thêm entry 2026-06-21
+- **Created**: `docs/HANDOVER_OpenFileFromProduction.md` — Handover summary cho session mới
 
 ## 2026-06-08
 

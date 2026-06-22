@@ -26,6 +26,7 @@ namespace Lynn_DPI_AT
     public partial class OpenFile_FromProduction
     {
         public const int FILE_DIALOG_TIMEOUT_MS = 15000;
+        public const int APPLY_PRESETTING_TIMEOUT_MS = 15000;
         public const int TOP_VALIDATE_TIMEOUT_MS = 60000;
         public const int TOP_VALIDATE_POLL_MS = 2000;
 
@@ -90,13 +91,31 @@ namespace Lynn_DPI_AT
                 repo.BtnOpenInDialog.Click();
                 Delay.Milliseconds(1000);
 
-                // --- Buoc 5: Cho app load ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction", "Buoc 5: Cho app load...");
+                // --- Buoc 5: Wait va Click BtnApplyProductionPresetting ---
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Buoc 5: Cho BtnApplyProductionPresetting xuat hien...");
+                if (!repo.KohyoungGUI1.BtnApplyProductionPresettingInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
+                {
+                    Report.Screenshot(repo.CCIMainWindow.Self, true);
+                    throw new Exception(string.Format(
+                        "BtnApplyProductionPresetting khong xuat hien sau {0}ms.",
+                        APPLY_PRESETTING_TIMEOUT_MS));
+                }
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Buoc 5: Click BtnApplyProductionPresetting...");
+                repo.KohyoungGUI1.BtnApplyProductionPresetting.Click();
+                Delay.Milliseconds(500);
+                Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                    "Buoc 5 OK: BtnApplyProductionPresetting clicked.");
+
+                // --- Buoc 6: Cho app load sau Apply ---
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Buoc 6: Cho app load sau Apply...");
                 Delay.Milliseconds(2000);
 
-                // --- Buoc 6: Validate TopTextRecipeName chua ModelName ---
+                // --- Buoc 7: Validate TopTextRecipeName chua ModelName ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 6: Validate ModelName tai vung TOP...");
+                    "Buoc 7: Validate ModelName tai vung TOP...");
                 ValidateTopModelName();
             }
             finally
