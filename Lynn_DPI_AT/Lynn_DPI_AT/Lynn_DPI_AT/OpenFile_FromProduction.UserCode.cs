@@ -91,22 +91,10 @@ namespace Lynn_DPI_AT
                 repo.BtnOpenInDialog.Click();
                 Delay.Milliseconds(1000);
 
-                // --- Buoc 5: Wait va Click BtnApplyProductionPresetting ---
+                // --- Buoc 5: Wait va Click Apply (robust fallback) ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 5: Cho BtnApplyProductionPresetting xuat hien...");
-                if (!repo.InspectionRegionSettings.BtnApplyProductionPresettingInfoesettingInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
-                {
-                    Report.Screenshot(repo.CCIMainWindow.Self, true);
-                    throw new Exception(string.Format(
-                        "BtnApplyProductionPresetting khong xuat hien sau {0}ms.",
-                        APPLY_PRESETTING_TIMEOUT_MS));
-                }
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 5: Click BtnApplyProductionPresetting...");
-                repo.InspectionRegionSettings.BtnApplyProductionPresettingonPresetting.Click();
-                Delay.Milliseconds(500);
-                Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                    "Buoc 5 OK: BtnApplyProductionPresetting clicked.");
+                    "Buoc 5: Click Apply voi fallback...");
+                ClickApplyWithFallback();
 
                 // --- Buoc 6: Cho app load sau Apply ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
@@ -217,6 +205,125 @@ namespace Lynn_DPI_AT
             throw new Exception(string.Format(
                 "ValidateTopModelName FAIL: TopTextRecipeName = '{0}', expected contains '{1}'",
                 actualCaption ?? "(null)", expected));
+        }
+
+        private void ClickApplyWithFallback()
+        {
+            const int DIALOG_CLOSE_CHECK_MS = 3000;
+
+            if (!repo.InspectionRegionSettings.SelfInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
+            {
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+                throw new Exception(string.Format(
+                    "Popup dialog khong xuat hien sau {0}ms.", APPLY_PRESETTING_TIMEOUT_MS));
+            }
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                "Popup dialog da xuat hien. Bat dau click Apply...");
+
+            // Strategy 1: Native WPF Apply — Adapter.Click
+            try
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Strategy 1: Native WPF Apply.Click()...");
+                repo.InspectionRegionSettings.Apply.Click();
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        "Buoc 5 OK: Apply clicked (Strategy 1 — Native WPF).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    "Strategy 1: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    string.Format("Strategy 1 exception: {0}", ex.Message));
+            }
+
+            // Strategy 2: Native WPF Apply — Focus + Space
+            try
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Strategy 2: Focus + Space...");
+                repo.InspectionRegionSettings.Apply.Focus();
+                Delay.Milliseconds(200);
+                Keyboard.Press("{Space}");
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        "Buoc 5 OK: Apply clicked (Strategy 2 — Focus+Space).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    "Strategy 2: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    string.Format("Strategy 2 exception: {0}", ex.Message));
+            }
+
+            // Strategy 3: UIA BtnApplyProductionPresetting — Click
+            try
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Strategy 3: UIA BtnApplyProductionPresetting.Click()...");
+                if (repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(2000))
+                {
+                    repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
+                    Delay.Milliseconds(500);
+                    if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                    {
+                        Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                            "Buoc 5 OK: Apply clicked (Strategy 3 — UIA).");
+                        return;
+                    }
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        "Strategy 3: dialog van con mo.");
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        "Strategy 3: BtnApplyProductionPresetting khong tim thay.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    string.Format("Strategy 3 exception: {0}", ex.Message));
+            }
+
+            // Strategy 4: Native WPF Apply — Coordinate click via ScreenRectangle
+            try
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Strategy 4: Coordinate click via ScreenRectangle...");
+                var rect = repo.InspectionRegionSettings.Apply.Element.ScreenRectangle;
+                int cx = rect.Location.X + rect.Width / 2;
+                int cy = rect.Location.Y + rect.Height / 2;
+                Mouse.MoveTo(new Point(cx, cy));
+                Mouse.Click();
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        "Buoc 5 OK: Apply clicked (Strategy 4 — Coordinate).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    "Strategy 4: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    string.Format("Strategy 4 exception: {0}", ex.Message));
+            }
+
+            Report.Screenshot(repo.CCIMainWindow.Self, true);
+            throw new Exception("Tat ca 4 strategy click Apply deu that bai. Dialog van con mo.");
         }
 
         private void CleanupDialog()
