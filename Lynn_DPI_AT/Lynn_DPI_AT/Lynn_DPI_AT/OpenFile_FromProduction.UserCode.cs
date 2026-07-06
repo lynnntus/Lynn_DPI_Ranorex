@@ -94,7 +94,7 @@ namespace Lynn_DPI_AT
                 // --- Buoc 5: Wait va Click BtnApplyProductionPresetting ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 5: Cho BtnApplyProductionPresetting xuat hien...");
-                if (!repo.KohyoungGUI1.BtnApplyProductionPresettingInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
+                if (!repo.InspectionRegionSettings.BtnApplyProductionPresettingInfoesettingInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
                 {
                     Report.Screenshot(repo.CCIMainWindow.Self, true);
                     throw new Exception(string.Format(
@@ -103,7 +103,7 @@ namespace Lynn_DPI_AT
                 }
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 5: Click BtnApplyProductionPresetting...");
-                repo.KohyoungGUI1.BtnApplyProductionPresetting.Click();
+                repo.InspectionRegionSettings.BtnApplyProductionPresettingonPresetting.Click();
                 Delay.Milliseconds(500);
                 Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
                     "Buoc 5 OK: BtnApplyProductionPresetting clicked.");

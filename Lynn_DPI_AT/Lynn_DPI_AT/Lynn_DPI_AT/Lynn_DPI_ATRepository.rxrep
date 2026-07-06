@@ -353,6 +353,17 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			searchtimeout="30000ms">
 				/form[@name='Popup']/container[1]//button[@text='Settings']/text[@caption='Settings']
 			</item>
+			<item
+			addcaps="text,uiautomation"
+			capname="button"
+			ensurevisible="True"
+			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
+			name="BtnApplyProductionPresetting"
+			refimgid="e45924fc-b174-4bfc-8ae3-93064267fe15"
+			robustPath="/form[@processname='KohyoungGUI']/form[@name='Popup']//button[@text='Apply']"
+			searchtimeout="30000ms">
+				/form[@name='Popup']//button[@text='Apply']
+			</item>
 			<basepath>
 				/form[@name='Popup']
 			</basepath>
@@ -610,6 +621,7 @@ QAwG7ECsBMRgE4kA0kAswsDAwAAAMkge0iXkqHwAAAAASUVORK5CYII=
 		id="df7fcbad-b598-4dac-b7f6-54713c3a9bcf"
 		isrooted="True"
 		name="Explorer1"
+		refimgid="768dd549-dacd-4896-9d39-28f9e0b0e54d"
 		refpath="/menubar[@processname='explorer']"
 		searchtimeout="30000ms"
 		usecache="True">
@@ -757,16 +769,6 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			robustPath="/form[@processname='KohyoungGUI']//text[@name='Production']"
 			searchtimeout="30000ms">
 				/form[@processname='KohyoungGUI']/?/?/radiobutton[@name='Production']/text[@automationid='HeaderTextBlock']
-			</item>
-			<item
-			addcaps="text,uiautomation"
-			capname="button"
-			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
-			name="BtnApplyProductionPresetting"
-			refimgid="e45924fc-b174-4bfc-8ae3-93064267fe15"
-			robustPath="/form[@name='Popup']/?/?/button[@text='Apply']"
-			searchtimeout="30000ms">
-				/form[@processname='KohyoungGUI']/container[@caption='']/button[@text='Apply']
 			</item>
 			<item
 			addcaps="text,uiautomation"

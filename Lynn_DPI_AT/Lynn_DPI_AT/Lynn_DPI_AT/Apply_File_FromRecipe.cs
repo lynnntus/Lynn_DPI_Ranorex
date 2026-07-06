@@ -84,8 +84,8 @@ namespace Lynn_DPI_AT
             //Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
             //Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.BtnApplyProductionPresetting' at 18;9.", repo.KohyoungGUI1.BtnApplyProductionPresettingInfo, new RecordItemIndex(1));
-            repo.KohyoungGUI1.BtnApplyProductionPresetting.Click("18;9");
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.BtnApplyProductionPresetting' at 18;9.", repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo, new RecordItemIndex(1));
+            repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click("18;9");
             Delay.Milliseconds(0);
             
         }
