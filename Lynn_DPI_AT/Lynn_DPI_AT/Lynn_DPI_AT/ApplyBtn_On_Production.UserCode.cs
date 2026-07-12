@@ -24,13 +24,156 @@ namespace Lynn_DPI_AT
 {
     public partial class ApplyBtn_On_Production
     {
-        /// <summary>
-        /// This method gets called right after the recording has been started.
-        /// It can be used to execute recording specific initialization code.
-        /// </summary>
+        public const int DIALOG_POLL_INTERVAL_MS = 1000;
+        public const int DIALOG_POLL_TIMEOUT_MS = 10000;
+        public const int DIALOG_CLOSE_CHECK_MS = 3000;
+
         private void Init()
         {
-            // Your recording specific initialization code goes here.
+            Report.Log(ReportLevel.Info, "ApplyBtn_On_Production", "Module bat dau.");
+        }
+
+        public void ClickApplyWithPolling()
+        {
+            string dialogPath = "/form[@name='Popup']";
+
+            // Polling: kiem tra dialog co tu dong trong 10s khong
+            Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                "Bat dau polling kiem tra dialog Production Presetting (10s)...");
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < DIALOG_POLL_TIMEOUT_MS)
+            {
+                Ranorex.Core.Element dialogElement;
+                bool found = Host.Local.TryFindSingle(dialogPath, 0, out dialogElement);
+
+                if (!found)
+                {
+                    sw.Stop();
+                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                        string.Format("Dialog da tu dong dong sau {0}ms. Bo qua click Apply.",
+                            sw.ElapsedMilliseconds));
+                    return;
+                }
+
+                Delay.Milliseconds(DIALOG_POLL_INTERVAL_MS);
+            }
+            sw.Stop();
+
+            Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                string.Format("Dialog van con mo sau {0}ms. Thuc hien click Apply...",
+                    sw.ElapsedMilliseconds));
+
+            // Click Apply voi fallback strategies (tham khao OpenFile_FromProduction)
+            ClickApplyWithFallback();
+        }
+
+        private void ClickApplyWithFallback()
+        {
+            // Strategy 1: Native WPF Apply — Adapter.Click
+            try
+            {
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    "Strategy 1: Native WPF Apply.Click()...");
+                repo.InspectionRegionSettings.Apply.Click();
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
+                        "Apply OK (Strategy 1 — Native WPF).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    "Strategy 1: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    string.Format("Strategy 1 exception: {0}", ex.Message));
+            }
+
+            // Strategy 2: Focus + Space
+            try
+            {
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    "Strategy 2: Focus + Space...");
+                repo.InspectionRegionSettings.Apply.Focus();
+                Delay.Milliseconds(200);
+                Keyboard.Press("{Space}");
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
+                        "Apply OK (Strategy 2 — Focus+Space).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    "Strategy 2: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    string.Format("Strategy 2 exception: {0}", ex.Message));
+            }
+
+            // Strategy 3: UIA BtnApplyProductionPresetting
+            try
+            {
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    "Strategy 3: UIA BtnApplyProductionPresetting.Click()...");
+                if (repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(2000))
+                {
+                    repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
+                    Delay.Milliseconds(500);
+                    if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                    {
+                        Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
+                            "Apply OK (Strategy 3 — UIA).");
+                        return;
+                    }
+                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                        "Strategy 3: dialog van con mo.");
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                        "Strategy 3: BtnApplyProductionPresetting khong tim thay.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    string.Format("Strategy 3 exception: {0}", ex.Message));
+            }
+
+            // Strategy 4: Coordinate click
+            try
+            {
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    "Strategy 4: Coordinate click via ScreenRectangle...");
+                var rect = repo.InspectionRegionSettings.Apply.Element.ScreenRectangle;
+                int cx = rect.Location.X + rect.Width / 2;
+                int cy = rect.Location.Y + rect.Height / 2;
+                Mouse.MoveTo(new Point(cx, cy));
+                Mouse.Click();
+                Delay.Milliseconds(500);
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                {
+                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
+                        "Apply OK (Strategy 4 — Coordinate).");
+                    return;
+                }
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    "Strategy 4: dialog van con mo.");
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    string.Format("Strategy 4 exception: {0}", ex.Message));
+            }
+
+            Report.Screenshot(repo.CCIMainWindow.Self, true);
+            throw new Exception("Tat ca 4 strategy click Apply deu that bai. Dialog van con mo.");
         }
 
     }
