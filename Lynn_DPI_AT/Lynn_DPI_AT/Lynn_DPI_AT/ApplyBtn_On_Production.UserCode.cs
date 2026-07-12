@@ -37,13 +37,14 @@ namespace Lynn_DPI_AT
         {
             string dialogPath = "/form[@name='Popup']";
 
-            // Polling: kiem tra dialog co tu dong trong 10s khong
             Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                "Bat dau polling kiem tra dialog Production Presetting (10s)...");
+                "Bat dau cho dialog tu dong — toi da 10 giay");
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
+            int checkCount = 0;
             while (sw.ElapsedMilliseconds < DIALOG_POLL_TIMEOUT_MS)
             {
+                checkCount++;
                 Ranorex.Core.Element dialogElement;
                 bool found = Host.Local.TryFindSingle(dialogPath, 0, out dialogElement);
 
@@ -51,18 +52,20 @@ namespace Lynn_DPI_AT
                 {
                     sw.Stop();
                     Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                        string.Format("Dialog da tu dong dong sau {0}ms. Bo qua click Apply.",
-                            sw.ElapsedMilliseconds));
+                        string.Format("Dialog da tu dong dong sau {0}s — khong can click Apply",
+                            sw.ElapsedMilliseconds / 1000.0));
                     return;
                 }
+
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    string.Format("Kiem tra lan {0}: dialog van con mo", checkCount));
 
                 Delay.Milliseconds(DIALOG_POLL_INTERVAL_MS);
             }
             sw.Stop();
 
             Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                string.Format("Dialog van con mo sau {0}ms. Thuc hien click Apply...",
-                    sw.ElapsedMilliseconds));
+                "Dialog van con sau 10s — bat dau click Apply");
 
             // Click Apply voi fallback strategies (tham khao OpenFile_FromProduction)
             ClickApplyWithFallback();
@@ -79,8 +82,8 @@ namespace Lynn_DPI_AT
                 Delay.Milliseconds(500);
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                 {
-                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
-                        "Apply OK (Strategy 1 — Native WPF).");
+                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                        "Da click Apply thanh cong (Strategy 1 — Native WPF)");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
@@ -103,8 +106,8 @@ namespace Lynn_DPI_AT
                 Delay.Milliseconds(500);
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                 {
-                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
-                        "Apply OK (Strategy 2 — Focus+Space).");
+                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                        "Da click Apply thanh cong (Strategy 2 — Focus+Space)");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
@@ -127,8 +130,8 @@ namespace Lynn_DPI_AT
                     Delay.Milliseconds(500);
                     if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                     {
-                        Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
-                            "Apply OK (Strategy 3 — UIA).");
+                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                            "Da click Apply thanh cong (Strategy 3 — UIA)");
                         return;
                     }
                     Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
@@ -159,8 +162,8 @@ namespace Lynn_DPI_AT
                 Delay.Milliseconds(500);
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                 {
-                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
-                        "Apply OK (Strategy 4 — Coordinate).");
+                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                        "Da click Apply thanh cong (Strategy 4 — Coordinate)");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
