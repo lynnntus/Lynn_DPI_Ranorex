@@ -321,17 +321,6 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 				/form[@name='Popup']/container[1]/?/?/checkbox[@text&gt;'Production stops when all']
 			</item>
 			<item
-			addcaps="button,wpfelement,wpfgroupelement"
-			capname="button"
-			id="488753fc-23ec-497a-98a5-416a18e568e0"
-			name="Apply"
-			refimgid="39e9b508-e2c3-462f-aeb4-3d3f2b97b212"
-			refpath="/form[@name='Popup']/container[2]/button[@text='Apply']"
-			robustPath="/form[@name='Popup']/?/?/button[@text='Apply']"
-			searchtimeout="30000ms">
-				/form[@name='Popup']/?/?/button[@text='Apply']
-			</item>
-			<item
 			addcaps="text,wpfelement,wpfgroupelement"
 			capname="text"
 			id="06c44a31-b996-451e-9ebc-e92260a2ba67"

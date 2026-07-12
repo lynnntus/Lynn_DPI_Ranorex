@@ -836,7 +836,6 @@ namespace Lynn_DPI_AT
         {
             RepoItemInfo _btndualcloseInfo;
             RepoItemInfo _productionstopswhenalllotinspectionInfo;
-            RepoItemInfo _applyInfo;
             RepoItemInfo _lotproductionInfo;
             RepoItemInfo _settingsInfo;
             RepoItemInfo _btnapplyproductionpresettingInfo;
@@ -849,7 +848,6 @@ namespace Lynn_DPI_AT
             {
                 _btndualcloseInfo = new RepoItemInfo(this, "BtnDualClose", "?/?/button[@automationid='btnDualClose']", "", 30000, null, "5646b1ce-2367-4416-a41f-e82cc1e40e6e");
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
-                _applyInfo = new RepoItemInfo(this, "Apply", "?/?/button[@text='Apply']", "?/?/button[@text='Apply']", 30000, null, "488753fc-23ec-497a-98a5-416a18e568e0");
                 _lotproductionInfo = new RepoItemInfo(this, "LOTProduction", "container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']", ".//text[@caption='LOT Production']", 30000, null, "06c44a31-b996-451e-9ebc-e92260a2ba67");
                 _settingsInfo = new RepoItemInfo(this, "Settings", "container[1]//button[@text='Settings']/text[@caption='Settings']", ".//text[@caption='Settings']", 30000, null, "312dd64a-e495-491f-8da8-afc70a6ec483");
                 _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", "form[@name='Popup']//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
@@ -924,30 +922,6 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _productionstopswhenalllotinspectionInfo;
-                }
-            }
-
-            /// <summary>
-            /// The Apply item.
-            /// </summary>
-            [RepositoryItem("488753fc-23ec-497a-98a5-416a18e568e0")]
-            public virtual Ranorex.Button Apply
-            {
-                get
-                {
-                    return _applyInfo.CreateAdapter<Ranorex.Button>(true);
-                }
-            }
-
-            /// <summary>
-            /// The Apply item info.
-            /// </summary>
-            [RepositoryItemInfo("488753fc-23ec-497a-98a5-416a18e568e0")]
-            public virtual RepoItemInfo ApplyInfo
-            {
-                get
-                {
-                    return _applyInfo;
                 }
             }
 

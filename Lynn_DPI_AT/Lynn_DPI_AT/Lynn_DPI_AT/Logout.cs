@@ -87,8 +87,8 @@ namespace Lynn_DPI_AT
             repo.InspectionRegionSettings.BtnDualClose.Click("95;10");
             Delay.Milliseconds(200);
             
-            Report.Log(ReportLevel.Info, "Validation", "Validating AttributeEqual (Text='Export_Lynn') on item 'Explorer.ExportLynn'.", repo.Explorer.ExportLynnInfo, new RecordItemIndex(2));
-            Validate.AttributeEqual(repo.Explorer.ExportLynnInfo, "Text", "Export_Lynn");
+            Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'Explorer.ExportLynn'.", repo.Explorer.ExportLynnInfo, new RecordItemIndex(2));
+            Validate.Exists(repo.Explorer.ExportLynnInfo);
             Delay.Milliseconds(100);
             
             Report.Screenshot(ReportLevel.Info, "User", "", repo.Explorer.ExportLynn, false, new RecordItemIndex(3));

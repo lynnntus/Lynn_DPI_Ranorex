@@ -5,9 +5,8 @@
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
-    <Element value="Apply_File_FromRecipe.rxrec" />
-    <Element value="OpenFile_FromProduction.rxrec" />
-    <Element value="OpenFile.rxrec" />
+    <Element value="OpenFile_FromProduction.UserCode.cs" />
+    <Element value="Logout.rxrec" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">

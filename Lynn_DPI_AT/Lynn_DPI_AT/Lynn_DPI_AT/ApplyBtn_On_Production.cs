@@ -24,29 +24,29 @@ namespace Lynn_DPI_AT
 {
 #pragma warning disable 0436 //(CS0436) The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'. Using the type defined in 'assembly'.
     /// <summary>
-    ///The Recording1 recording.
+    ///The ApplyBtn_On_Production recording.
     /// </summary>
-    [TestModule("31a668c9-4d3a-4de2-b4d0-832098b8e516", ModuleType.Recording, 1)]
-    public partial class Recording1 : ITestModule
+    [TestModule("19eff9e4-8b0d-407c-a2c6-45940e8d82b6", ModuleType.Recording, 1)]
+    public partial class ApplyBtn_On_Production : ITestModule
     {
         /// <summary>
         /// Holds an instance of the Lynn_DPI_ATRepository repository.
         /// </summary>
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
-        static Recording1 instance = new Recording1();
+        static ApplyBtn_On_Production instance = new ApplyBtn_On_Production();
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public Recording1()
+        public ApplyBtn_On_Production()
         {
         }
 
         /// <summary>
         /// Gets a static instance of this recording.
         /// </summary>
-        public static Recording1 Instance
+        public static ApplyBtn_On_Production Instance
         {
             get { return instance; }
         }
@@ -79,6 +79,10 @@ namespace Lynn_DPI_AT
 
             Init();
 
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.BtnApplyProductionPresetting' at Center.", repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo, new RecordItemIndex(0));
+            repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
+            Delay.Milliseconds(0);
+            
         }
 
 #region Image Feature Data

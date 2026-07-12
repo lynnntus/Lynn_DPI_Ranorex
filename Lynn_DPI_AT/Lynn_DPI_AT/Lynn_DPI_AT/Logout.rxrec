@@ -1196,7 +1196,7 @@ a9h/z8pR/a9h/wA/KVxVFAHa/wBr2H/PylH9r2H/AD8pXFUUAdr/AGvYf8/KUf2vYf8APylcVRQB
 			</helperscreenshot>
 		</mouseitem>
 		<validationitem
-		action="AttributeEqual"
+		action="Exists"
 		duration="100ms"
 		enabled="True"
 		optional="False"

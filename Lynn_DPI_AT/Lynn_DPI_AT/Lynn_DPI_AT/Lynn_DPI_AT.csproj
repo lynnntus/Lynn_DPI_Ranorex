@@ -122,6 +122,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplyBtn_On_Production.cs">
+      <BoundTo>8e8e4fbe-e59a-402e-83a4-c171e3906e87</BoundTo>
+      <DependentUpon>ApplyBtn_On_Production.rxrec</DependentUpon>
+      <RecorderCode>true</RecorderCode>
+      <id>255f4591-5363-44ad-ae73-6e33d69a3b26</id>
+    </Compile>
+    <Compile Include="ApplyBtn_On_Production.UserCode.cs">
+      <BoundTo>8e8e4fbe-e59a-402e-83a4-c171e3906e87</BoundTo>
+      <DependentUpon>ApplyBtn_On_Production.rxrec</DependentUpon>
+      <UserCode>true</UserCode>
+      <id>11033bcd-7ff2-452d-a411-f6c2a0817cdc</id>
+    </Compile>
     <Compile Include="Apply_File_FromRecipe.cs">
       <BoundTo>2c9e6da5-210b-4882-967b-272444b95d23</BoundTo>
       <DependentUpon>Apply_File_FromRecipe.rxrec</DependentUpon>
@@ -240,6 +252,11 @@
   <ItemGroup>
     <None Include="app.config">
       <id>412bca01-7441-4951-b1db-78ac1ecf3717</id>
+    </None>
+    <None Include="ApplyBtn_On_Production.rxrec">
+      <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
+      <id>8e8e4fbe-e59a-402e-83a4-c171e3906e87</id>
+      <recordtableid>19eff9e4-8b0d-407c-a2c6-45940e8d82b6</recordtableid>
     </None>
     <None Include="Apply_File_FromRecipe.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>

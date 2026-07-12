@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <recordtable
 embeddedrepository="False"
-id="31a668c9-4d3a-4de2-b4d0-832098b8e516"
+id="19eff9e4-8b0d-407c-a2c6-45940e8d82b6"
 mode="Desktop">
 	<repeatcount>
 		1
@@ -19,12 +19,38 @@ mode="Desktop">
 		True
 	</useDefaultItemLogging>
 	<codegen
-	classname="Recording1"
+	classname="ApplyBtn_On_Production"
 	namespace="Lynn_DPI_AT">
 	</codegen>
 	<variables>
 	</variables>
 	<recorditems>
+		<mouseitem
+		action="Click"
+		button="Left"
+		duration="300ms"
+		enabled="True"
+		loc="Center"
+		movetime="300ms"
+		optional="False"
+		searchpropertyid="ff32c51f-b6a1-46d2-ae4c-81cfd81d8c66"
+		sx="0"
+		sy="0"
+		warnoutofbounds="False">
+			<comment>
+			</comment>
+			<bindings>
+			</bindings>
+			<info
+			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
+			sourcename="RepositoryEditor">
+				<path>
+					/form[@name='Popup']//button[@text='Apply']
+				</path>
+				<robustPath>
+				</robustPath>
+			</info>
+		</mouseitem>
 	</recorditems>
 	<repository
 	id="414295e6-2100-449c-9668-76146e2e7237"
@@ -41,7 +67,7 @@ mode="Desktop">
 	</repository>
 	<usercodefile
 	lang="CSharp">
-		Recording1.UserCode.cs
+		ApplyBtn_On_Production.UserCode.cs
 	</usercodefile>
 	<references>
 	</references>
