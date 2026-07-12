@@ -75,7 +75,7 @@ namespace Lynn_DPI_AT
             {
                 Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
                     "Strategy 1: Native WPF Apply.Click()...");
-                repo.InspectionRegionSettings.Apply.Click();
+                repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
                 Delay.Milliseconds(500);
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                 {
@@ -97,7 +97,7 @@ namespace Lynn_DPI_AT
             {
                 Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
                     "Strategy 2: Focus + Space...");
-                repo.InspectionRegionSettings.Apply.Focus();
+                repo.InspectionRegionSettings.BtnApplyProductionPresetting.Focus();
                 Delay.Milliseconds(200);
                 Keyboard.Press("{Space}");
                 Delay.Milliseconds(500);
@@ -151,7 +151,7 @@ namespace Lynn_DPI_AT
             {
                 Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
                     "Strategy 4: Coordinate click via ScreenRectangle...");
-                var rect = repo.InspectionRegionSettings.Apply.Element.ScreenRectangle;
+                var rect = repo.InspectionRegionSettings.BtnApplyProductionPresetting.Element.ScreenRectangle;
                 int cx = rect.Location.X + rect.Width / 2;
                 int cy = rect.Location.Y + rect.Height / 2;
                 Mouse.MoveTo(new Point(cx, cy));
