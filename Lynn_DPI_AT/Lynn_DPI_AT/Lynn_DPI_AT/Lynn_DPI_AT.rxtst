@@ -199,13 +199,6 @@
 			name="Logout">
 			</testcase>
 			<testmodule
-			enabled="False"
-			id="c3e8fd78-d9aa-4eec-b37c-2ab49d58ca07"
-			name="Apply_File_FromRecipe"
-			ref="2892bd97-ec61-4d32-9efb-226ca7a6a018"
-			type="Recording">
-			</testmodule>
-			<testmodule
 			id="c8b4181e-077b-4542-9417-2eda02ae4181"
 			name="StartAUT"
 			ref="9c64181c-7a09-48fb-99df-ff91dc9385fd"
@@ -271,6 +264,12 @@
 					variablename="StartAutProcessIDVar">
 					</var>
 				</databinding>
+			</testmodule>
+			<testmodule
+			id="f20ab570-e3d3-4563-9701-70ab406a552d"
+			name="Tab_Production"
+			ref="2892bd97-ec61-4d32-9efb-226ca7a6a018"
+			type="Recording">
 			</testmodule>
 			<testcase
 			id="f5bb101f-1823-40dd-8d94-93565696bdae"
@@ -361,6 +360,10 @@
 						id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
 						name="Production_OpenFile">
 							<testmodule
+							id="f20ab570-e3d3-4563-9701-70ab406a552d"
+							name="Tab_Production">
+							</testmodule>
+							<testmodule
 							id="639740b6-0aab-4720-b0d4-cb535714613c"
 							name="ApplyBtn_On_Production">
 							</testmodule>
@@ -369,10 +372,6 @@
 							name="OpenFile_FromProduction">
 							</testmodule>
 						</smartfoldernode>
-						<testmodule
-						id="c3e8fd78-d9aa-4eec-b37c-2ab49d58ca07"
-						name="Apply_File_FromRecipe">
-						</testmodule>
 					</testcase>
 					<testcase
 					id="bed77880-1e1a-4061-9d52-61e4510ded0a"

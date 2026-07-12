@@ -22,7 +22,7 @@ using Ranorex.Core.Testing;
 
 namespace Lynn_DPI_AT
 {
-    public partial class Apply_File_FromRecipe
+    public partial class Tab_Production
     {
         /// <summary>
         /// This method gets called right after the recording has been started.

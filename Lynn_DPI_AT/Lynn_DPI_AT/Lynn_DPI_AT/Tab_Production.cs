@@ -24,29 +24,29 @@ namespace Lynn_DPI_AT
 {
 #pragma warning disable 0436 //(CS0436) The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'. Using the type defined in 'assembly'.
     /// <summary>
-    ///The Apply_File_FromRecipe recording.
+    ///The Tab_Production recording.
     /// </summary>
     [TestModule("2892bd97-ec61-4d32-9efb-226ca7a6a018", ModuleType.Recording, 1)]
-    public partial class Apply_File_FromRecipe : ITestModule
+    public partial class Tab_Production : ITestModule
     {
         /// <summary>
         /// Holds an instance of the Lynn_DPI_ATRepository repository.
         /// </summary>
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
-        static Apply_File_FromRecipe instance = new Apply_File_FromRecipe();
+        static Tab_Production instance = new Tab_Production();
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public Apply_File_FromRecipe()
+        public Tab_Production()
         {
         }
 
         /// <summary>
         /// Gets a static instance of this recording.
         /// </summary>
-        public static Apply_File_FromRecipe Instance
+        public static Tab_Production Instance
         {
             get { return instance; }
         }
@@ -84,8 +84,8 @@ namespace Lynn_DPI_AT
             //Mouse.ButtonDown(System.Windows.Forms.MouseButtons.Left);
             //Delay.Milliseconds(0);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.BtnApplyProductionPresetting' at 18;9.", repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo, new RecordItemIndex(1));
-            repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click("18;9");
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.TabProduction' at 18;9.", repo.KohyoungGUI1.TabProductionInfo, new RecordItemIndex(1));
+            repo.KohyoungGUI1.TabProduction.Click("18;9");
             Delay.Milliseconds(0);
             
         }

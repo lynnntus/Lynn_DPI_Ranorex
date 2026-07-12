@@ -19,7 +19,7 @@ mode="Desktop">
 		True
 	</useDefaultItemLogging>
 	<codegen
-	classname="Apply_File_FromRecipe"
+	classname="Tab_Production"
 	namespace="Lynn_DPI_AT">
 	</codegen>
 	<variables>
@@ -197,138 +197,14 @@ J5v+z+tHm/7P61HRQBJ5v+z+tMOwnOz9aSigBcR/3P1oxH/c/WkooAXEf9z9aMR/3P1pKKAFxH/c
 			<bindings>
 			</bindings>
 			<info
-			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
+			id="d7854f56-5fe3-4f77-a14f-99c5af680dba"
 			sourcename="Recorder">
-				<element
-				capabilities="uiautomation"
-				dontcache="False"
-				enabled="True"
-				flavor="uia"
-				hasfocus="False"
-				index="0"
-				prefcap="text"
-				rect="1041,856,34,17"
-				role="text"
-				snapElem=""
-				valid="True"
-				visible="True">
-					<attribute
-					name="backgroundcolor"
-					type="System.String">
-						Apply
-					</attribute>
-					<attribute
-					name="caption"
-					type="System.String">
-						Apply
-					</attribute>
-					<attribute
-					name="text"
-					type="System.String">
-						Apply
-					</attribute>
-					<attribute
-					name="textcolor"
-					type="System.String">
-						Apply
-					</attribute>
-					<attribute
-					name="classname"
-					type="System.String">
-						TextBlock
-					</attribute>
-					<attribute
-					name="controltype"
-					type="System.String">
-						Text
-					</attribute>
-					<attribute
-					name="frameworkid"
-					type="System.String">
-						WPF
-					</attribute>
-					<attribute
-					name="iscontentelement"
-					type="System.Boolean">
-						True
-					</attribute>
-					<attribute
-					name="iscontrolelement"
-					type="System.Boolean">
-						True
-					</attribute>
-					<attribute
-					name="iskeyboardfocusable"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="ispassword"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="isrequiredforform"
-					type="System.Boolean">
-						False
-					</attribute>
-					<attribute
-					name="localizedcontroltype"
-					type="System.String">
-						text
-					</attribute>
-					<attribute
-					name="name"
-					type="System.String">
-						Apply
-					</attribute>
-					<attribute
-					name="orientation"
-					type="System.Windows.Automation.OrientationType, UIAutomationTypes, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-						None
-					</attribute>
-					<attribute
-					name="processid"
-					type="System.Int32">
-						6532
-					</attribute>
-				</element>
 				<path>
-					/form[@processname='KohyoungGUI']/?/?/text[@name='Apply']
+					/form[@processname='KohyoungGUI']/container[@automationid='WindowTitleBarPanel']//radiobutton[@text='Production']/text[@automationid='HeaderTextBlock']
 				</path>
 				<robustPath>
 				</robustPath>
 			</info>
-			<helperscreenshot
-			guid="f4e85e16-6e5d-4f02-b047-cda3a5120f3e">
-				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
-			</helperscreenshot>
 		</mouseitem>
 	</recorditems>
 	<repository
@@ -346,7 +222,7 @@ FGFUYApaKKkYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9k=
 	</repository>
 	<usercodefile
 	lang="CSharp">
-		Apply_File_FromRecipe.UserCode.cs
+		Tab_Production.UserCode.cs
 	</usercodefile>
 	<references>
 	</references>

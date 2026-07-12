@@ -134,15 +134,15 @@
       <UserCode>true</UserCode>
       <id>11033bcd-7ff2-452d-a411-f6c2a0817cdc</id>
     </Compile>
-    <Compile Include="Apply_File_FromRecipe.cs">
+    <Compile Include="Tab_Production.cs">
       <BoundTo>2c9e6da5-210b-4882-967b-272444b95d23</BoundTo>
-      <DependentUpon>Apply_File_FromRecipe.rxrec</DependentUpon>
+      <DependentUpon>Tab_Production.rxrec</DependentUpon>
       <RecorderCode>true</RecorderCode>
       <id>2410a1c0-584f-47ee-82fc-ccecba7770a0</id>
     </Compile>
-    <Compile Include="Apply_File_FromRecipe.UserCode.cs">
+    <Compile Include="Tab_Production.UserCode.cs">
       <BoundTo>2c9e6da5-210b-4882-967b-272444b95d23</BoundTo>
-      <DependentUpon>Apply_File_FromRecipe.rxrec</DependentUpon>
+      <DependentUpon>Tab_Production.rxrec</DependentUpon>
       <UserCode>true</UserCode>
       <id>eea06a4a-4ecc-406e-b3ef-e4f933accc21</id>
     </Compile>
@@ -258,7 +258,7 @@
       <id>8e8e4fbe-e59a-402e-83a4-c171e3906e87</id>
       <recordtableid>19eff9e4-8b0d-407c-a2c6-45940e8d82b6</recordtableid>
     </None>
-    <None Include="Apply_File_FromRecipe.rxrec">
+    <None Include="Tab_Production.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
       <id>2c9e6da5-210b-4882-967b-272444b95d23</id>
       <recordtableid>2892bd97-ec61-4d32-9efb-226ca7a6a018</recordtableid>
