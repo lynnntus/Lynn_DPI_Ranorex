@@ -1,5 +1,19 @@
 # Change History
 
+## 2026-07-13
+
+### ~PM 2 — Viết lại ClickApplyWithPolling() hoàn toàn
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/ApplyBtn_On_Production.UserCode.cs` — Bỏ ClickApplyWithFallback() (4 strategy click dồn dập). Viết lại ClickApplyWithPolling(): poll kiên nhẫn 60s mỗi 1s, check dialog biến mất → check Apply Visible+Enabled → click 1 phát → chờ. Thêm chẩn đoán đếm form[@name='Popup']. Timeout → screenshot + throw rõ ràng.
+- **Modified**: `docs/history.md`, `docs/chat.md` — Cập nhật
+
+### ~PM — ApplyBtn_On_Production polling + accessor fix + HANDOFF
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/ApplyBtn_On_Production.UserCode.cs` — Implement polling loop (1s interval, 10s timeout) cho dialog tu dong + 4-strategy click fallback
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs` — Fix accessor: `repo.InspectionRegionSettings.Apply` → `repo.InspectionRegionSettings.BtnApplyProductionPresetting` (5 cho)
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/ApplyBtn_On_Production.UserCode.cs` — Fix accessor tuong tu (5 cho) + cap nhat Report.Log messages
+- **Created**: `docs/HANDOFF.md` — Ban giao context day du cho session moi (6 sections)
+- **Modified**: `docs/history.md` — Them entry 2026-07-13
+- **Modified**: `docs/chat.md` — Them entry 2026-07-13
+
 ## 2026-06-21
 
 ### ~PM — Implement OpenFile_FromProduction + Fix typo OpenFile

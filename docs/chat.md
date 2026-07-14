@@ -1,5 +1,26 @@
 # Chat History
 
+## 2026-07-13
+
+### ~PM 2 — Viết lại ClickApplyWithPolling() hoàn toàn
+- **Yêu cầu**: Viết lại `ClickApplyWithPolling()` trong `ApplyBtn_On_Production.UserCode.cs`. Bỏ cách cũ (4 strategy click dồn dập). Thay bằng vòng poll kiên nhẫn 60s. Thêm chẩn đoán đếm Popup. Đọc `.rxrep` trước khi code.
+- **Kết quả**: Đã viết lại hoàn toàn. Bỏ `ClickApplyWithFallback()`. Logic mới: poll mỗi 1s, tối đa 60s, 3 điều kiện (dialog mất → Apply sẵn sàng → chờ). Chẩn đoán đầu method đếm tất cả `form[@name='Popup']` kèm Visible/ScreenRect. Cảnh báo nếu >1 popup.
+- **Accessor đã dùng**: `repo.InspectionRegionSettings.BtnApplyProductionPresetting` (từ `.rxrep`: `/form[@name='Popup']//button[@text='Apply']`), `repo.InspectionRegionSettings.SelfInfo` (folder base: `/form[@name='Popup']`)
+- **Lưu ý**: `OpenFile_FromProduction.UserCode.cs` cũng có `ClickApplyWithFallback()` tương tự — CHƯA sửa, cần confirm riêng
+- **Files thay đổi**: `ApplyBtn_On_Production.UserCode.cs`
+
+### ~PM — ApplyBtn_On_Production: polling + accessor fix + HANDOFF
+- **Yeu cau 1**: Them polling loop vao `ApplyBtn_On_Production.UserCode.cs` — kiem tra moi 1s (max 10s) dialog tu dong, neu con thi click Apply voi 4 strategy fallback
+- **Ket qua 1**: Implement `ClickApplyWithPolling()` + `ClickApplyWithFallback()` hoan chinh
+- **Yeu cau 2**: Doc `.rxrep` xac nhan accessor, thay `repo.InspectionRegionSettings.Apply` bang accessor dung trong ca 2 file
+- **Ket qua 2**: Phat hien `Apply` nam o folder `KohyoungGUI1`, khong phai `InspectionRegionSettings`. Accessor dung: `repo.InspectionRegionSettings.BtnApplyProductionPresetting`. Da sua 10 cho tong cong
+- **Yeu cau 3**: Kiem tra va cap nhat Report.Log messages trong polling loop
+- **Ket qua 3**: Cap nhat 5 log messages theo dung format yeu cau
+- **Yeu cau 4**: Tao `HANDOFF.md` ban giao context cho session moi — doc file that, khong tu tri nho
+- **Ket qua 4**: Tao `docs/HANDOFF.md` voi 6 sections: Tong quan, Repository, Functions, Test Suite, Van de dang xu ly, Quy tac
+- **Files thay doi**: `ApplyBtn_On_Production.UserCode.cs`, `OpenFile_FromProduction.UserCode.cs`, `docs/HANDOFF.md`
+- **Van de con**: Popup name collision (chua xac minh), polling can tang len 60-90s va kiem tra Visible+Enabled
+
 ## 2026-06-21
 
 ### ~PM — Implement OpenFile_FromProduction UserCode

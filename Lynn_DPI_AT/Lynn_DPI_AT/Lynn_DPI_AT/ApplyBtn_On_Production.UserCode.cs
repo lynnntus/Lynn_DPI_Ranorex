@@ -25,8 +25,7 @@ namespace Lynn_DPI_AT
     public partial class ApplyBtn_On_Production
     {
         public const int DIALOG_POLL_INTERVAL_MS = 1000;
-        public const int DIALOG_POLL_TIMEOUT_MS = 10000;
-        public const int DIALOG_CLOSE_CHECK_MS = 3000;
+        public const int DIALOG_POLL_TIMEOUT_MS = 60000;
 
         private void Init()
         {
@@ -36,147 +35,127 @@ namespace Lynn_DPI_AT
         public void ClickApplyWithPolling()
         {
             string dialogPath = "/form[@name='Popup']";
+            string applyBtnPath = "/form[@name='Popup']//button[@text='Apply']";
 
+            // --- Chẩn đoán: đếm tất cả form[@name='Popup'] đang tồn tại ---
+            try
+            {
+                IList<Ranorex.Core.Element> allPopups = Host.Local.Find(dialogPath, 0);
+                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                    string.Format("CHAN DOAN: Tim thay {0} form[@name='Popup']", allPopups.Count));
+
+                for (int i = 0; i < allPopups.Count; i++)
+                {
+                    try
+                    {
+                        var el = allPopups[i];
+                        bool vis = el.Visible;
+                        var rect = el.ScreenRectangle;
+                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                            string.Format("  Popup[{0}]: Visible={1}, ScreenRect={2}",
+                                i, vis, rect));
+                    }
+                    catch (Exception ex)
+                    {
+                        Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                            string.Format("  Popup[{0}]: khong doc duoc — {1}", i, ex.Message));
+                    }
+                }
+
+                if (allPopups.Count > 1)
+                {
+                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                        "CANH BAO: >1 form[@name='Popup'] ton tai! "
+                        + "Kiem tra dialog co the KHONG BAO GIO thay 'da dong'. "
+                        + "Can dung tin hieu dang tin hon (vd: BtnApplyProductionPresetting.Exists).");
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                    string.Format("CHAN DOAN: loi khi dem Popup — {0}", ex.Message));
+            }
+
+            // --- Vòng poll kiên nhẫn: 60 giây, mỗi 1 giây ---
             Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                "Bat dau cho dialog tu dong — toi da 10 giay");
+                string.Format("Bat dau polling dialog — toi da {0}s, moi {1}s",
+                    DIALOG_POLL_TIMEOUT_MS / 1000, DIALOG_POLL_INTERVAL_MS / 1000));
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            int checkCount = 0;
+            int round = 0;
+            bool hasClicked = false;
+
             while (sw.ElapsedMilliseconds < DIALOG_POLL_TIMEOUT_MS)
             {
-                checkCount++;
-                Ranorex.Core.Element dialogElement;
-                bool found = Host.Local.TryFindSingle(dialogPath, 0, out dialogElement);
+                round++;
 
-                if (!found)
+                // Dieu kien 1: Dialog da bien mat?
+                bool dialogExists = repo.InspectionRegionSettings.SelfInfo.Exists(0);
+                if (!dialogExists)
                 {
                     sw.Stop();
-                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                        string.Format("Dialog da tu dong dong sau {0}s — khong can click Apply",
-                            sw.ElapsedMilliseconds / 1000.0));
+                    Report.Log(ReportLevel.Success, "ApplyBtn_On_Production",
+                        string.Format("Vong {0}: Dialog da bien mat sau {1:F1}s — THANH CONG"
+                            + (hasClicked ? " (da click Apply truoc do)" : " (tu dong dong, khong can click)"),
+                            round, sw.ElapsedMilliseconds / 1000.0));
                     return;
                 }
 
-                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                    string.Format("Kiem tra lan {0}: dialog van con mo", checkCount));
+                // Dieu kien 2: Apply button ton tai + Visible + Enabled?
+                try
+                {
+                    Ranorex.Core.Element applyEl;
+                    bool applyFound = Host.Local.TryFindSingle(applyBtnPath, 0, out applyEl);
+
+                    if (applyFound && applyEl.Visible && applyEl.Enabled)
+                    {
+                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                            string.Format("Vong {0}: Apply Visible+Enabled — click 1 phat", round));
+                        repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
+                        hasClicked = true;
+                    }
+                    else if (applyFound)
+                    {
+                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                            string.Format("Vong {0}: Dialog con mo, Apply ton tai nhung chua san sang (Visible={1}, Enabled={2}) — cho tiep",
+                                round, applyFound ? applyEl.Visible.ToString() : "N/A",
+                                applyFound ? applyEl.Enabled.ToString() : "N/A"));
+                    }
+                    else
+                    {
+                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
+                            string.Format("Vong {0}: Dialog con mo, Apply KHONG tim thay — cho tiep", round));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
+                        string.Format("Vong {0}: Loi khi kiem tra Apply — {1}", round, ex.Message));
+                }
 
                 Delay.Milliseconds(DIALOG_POLL_INTERVAL_MS);
             }
+
             sw.Stop();
 
-            Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                "Dialog van con sau 10s — bat dau click Apply");
+            // Het timeout — screenshot va throw
+            Report.Log(ReportLevel.Error, "ApplyBtn_On_Production",
+                string.Format("THAT BAI: Dialog van con mo sau {0}s ({1} vong poll). hasClicked={2}",
+                    DIALOG_POLL_TIMEOUT_MS / 1000, round, hasClicked));
 
-            // Click Apply voi fallback strategies (tham khao OpenFile_FromProduction)
-            ClickApplyWithFallback();
-        }
-
-        private void ClickApplyWithFallback()
-        {
-            // Strategy 1: Native WPF Apply — Adapter.Click
             try
             {
-                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                    "Strategy 1: Native WPF Apply.Click()...");
-                repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
-                Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
-                {
-                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                        "Da click Apply thanh cong (Strategy 1 — Native WPF)");
-                    return;
-                }
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    "Strategy 1: dialog van con mo.");
+                Report.Screenshot(repo.InspectionRegionSettings.Self, true);
             }
-            catch (Exception ex)
+            catch
             {
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    string.Format("Strategy 1 exception: {0}", ex.Message));
+                try { Report.Screenshot(); } catch { }
             }
 
-            // Strategy 2: Focus + Space
-            try
-            {
-                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                    "Strategy 2: Focus + Space...");
-                repo.InspectionRegionSettings.BtnApplyProductionPresetting.Focus();
-                Delay.Milliseconds(200);
-                Keyboard.Press("{Space}");
-                Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
-                {
-                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                        "Da click Apply thanh cong (Strategy 2 — Focus+Space)");
-                    return;
-                }
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    "Strategy 2: dialog van con mo.");
-            }
-            catch (Exception ex)
-            {
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    string.Format("Strategy 2 exception: {0}", ex.Message));
-            }
-
-            // Strategy 3: UIA BtnApplyProductionPresetting
-            try
-            {
-                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                    "Strategy 3: UIA BtnApplyProductionPresetting.Click()...");
-                if (repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(2000))
-                {
-                    repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
-                    Delay.Milliseconds(500);
-                    if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
-                    {
-                        Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                            "Da click Apply thanh cong (Strategy 3 — UIA)");
-                        return;
-                    }
-                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                        "Strategy 3: dialog van con mo.");
-                }
-                else
-                {
-                    Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                        "Strategy 3: BtnApplyProductionPresetting khong tim thay.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    string.Format("Strategy 3 exception: {0}", ex.Message));
-            }
-
-            // Strategy 4: Coordinate click
-            try
-            {
-                Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                    "Strategy 4: Coordinate click via ScreenRectangle...");
-                var rect = repo.InspectionRegionSettings.BtnApplyProductionPresetting.Element.ScreenRectangle;
-                int cx = rect.Location.X + rect.Width / 2;
-                int cy = rect.Location.Y + rect.Height / 2;
-                Mouse.MoveTo(new Point(cx, cy));
-                Mouse.Click();
-                Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
-                {
-                    Report.Log(ReportLevel.Info, "ApplyBtn_On_Production",
-                        "Da click Apply thanh cong (Strategy 4 — Coordinate)");
-                    return;
-                }
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    "Strategy 4: dialog van con mo.");
-            }
-            catch (Exception ex)
-            {
-                Report.Log(ReportLevel.Warn, "ApplyBtn_On_Production",
-                    string.Format("Strategy 4 exception: {0}", ex.Message));
-            }
-
-            Report.Screenshot(repo.CCIMainWindow.Self, true);
-            throw new Exception("Tat ca 4 strategy click Apply deu that bai. Dialog van con mo.");
+            throw new Exception(string.Format(
+                "ApplyBtn_On_Production: Dialog 'Production Presetting' van con mo sau {0}s. "
+                + "Da click Apply: {1}. Kiem tra app co dang loading qua lau hoac dialog bi treo.",
+                DIALOG_POLL_TIMEOUT_MS / 1000, hasClicked));
         }
 
     }
