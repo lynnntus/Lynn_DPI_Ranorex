@@ -481,6 +481,12 @@
 		<testconfiguration
 		name="TestRun">
 			<testcontainer
+			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
+			</testcontainer>
+			<testcontainer
+			id="4985393b-ae1b-4ebd-931b-281c83046a79">
+			</testcontainer>
+			<testcontainer
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">
 			</testcontainer>
 			<testcontainer
