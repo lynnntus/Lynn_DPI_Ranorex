@@ -25,32 +25,21 @@ mode="Desktop">
 	<variables>
 	</variables>
 	<recorditems>
-		<mouseitem
-		action="Click"
-		button="Left"
-		duration="300ms"
+		<userrecorditem
+		classname="ApplyBtn_On_Production"
 		enabled="True"
-		loc="Center"
-		movetime="300ms"
-		optional="False"
-		searchpropertyid="ff32c51f-b6a1-46d2-ae4c-81cfd81d8c66"
-		sx="0"
-		sy="0"
-		warnoutofbounds="False">
+		isexternaltestmethod="False"
+		methodname="ClickApplyWithPolling"
+		namespace="Lynn_DPI_AT"
+		optional="False">
 			<comment>
 			</comment>
 			<bindings>
 			</bindings>
-			<info
-			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
-			sourcename="RepositoryEditor">
-				<path>
-					/form[@name='Popup']//button[@text='Apply']
-				</path>
-				<robustPath>
-				</robustPath>
-			</info>
-		</mouseitem>
+			<arguments
+			id="20fd3fdc-94e1-478a-b21f-5f898f0ea0da">
+			</arguments>
+		</userrecorditem>
 	</recorditems>
 	<repository
 	id="414295e6-2100-449c-9668-76146e2e7237"

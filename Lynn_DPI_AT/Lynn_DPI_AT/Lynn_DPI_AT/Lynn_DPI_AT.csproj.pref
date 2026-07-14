@@ -5,7 +5,6 @@
     <Element value="Lynn_DPI_AT.rxtst" />
     <Element value="ApplyBtn_On_Production.rxrec" />
     <Element value="OpenFile_FromProduction.rxrec" />
-    <Element value="Tab_Production.rxrec" />
     <Element value="OpenFile_FromProduction.UserCode.cs" />
   </Array>
   <Properties name="projectSavedData">
@@ -13,9 +12,9 @@
       <runOnBuild value="False" />
     </Properties>
     <Array name="recentusercodeselections">
+      <Element value="Lynn_DPI_AT.ApplyBtn_On_Production.ClickApplyWithPolling()" />
       <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
       <Element value="Lynn_DPI_AT.OpenFile_FromProduction.OpenRecipeFileByPath()" />
-      <Element value="Lynn_DPI_AT.OpenFile.OpenRecipeFileByPath(String recipeFilePath)" />
     </Array>
   </Properties>
 </Properties>

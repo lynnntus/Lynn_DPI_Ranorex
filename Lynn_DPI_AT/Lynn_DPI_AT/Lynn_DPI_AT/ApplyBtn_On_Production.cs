@@ -79,8 +79,7 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.BtnApplyProductionPresetting' at Center.", repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo, new RecordItemIndex(0));
-            repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
+            ClickApplyWithPolling();
             Delay.Milliseconds(0);
             
         }

@@ -131,9 +131,9 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.TabProduction' at 45;5.", repo.KohyoungGUI1.TabProductionInfo, new RecordItemIndex(0));
-            repo.KohyoungGUI1.TabProduction.Click("45;5");
-            Delay.Milliseconds(0);
+            //Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.TabProduction' at 45;5.", repo.KohyoungGUI1.TabProductionInfo, new RecordItemIndex(0));
+            //repo.KohyoungGUI1.TabProduction.Click("45;5");
+            //Delay.Milliseconds(0);
             
             RecipeFilePath = OpenRecipeFileByPath();
             Delay.Milliseconds(0);

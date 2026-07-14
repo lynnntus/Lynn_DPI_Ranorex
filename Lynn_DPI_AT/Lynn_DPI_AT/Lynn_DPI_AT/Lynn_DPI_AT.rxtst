@@ -115,6 +115,10 @@
 			id="3d1682f4-1614-490d-9714-819edec40d65"
 			name="SmokeTest">
 			</testcase>
+			<testcase
+			id="4985393b-ae1b-4ebd-931b-281c83046a79"
+			name="MoveTo_Production_Tab">
+			</testcase>
 			<teardown
 			id="5a935d87-f885-417b-b0ac-061dac073162"
 			name="teardown">
@@ -354,19 +358,23 @@
 						</testmodule>
 					</testcase>
 					<testcase
+					id="4985393b-ae1b-4ebd-931b-281c83046a79"
+					name="MoveTo_Production_Tab">
+						<testmodule
+						id="f20ab570-e3d3-4563-9701-70ab406a552d"
+						name="Tab_Production">
+						</testmodule>
+						<testmodule
+						id="639740b6-0aab-4720-b0d4-cb535714613c"
+						name="ApplyBtn_On_Production">
+						</testmodule>
+					</testcase>
+					<testcase
 					id="e3c00646-e4a8-4447-bca3-db0ca47b0c38"
 					name="Production_OpenFile">
 						<smartfoldernode
 						id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
 						name="Production_OpenFile">
-							<testmodule
-							id="f20ab570-e3d3-4563-9701-70ab406a552d"
-							name="Tab_Production">
-							</testmodule>
-							<testmodule
-							id="639740b6-0aab-4720-b0d4-cb535714613c"
-							name="ApplyBtn_On_Production">
-							</testmodule>
 							<testmodule
 							id="33de9e53-27f4-4344-b1d0-3f8cee1c4b56"
 							name="OpenFile_FromProduction">
@@ -472,9 +480,6 @@
 	default="TestRun">
 		<testconfiguration
 		name="TestRun">
-			<testcontainer
-			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
-			</testcontainer>
 			<testcontainer
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">
 			</testcontainer>
