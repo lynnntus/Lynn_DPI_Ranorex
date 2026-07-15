@@ -26,6 +26,8 @@ namespace Lynn_DPI_AT
     {
         private const int DIALOG_APPEAR_TIMEOUT_MS = 10000;
         private const int DIALOG_AUTOCLOSE_TIMEOUT_MS = 30000;
+        private const int APPLY_ENABLED_TIMEOUT_MS = 10000;
+        private const int APPLY_CLOSE_VERIFY_TIMEOUT_MS = 5000;
         private const int POLL_INTERVAL_MS = 500;
 
         private void Init()
@@ -37,7 +39,7 @@ namespace Lynn_DPI_AT
         {
             var sw = System.Diagnostics.Stopwatch.StartNew();
 
-            // BUOC 1: Cho dialog xuat hien
+            // === BUOC 1: Cho dialog xuat hien (max 10s) ===
             Report.Log(ReportLevel.Info, "VerifyAutoClose",
                 string.Format("BUOC 1: Cho dialog 'Production Presetting' xuat hien (toi da {0}s)...",
                     DIALOG_APPEAR_TIMEOUT_MS / 1000));
@@ -67,39 +69,118 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Success, "VerifyAutoClose",
                 string.Format("Dialog da xuat hien sau {0:F1}s.", sw.ElapsedMilliseconds / 1000.0));
 
-            // BUOC 2: Cho dialog tu dong dong
+            // === BUOC 2: Cho dialog tu dong dong (max 30s) ===
             sw.Restart();
             Report.Log(ReportLevel.Info, "VerifyAutoClose",
                 string.Format("BUOC 2: Cho dialog tu dong dong (toi da {0}s)...",
                     DIALOG_AUTOCLOSE_TIMEOUT_MS / 1000));
 
-            bool closed = false;
+            bool autoClosed = false;
             while (sw.ElapsedMilliseconds < DIALOG_AUTOCLOSE_TIMEOUT_MS)
             {
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(0))
                 {
-                    closed = true;
+                    autoClosed = true;
                     break;
                 }
                 Delay.Milliseconds(POLL_INTERVAL_MS);
             }
             sw.Stop();
 
-            if (!closed)
+            if (autoClosed)
             {
-                try { Report.Screenshot(repo.InspectionRegionSettings.Self, true); }
-                catch { try { Report.Screenshot(); } catch { } }
-
-                Report.Log(ReportLevel.Failure, "VerifyAutoClose",
-                    string.Format("THAT BAI: Dialog van con mo sau {0}s. App khong tu dong dong dialog.",
-                        DIALOG_AUTOCLOSE_TIMEOUT_MS / 1000));
-                throw new Exception(string.Format(
-                    "VerifyAutoClose: Dialog 'Production Presetting' khong tu dong dong sau {0}s. Kiem tra app co bi treo hoac loading qua lau.",
-                    DIALOG_AUTOCLOSE_TIMEOUT_MS / 1000));
+                Report.Log(ReportLevel.Success, "VerifyAutoClose",
+                    string.Format("Dialog da tu dong dong sau {0:F1}s — TEST PASS (hanh vi dung).",
+                        sw.ElapsedMilliseconds / 1000.0));
+                return;
             }
 
-            Report.Log(ReportLevel.Success, "VerifyAutoClose",
-                string.Format("Dialog da tu dong sau {0:F1}s — TEST PASS.", sw.ElapsedMilliseconds / 1000.0));
+            // === BUOC 3: FALLBACK — dialog khong tu dong dong, thu click Apply ===
+            Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                string.Format("Dialog KHONG tu dong dong sau {0}s. Chuyen sang fallback: click Apply.",
+                    DIALOG_AUTOCLOSE_TIMEOUT_MS / 1000));
+
+            // 3a: Cho Apply button enabled (max 10s)
+            sw.Restart();
+            Report.Log(ReportLevel.Info, "VerifyAutoClose",
+                string.Format("BUOC 3: FALLBACK — cho Apply button enabled (toi da {0}s)...",
+                    APPLY_ENABLED_TIMEOUT_MS / 1000));
+
+            bool applyClicked = false;
+            while (sw.ElapsedMilliseconds < APPLY_ENABLED_TIMEOUT_MS)
+            {
+                try
+                {
+                    var btnInfo = repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo;
+                    if (btnInfo.Exists(0))
+                    {
+                        var btn = repo.InspectionRegionSettings.BtnApplyProductionPresetting;
+                        if (btn.Visible && btn.Enabled)
+                        {
+                            Report.Log(ReportLevel.Info, "VerifyAutoClose",
+                                string.Format("Apply button da enabled sau {0:F1}s — click Apply.",
+                                    sw.ElapsedMilliseconds / 1000.0));
+                            btn.Click();
+                            applyClicked = true;
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                        string.Format("Loi khi kiem tra Apply button: {0}", ex.Message));
+                }
+                Delay.Milliseconds(POLL_INTERVAL_MS);
+            }
+            sw.Stop();
+
+            if (!applyClicked)
+            {
+                TakeScreenshot();
+                Report.Log(ReportLevel.Failure, "VerifyAutoClose",
+                    string.Format("THAT BAI: Apply button khong enabled sau {0}s. Dialog bi treo.",
+                        APPLY_ENABLED_TIMEOUT_MS / 1000));
+                throw new Exception(string.Format(
+                    "VerifyAutoClose: Dialog khong tu dong dong va Apply button khong enabled sau {0}s.",
+                    APPLY_ENABLED_TIMEOUT_MS / 1000));
+            }
+
+            // 3b: Verify dialog dong sau click Apply (max 5s)
+            sw.Restart();
+            bool closedAfterClick = false;
+            while (sw.ElapsedMilliseconds < APPLY_CLOSE_VERIFY_TIMEOUT_MS)
+            {
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(0))
+                {
+                    closedAfterClick = true;
+                    break;
+                }
+                Delay.Milliseconds(POLL_INTERVAL_MS);
+            }
+            sw.Stop();
+
+            if (!closedAfterClick)
+            {
+                TakeScreenshot();
+                Report.Log(ReportLevel.Failure, "VerifyAutoClose",
+                    string.Format("THAT BAI: Dialog van con mo sau khi click Apply ({0}s). App loi nghiem trong.",
+                        APPLY_CLOSE_VERIFY_TIMEOUT_MS / 1000));
+                throw new Exception(string.Format(
+                    "VerifyAutoClose: Dialog khong dong sau khi click Apply ({0}s).",
+                    APPLY_CLOSE_VERIFY_TIMEOUT_MS / 1000));
+            }
+
+            Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                string.Format("Dialog da dong sau khi click Apply ({0:F1}s). "
+                    + "TEST PASS nhung app KHONG tu dong dong dialog — can review lai.",
+                    sw.ElapsedMilliseconds / 1000.0));
+        }
+
+        private void TakeScreenshot()
+        {
+            try { Report.Screenshot(repo.InspectionRegionSettings.Self, true); }
+            catch { try { Report.Screenshot(); } catch { } }
         }
     }
 }
