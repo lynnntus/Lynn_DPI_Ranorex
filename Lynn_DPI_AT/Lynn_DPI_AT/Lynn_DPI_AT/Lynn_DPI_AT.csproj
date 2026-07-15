@@ -122,15 +122,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplyBtn_On_Production.cs">
+    <Compile Include="Verify_ProductionPresettingDialog_AutoClose.cs">
       <BoundTo>8e8e4fbe-e59a-402e-83a4-c171e3906e87</BoundTo>
-      <DependentUpon>ApplyBtn_On_Production.rxrec</DependentUpon>
+      <DependentUpon>Verify_ProductionPresettingDialog_AutoClose.rxrec</DependentUpon>
       <RecorderCode>true</RecorderCode>
       <id>255f4591-5363-44ad-ae73-6e33d69a3b26</id>
     </Compile>
-    <Compile Include="ApplyBtn_On_Production.UserCode.cs">
+    <Compile Include="Verify_ProductionPresettingDialog_AutoClose.UserCode.cs">
       <BoundTo>8e8e4fbe-e59a-402e-83a4-c171e3906e87</BoundTo>
-      <DependentUpon>ApplyBtn_On_Production.rxrec</DependentUpon>
+      <DependentUpon>Verify_ProductionPresettingDialog_AutoClose.rxrec</DependentUpon>
       <UserCode>true</UserCode>
       <id>11033bcd-7ff2-452d-a411-f6c2a0817cdc</id>
     </Compile>
@@ -253,7 +253,7 @@
     <None Include="app.config">
       <id>412bca01-7441-4951-b1db-78ac1ecf3717</id>
     </None>
-    <None Include="ApplyBtn_On_Production.rxrec">
+    <None Include="Verify_ProductionPresettingDialog_AutoClose.rxrec">
       <BoundTo>b8295835-9fc5-456e-b3bc-19800986597e</BoundTo>
       <id>8e8e4fbe-e59a-402e-83a4-c171e3906e87</id>
       <recordtableid>19eff9e4-8b0d-407c-a2c6-45940e8d82b6</recordtableid>

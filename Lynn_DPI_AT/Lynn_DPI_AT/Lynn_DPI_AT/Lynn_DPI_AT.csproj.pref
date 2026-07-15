@@ -1,11 +1,14 @@
 ﻿<Properties>
-  <Array name="active" />
+  <Array name="active">
+    <Element value="Lynn_DPI_AT.rxtst" />
+  </Array>
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
     <Element value="ApplyBtn_On_Production.rxrec" />
     <Element value="OpenFile_FromProduction.rxrec" />
     <Element value="OpenFile_FromProduction.UserCode.cs" />
+    <Element value="Tab_Production.rxrec" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">

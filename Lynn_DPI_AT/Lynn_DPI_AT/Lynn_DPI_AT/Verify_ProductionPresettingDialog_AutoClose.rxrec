@@ -19,14 +19,14 @@ mode="Desktop">
 		True
 	</useDefaultItemLogging>
 	<codegen
-	classname="ApplyBtn_On_Production"
+	classname="Verify_ProductionPresettingDialog_AutoClose"
 	namespace="Lynn_DPI_AT">
 	</codegen>
 	<variables>
 	</variables>
 	<recorditems>
 		<userrecorditem
-		classname="ApplyBtn_On_Production"
+		classname="Verify_ProductionPresettingDialog_AutoClose"
 		enabled="True"
 		isexternaltestmethod="False"
 		methodname="ClickApplyWithPolling"
@@ -56,7 +56,7 @@ mode="Desktop">
 	</repository>
 	<usercodefile
 	lang="CSharp">
-		ApplyBtn_On_Production.UserCode.cs
+		Verify_ProductionPresettingDialog_AutoClose.UserCode.cs
 	</usercodefile>
 	<references>
 	</references>

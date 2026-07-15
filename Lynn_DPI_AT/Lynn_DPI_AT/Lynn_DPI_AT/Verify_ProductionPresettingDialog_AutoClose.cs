@@ -24,29 +24,29 @@ namespace Lynn_DPI_AT
 {
 #pragma warning disable 0436 //(CS0436) The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'. Using the type defined in 'assembly'.
     /// <summary>
-    ///The ApplyBtn_On_Production recording.
+    ///The Verify_ProductionPresettingDialog_AutoClose recording.
     /// </summary>
     [TestModule("19eff9e4-8b0d-407c-a2c6-45940e8d82b6", ModuleType.Recording, 1)]
-    public partial class ApplyBtn_On_Production : ITestModule
+    public partial class Verify_ProductionPresettingDialog_AutoClose : ITestModule
     {
         /// <summary>
         /// Holds an instance of the Lynn_DPI_ATRepository repository.
         /// </summary>
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
-        static ApplyBtn_On_Production instance = new ApplyBtn_On_Production();
+        static Verify_ProductionPresettingDialog_AutoClose instance = new Verify_ProductionPresettingDialog_AutoClose();
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public ApplyBtn_On_Production()
+        public Verify_ProductionPresettingDialog_AutoClose()
         {
         }
 
         /// <summary>
         /// Gets a static instance of this recording.
         /// </summary>
-        public static ApplyBtn_On_Production Instance
+        public static Verify_ProductionPresettingDialog_AutoClose Instance
         {
             get { return instance; }
         }

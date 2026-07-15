@@ -22,7 +22,7 @@ using Ranorex.Core.Testing;
 
 namespace Lynn_DPI_AT
 {
-    public partial class ApplyBtn_On_Production
+    public partial class Verify_ProductionPresettingDialog_AutoClose
     {
         public const int DIALOG_POLL_INTERVAL_MS = 1000;
         public const int DIALOG_POLL_TIMEOUT_MS = 60000;
