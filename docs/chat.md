@@ -1,5 +1,15 @@
 # Chat History
 
+## 2026-07-19
+
+### ~PM — Fix false failure Bước 3b: verify dialog đóng sau click Apply
+- **Yêu cầu**: Fix false failure "Dialog van con mo sau khi click Apply (5s)" mặc dù dialog đã đóng thật. Phân tích root cause, đề xuất 2-3 giải pháp, so sánh, chọn tốt nhất.
+- **Root cause**: `SelfInfo.WaitForNotExists` dùng basepath `/form[@name='Popup' and @title='Production Presetting']` match nhầm panel khác trong Production screen (Fiducial, Conveyor, PCB View...). Đã thử thêm `title='Production Presetting'` vào basepath → vẫn fail.
+- **3 giải pháp**: (A) Thay SelfInfo → BtnApplyProductionPresettingInfo [12/12], (B) Dynamic RxPath bypass repo [8/12], (C) Poll Exists(0)==false [9/12]
+- **Chọn**: Option A — thay 2 dòng tại Bước 2 (line 71) và Bước 3b (line 138)
+- **Kết quả**: Code đã sửa, build PASS (0 errors, 0 warnings)
+- **Files thay đổi**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+
 ## 2026-07-13
 
 ### ~PM 2 — Viết lại ClickApplyWithPolling() hoàn toàn

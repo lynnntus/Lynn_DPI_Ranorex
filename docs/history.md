@@ -1,5 +1,16 @@
 # Change History
 
+## 2026-07-19
+
+### ~PM — Fix false failure Bước 3b: SelfInfo → BtnApplyProductionPresettingInfo
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+  - Line 71 (Bước 2): `SelfInfo.WaitForNotExists` → `BtnApplyProductionPresettingInfo.WaitForNotExists`
+  - Line 138 (Bước 3b): `SelfInfo.WaitForNotExists` → `BtnApplyProductionPresettingInfo.WaitForNotExists`
+  - Root cause: `SelfInfo` dùng basepath `/form[@name='Popup' and @title='Production Presetting']` match nhầm panel khác trong Production screen
+  - Fix: verify bằng Apply button (element con chỉ tồn tại khi dialog mở) thay vì dialog form
+- Build: PASS (0 errors, 0 warnings)
+- **Modified**: `docs/history.md`, `docs/chat.md` — Cập nhật
+
 ## 2026-07-13
 
 ### ~PM 2 — Viết lại ClickApplyWithPolling() hoàn toàn

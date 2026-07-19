@@ -68,7 +68,7 @@ namespace Lynn_DPI_AT
 
             try
             {
-                repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_AUTOCLOSE_TIMEOUT_MS);
+                repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.WaitForNotExists(DIALOG_AUTOCLOSE_TIMEOUT_MS);
                 sw.Stop();
                 Report.Log(ReportLevel.Success, "VerifyAutoClose",
                     string.Format("Dialog da tu dong dong sau {0:F1}s — TEST PASS (hanh vi dung).",
@@ -135,7 +135,7 @@ namespace Lynn_DPI_AT
             sw.Restart();
             try
             {
-                repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(APPLY_CLOSE_VERIFY_TIMEOUT_MS);
+                repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.WaitForNotExists(APPLY_CLOSE_VERIFY_TIMEOUT_MS);
             }
             catch
             {
