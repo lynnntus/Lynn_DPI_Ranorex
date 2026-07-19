@@ -834,7 +834,7 @@ namespace Lynn_DPI_AT
         [RepositoryFolder("7b7cc356-6b4f-4429-ac48-e69a7067da19")]
         public partial class InspectionRegionSettingsAppFolder : RepoGenBaseFolder
         {
-            RepoItemInfo _btndualcloseInfo;
+            Lynn_DPI_ATRepositoryFolders.ShutdownDialogFolder _shutdowndialog;
             RepoItemInfo _productionstopswhenalllotinspectionInfo;
             RepoItemInfo _lotproductionInfo;
             RepoItemInfo _settingsInfo;
@@ -846,7 +846,7 @@ namespace Lynn_DPI_AT
             public InspectionRegionSettingsAppFolder(RepoGenBaseFolder parentFolder) :
                     base("InspectionRegionSettings", "/form[@name='Popup' and @title='Production Presetting']", parentFolder, 30000, null, true, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
             {
-                _btndualcloseInfo = new RepoItemInfo(this, "BtnDualClose", "?/?/button[@automationid='btnDualClose']", "", 30000, null, "5646b1ce-2367-4416-a41f-e82cc1e40e6e");
+                _shutdowndialog = new Lynn_DPI_ATRepositoryFolders.ShutdownDialogFolder(this);
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
                 _lotproductionInfo = new RepoItemInfo(this, "LOTProduction", "container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']", ".//text[@caption='LOT Production']", 30000, null, "06c44a31-b996-451e-9ebc-e92260a2ba67");
                 _settingsInfo = new RepoItemInfo(this, "Settings", "container[1]//button[@text='Settings']/text[@caption='Settings']", ".//text[@caption='Settings']", 30000, null, "312dd64a-e495-491f-8da8-afc70a6ec483");
@@ -874,30 +874,6 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _selfInfo;
-                }
-            }
-
-            /// <summary>
-            /// The BtnDualClose item.
-            /// </summary>
-            [RepositoryItem("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
-            public virtual Ranorex.Button BtnDualClose
-            {
-                get
-                {
-                    return _btndualcloseInfo.CreateAdapter<Ranorex.Button>(true);
-                }
-            }
-
-            /// <summary>
-            /// The BtnDualClose item info.
-            /// </summary>
-            [RepositoryItemInfo("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
-            public virtual RepoItemInfo BtnDualCloseInfo
-            {
-                get
-                {
-                    return _btndualcloseInfo;
                 }
             }
 
@@ -994,6 +970,81 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _btnapplyproductionpresettingInfo;
+                }
+            }
+
+            /// <summary>
+            /// The ShutdownDialog folder.
+            /// </summary>
+            [RepositoryFolder("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
+            public virtual Lynn_DPI_ATRepositoryFolders.ShutdownDialogFolder ShutdownDialog
+            {
+                get { return _shutdowndialog; }
+            }
+        }
+
+        /// <summary>
+        /// The ShutdownDialogFolder folder.
+        /// </summary>
+        [RepositoryFolder("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
+        public partial class ShutdownDialogFolder : RepoGenBaseFolder
+        {
+            RepoItemInfo _btndualclose_shutdownInfo;
+
+            /// <summary>
+            /// Creates a new ShutdownDialog  folder.
+            /// </summary>
+            public ShutdownDialogFolder(RepoGenBaseFolder parentFolder) :
+                    base("ShutdownDialog", "form[@name='Popup' and @title='Inspection Region Settings']", parentFolder, 30000, null, false, "5646b1ce-2367-4416-a41f-e82cc1e40e6e", "")
+            {
+                _btndualclose_shutdownInfo = new RepoItemInfo(this, "BtnDualClose_Shutdown", "?/?/button[@automationid='btnDualClose']", "element", 30000, null, "a570d2d4-6672-4c4f-b0e6-9af3de3f0de1");
+            }
+
+            /// <summary>
+            /// The Self item.
+            /// </summary>
+            [RepositoryItem("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
+            public virtual Ranorex.Form Self
+            {
+                get
+                {
+                    return _selfInfo.CreateAdapter<Ranorex.Form>(true);
+                }
+            }
+
+            /// <summary>
+            /// The Self item info.
+            /// </summary>
+            [RepositoryItemInfo("5646b1ce-2367-4416-a41f-e82cc1e40e6e")]
+            public virtual RepoItemInfo SelfInfo
+            {
+                get
+                {
+                    return _selfInfo;
+                }
+            }
+
+            /// <summary>
+            /// The BtnDualClose_Shutdown item.
+            /// </summary>
+            [RepositoryItem("a570d2d4-6672-4c4f-b0e6-9af3de3f0de1")]
+            public virtual Ranorex.Button BtnDualClose_Shutdown
+            {
+                get
+                {
+                    return _btndualclose_shutdownInfo.CreateAdapter<Ranorex.Button>(true);
+                }
+            }
+
+            /// <summary>
+            /// The BtnDualClose_Shutdown item info.
+            /// </summary>
+            [RepositoryItemInfo("a570d2d4-6672-4c4f-b0e6-9af3de3f0de1")]
+            public virtual RepoItemInfo BtnDualClose_ShutdownInfo
+            {
+                get
+                {
+                    return _btndualclose_shutdownInfo;
                 }
             }
         }

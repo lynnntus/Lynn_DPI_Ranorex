@@ -83,8 +83,8 @@ namespace Lynn_DPI_AT
             repo.CCIMainWindow.SomeButton.Click("13;15");
             Delay.Milliseconds(200);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.BtnDualClose' at 95;10.", repo.InspectionRegionSettings.BtnDualCloseInfo, new RecordItemIndex(1));
-            repo.InspectionRegionSettings.BtnDualClose.Click("95;10");
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'InspectionRegionSettings.ShutdownDialog.BtnDualClose_Shutdown' at 95;10.", repo.InspectionRegionSettings.ShutdownDialog.BtnDualClose_ShutdownInfo, new RecordItemIndex(1));
+            repo.InspectionRegionSettings.ShutdownDialog.BtnDualClose_Shutdown.Click("95;10");
             Delay.Milliseconds(200);
             
             Report.Log(ReportLevel.Info, "Validation", "Validating Exists on item 'Explorer.ExportLynn'.", repo.Explorer.ExportLynnInfo, new RecordItemIndex(2));

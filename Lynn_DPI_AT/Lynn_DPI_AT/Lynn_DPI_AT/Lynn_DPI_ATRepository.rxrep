@@ -297,16 +297,26 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		name="InspectionRegionSettings"
 		searchtimeout="30000ms"
 		usecache="True">
-			<item
-			addcaps="button,wpfelement,wpfgroupelement"
-			capname="button"
+			<folder
+			capname="form"
 			id="5646b1ce-2367-4416-a41f-e82cc1e40e6e"
-			name="BtnDualClose"
-			refimgid="f54458de-3208-4c82-82a5-548ee3cac720"
-			robustPath=""
-			searchtimeout="30000ms">
-				/form[@name='Popup' and @title='Production Presetting']/?/?/button[@automationid='btnDualClose']
-			</item>
+			isrooted="True"
+			name="ShutdownDialog"
+			refimgid="a41fd425-6681-4dd5-8152-9fe93bb414b3"
+			searchtimeout="30000ms"
+			usecache="False">
+				<item
+				capname="button"
+				id="a570d2d4-6672-4c4f-b0e6-9af3de3f0de1"
+				name="BtnDualClose_Shutdown"
+				robustPath="/form[@name='Popup' and @title='Production Presetting']/form[@name='Popup' and @title='Inspection Region Settings']/element"
+				searchtimeout="30000ms">
+					/form[@name='Popup' and @title='Production Presetting']/form[@name='Popup' and @title='Inspection Region Settings']/?/?/button[@automationid='btnDualClose']
+				</item>
+				<basepath>
+					/form[@name='Popup' and @title='Production Presetting']/form[@name='Popup' and @title='Inspection Region Settings']
+				</basepath>
+			</folder>
 			<item
 			addcaps="checkbox,wpfelement,wpfgroupelement"
 			capname="checkbox"
