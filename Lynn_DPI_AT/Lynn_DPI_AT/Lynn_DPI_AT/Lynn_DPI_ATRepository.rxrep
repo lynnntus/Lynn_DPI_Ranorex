@@ -295,7 +295,6 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		id="7b7cc356-6b4f-4429-ac48-e69a7067da19"
 		isrooted="True"
 		name="InspectionRegionSettings"
-		refpath="/form[@name='Popup']"
 		searchtimeout="30000ms"
 		usecache="True">
 			<item
@@ -304,10 +303,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="5646b1ce-2367-4416-a41f-e82cc1e40e6e"
 			name="BtnDualClose"
 			refimgid="f54458de-3208-4c82-82a5-548ee3cac720"
-			refpath="/form[@name='Popup']/container[@caption='']/button[@automationid='btnDualClose']"
 			robustPath=""
 			searchtimeout="30000ms">
-				/form[@name='Popup']/?/?/button[@automationid='btnDualClose']
+				/form[@name='Popup' and @title='Production Presetting']/?/?/button[@automationid='btnDualClose']
 			</item>
 			<item
 			addcaps="checkbox,wpfelement,wpfgroupelement"
@@ -315,10 +313,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="08c334b9-f5fb-4690-b779-609d02b71459"
 			name="ProductionStopsWhenAllLOTInspection"
 			refimgid="3bddf9ea-8213-44d5-9ab4-835f67ae3e78"
-			refpath="/form[@name='Popup']/container[1]/container[3]/checkbox[@text>'Production stops when all']"
 			robustPath="/form[@name='Popup']//checkbox[@text>'Production stops when all']"
 			searchtimeout="30000ms">
-				/form[@name='Popup']/container[1]/?/?/checkbox[@text&gt;'Production stops when all']
+				/form[@name='Popup' and @title='Production Presetting']/container[1]/?/?/checkbox[@text&gt;'Production stops when all']
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
@@ -326,10 +323,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="06c44a31-b996-451e-9ebc-e92260a2ba67"
 			name="LOTProduction"
 			refimgid="f544cb89-80cc-49d0-acf1-bd454ee28f34"
-			refpath="/form[@name='Popup']/container[1]/text[@caption='Production Settings']/radiobutton/button/container/radiobutton/text[@caption='LOT Production']"
 			robustPath="/form[@name='Popup']//text[@caption='LOT Production']"
 			searchtimeout="30000ms">
-				/form[@name='Popup']/container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']
+				/form[@name='Popup' and @title='Production Presetting']/container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
@@ -337,10 +333,9 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="312dd64a-e495-491f-8da8-afc70a6ec483"
 			name="Settings"
 			refimgid="17a5aacf-9bf8-4a6f-ab18-ee98efa132a1"
-			refpath="/form[@name='Popup']/container[1]/text[@caption='Production Settings']/radiobutton/button/text[@caption='Settings']"
 			robustPath="/form[@name='Popup']//text[@caption='Settings']"
 			searchtimeout="30000ms">
-				/form[@name='Popup']/container[1]//button[@text='Settings']/text[@caption='Settings']
+				/form[@name='Popup' and @title='Production Presetting']/container[1]//button[@text='Settings']/text[@caption='Settings']
 			</item>
 			<item
 			addcaps="text,uiautomation"
@@ -351,10 +346,10 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			refimgid="e45924fc-b174-4bfc-8ae3-93064267fe15"
 			robustPath="/form[@processname='KohyoungGUI']/form[@name='Popup']//button[@text='Apply']"
 			searchtimeout="30000ms">
-				/form[@name='Popup']//button[@text='Apply']
+				/form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']
 			</item>
 			<basepath>
-				/form[@name='Popup']
+				/form[@name='Popup' and @title='Production Presetting']
 			</basepath>
 			<icon>
 				iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACx

@@ -844,7 +844,7 @@ namespace Lynn_DPI_AT
             /// Creates a new InspectionRegionSettings  folder.
             /// </summary>
             public InspectionRegionSettingsAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("InspectionRegionSettings", "/form[@name='Popup']", parentFolder, 30000, null, true, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
+                    base("InspectionRegionSettings", "/form[@name='Popup' and @title='Production Presetting']", parentFolder, 30000, null, true, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
             {
                 _btndualcloseInfo = new RepoItemInfo(this, "BtnDualClose", "?/?/button[@automationid='btnDualClose']", "", 30000, null, "5646b1ce-2367-4416-a41f-e82cc1e40e6e");
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
