@@ -32,7 +32,9 @@ BUOC 3: FALLBACK — click Apply
 - Code da pass review (0 Critical, 2 Warning, 3 Suggestion — khong blocking)
 - Buoc 1 + Buoc 2 da refactor tu poll thu cong `Exists(0)` sang Ranorex native API
 - Build PASS (0 errors, 0 warnings)
-- **DA FIX: false failure Buoc 3b** — thay `SelfInfo.WaitForNotExists` bang `BtnApplyProductionPresettingInfo.WaitForNotExists` o ca Buoc 2 (line 71) va Buoc 3b (line 138)
+- **DA FIX (2 buoc)**:
+  1. Doi target: `SelfInfo.WaitForNotExists` → `BtnApplyProductionPresettingInfo.WaitForNotExists` (Buoc 2 + 3b)
+  2. Tang timeout: `APPLY_CLOSE_VERIFY_TIMEOUT_MS` tu 5s → 15s (app can ~5-7s de xu ly Apply)
 - Da thu sua Base path repo them `title='Production Presetting'` → van fail → fix bang cach doi target sang Apply button
 - **CAN TEST MANUAL** tren may test de xac nhan fix hoat dong
 

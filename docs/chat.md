@@ -2,6 +2,13 @@
 
 ## 2026-07-19
 
+### ~PM 2 — Tăng timeout Bước 3b: 5s → 15s
+- **Yêu cầu**: Test sau Option A vẫn fail — phân tích screenshot Ranorex Report, xác nhận timing issue
+- **Evidence**: Click Apply lúc 02:22.195, screenshot "(null)" lúc 02:29.522 (dialog đã đóng sau ~5-7s, vượt timeout 5s)
+- **Fix**: `APPLY_CLOSE_VERIFY_TIMEOUT_MS = 5000` → `15000` (line 30). 15s = 2x margin, nhất quán với timeout khác (10s)
+- **Kết quả**: Code sửa 1 dòng, build PASS
+- **Files thay đổi**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+
 ### ~PM — Fix false failure Bước 3b: verify dialog đóng sau click Apply
 - **Yêu cầu**: Fix false failure "Dialog van con mo sau khi click Apply (5s)" mặc dù dialog đã đóng thật. Phân tích root cause, đề xuất 2-3 giải pháp, so sánh, chọn tốt nhất.
 - **Root cause**: `SelfInfo.WaitForNotExists` dùng basepath `/form[@name='Popup' and @title='Production Presetting']` match nhầm panel khác trong Production screen (Fiducial, Conveyor, PCB View...). Đã thử thêm `title='Production Presetting'` vào basepath → vẫn fail.

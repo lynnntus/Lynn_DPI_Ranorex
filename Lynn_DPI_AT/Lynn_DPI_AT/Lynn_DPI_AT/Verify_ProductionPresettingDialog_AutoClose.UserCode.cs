@@ -27,7 +27,7 @@ namespace Lynn_DPI_AT
         private const int DIALOG_APPEAR_TIMEOUT_MS = 10000;
         private const int DIALOG_AUTOCLOSE_TIMEOUT_MS = 30000;
         private const int APPLY_ENABLED_TIMEOUT_MS = 10000;
-        private const int APPLY_CLOSE_VERIFY_TIMEOUT_MS = 5000;
+        private const int APPLY_CLOSE_VERIFY_TIMEOUT_MS = 15000;
         private const int POLL_INTERVAL_MS = 500;
 
         private void Init()

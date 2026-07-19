@@ -2,6 +2,14 @@
 
 ## 2026-07-19
 
+### ~PM 2 — Tăng timeout Bước 3b: 5s → 15s (timing issue)
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+  - Line 30: `APPLY_CLOSE_VERIFY_TIMEOUT_MS = 5000` → `15000`
+  - Root cause: App cần ~5-7s để xử lý Apply và đóng dialog, timeout 5s không đủ
+  - Evidence: Screenshot "(null)" chứng minh dialog đã đóng, chỉ vượt timeout
+- Build: PASS (0 errors, 0 warnings)
+- **Modified**: `docs/history.md`, `docs/chat.md`, `docs/HANDOFF_Verify_ProductionPresettingDialog_20260719.md`
+
 ### ~PM — Fix false failure Bước 3b: SelfInfo → BtnApplyProductionPresettingInfo
 - **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
   - Line 71 (Bước 2): `SelfInfo.WaitForNotExists` → `BtnApplyProductionPresettingInfo.WaitForNotExists`
