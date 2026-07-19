@@ -44,16 +44,7 @@ namespace Lynn_DPI_AT
                 string.Format("BUOC 1: Cho dialog 'Production Presetting' xuat hien (toi da {0}s)...",
                     DIALOG_APPEAR_TIMEOUT_MS / 1000));
 
-            bool appeared = false;
-            while (sw.ElapsedMilliseconds < DIALOG_APPEAR_TIMEOUT_MS)
-            {
-                if (repo.InspectionRegionSettings.SelfInfo.Exists(0))
-                {
-                    appeared = true;
-                    break;
-                }
-                Delay.Milliseconds(POLL_INTERVAL_MS);
-            }
+            bool appeared = repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_APPEAR_TIMEOUT_MS);
 
             if (!appeared)
             {
@@ -75,24 +66,18 @@ namespace Lynn_DPI_AT
                 string.Format("BUOC 2: Cho dialog tu dong dong (toi da {0}s)...",
                     DIALOG_AUTOCLOSE_TIMEOUT_MS / 1000));
 
-            bool autoClosed = false;
-            while (sw.ElapsedMilliseconds < DIALOG_AUTOCLOSE_TIMEOUT_MS)
+            try
             {
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(0))
-                {
-                    autoClosed = true;
-                    break;
-                }
-                Delay.Milliseconds(POLL_INTERVAL_MS);
-            }
-            sw.Stop();
-
-            if (autoClosed)
-            {
+                repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_AUTOCLOSE_TIMEOUT_MS);
+                sw.Stop();
                 Report.Log(ReportLevel.Success, "VerifyAutoClose",
                     string.Format("Dialog da tu dong dong sau {0:F1}s — TEST PASS (hanh vi dung).",
                         sw.ElapsedMilliseconds / 1000.0));
                 return;
+            }
+            catch
+            {
+                sw.Stop();
             }
 
             // === BUOC 3: FALLBACK — dialog khong tu dong dong, thu click Apply ===
@@ -148,20 +133,13 @@ namespace Lynn_DPI_AT
 
             // 3b: Verify dialog dong sau click Apply (max 5s)
             sw.Restart();
-            bool closedAfterClick = false;
-            while (sw.ElapsedMilliseconds < APPLY_CLOSE_VERIFY_TIMEOUT_MS)
+            try
             {
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(0))
-                {
-                    closedAfterClick = true;
-                    break;
-                }
-                Delay.Milliseconds(POLL_INTERVAL_MS);
+                repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(APPLY_CLOSE_VERIFY_TIMEOUT_MS);
             }
-            sw.Stop();
-
-            if (!closedAfterClick)
+            catch
             {
+                sw.Stop();
                 TakeScreenshot();
                 Report.Log(ReportLevel.Failure, "VerifyAutoClose",
                     string.Format("THAT BAI: Dialog van con mo sau khi click Apply ({0}s). App loi nghiem trong.",
@@ -170,6 +148,7 @@ namespace Lynn_DPI_AT
                     "VerifyAutoClose: Dialog khong dong sau khi click Apply ({0}s).",
                     APPLY_CLOSE_VERIFY_TIMEOUT_MS / 1000));
             }
+            sw.Stop();
 
             Report.Log(ReportLevel.Warn, "VerifyAutoClose",
                 string.Format("Dialog da dong sau khi click Apply ({0:F1}s). "
