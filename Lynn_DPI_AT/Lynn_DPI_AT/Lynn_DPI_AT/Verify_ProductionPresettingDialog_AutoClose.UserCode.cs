@@ -60,6 +60,8 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Success, "VerifyAutoClose",
                 string.Format("Dialog da xuat hien sau {0:F1}s.", sw.ElapsedMilliseconds / 1000.0));
 
+            LogPopupAndApplyDiag("PRE_BUOC2");
+
             // === BUOC 2: Cho dialog tu dong dong (max 30s) ===
             sw.Restart();
             Report.Log(ReportLevel.Info, "VerifyAutoClose",
@@ -73,6 +75,7 @@ namespace Lynn_DPI_AT
                 Report.Log(ReportLevel.Success, "VerifyAutoClose",
                     string.Format("Dialog da tu dong dong sau {0:F1}s — TEST PASS (hanh vi dung).",
                         sw.ElapsedMilliseconds / 1000.0));
+                LogPopupAndApplyDiag("POST_CLOSE");
                 return;
             }
             catch
@@ -154,6 +157,92 @@ namespace Lynn_DPI_AT
                 string.Format("Dialog da dong sau khi click Apply ({0:F1}s). "
                     + "TEST PASS nhung app KHONG tu dong dong dialog — can review lai.",
                     sw.ElapsedMilliseconds / 1000.0));
+        }
+
+        private void LogPopupAndApplyDiag(string tag)
+        {
+            try
+            {
+                // 1. Tat ca form[@name='Popup']
+                var popups = Host.Local.Find<Ranorex.Form>("/form[@name='Popup']");
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("[{0}] So luong form[@name='Popup']: {1}", tag, popups.Count));
+                for (int i = 0; i < popups.Count; i++)
+                {
+                    try
+                    {
+                        var f = popups[i];
+                        Report.Log(ReportLevel.Info, "DIAG",
+                            string.Format("[{0}]   Popup[{1}]: Visible={2}, Rect={3}, Path={4}",
+                                tag, i, f.Visible, f.Element.ScreenRectangle,
+                                f.Element.GetPath(PathBuildMode.Default).ToString()));
+                    }
+                    catch (Exception ex2)
+                    {
+                        Report.Log(ReportLevel.Warn, "DIAG",
+                            string.Format("[{0}]   Popup[{1}]: loi doc thuoc tinh — {2}", tag, i, ex2.Message));
+                    }
+                }
+
+                // 2. Tat ca button[@text='Apply']
+                var applyBtns = Host.Local.Find<Ranorex.Button>("//button[@text='Apply']");
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("[{0}] So luong button[@text='Apply']: {1}", tag, applyBtns.Count));
+                for (int i = 0; i < applyBtns.Count; i++)
+                {
+                    try
+                    {
+                        var b = applyBtns[i];
+                        Report.Log(ReportLevel.Info, "DIAG",
+                            string.Format("[{0}]   Apply[{1}]: Visible={2}, Enabled={3}, Rect={4}, Path={5}",
+                                tag, i, b.Visible, b.Enabled, b.Element.ScreenRectangle,
+                                b.Element.GetPath(PathBuildMode.Default).ToString()));
+                    }
+                    catch (Exception ex2)
+                    {
+                        Report.Log(ReportLevel.Warn, "DIAG",
+                            string.Format("[{0}]   Apply[{1}]: loi doc thuoc tinh — {2}", tag, i, ex2.Message));
+                    }
+                }
+
+                // 3. Dialog accessor dang tro toi
+                if (repo.InspectionRegionSettings.SelfInfo.Exists(1000))
+                {
+                    var dlg = repo.InspectionRegionSettings.Self;
+                    Report.Log(ReportLevel.Info, "DIAG",
+                        string.Format("[{0}] Accessor DIALOG: Visible={1}, Rect={2}, Path={3}",
+                            tag, dlg.Visible, dlg.Element.ScreenRectangle,
+                            dlg.Element.GetPath(PathBuildMode.Default).ToString()));
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Warn, "DIAG",
+                        string.Format("[{0}] Accessor DIALOG: khong tim thay element", tag));
+                }
+
+                // 4. Nut Apply accessor dang tro toi
+                if (repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(1000))
+                {
+                    var btn = repo.InspectionRegionSettings.BtnApplyProductionPresetting;
+                    Report.Log(ReportLevel.Info, "DIAG",
+                        string.Format("[{0}] Accessor APPLY: Visible={1}, Enabled={2}, Rect={3}, Path={4}",
+                            tag, btn.Visible, btn.Enabled, btn.Element.ScreenRectangle,
+                            btn.Element.GetPath(PathBuildMode.Default).ToString()));
+                }
+                else
+                {
+                    Report.Log(ReportLevel.Warn, "DIAG",
+                        string.Format("[{0}] Accessor APPLY: khong tim thay element", tag));
+                }
+
+                // 5. Screenshot
+                Report.Screenshot();
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "DIAG",
+                    string.Format("[{0}] LogPopupAndApplyDiag EXCEPTION: {1}", tag, ex.Message));
+            }
         }
 
         private void TakeScreenshot()
