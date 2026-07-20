@@ -110,7 +110,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		refimgid="8d6ef9bf-3ef7-4883-8bf8-b82541e57145"
 		refpath="/form[@title='CCIMainWindow']"
 		searchtimeout="30000ms"
-		usecache="True">
+		usecache="False">
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
 			capname="text"
@@ -296,16 +296,6 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		name="ShutdownDialog"
 		searchtimeout="30000ms"
 		usecache="False">
-			<item
-			addcaps="button,wpfelement,wpfgroupelement"
-			capname="button"
-			id="b0d8b335-4d6a-4016-943a-6028f15c44af"
-			name="BtnDualClose_Shutdown"
-			refimgid="9ec0dab2-62ca-4556-9896-08ee2da494d9"
-			robustPath="/form[@processname='KohyoungGUI']/?/?/button[@automationid='btnDualClose']"
-			searchtimeout="30000ms">
-				/form[@name='Popup' and @title='Inspection Region Settings']/?/?/button[@automationid='btnDualClose']
-			</item>
 			<basepath>
 				/form[@name='Popup' and @title='Inspection Region Settings']
 			</basepath>
@@ -317,7 +307,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		isrooted="True"
 		name="InspectionRegionSettings"
 		searchtimeout="30000ms"
-		usecache="True">
+		usecache="False">
 			<item
 			addcaps="checkbox,wpfelement,wpfgroupelement"
 			capname="checkbox"
@@ -355,7 +345,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			id="d3124fd6-d55f-4ce9-a842-9704dd0a508c"
 			name="BtnApplyProductionPresetting"
 			refimgid="e45924fc-b174-4bfc-8ae3-93064267fe15"
-			robustPath="/form[@processname='KohyoungGUI']/form[@name='Popup']//button[@text='Apply']"
+			robustPath="/form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']"
 			searchtimeout="30000ms">
 				/form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']
 			</item>
@@ -797,6 +787,17 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			robustPath="/form[@processname='KohyoungGUI']/?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']"
 			searchtimeout="30000ms">
 				/form[@processname='KohyoungGUI']/?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="b0d8b335-4d6a-4016-943a-6028f15c44af"
+			name="BtnDualClose_Shutdown"
+			refimgid="9ec0dab2-62ca-4556-9896-08ee2da494d9"
+			refpath="/form[@name='Popup']/container[@caption='']/button[@automationid='btnDualClose']"
+			robustPath="/form[@processname='KohyoungGUI']/?/?/button[@automationid='btnDualClose']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/button[@automationid='btnDualClose']
 			</item>
 			<basepath>
 				/form[@processname='KohyoungGUI']

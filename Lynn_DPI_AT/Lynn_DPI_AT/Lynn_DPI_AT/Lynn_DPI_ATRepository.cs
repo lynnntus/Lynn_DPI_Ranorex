@@ -432,7 +432,7 @@ namespace Lynn_DPI_AT
             /// Creates a new CCIMainWindow  folder.
             /// </summary>
             public CCIMainWindowAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("CCIMainWindow", "/form[@title='CCIMainWindow']", parentFolder, 30000, null, true, "32658c71-369b-46b3-971a-ad23802facd5", "")
+                    base("CCIMainWindow", "/form[@title='CCIMainWindow']", parentFolder, 30000, null, false, "32658c71-369b-46b3-971a-ad23802facd5", "")
             {
                 _area1 = new Lynn_DPI_ATRepositoryFolders.Area1Folder(this);
                 _createoropenrecipeInfo = new RepoItemInfo(this, "CreateOrOpenRecipe", "container[@automationid='MainView']/?/?/text[@caption='Create or open recipe.']", "", 30000, null, "1ca25c88-a5ce-4306-aacd-c575283c4707");
@@ -845,7 +845,6 @@ namespace Lynn_DPI_AT
         [RepositoryFolder("d80e324e-350f-44c1-87c0-9546e11e0516")]
         public partial class ShutdownDialogFolder : RepoGenBaseFolder
         {
-            RepoItemInfo _btndualclose_shutdownInfo;
 
             /// <summary>
             /// Creates a new ShutdownDialog  folder.
@@ -853,7 +852,6 @@ namespace Lynn_DPI_AT
             public ShutdownDialogFolder(RepoGenBaseFolder parentFolder) :
                     base("ShutdownDialog", "/form[@name='Popup' and @title='Inspection Region Settings']", parentFolder, 30000, null, false, "d80e324e-350f-44c1-87c0-9546e11e0516", "")
             {
-                _btndualclose_shutdownInfo = new RepoItemInfo(this, "BtnDualClose_Shutdown", "?/?/button[@automationid='btnDualClose']", "?/?/button[@automationid='btnDualClose']", 30000, null, "b0d8b335-4d6a-4016-943a-6028f15c44af");
             }
 
             /// <summary>
@@ -879,30 +877,6 @@ namespace Lynn_DPI_AT
                     return _selfInfo;
                 }
             }
-
-            /// <summary>
-            /// The BtnDualClose_Shutdown item.
-            /// </summary>
-            [RepositoryItem("b0d8b335-4d6a-4016-943a-6028f15c44af")]
-            public virtual Ranorex.Button BtnDualClose_Shutdown
-            {
-                get
-                {
-                    return _btndualclose_shutdownInfo.CreateAdapter<Ranorex.Button>(true);
-                }
-            }
-
-            /// <summary>
-            /// The BtnDualClose_Shutdown item info.
-            /// </summary>
-            [RepositoryItemInfo("b0d8b335-4d6a-4016-943a-6028f15c44af")]
-            public virtual RepoItemInfo BtnDualClose_ShutdownInfo
-            {
-                get
-                {
-                    return _btndualclose_shutdownInfo;
-                }
-            }
         }
 
         /// <summary>
@@ -920,12 +894,12 @@ namespace Lynn_DPI_AT
             /// Creates a new InspectionRegionSettings  folder.
             /// </summary>
             public InspectionRegionSettingsAppFolder(RepoGenBaseFolder parentFolder) :
-                    base("InspectionRegionSettings", "/form[@name='Popup' and @title='Production Presetting']", parentFolder, 30000, null, true, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
+                    base("InspectionRegionSettings", "/form[@name='Popup' and @title='Production Presetting']", parentFolder, 30000, null, false, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
             {
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
                 _lotproductionInfo = new RepoItemInfo(this, "LOTProduction", "container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']", ".//text[@caption='LOT Production']", 30000, null, "06c44a31-b996-451e-9ebc-e92260a2ba67");
                 _settingsInfo = new RepoItemInfo(this, "Settings", "container[1]//button[@text='Settings']/text[@caption='Settings']", ".//text[@caption='Settings']", 30000, null, "312dd64a-e495-491f-8da8-afc70a6ec483");
-                _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", "form[@name='Popup']//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
+                _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", ".//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
             }
 
             /// <summary>
@@ -1512,6 +1486,7 @@ namespace Lynn_DPI_AT
             RepoItemInfo _settingsInfo;
             RepoItemInfo _partcontenthostInfo;
             RepoItemInfo _partcontenthost1Info;
+            RepoItemInfo _btndualclose_shutdownInfo;
 
             /// <summary>
             /// Creates a new KohyoungGUI1  folder.
@@ -1528,6 +1503,7 @@ namespace Lynn_DPI_AT
                 _settingsInfo = new RepoItemInfo(this, "Settings", "?/?/text[@name='Settings']", "?/?/text[@name='Settings']", 30000, null, "b8b1b48d-4f65-4067-aefd-1217909bfb9c");
                 _partcontenthostInfo = new RepoItemInfo(this, "PARTContentHost", "?/?/text[@automationid='lotIDTextBox']/container[@automationid='PART_ContentHost']", ".//container[@automationid='PART_ContentHost']", 30000, null, "934312b9-5385-4f03-9fb7-efc6e91b1813");
                 _partcontenthost1Info = new RepoItemInfo(this, "PARTContentHost1", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", 30000, null, "cd72e252-5db7-46c4-aaef-c25a001b7564");
+                _btndualclose_shutdownInfo = new RepoItemInfo(this, "BtnDualClose_Shutdown", "?/?/button[@automationid='btnDualClose']", "?/?/button[@automationid='btnDualClose']", 30000, null, "b0d8b335-4d6a-4016-943a-6028f15c44af");
             }
 
             /// <summary>
@@ -1767,6 +1743,30 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _partcontenthost1Info;
+                }
+            }
+
+            /// <summary>
+            /// The BtnDualClose_Shutdown item.
+            /// </summary>
+            [RepositoryItem("b0d8b335-4d6a-4016-943a-6028f15c44af")]
+            public virtual Ranorex.Button BtnDualClose_Shutdown
+            {
+                get
+                {
+                    return _btndualclose_shutdownInfo.CreateAdapter<Ranorex.Button>(true);
+                }
+            }
+
+            /// <summary>
+            /// The BtnDualClose_Shutdown item info.
+            /// </summary>
+            [RepositoryItemInfo("b0d8b335-4d6a-4016-943a-6028f15c44af")]
+            public virtual RepoItemInfo BtnDualClose_ShutdownInfo
+            {
+                get
+                {
+                    return _btndualclose_shutdownInfo;
                 }
             }
         }

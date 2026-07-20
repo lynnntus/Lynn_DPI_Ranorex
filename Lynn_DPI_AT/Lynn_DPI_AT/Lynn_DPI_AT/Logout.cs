@@ -83,8 +83,8 @@ namespace Lynn_DPI_AT
             repo.CCIMainWindow.SomeButton.Click("13;15");
             Delay.Milliseconds(200);
             
-            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'ShutdownDialog.BtnDualClose_Shutdown' at Center.", repo.ShutdownDialog.BtnDualClose_ShutdownInfo, new RecordItemIndex(1));
-            repo.ShutdownDialog.BtnDualClose_Shutdown.Click();
+            Report.Log(ReportLevel.Info, "Mouse", "Mouse Left Click item 'KohyoungGUI1.BtnDualClose_Shutdown' at Center.", repo.KohyoungGUI1.BtnDualClose_ShutdownInfo, new RecordItemIndex(1));
+            repo.KohyoungGUI1.BtnDualClose_Shutdown.Click();
             Delay.Milliseconds(0);
             
             Report.Screenshot(ReportLevel.Success, "User", "", null, false, new RecordItemIndex(2));
