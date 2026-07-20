@@ -1,6 +1,6 @@
 # HANDOFF — Lynn_DPI_AT Session Context
 
-> Tao boi Claude Code — 2026-07-13
+> Tao boi Claude Code — cap nhat 2026-07-20
 > Muc dich: Ban giao context cho session moi
 
 ---
@@ -38,11 +38,12 @@ Lynn_DPI_AT (suite)
     │   └── Logout [DISABLED]
     ├── OpenFile (datasource=OpenFile)
     │   └── OpenFile module
+    ├── Production_TabNavigation
+    │   ├── Tab_Production
+    │   └── Verify_ProductionPresettingDialog_AutoClose
     ├── Production_OpenFile
-    │   ├── Production_OpenFile (smartfolder, datasource=Production_OpenFile)
-    │   │   ├── ApplyBtn_On_Production
-    │   │   └── OpenFile_FromProduction
-    │   └── Apply_File_FromRecipe [DISABLED]
+    │   └── Production_OpenFile (smartfolder, datasource=Production_OpenFile)
+    │       └── OpenFile_FromProduction
     └── Logout
         └── Logout module
 ```
@@ -53,7 +54,7 @@ Lynn_DPI_AT (suite)
 |----------|-----------|--------|-----|
 | `Users.csv` | `NewConnector` | `LoginRetry` | `UserName`, `Password` |
 | `OpenFileData.csv` | `OpenFile` | `OpenFile` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `Model Name` |
-| `Production_OpenFileData.csv` | `Production_OpenFile` | `ApplyBtn_On_Production`, `OpenFile_FromProduction` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `ModeName` |
+| `Production_OpenFileData.csv` | `Production_OpenFile` | `OpenFile_FromProduction` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `ModeName` |
 
 ---
 
@@ -61,24 +62,36 @@ Lynn_DPI_AT (suite)
 
 ### Cac AppFolder va items chinh
 
-| AppFolder | Base RxPath | Items |
-|-----------|-------------|-------|
-| `CCILoginWindow` | `/form[@name='View']` | `Login`, `XIDPWLoginArea`(`SomeText`, `TextXPW`, `XPWWatermark`) |
-| `CCIMainWindow` | `/form[@title='CCIMainWindow']` | `CreateOrOpenRecipe`, `SomeButton`, `LeftMenuOpenToogleButton`, `SomeIndicator`, `Text`, `SomeIndicator1`, `SomeText`, `MenuOpenRecipe`, `SomeTable`, `Production`, `Area1`(`BtnMore`, `TopTextRecipeName`, `BtnOpenFileFromProduction`) |
-| `InspectionRegionSettings` | `/form[@name='Popup']` | `BtnDualClose`, `ProductionStopsWhenAllLOTInspection`, `LOTProduction`, `Settings`, **`BtnApplyProductionPresetting`** |
-| `SelectRecipeFile` | `/form[@title='Select Recipe File']` | `SystemItemNameDisplay`, `Text1148`, `TxtFileNameInDialog` |
-| `KohyoungGUI1` | `/form[@processname='KohyoungGUI']` | `SomeText`, `SomeText1`, `Apply`, `TabProduction`, `Continue`, `HeaderTextBlock1`, `Settings`, `PARTContentHost`, `PARTContentHost1` |
-| `Explorer` | `/desktop[@processname='explorer']` | `NEPTUNECALLINONE`, `ExportLynn` |
-| Root level | — | `BtnOpenInDialog` → `/form[@title='Select Recipe File']/button[@text='&Open']` |
+| AppFolder | Base RxPath | Use Cache | Items |
+|-----------|-------------|-----------|-------|
+| `CCILoginWindow` | `/form[@name='View']` | True | `Login`, `XIDPWLoginArea`(`SomeText`, `TextXPW`, `XPWWatermark`) |
+| `CCIMainWindow` | `/form[@title='CCIMainWindow']` | True | `CreateOrOpenRecipe`, `SomeButton`, `LeftMenuOpenToogleButton`, `SomeIndicator`, `Text`, `SomeIndicator1`, `SomeText`, `MenuOpenRecipe`, `SomeTable`, `Production`, `Area1`(`BtnMore`, `TopTextRecipeName`, `BtnOpenFileFromProduction`) |
+| `ShutdownDialog` | `/form[@name='Popup' and @title='Inspection Region Settings']` | False | `BtnDualClose_Shutdown` |
+| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | **True** ⚠️ | `BtnDualClose`, `ProductionStopsWhenAllLOTInspection`, `LOTProduction`, `Settings`, **`BtnApplyProductionPresetting`** |
+| `SelectRecipeFile` | `/form[@title='Select Recipe File']` | False | `SystemItemNameDisplay`, `Text1148`, `TxtFileNameInDialog` |
+| `KohyoungGUI1` | `/form[@processname='KohyoungGUI']` | True | `SomeText`, `SomeText1`, `Apply`, `TabProduction`, `Continue`, `HeaderTextBlock1`, `Settings`, `PARTContentHost`, `PARTContentHost1` |
+| `Explorer` | `/desktop[@processname='explorer']` | True | `NEPTUNECALLINONE`, `ExportLynn` |
+| Root level | — | — | `BtnOpenInDialog` → `/form[@title='Select Recipe File']/button[@text='&Open']` |
+
+> ⚠️ **InspectionRegionSettings** dang de Use Cache = True → **nguyen nhan Bug 1**. Can doi sang False.
 
 ### CANH BAO: 2 nut Apply khac nhau
 
 | Accessor | RxPath | Dung cho |
 |----------|--------|----------|
-| `repo.InspectionRegionSettings.BtnApplyProductionPresetting` | `/form[@name='Popup']//button[@text='Apply']` | Apply tren dialog Production Presetting |
+| `repo.InspectionRegionSettings.BtnApplyProductionPresetting` | `/form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']` | Apply tren dialog Production Presetting |
 | `repo.KohyoungGUI1.Apply` | `/form[@processname='KohyoungGUI']/container[@caption='']/button[@text='Apply']` | Apply tren main window (khac!) |
 
 > **KHONG duoc nham lan 2 nut nay.** Truoc khi dung accessor, LUON doc `.rxrep` de xac nhan.
+
+### CANH BAO: 2 folder cung dung form[@name='Popup']
+
+| Folder | Base RxPath | @title |
+|--------|-------------|--------|
+| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | Production Presetting |
+| `ShutdownDialog` | `/form[@name='Popup' and @title='Inspection Region Settings']` | Inspection Region Settings |
+
+> `@title` la phan phan biet duy nhat. Khong duoc bo `@title` khoi basepath.
 
 ### CANH BAO: Ten trung lap giua cac folder
 
@@ -139,15 +152,22 @@ Constants: `LOGIN_WINDOW_TIMEOUT_MS=80000`, `LOGIN_FIELD_TIMEOUT_MS=10000`, `MAI
 
 Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `DIALOG_CLOSE_TIMEOUT_MS=5000`, `MENU_OPEN_RECIPE_TIMEOUT_MS=50000`, `MENU_POLL_INTERVAL_MS=400`
 
-### ApplyBtn_On_Production.UserCode.cs
+### Tab_Production.UserCode.cs
+
+| Method | Mo ta |
+|--------|-------|
+| `Init()` | Trong (stub) |
+
+### Verify_ProductionPresettingDialog_AutoClose.UserCode.cs
 
 | Method | Mo ta |
 |--------|-------|
 | `Init()` | Log "Module bat dau" |
-| `ClickApplyWithPolling()` | Polling loop: kiem tra dialog `/form[@name='Popup']` moi 1s, toi da 10s. Neu dialog tu dong → return. Neu con → goi `ClickApplyWithFallback()` |
-| `ClickApplyWithFallback()` | 4 strategy click Apply: (1) Native WPF Click, (2) Focus+Space, (3) UIA Exists+Click, (4) Coordinate click via ScreenRectangle. Moi strategy check dialog dong chua. Throw exception neu tat ca fail |
+| `ClickApplyWithPolling()` | 3 buoc: (1) Cho dialog xuat hien max 10s. (2) Cho dialog TU DONG dong max 30s bang `BtnApplyProductionPresettingInfo.WaitForNotExists()`. (3) Fallback: poll Apply button Visible+Enabled max 10s → click → verify dong |
+| `LogPopupAndApplyDiag(tag)` | **CODE TAM** — log so luong Popup, Apply buttons, accessor state, screenshot |
+| `TakeScreenshot()` | Screenshot dialog hoac man hinh |
 
-Constants: `DIALOG_POLL_INTERVAL_MS=1000`, `DIALOG_POLL_TIMEOUT_MS=10000`, `DIALOG_CLOSE_CHECK_MS=3000`
+Constants: `DIALOG_APPEAR_TIMEOUT_MS=10000`, `DIALOG_AUTOCLOSE_TIMEOUT_MS=30000`, `APPLY_ENABLED_TIMEOUT_MS=10000`, `APPLY_CLOSE_VERIFY_TIMEOUT_MS=15000`, `POLL_INTERVAL_MS=500`
 
 ### OpenFile_FromProduction.UserCode.cs
 
@@ -158,16 +178,11 @@ Constants: `DIALOG_POLL_INTERVAL_MS=1000`, `DIALOG_POLL_TIMEOUT_MS=10000`, `DIAL
 | `EnterPathIntoFileNameField(path)` | Set `TextValue`, verify match |
 | `ReadFileNameField()` | Try `TextValue` → fallback `WindowText` |
 | `ValidateTopModelName()` | Poll `TopTextRecipeName.Caption` contains `ModelName`, max 60s |
-| `ClickApplyWithFallback()` | 4 strategy (giong ApplyBtn_On_Production) |
+| `ClickApplyWithFallback()` | 4 strategy: (1) Native Click, (2) Focus+Space, (3) UIA Exists+Click, (4) Coordinate click. Kiem tra dialog dong sau moi strategy |
+| `LogPopupAndApplyDiag(tag)` | **CODE TAM** — log so luong Popup, Apply buttons, accessor state, screenshot |
 | `CleanupDialog()` | Escape → Close dialog neu con mo |
 
 Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, `TOP_VALIDATE_TIMEOUT_MS=60000`, `TOP_VALIDATE_POLL_MS=2000`
-
-### Apply_File_FromRecipe.UserCode.cs
-
-| Method | Mo ta |
-|--------|-------|
-| `Init()` | Trong (stub) |
 
 ### Recording1.UserCode.cs
 
@@ -198,13 +213,13 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 | TestCase | StartAUT → Recording1 → CloseAUT | — | Basic flow, `AppProcessID` truyen tu StartAUT → CloseAUT |
 | SmokeTest | StartAUT → LoginRetry → Login_Pass [DISABLED] → Logout [DISABLED] | `Users.csv` (rows 1-2) | Login retry qua CSV |
 | OpenFile | OpenFile | `OpenFileData.csv` | Open recipe tu menu |
-| Production_OpenFile | ApplyBtn_On_Production → OpenFile_FromProduction | `Production_OpenFileData.csv` | Open recipe tu Production tab |
+| Production_TabNavigation | Tab_Production → Verify_ProductionPresettingDialog_AutoClose | — | Chuyen tab Production + verify dialog tu dong dong |
+| Production_OpenFile | OpenFile_FromProduction | `Production_OpenFileData.csv` | Open recipe tu Production tab |
 | Logout | Logout | — | Logout cuoi cung |
 
 ### Luu y quan trong
 
 - `Login_Pass` va `Logout` trong SmokeTest deu **DISABLED**
-- `Apply_File_FromRecipe` trong Production_OpenFile **DISABLED**
 - `AppProcessID` truyen tu `StartAUT` → `CloseAUT` qua test case parameter — neu them test case moi can bind lai
 - Tat ca search timeout trong repository: 30,000ms (30 giay)
 
@@ -212,31 +227,41 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 
 ## 5. VAN DE DANG XU LY
 
-### Production Presetting dialog — trang thai loading
+### ĐÃ FIX (phiên 2026-07-20)
 
-**Boi canh:**
-Dialog "Production Presetting" (`/form[@name='Popup']`) xuat hien khi:
-1. User chuyen tab sang Production (lan dau) → dialog **tu dong dong** sau vai giay
-2. User click "Open File from Production" → dialog **can click Apply** de confirm
+**Bug 1 — Repo cache element cha đã chết (root cause chính)**
+- Triệu chứng: "Element is not visible" khi click Apply, dù Spy thấy nút hiển thị bình thường.
+- Log DIAG: chỉ có 1 form[@name='Popup'] (giả thuyết "nhiều Popup" là SAI). Tìm trực tiếp ->
+  Apply Visible=True, Rect={998,849,120,32}. Qua repo accessor -> Visible=False, Rect={0,0,0,0}.
+- Nguyên nhân: folder InspectionRegionSettings cache form[@name='Popup'] cũ đã đóng.
+- FIX: Use Cache = False cho folder đó. Sau fix Apply click được (Strategy 2 Focus+Space).
+- Folder ShutdownDialog cũng dùng form[@name='Popup'] -> nên tắt cache tương tự.
 
-**Bug hien tai:**
-Module `ApplyBtn_On_Production` poll 10s cho dialog tu dong. Nhung:
-- Timeout 10s co the khong du cho truong hop loading lau
-- Chua kiem tra Apply button co **Visible + Enabled** truoc khi click
-- Nen co the click vao Apply khi button chua san sang (greyed out)
+**Bug 2 — Path lồng form trong form**
+- BtnApplyProductionPresetting từng có robustPath /form[@processname='KohyoungGUI']/
+  form[@name='Popup']//button[...] — hai form nối nhau, không hợp lệ. Đã sửa:
+    Item     : .//button[@text='Apply']
+    Robust   : /form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']
+    Absolute : (giống Robust)
+- Giữ @title vì repo có 2 folder cùng dùng form[@name='Popup'] (ShutdownDialog='Inspection
+  Region Settings', InspectionRegionSettings='Production Presetting').
 
-**Huong fix da thong nhat:**
-- Tang timeout len 60–90 giay
-- Moi vong poll (1s) kiem tra 3 dieu kien:
-  1. Dialog da dong? → thanh cong, return
-  2. Apply button Visible + Enabled? → click 1 lan
-  3. Chua san sang? → cho tiep
+### ĐANG XỬ LÝ
+**Bug 3 — ValidateTopModelName đọc sai attribute**: Actual='topTextRecipeName' không đổi suốt
+60s poll. Spy xác minh: Caption trả về AUTOMATIONID, text thật ("KYE_Ver9_3_Job remake_1") nằm
+ở Text/SelectionText. ModelName trong CSV ĐÚNG, không cần sửa. Chưa fix.
 
-**Van de chua xac minh:**
-- `/form[@name='Popup']` co the match NHIEU WPF window (tooltip, dropdown cung dung ten 'Popup')
-- Can log **so luong** `form[@name='Popup']` matches de xac nhan
-- Neu luon >= 1 match (vi tooltip/system popup), polling se KHONG BAO GIO thay "dialog dong"
-- Can investigate them truoc khi fix
+### TỒN ĐỌNG
+- BtnApplyProductionPresetting vẫn fallback sang Robust path (~30s/lần), chưa fail nhưng chậm.
+- ClickApplyWithFallback() có 4 strategy nhưng CẢ 4 dùng cùng 1 element -> không phải dự phòng
+  thật; chỉ Strategy 2 ăn. Nên thay bằng poll mỗi 1s, timeout 60-90s: (1) dialog mất -> Success;
+  (2) Apply Visible+Enabled -> click ĐÚNG 1 phát; (3) chưa sẵn sàng -> chờ.
+- Code DIAG (LogPopupAndApplyDiag) là code tạm, xóa sau.
+
+### HÀNH VI DIALOG "Production Presetting" (xác minh tay)
+Hiện ở trạng thái LOADING, lúc đó Apply KHÔNG nhận click.
+(a) Chuyển sang tab Production: dialog TỰ biến mất, không cần Apply.
+(b) Mở jobfile từ tab Production: BẮT BUỘC click Apply mới đóng.
 
 ---
 
@@ -253,3 +278,9 @@ Module `ApplyBtn_On_Production` poll 10s cho dialog tu dong. Nhung:
 5. **Investigation truoc khi fix** — Workflow bat buoc: Investigation → Evidence (report) → Root Cause → Proposed Fix → Confirm → Implement. KHONG implement fix truoc khi chung minh root cause.
 
 6. **KHONG hardcode** credentials, duong dan tuyet doi, hoac gia tri test data trong UserCode. Du lieu qua data binding (`this.VariableName`).
+
+7. **Element "tim thay nhung not visible"** → kiem tra Use Cache cua folder cha TRUOC khi nghi code.
+
+8. **Caption cua WPF element** co the tra ve automationid thay vi text hien thi. Xac minh bang Spy truoc khi dung `GetAttributeValueText`.
+
+9. **Khong long form trong form.** Form Popup la cua so doc lap.
