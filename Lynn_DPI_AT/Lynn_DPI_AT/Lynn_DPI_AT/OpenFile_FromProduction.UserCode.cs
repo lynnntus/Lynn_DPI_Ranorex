@@ -313,7 +313,7 @@ namespace Lynn_DPI_AT
                 int cy = rect.Location.Y + rect.Height / 2;
                 Mouse.MoveTo(new Point(cx, cy));
                 Mouse.Click();
-                Delay.Milliseconds(500);
+                Delay.Milliseconds(5000);
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
                 {
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
