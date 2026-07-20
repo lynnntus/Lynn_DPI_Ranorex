@@ -167,7 +167,7 @@ namespace Lynn_DPI_AT
                 string.Format("Expected ModelName = '{0}'", expected));
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            string actualCaption = null;
+            string actualText = null;
 
             while (sw.ElapsedMilliseconds < TOP_VALIDATE_TIMEOUT_MS)
             {
@@ -175,15 +175,22 @@ namespace Lynn_DPI_AT
                 {
                     if (repo.CCIMainWindow.Area1.TopTextRecipeNameInfo.Exists(0))
                     {
-                        actualCaption = repo.CCIMainWindow.Area1.TopTextRecipeName.Element
-                            .GetAttributeValueText("Caption");
+                        var el = repo.CCIMainWindow.Area1.TopTextRecipeName.Element;
 
-                        if (!string.IsNullOrEmpty(actualCaption) && actualCaption.Contains(expected))
+                        actualText = el.GetAttributeValueText("Text");
+                        if (string.IsNullOrEmpty(actualText))
+                            actualText = el.GetAttributeValueText("SelectionText");
+
+                        Report.Log(ReportLevel.Debug, "OpenFile_FromProduction",
+                            string.Format("ValidateTop poll: Text='{0}' ({1}ms)",
+                                actualText ?? "(null)", sw.ElapsedMilliseconds));
+
+                        if (!string.IsNullOrEmpty(actualText) && actualText.Contains(expected))
                         {
                             sw.Stop();
                             Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
                                 string.Format("TOP ModelName matched: '{0}' contains '{1}' ({2}ms)",
-                                    actualCaption, expected, sw.ElapsedMilliseconds));
+                                    actualText, expected, sw.ElapsedMilliseconds));
                             return;
                         }
                     }
@@ -200,11 +207,11 @@ namespace Lynn_DPI_AT
             sw.Stop();
             Report.Screenshot(repo.CCIMainWindow.Self, true);
             Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
-                string.Format("TOP ModelName FAIL. Expected contains: '{0}', Actual: '{1}' ({2}ms)",
-                    expected, actualCaption ?? "(null)", sw.ElapsedMilliseconds));
+                string.Format("TOP ModelName FAIL. Expected contains: '{0}', Actual Text: '{1}' ({2}ms)",
+                    expected, actualText ?? "(null)", sw.ElapsedMilliseconds));
             throw new Exception(string.Format(
-                "ValidateTopModelName FAIL: TopTextRecipeName = '{0}', expected contains '{1}'",
-                actualCaption ?? "(null)", expected));
+                "ValidateTopModelName FAIL: TopTextRecipeName Text = '{0}', expected contains '{1}'",
+                actualText ?? "(null)", expected));
         }
 
         private void ClickApplyWithFallback()

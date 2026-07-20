@@ -67,13 +67,13 @@ Lynn_DPI_AT (suite)
 | `CCILoginWindow` | `/form[@name='View']` | True | `Login`, `XIDPWLoginArea`(`SomeText`, `TextXPW`, `XPWWatermark`) |
 | `CCIMainWindow` | `/form[@title='CCIMainWindow']` | True | `CreateOrOpenRecipe`, `SomeButton`, `LeftMenuOpenToogleButton`, `SomeIndicator`, `Text`, `SomeIndicator1`, `SomeText`, `MenuOpenRecipe`, `SomeTable`, `Production`, `Area1`(`BtnMore`, `TopTextRecipeName`, `BtnOpenFileFromProduction`) |
 | `ShutdownDialog` | `/form[@name='Popup' and @title='Inspection Region Settings']` | False | `BtnDualClose_Shutdown` |
-| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | **True** ⚠️ | `BtnDualClose`, `ProductionStopsWhenAllLOTInspection`, `LOTProduction`, `Settings`, **`BtnApplyProductionPresetting`** |
+| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | False | `BtnDualClose`, `ProductionStopsWhenAllLOTInspection`, `LOTProduction`, `Settings`, **`BtnApplyProductionPresetting`** |
 | `SelectRecipeFile` | `/form[@title='Select Recipe File']` | False | `SystemItemNameDisplay`, `Text1148`, `TxtFileNameInDialog` |
 | `KohyoungGUI1` | `/form[@processname='KohyoungGUI']` | True | `SomeText`, `SomeText1`, `Apply`, `TabProduction`, `Continue`, `HeaderTextBlock1`, `Settings`, `PARTContentHost`, `PARTContentHost1` |
 | `Explorer` | `/desktop[@processname='explorer']` | True | `NEPTUNECALLINONE`, `ExportLynn` |
 | Root level | — | — | `BtnOpenInDialog` → `/form[@title='Select Recipe File']/button[@text='&Open']` |
 
-> ⚠️ **InspectionRegionSettings** dang de Use Cache = True → **nguyen nhan Bug 1**. Can doi sang False.
+> Ca 2 folder dung `form[@name='Popup']` deu da dat Use Cache = False (Bug 1 da fix).
 
 ### CANH BAO: 2 nut Apply khac nhau
 
@@ -284,3 +284,7 @@ Hiện ở trạng thái LOADING, lúc đó Apply KHÔNG nhận click.
 8. **Caption cua WPF element** co the tra ve automationid thay vi text hien thi. Xac minh bang Spy truoc khi dung `GetAttributeValueText`.
 
 9. **Khong long form trong form.** Form Popup la cua so doc lap.
+
+10. **2 may**: May A (Claude Code sua code) va may Ranorex (chinh repository + chay test). File `.rxrep` chi sua tren may Ranorex. Truoc khi doc/tham chieu `.rxrep`, phai dong bo ban moi nhat tu may Ranorex ve.
+
+11. **Khi copy code tu may A sang may Ranorex**, KHONG de `.rxrep` va file `.cs` sinh tu no (vd `Lynn_DPI_ATRepository.cs`) — se mat cac thiet lap nhu Use Cache va path da sua.
