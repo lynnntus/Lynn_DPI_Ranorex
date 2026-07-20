@@ -216,7 +216,7 @@ namespace Lynn_DPI_AT
 
         private void ClickApplyWithFallback()
         {
-            const int DIALOG_CLOSE_CHECK_MS = 3000;
+            const int DIALOG_CLOSE_WAIT_MS = 30000;
 
             if (!repo.InspectionRegionSettings.SelfInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
             {
@@ -234,14 +234,16 @@ namespace Lynn_DPI_AT
                     "Strategy 1: Native WPF Apply.Click()...");
                 repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
                 Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    string.Format("Strategy 1: cho dialog dong (max {0}ms)...", DIALOG_CLOSE_WAIT_MS));
+                if (repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_CLOSE_WAIT_MS))
                 {
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                        "Buoc 5 OK: Apply clicked (Strategy 1 — Native WPF).");
+                        "Buoc 5 OK: Apply clicked (Strategy 1 — Native WPF). Dialog da dong.");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                    "Strategy 1: dialog van con mo.");
+                    "Strategy 1: dialog van con mo sau 30s.");
             }
             catch (Exception ex)
             {
@@ -258,14 +260,16 @@ namespace Lynn_DPI_AT
                 Delay.Milliseconds(200);
                 Keyboard.Press("{Space}");
                 Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    string.Format("Strategy 2: cho dialog dong (max {0}ms)...", DIALOG_CLOSE_WAIT_MS));
+                if (repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_CLOSE_WAIT_MS))
                 {
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                        "Buoc 5 OK: Apply clicked (Strategy 2 — Focus+Space).");
+                        "Buoc 5 OK: Apply clicked (Strategy 2 — Focus+Space). Dialog da dong.");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                    "Strategy 2: dialog van con mo.");
+                    "Strategy 2: dialog van con mo sau 30s.");
             }
             catch (Exception ex)
             {
@@ -282,14 +286,16 @@ namespace Lynn_DPI_AT
                 {
                     repo.InspectionRegionSettings.BtnApplyProductionPresetting.Click();
                     Delay.Milliseconds(500);
-                    if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                        string.Format("Strategy 3: cho dialog dong (max {0}ms)...", DIALOG_CLOSE_WAIT_MS));
+                    if (repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_CLOSE_WAIT_MS))
                     {
                         Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                            "Buoc 5 OK: Apply clicked (Strategy 3 — UIA).");
+                            "Buoc 5 OK: Apply clicked (Strategy 3 — UIA). Dialog da dong.");
                         return;
                     }
                     Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                        "Strategy 3: dialog van con mo.");
+                        "Strategy 3: dialog van con mo sau 30s.");
                 }
                 else
                 {
@@ -314,14 +320,16 @@ namespace Lynn_DPI_AT
                 Mouse.MoveTo(new Point(cx, cy));
                 Mouse.Click();
                 Delay.Milliseconds(500);
-                if (!repo.InspectionRegionSettings.SelfInfo.Exists(DIALOG_CLOSE_CHECK_MS))
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    string.Format("Strategy 4: cho dialog dong (max {0}ms)...", DIALOG_CLOSE_WAIT_MS));
+                if (repo.InspectionRegionSettings.SelfInfo.WaitForNotExists(DIALOG_CLOSE_WAIT_MS))
                 {
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                        "Buoc 5 OK: Apply clicked (Strategy 4 — Coordinate).");
+                        "Buoc 5 OK: Apply clicked (Strategy 4 — Coordinate). Dialog da dong.");
                     return;
                 }
                 Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                    "Strategy 4: dialog van con mo.");
+                    "Strategy 4: dialog van con mo sau 30s.");
             }
             catch (Exception ex)
             {
