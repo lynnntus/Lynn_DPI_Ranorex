@@ -251,6 +251,14 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 60s poll. Spy xác minh: Caption trả về AUTOMATIONID, text thật ("KYE_Ver9_3_Job remake_1") nằm
 ở Text/SelectionText. ModelName trong CSV ĐÚNG, không cần sửa. Chưa fix.
 
+**Bug 4 — ClickApplyWithFallback() chờ quá ngắn sau khi click Apply**
+- Triệu chứng: Strategy 1 click Apply thành công, dialog chuyển sang trạng thái "Please Wait"
+  (app đang load jobfile). Nhưng code chỉ chờ 3 giây (`DIALOG_CLOSE_CHECK_MS = 3000`), thấy
+  dialog vẫn mở → tưởng click thất bại → nhảy sang strategy tiếp. Thực tế chỉ cần chờ đủ lâu.
+- Nguyên nhân: `DIALOG_CLOSE_CHECK_MS = 3000` quá ngắn. App load jobfile có thể mất 30-60 giây.
+- FIX: Sau Strategy 1, poll dialog tối đa 60 giây (log mỗi 10 giây). Chỉ khi hết 60 giây mà
+  dialog vẫn mở thì mới chuyển sang strategy tiếp.
+
 ### TỒN ĐỌNG
 - BtnApplyProductionPresetting vẫn fallback sang Robust path (~30s/lần), chưa fail nhưng chậm.
 - ClickApplyWithFallback() có 4 strategy nhưng CẢ 4 dùng cùng 1 element -> không phải dự phòng
