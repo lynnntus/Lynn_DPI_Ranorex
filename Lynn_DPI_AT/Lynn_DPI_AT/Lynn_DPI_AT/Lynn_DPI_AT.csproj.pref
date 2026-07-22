@@ -5,9 +5,7 @@
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
-    <Element value="Logout.rxrec" />
-    <Element value="Tab_Production.rxrec" />
-    <Element value="OpenFile_FromProduction.rxrec" />
+    <Element value="Lynn_DPI_ATRepository.rxrep" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">
