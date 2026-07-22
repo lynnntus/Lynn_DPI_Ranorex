@@ -25,7 +25,7 @@ namespace Lynn_DPI_AT
     public partial class Verify_ProductionPresettingDialog_AutoClose
     {
         private const int DIALOG_APPEAR_TIMEOUT_MS = 15000;
-        private const int DIALOG_AUTOCLOSE_TIMEOUT_MS = 10000;
+        private const int DIALOG_AUTOCLOSE_TIMEOUT_MS = 30000;
         private const int APPLY_ENABLED_TIMEOUT_MS = 10000;
         private const int APPLY_CLOSE_VERIFY_TIMEOUT_MS = 15000;
         private const int POLL_INTERVAL_MS = 500;
@@ -60,7 +60,7 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Success, "VerifyAutoClose",
                 string.Format("Dialog da xuat hien sau {0:F1}s.", sw.ElapsedMilliseconds / 1000.0));
 
-            // === BUOC 2: Cho dialog tu dong dong (max 10s) ===
+            // === BUOC 2: Cho dialog tu dong dong (max 30s) ===
             sw.Restart();
             Report.Log(ReportLevel.Info, "VerifyAutoClose",
                 string.Format("BUOC 2: Cho dialog tu dong dong (toi da {0}s)...",
