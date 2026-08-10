@@ -885,8 +885,10 @@ namespace Lynn_DPI_AT
         [RepositoryFolder("7b7cc356-6b4f-4429-ac48-e69a7067da19")]
         public partial class InspectionRegionSettingsAppFolder : RepoGenBaseFolder
         {
+            RepoItemInfo _radionotuseInfo;
+            RepoItemInfo _radioquantityinspectionInfo;
+            RepoItemInfo _radiolotproductionInfo;
             RepoItemInfo _productionstopswhenalllotinspectionInfo;
-            RepoItemInfo _lotproductionInfo;
             RepoItemInfo _settingsInfo;
             RepoItemInfo _btnapplyproductionpresettingInfo;
 
@@ -896,8 +898,10 @@ namespace Lynn_DPI_AT
             public InspectionRegionSettingsAppFolder(RepoGenBaseFolder parentFolder) :
                     base("InspectionRegionSettings", "/form[@name='Popup' and @title='Production Presetting']", parentFolder, 30000, null, false, "7b7cc356-6b4f-4429-ac48-e69a7067da19", "")
             {
+                _radionotuseInfo = new RepoItemInfo(this, "RadioNotUse", ".//radiobutton[@text='Not Use']", ".//radiobutton[@text='Not Use']", 30000, null, "f7956365-8b39-40b4-8c5f-c663045209d1");
+                _radioquantityinspectionInfo = new RepoItemInfo(this, "RadioQuantityInspection", ".//radiobutton[@text='Quantity of Inspection Objects']", ".//radiobutton[@text>'Quantity of Inspection Ob']", 30000, null, "b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028");
+                _radiolotproductionInfo = new RepoItemInfo(this, "RadioLotProduction", ".//radiobutton[@text='LOT Production']", ".//radiobutton[@text='LOT Production']", 30000, null, "facbf450-87fd-4556-a5aa-5bd281c7e8cf");
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
-                _lotproductionInfo = new RepoItemInfo(this, "LOTProduction", "container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']", ".//text[@caption='LOT Production']", 30000, null, "06c44a31-b996-451e-9ebc-e92260a2ba67");
                 _settingsInfo = new RepoItemInfo(this, "Settings", "container[1]//button[@text='Settings']/text[@caption='Settings']", ".//text[@caption='Settings']", 30000, null, "312dd64a-e495-491f-8da8-afc70a6ec483");
                 _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", ".//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
             }
@@ -927,6 +931,78 @@ namespace Lynn_DPI_AT
             }
 
             /// <summary>
+            /// The RadioNotUse item.
+            /// </summary>
+            [RepositoryItem("f7956365-8b39-40b4-8c5f-c663045209d1")]
+            public virtual Ranorex.RadioButton RadioNotUse
+            {
+                get
+                {
+                    return _radionotuseInfo.CreateAdapter<Ranorex.RadioButton>(true);
+                }
+            }
+
+            /// <summary>
+            /// The RadioNotUse item info.
+            /// </summary>
+            [RepositoryItemInfo("f7956365-8b39-40b4-8c5f-c663045209d1")]
+            public virtual RepoItemInfo RadioNotUseInfo
+            {
+                get
+                {
+                    return _radionotuseInfo;
+                }
+            }
+
+            /// <summary>
+            /// The RadioQuantityInspection item.
+            /// </summary>
+            [RepositoryItem("b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028")]
+            public virtual Ranorex.RadioButton RadioQuantityInspection
+            {
+                get
+                {
+                    return _radioquantityinspectionInfo.CreateAdapter<Ranorex.RadioButton>(true);
+                }
+            }
+
+            /// <summary>
+            /// The RadioQuantityInspection item info.
+            /// </summary>
+            [RepositoryItemInfo("b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028")]
+            public virtual RepoItemInfo RadioQuantityInspectionInfo
+            {
+                get
+                {
+                    return _radioquantityinspectionInfo;
+                }
+            }
+
+            /// <summary>
+            /// The RadioLotProduction item.
+            /// </summary>
+            [RepositoryItem("facbf450-87fd-4556-a5aa-5bd281c7e8cf")]
+            public virtual Ranorex.RadioButton RadioLotProduction
+            {
+                get
+                {
+                    return _radiolotproductionInfo.CreateAdapter<Ranorex.RadioButton>(true);
+                }
+            }
+
+            /// <summary>
+            /// The RadioLotProduction item info.
+            /// </summary>
+            [RepositoryItemInfo("facbf450-87fd-4556-a5aa-5bd281c7e8cf")]
+            public virtual RepoItemInfo RadioLotProductionInfo
+            {
+                get
+                {
+                    return _radiolotproductionInfo;
+                }
+            }
+
+            /// <summary>
             /// The ProductionStopsWhenAllLOTInspection item.
             /// </summary>
             [RepositoryItem("08c334b9-f5fb-4690-b779-609d02b71459")]
@@ -947,30 +1023,6 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _productionstopswhenalllotinspectionInfo;
-                }
-            }
-
-            /// <summary>
-            /// The LOTProduction item.
-            /// </summary>
-            [RepositoryItem("06c44a31-b996-451e-9ebc-e92260a2ba67")]
-            public virtual Ranorex.Text LOTProduction
-            {
-                get
-                {
-                    return _lotproductionInfo.CreateAdapter<Ranorex.Text>(true);
-                }
-            }
-
-            /// <summary>
-            /// The LOTProduction item info.
-            /// </summary>
-            [RepositoryItemInfo("06c44a31-b996-451e-9ebc-e92260a2ba67")]
-            public virtual RepoItemInfo LOTProductionInfo
-            {
-                get
-                {
-                    return _lotproductionInfo;
                 }
             }
 

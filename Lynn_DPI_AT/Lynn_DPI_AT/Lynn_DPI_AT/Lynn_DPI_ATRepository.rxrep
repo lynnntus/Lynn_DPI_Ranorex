@@ -306,8 +306,39 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		id="7b7cc356-6b4f-4429-ac48-e69a7067da19"
 		isrooted="True"
 		name="InspectionRegionSettings"
+		refimgid="b57895f8-073b-4f84-93da-6441da44b648"
 		searchtimeout="30000ms"
 		usecache="False">
+			<item
+			addcaps="radiobutton,wpfelement,wpfgroupelement"
+			capname="radiobutton"
+			id="f7956365-8b39-40b4-8c5f-c663045209d1"
+			name="RadioNotUse"
+			refimgid="dbfcfd9c-1c57-4336-bbcc-2aa7efc5ad48"
+			robustPath="/form[@processname='KohyoungGUI']//radiobutton[@text='Not Use']"
+			searchtimeout="30000ms">
+				/form[@name='Popup' and @title='Production Presetting']//radiobutton[@text='Not Use']
+			</item>
+			<item
+			addcaps="radiobutton,wpfelement,wpfgroupelement"
+			capname="radiobutton"
+			id="b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028"
+			name="RadioQuantityInspection"
+			refimgid="acd391f9-632f-4bcd-b5c1-2d877d216012"
+			robustPath="/form[@processname='KohyoungGUI']//radiobutton[@text>'Quantity of Inspection Ob']"
+			searchtimeout="30000ms">
+				/form[@name='Popup' and @title='Production Presetting']//radiobutton[@text='Quantity of Inspection Objects']
+			</item>
+			<item
+			addcaps="radiobutton,wpfelement,wpfgroupelement"
+			capname="radiobutton"
+			id="facbf450-87fd-4556-a5aa-5bd281c7e8cf"
+			name="RadioLotProduction"
+			refimgid="ec3e9209-cf82-4763-a895-1a3a030ad1c3"
+			robustPath="/form[@processname='KohyoungGUI']//radiobutton[@text='LOT Production']"
+			searchtimeout="30000ms">
+				/form[@name='Popup' and @title='Production Presetting']//radiobutton[@text='LOT Production']
+			</item>
 			<item
 			addcaps="checkbox,wpfelement,wpfgroupelement"
 			capname="checkbox"
@@ -317,16 +348,6 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			robustPath="/form[@name='Popup']//checkbox[@text>'Production stops when all']"
 			searchtimeout="30000ms">
 				/form[@name='Popup' and @title='Production Presetting']/container[1]/?/?/checkbox[@text&gt;'Production stops when all']
-			</item>
-			<item
-			addcaps="text,wpfelement,wpfgroupelement"
-			capname="text"
-			id="06c44a31-b996-451e-9ebc-e92260a2ba67"
-			name="LOTProduction"
-			refimgid="f544cb89-80cc-49d0-acf1-bd454ee28f34"
-			robustPath="/form[@name='Popup']//text[@caption='LOT Production']"
-			searchtimeout="30000ms">
-				/form[@name='Popup' and @title='Production Presetting']/container[1]//button[@text='Settings']/?/?/radiobutton[@text='LOT Production']/text[@caption='LOT Production']
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"

@@ -448,7 +448,7 @@
 		<DataSource
 		id="80a8d855-407c-4c04-814b-f7785a0691ce"
 		includefile="Unchecked"
-		lastknownrowcount="2"
+		lastknownrowcount="4"
 		name="Production_OpenFile"
 		type="Ranorex.Core.Data.CsvDataConnector"
 		withheaders="True">
@@ -467,6 +467,15 @@
 				</column>
 				<column>
 					ModeName
+				</column>
+				<column>
+					ProductionSetting
+				</column>
+				<column>
+					InspectionQuantity
+				</column>
+				<column>
+					LotName
 				</column>
 			</lastknowncolumns>
 			<maskedcolumns>
