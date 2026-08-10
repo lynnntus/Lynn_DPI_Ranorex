@@ -1,5 +1,31 @@
 # Change History
 
+## 2026-07-24
+
+### ~PM 3 — Verify lesson system + CLAUDE.md Debugging Workflow
+- Session mới tự đọc INDEX trước debug bug, match 2 lesson chính xác (Dialog Close Polling Timeout + Use Cache Stale Element). Hệ thống hoạt động đúng thiết kế.
+
+### ~PM 2 — Update CLAUDE.md: tích hợp Debugging Workflow
+- **Created**: `CLAUDE.md.backup` — Backup trước khi sửa
+- **Modified**: `CLAUDE.md` — 3 thay đổi:
+  - Thêm section `## ⛔ Debugging Workflow` (sau Known Gotchas, trước Do Not)
+  - Update bảng `### Bai hoc`: 1 INDEX + 8 lesson thực tế (loại `code-review-login-retry.md` — là review report, không phải lesson)
+  - Update Known Gotchas #7: thêm cross-reference tới Debugging Workflow
+
+### ~PM — Bổ sung 3 lesson thiếu + update Bug 3 status
+- **Created**: `docs/lessons/repo-use-cache-stale-element.md` — Lesson: Use Cache = True gây stale element reference cho dialog/popup
+- **Created**: `docs/lessons/rxpath-nested-form-invalid.md` — Lesson: Form lồng form trong RxPath không hợp lệ (dialog là top-level window)
+- **Created**: `docs/lessons/wpf-caption-vs-textvalue.md` — Lesson: WPF Caption trả AutomationId, dùng Text/SelectionText
+- **Modified**: `docs/lessons/INDEX.md` — Thêm 9 triệu chứng mới cho 3 lesson + thêm category "Attribute / Property"
+- **Modified**: `docs/HANDOFF.md` — Bug 3 status: "ĐANG XỬ LÝ" → "ĐÃ FIX 2026-07-24", cập nhật mô tả function ValidateTopModelName
+
+### ~AM — Tạo hệ thống Lessons Learned
+- **Created**: `docs/lessons/generic-popup-path-collision.md` — Lesson: RxPath generic `/form[@name='Popup']` match nhiều element → dùng child element duy nhất cho WaitForNotExists
+- **Created**: `docs/lessons/win32-edit-textvalue-input.md` — Lesson: Win32 Edit control không nhận keyboard shortcuts → dùng `TextValue` property
+- **Created**: `docs/lessons/dialog-close-polling-timeout.md` — Lesson: Fixed wait quá ngắn cho app processing → polling loop với timeout đủ lớn
+- **Created**: `docs/lessons/INDEX.md` — Index tra cứu triệu chứng → lesson (6 lesson: 3 mới + 3 cũ)
+- **Modified**: `docs/HANDOFF.md` — Thêm section 7. DEBUGGING PROTOCOL (hướng dẫn session mới tra cứu lesson trước khi investigate)
+
 ## 2026-07-19
 
 ### ~PM 2 — Tăng timeout Bước 3b: 5s → 15s (timing issue)

@@ -177,7 +177,7 @@ Constants: `DIALOG_APPEAR_TIMEOUT_MS=10000`, `DIALOG_AUTOCLOSE_TIMEOUT_MS=30000`
 | `OpenRecipeFileByPath()` | Flow 7 buoc: check Enable → click BtnOpenFileFromProduction → cho dialog → nhap path → click Open → click Apply (fallback) → validate TopModelName |
 | `EnterPathIntoFileNameField(path)` | Set `TextValue`, verify match |
 | `ReadFileNameField()` | Try `TextValue` → fallback `WindowText` |
-| `ValidateTopModelName()` | Poll `TopTextRecipeName.Caption` contains `ModelName`, max 60s |
+| `ValidateTopModelName()` | Poll `TopTextRecipeName.Text` (fallback `SelectionText`) contains `ModelName`, max 60s |
 | `ClickApplyWithFallback()` | 4 strategy: (1) Native Click, (2) Focus+Space, (3) UIA Exists+Click, (4) Coordinate click. Kiem tra dialog dong sau moi strategy |
 | `LogPopupAndApplyDiag(tag)` | **CODE TAM** — log so luong Popup, Apply buttons, accessor state, screenshot |
 | `CleanupDialog()` | Escape → Close dialog neu con mo |
@@ -246,10 +246,13 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 - Giữ @title vì repo có 2 folder cùng dùng form[@name='Popup'] (ShutdownDialog='Inspection
   Region Settings', InspectionRegionSettings='Production Presetting').
 
-### ĐANG XỬ LÝ
+### ĐÃ FIX
 **Bug 3 — ValidateTopModelName đọc sai attribute**: Actual='topTextRecipeName' không đổi suốt
 60s poll. Spy xác minh: Caption trả về AUTOMATIONID, text thật ("KYE_Ver9_3_Job remake_1") nằm
-ở Text/SelectionText. ModelName trong CSV ĐÚNG, không cần sửa. Chưa fix.
+ở Text/SelectionText. ModelName trong CSV ĐÚNG.
+**Đã fix 2026-07-24**: Code hiện tại dùng `GetAttributeValueText("Text")` với fallback
+`GetAttributeValueText("SelectionText")` — không còn dùng Caption.
+Xem lesson: [wpf-caption-vs-textvalue.md](lessons/wpf-caption-vs-textvalue.md).
 
 **Bug 4 — ClickApplyWithFallback() chờ quá ngắn sau khi click Apply**
 - Triệu chứng: Strategy 1 click Apply thành công, dialog chuyển sang trạng thái "Please Wait"
@@ -296,3 +299,37 @@ Hiện ở trạng thái LOADING, lúc đó Apply KHÔNG nhận click.
 10. **2 may**: May A (Claude Code sua code) va may Ranorex (chinh repository + chay test). File `.rxrep` chi sua tren may Ranorex. Truoc khi doc/tham chieu `.rxrep`, phai dong bo ban moi nhat tu may Ranorex ve.
 
 11. **Khi copy code tu may A sang may Ranorex**, KHONG de `.rxrep` va file `.cs` sinh tu no (vd `Lynn_DPI_ATRepository.cs`) — se mat cac thiet lap nhu Use Cache va path da sua.
+
+---
+
+## 7. DEBUGGING PROTOCOL
+
+Khi user bao loi hoac test FAIL, **TRUOC KHI investigate**, kiem tra xem loi da co lesson chua:
+
+### Buoc 1: Doc INDEX
+
+Mo `docs/lessons/INDEX.md` → tra cuu theo trieu chung trong bang "Tra cuu nhanh theo trieu chung".
+
+### Buoc 2: Doc lesson tuong ung
+
+Neu tim thay lesson match → doc ky phan:
+- **Cach xac minh** — lam theo cac buoc de confirm root cause
+- **Fix chuan** — ap dung fix da chung minh
+- **Anti-pattern** — tranh nhung cach lam sai da biet
+
+### Buoc 3: Neu khong tim thay lesson
+
+Tien hanh investigation theo quy trinh:
+1. Investigation → Evidence (report/log) → Root Cause → Proposed Fix → Confirm → Implement
+2. Sau khi fix thanh cong → viet lesson moi vao `docs/lessons/` theo template cac lesson hien co
+3. Cap nhat `docs/lessons/INDEX.md` voi trieu chung moi
+
+### Phan loai nhanh
+
+| Loai loi | Check dau tien |
+|----------|---------------|
+| Element khong tim thay / tim sai | Lessons: Repository / UI Element |
+| Input text sai | Lessons: Input / Keyboard |
+| Test FAIL intermittent / timeout | Lessons: Timing / Wait |
+| Code khong co effect | Lessons: Ranorex Framework |
+| Element "Visible=False" du UI hien thi | Quy tac 7: kiem tra Use Cache |

@@ -1,5 +1,29 @@
 # Chat History
 
+## 2026-07-24
+
+### ~PM 2 — Update CLAUDE.md: tích hợp Debugging Workflow
+- **Yêu cầu**: Thêm section Debugging Workflow bắt buộc đọc INDEX.md trước khi debug, update bảng Bài học (9 lesson thực tế), update Known Gotchas #7 cross-reference
+- **Phân loại**: `code-review-login-retry.md` → code review report, KHÔNG phải lesson → loại khỏi bảng
+- **Kết quả**: 3 thay đổi apply bằng str_replace, backup tại `CLAUDE.md.backup`
+- **Files tạo mới**: `CLAUDE.md.backup`
+- **Files thay đổi**: `CLAUDE.md` (3 edits: section mới, bảng Bài học, Known Gotchas #7)
+
+### ~PM — Bổ sung 3 lesson thiếu (Phase 2)
+- **Yêu cầu**: User review phát hiện 3 bug từ HANDOFF.md chưa có lesson: Bug 1 (Use Cache stale), Bug 2 (form lồng form), Bug 3 (Caption vs Text). Tạo 3 lesson + update INDEX + verify Bug 3 code.
+- **Verify Bug 3**: Đọc code `ValidateTopModelName()` — đã dùng `GetAttributeValueText("Text")` (KHÔNG phải Caption) → Bug 3 ĐÃ FIX.
+- **Kết quả**: 3 lesson files mới, INDEX thêm 9 triệu chứng + 1 category mới, HANDOFF.md Bug 3 status → "ĐÃ FIX 2026-07-24"
+- **Files tạo mới**: `docs/lessons/repo-use-cache-stale-element.md`, `docs/lessons/rxpath-nested-form-invalid.md`, `docs/lessons/wpf-caption-vs-textvalue.md`
+- **Files thay đổi**: `docs/lessons/INDEX.md`, `docs/HANDOFF.md`
+
+### ~AM — Tạo hệ thống Lessons Learned
+- **Yêu cầu**: Rút bài học từ bugs đã fix trong 2 module (Verify_ProductionPresettingDialog_AutoClose, OpenFile_FromProduction), tạo lesson files + INDEX + Debugging Protocol
+- **Đọc context**: HANDOFF.md, HANDOFF_Verify_*.md, HANDOVER_OpenFile_*.md, OpenFile_KNOWLEDGE.md, code hiện tại, 3 lesson cũ
+- **Identify**: 4 patterns, 1 bỏ qua (timeout interdependency — chưa đủ root cause evidence)
+- **Kết quả**: 3 lesson files + INDEX.md + Debugging Protocol trong HANDOFF.md
+- **Files tạo mới**: `docs/lessons/generic-popup-path-collision.md`, `docs/lessons/win32-edit-textvalue-input.md`, `docs/lessons/dialog-close-polling-timeout.md`, `docs/lessons/INDEX.md`
+- **Files thay đổi**: `docs/HANDOFF.md` (thêm section 7. DEBUGGING PROTOCOL)
+
 ## 2026-07-19
 
 ### ~PM 2 — Tăng timeout Bước 3b: 5s → 15s

@@ -126,26 +126,7 @@ Xem chi tiet: [docs/lessons/openfile-dynamic-rxpath-lesson.md](docs/lessons/open
 
 6. **SomeText value nam o PARENT** — `SomeText` (child) co `Caption = ''`. Actual value nam o `SomeText.Element.Parent.Caption` (ANCESTOR_L1).
 
-7. **Investigation truoc khi fix** — Ap dung khi bug KHONG match lesson nao trong INDEX (xem section Debugging Workflow ben duoi). Workflow bat buoc: Investigation → Evidence (report) → Root Cause → Proposed Fix → Confirm → Implement.
-
-## ⛔ Debugging Workflow — Doc INDEX truoc khi debug
-
-**LUON LUON** doc [docs/lessons/INDEX.md](docs/lessons/INDEX.md) TRUOC KHI phan tich bat ky bug nao, ke ca bug trong don gian.
-
-### 5 buoc bat buoc
-
-1. **Doc INDEX.md** — mo file, doc bang "Tra cuu nhanh theo trieu chung".
-2. **Doi chieu trieu chung** — so sanh loi dang gap voi cac dong trong bang.
-3. **Match chinh xac** → mo lesson tuong ung, ap dung "Fix chuan" trong do. KHONG tu nghi fix khac.
-4. **Match mot phan** (trieu chung giong nhung khong hoan toan khop) → ghi ro "trieu chung giong lesson X nhung khac o diem Y" trong report. Doc lesson de lay goi y, nhung van can investigation them.
-5. **Khong match** → dung workflow Investigation (Known Gotchas #7): Investigation → Evidence → Root Cause → Proposed Fix → Confirm → Implement.
-
-> **TUYET DOI KHONG** bo qua buoc 1-2. Nhieu bug da gap va fix roi — re-investigate tu dau la lang phi.
-
-### Sau khi fix xong
-
-Hoi user: "Bug nay co dang tao lesson moi khong? Co can update INDEX khong?"
-Neu co → tao lesson theo template trong `docs/lessons/`, update INDEX.md.
+7. **Investigation truoc khi fix** — Workflow bat buoc: Investigation → Evidence (report) → Root Cause → Proposed Fix → Confirm → Implement.
 
 ## Do Not
 
@@ -169,20 +150,10 @@ Neu co → tao lesson theo template trong `docs/lessons/`, update INDEX.md.
 | [.claude/rules/data_binding.md](.claude/rules/data_binding.md) | CsvDataConnector, them CSV moi, kiem tra binding |
 
 ### Bai hoc
-
-> Luon doc INDEX.md TRUOC de tra cuu theo trieu chung.
-
 | File | Noi dung |
 |------|----------|
-| **[docs/lessons/INDEX.md](docs/lessons/INDEX.md)** | **Bang tra cuu trieu chung → lesson — doc dau tien** |
-| [docs/lessons/generic-popup-path-collision.md](docs/lessons/generic-popup-path-collision.md) | RxPath generic `/form[@name='Popup']` match nhieu element |
-| [docs/lessons/repo-use-cache-stale-element.md](docs/lessons/repo-use-cache-stale-element.md) | Use Cache = True gay stale reference cho dialog/popup |
-| [docs/lessons/rxpath-nested-form-invalid.md](docs/lessons/rxpath-nested-form-invalid.md) | Form long form trong RxPath — dialog la top-level window |
-| [docs/lessons/wpf-caption-vs-textvalue.md](docs/lessons/wpf-caption-vs-textvalue.md) | WPF Caption tra AutomationId, dung Text/SelectionText |
-| [docs/lessons/win32-edit-textvalue-input.md](docs/lessons/win32-edit-textvalue-input.md) | Win32 Edit control: dung TextValue thay vi keyboard |
-| [docs/lessons/dialog-close-polling-timeout.md](docs/lessons/dialog-close-polling-timeout.md) | Polling thay fixed wait cho dialog close |
-| [docs/lessons/openfile-dynamic-rxpath-lesson.md](docs/lessons/openfile-dynamic-rxpath-lesson.md) | Dynamic RxPath: hard-code selector, investigation flow |
 | [.claude/lessons/login-retry-lesson.md](.claude/lessons/login-retry-lesson.md) | Debug login: WPF input, call chain, Init() limitations |
+| [docs/lessons/openfile-dynamic-rxpath-lesson.md](docs/lessons/openfile-dynamic-rxpath-lesson.md) | Dynamic RxPath: hard-code selector, investigation flow |
 
 ### Workflow
 | File | Noi dung |
