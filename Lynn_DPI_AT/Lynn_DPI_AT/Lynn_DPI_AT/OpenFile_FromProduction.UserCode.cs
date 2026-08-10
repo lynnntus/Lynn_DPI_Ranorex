@@ -39,6 +39,10 @@ namespace Lynn_DPI_AT
                 string.Format("RecipeFilePath = '{0}'", RecipeFilePath));
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 string.Format("ModelName = '{0}'", ModelName));
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("ProductionSetting = '{0}'", ProductionSetting));
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("InspectionQuantity = '{0}'", InspectionQuantity));
         }
 
         public string OpenRecipeFileByPath()
@@ -91,19 +95,34 @@ namespace Lynn_DPI_AT
                 repo.BtnOpenInDialog.Click();
                 Delay.Milliseconds(1000);
 
-                // --- Buoc 5: Wait va Click Apply (robust fallback) ---
+                // --- Buoc 5: Cho Production Presetting dialog xuat hien ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 5: Click Apply voi fallback...");
+                    "Buoc 5: Cho Production Presetting dialog...");
+                if (!repo.InspectionRegionSettings.SelfInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
+                {
+                    Report.Screenshot(repo.CCIMainWindow.Self, true);
+                    throw new Exception(string.Format(
+                        "Production Presetting dialog khong xuat hien sau {0}ms.", APPLY_PRESETTING_TIMEOUT_MS));
+                }
+                Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                    "Buoc 5 OK: Production Presetting dialog da xuat hien.");
+
+                // --- Buoc 5.5: Chon Production Setting theo test data ---
+                SelectProductionSetting();
+
+                // --- Buoc 6: Click Apply voi fallback ---
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Buoc 6: Click Apply voi fallback...");
                 ClickApplyWithFallback();
 
-                // --- Buoc 6: Cho app load sau Apply ---
+                // --- Buoc 7: Cho app load sau Apply ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 6: Cho app load sau Apply...");
+                    "Buoc 7: Cho app load sau Apply...");
                 Delay.Milliseconds(2000);
 
-                // --- Buoc 7: Validate TopTextRecipeName chua ModelName ---
+                // --- Buoc 8: Validate TopTextRecipeName chua ModelName ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    "Buoc 7: Validate ModelName tai vung TOP...");
+                    "Buoc 8: Validate ModelName tai vung TOP...");
                 ValidateTopModelName();
             }
             finally
@@ -214,20 +233,109 @@ namespace Lynn_DPI_AT
                 actualText ?? "(null)", expected));
         }
 
+        private void SelectProductionSetting()
+        {
+            string setting = (this.ProductionSetting ?? "").Trim();
+
+            if (string.IsNullOrEmpty(setting))
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "ProductionSetting rong — giu nguyen setting mac dinh.");
+                return;
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("Buoc 5.5: Chon ProductionSetting = '{0}'", setting));
+
+            switch (setting.ToLowerInvariant())
+            {
+                case "notuse":
+                    ClickRadioAndVerify(
+                        repo.InspectionRegionSettings.RadioNotUse,
+                        "RadioNotUse");
+                    break;
+
+                case "quantity":
+                    ClickRadioAndVerify(
+                        repo.InspectionRegionSettings.RadioQuantityInspection,
+                        "RadioQuantityInspection");
+
+                    string qty = (this.InspectionQuantity ?? "").Trim();
+                    if (string.IsNullOrEmpty(qty))
+                        throw new ArgumentException(
+                            "ProductionSetting=Quantity nhung InspectionQuantity rong.");
+
+                    int qtyNum;
+                    if (!int.TryParse(qty, out qtyNum) || qtyNum <= 0)
+                        throw new ArgumentException(string.Format(
+                            "InspectionQuantity = '{0}' khong hop le. Can so nguyen duong.", qty));
+
+                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                        string.Format("Nhap InspectionQuantity = '{0}'...", qty));
+                    Keyboard.Press("{Tab}");
+                    Delay.Milliseconds(300);
+                    Keyboard.Press(qty);
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        string.Format("Da nhap InspectionQuantity = '{0}'.", qty));
+                    break;
+
+                case "lotproduction":
+                    ClickRadioAndVerify(
+                        repo.InspectionRegionSettings.RadioLotProduction,
+                        "RadioLotProduction");
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        "LotProduction chua ho tro day du — chi chon radio, khong xu ly man hinh con.");
+                    break;
+
+                default:
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        string.Format("ProductionSetting = '{0}' khong nhan dien. Giu nguyen.", setting));
+                    break;
+            }
+        }
+
+        private void ClickRadioAndVerify(RadioButton radio, string radioName)
+        {
+            const int VERIFY_TIMEOUT_MS = 3000;
+            const int VERIFY_POLL_MS = 500;
+
+            radio.EnsureVisible();
+
+            if (!radio.Element.Enabled)
+            {
+                Report.Screenshot(repo.InspectionRegionSettings.Self, true);
+                throw new Exception(string.Format(
+                    "{0} disabled — dialog co the dang loading.", radioName));
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("Click {0}...", radioName));
+            radio.Click();
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < VERIFY_TIMEOUT_MS)
+            {
+                if (radio.Checked)
+                {
+                    sw.Stop();
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        string.Format("{0} da duoc chon ({1}ms).", radioName, sw.ElapsedMilliseconds));
+                    return;
+                }
+                Delay.Milliseconds(VERIFY_POLL_MS);
+            }
+
+            sw.Stop();
+            Report.Screenshot(repo.InspectionRegionSettings.Self, true);
+            throw new Exception(string.Format(
+                "{0} khong duoc chon sau khi click ({1}ms).", radioName, VERIFY_TIMEOUT_MS));
+        }
+
         private void ClickApplyWithFallback()
         {
             const int DIALOG_LOADING_TIMEOUT_MS = 60000;
             const int DIALOG_POLL_MS = 2000;
             const int DIALOG_LOG_INTERVAL_MS = 10000;
-
-            if (!repo.InspectionRegionSettings.SelfInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
-            {
-                Report.Screenshot(repo.CCIMainWindow.Self, true);
-                throw new Exception(string.Format(
-                    "Popup dialog khong xuat hien sau {0}ms.", APPLY_PRESETTING_TIMEOUT_MS));
-            }
-            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                "Popup dialog da xuat hien. Bat dau click Apply...");
 
             // Strategy 1: Native WPF Apply — Adapter.Click
             try
@@ -322,7 +430,7 @@ namespace Lynn_DPI_AT
                 {
                     sw.Stop();
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                        string.Format("Buoc 5 OK: Apply clicked ({0}). Dialog dong sau {1}ms.",
+                        string.Format("Buoc 6 OK: Apply clicked ({0}). Dialog dong sau {1}ms.",
                             strategyName, sw.ElapsedMilliseconds));
                     return true;
                 }
@@ -347,10 +455,28 @@ namespace Lynn_DPI_AT
         {
             try
             {
+                if (repo.InspectionRegionSettings.SelfInfo.Exists(1000))
+                {
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        "CleanupDialog: Production Presetting con mo — dang dong...");
+                    Keyboard.Press("{Escape}");
+                    Delay.Milliseconds(500);
+                    if (repo.InspectionRegionSettings.SelfInfo.Exists(1000))
+                        repo.InspectionRegionSettings.Self.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                    string.Format("CleanupDialog InspectionRegionSettings exception (non-fatal): {0}", ex.Message));
+            }
+
+            try
+            {
                 if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
                 {
                     Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                        "CleanupDialog: dialog con mo — dang dong...");
+                        "CleanupDialog: SelectRecipeFile con mo — dang dong...");
                     Keyboard.Press("{Escape}");
                     Delay.Milliseconds(500);
                     if (repo.SelectRecipeFile.SelfInfo.Exists(1000))
@@ -360,7 +486,7 @@ namespace Lynn_DPI_AT
             catch (Exception ex)
             {
                 Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                    string.Format("CleanupDialog exception (non-fatal): {0}", ex.Message));
+                    string.Format("CleanupDialog SelectRecipeFile exception (non-fatal): {0}", ex.Message));
             }
         }
 
