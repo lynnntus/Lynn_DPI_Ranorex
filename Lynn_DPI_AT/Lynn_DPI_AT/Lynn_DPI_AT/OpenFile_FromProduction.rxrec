@@ -43,6 +43,15 @@ mode="Desktop">
 		name="ModelName">
 			Lynn_Stacking_Underfill
 		</var>
+		<var
+		id="107c785a-e23e-4a0c-bae1-ace1dc2e409a"
+		name="ProductionSetting">
+			NotUse
+		</var>
+		<var
+		id="70384693-240b-4fc7-88a2-e9c89cc5f5be"
+		name="InspectionQuantity">
+		</var>
 	</variables>
 	<recorditems>
 		<mouseitem
