@@ -49,6 +49,18 @@
 					variableid="d9113e36-b4f0-48e3-b626-d37b530aa139"
 					variablename="ModelName">
 					</var>
+					<var
+					dataname="ProductionSetting"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="107c785a-e23e-4a0c-bae1-ace1dc2e409a"
+					variablename="ProductionSetting">
+					</var>
+					<var
+					dataname="InspectionQuantity"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="70384693-240b-4fc7-88a2-e9c89cc5f5be"
+					variablename="InspectionQuantity">
+					</var>
 				</databinding>
 			</testmodule>
 			<testmodule

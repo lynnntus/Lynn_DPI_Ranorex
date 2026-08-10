@@ -45,6 +45,8 @@ namespace Lynn_DPI_AT
             RecipeFilePath = "C:\\Kohyoung\\Job\\Lynn_20260516_Stacking\\Lynn_Stacking_Underfill.kyjob";
             ExpectedFileName = "Lynn_Stacking_Underfill.kyjob";
             ModelName = "Lynn_Stacking_Underfill";
+            ProductionSetting = "NotUse";
+            InspectionQuantity = "";
         }
 
         /// <summary>
@@ -103,6 +105,30 @@ namespace Lynn_DPI_AT
         {
             get { return _ModelName; }
             set { _ModelName = value; }
+        }
+
+        string _ProductionSetting;
+
+        /// <summary>
+        /// Gets or sets the value of variable ProductionSetting.
+        /// </summary>
+        [TestVariable("107c785a-e23e-4a0c-bae1-ace1dc2e409a")]
+        public string ProductionSetting
+        {
+            get { return _ProductionSetting; }
+            set { _ProductionSetting = value; }
+        }
+
+        string _InspectionQuantity;
+
+        /// <summary>
+        /// Gets or sets the value of variable InspectionQuantity.
+        /// </summary>
+        [TestVariable("70384693-240b-4fc7-88a2-e9c89cc5f5be")]
+        public string InspectionQuantity
+        {
+            get { return _InspectionQuantity; }
+            set { _InspectionQuantity = value; }
         }
 
 #endregion
