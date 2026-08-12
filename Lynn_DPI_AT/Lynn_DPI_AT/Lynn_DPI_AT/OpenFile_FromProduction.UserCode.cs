@@ -327,6 +327,8 @@ namespace Lynn_DPI_AT
                 string.Format("Nhap LOT ID = '{0}'...", lotName));
             repo.KohyoungGUI1.TxtLotID.Click();
             Delay.Milliseconds(200);
+            Keyboard.Press("{Home}{Shift+End}{Delete}");
+            Delay.Milliseconds(200);
             Keyboard.Press(lotName);
             Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
                 string.Format("Da nhap LOT ID = '{0}'.", lotName));
@@ -344,7 +346,7 @@ namespace Lynn_DPI_AT
 
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     string.Format("Nhap Planned Qty = '{0}'...", qty));
-                Keyboard.Press("^a");
+                Keyboard.Press("{Home}{Shift+End}{Delete}");
                 Delay.Milliseconds(200);
                 Keyboard.Press(qty);
                 Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
@@ -359,7 +361,14 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 "Click BtnLotApply...");
             repo.KohyoungGUI1.BtnLotApply.Click();
-            Delay.Milliseconds(500);
+            Delay.Milliseconds(1000);
+
+            if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_POLL_MS))
+            {
+                Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                    "LOT Settings da dong sau Apply.");
+                return;
+            }
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             while (sw.ElapsedMilliseconds < LOT_DIALOG_TIMEOUT_MS)
@@ -375,8 +384,13 @@ namespace Lynn_DPI_AT
 
             sw.Stop();
             Report.Screenshot(repo.CCIMainWindow.Self, true);
+            Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
+                string.Format("LOT Settings KHONG dong sau {0}ms. "
+                    + "Co the LOT ID = '{1}' da ton tai (loi 'already exists') "
+                    + "hoac loi khac. Xem screenshot.", LOT_DIALOG_TIMEOUT_MS, lotName));
             throw new Exception(string.Format(
-                "LOT Settings dialog khong dong sau {0}ms.", LOT_DIALOG_TIMEOUT_MS));
+                "LOT Settings dialog khong dong sau {0}ms. LOT ID = '{1}' co the da ton tai.",
+                LOT_DIALOG_TIMEOUT_MS, lotName));
         }
 
         private void ClickRadioAndVerify(RadioButton radio, string radioName)
