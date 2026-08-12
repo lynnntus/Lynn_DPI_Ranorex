@@ -350,14 +350,14 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 				/form[@name='Popup' and @title='Production Presetting']/container[1]/?/?/checkbox[@text&gt;'Production stops when all']
 			</item>
 			<item
-			addcaps="text,wpfelement,wpfgroupelement"
-			capname="text"
-			id="312dd64a-e495-491f-8da8-afc70a6ec483"
-			name="Settings"
-			refimgid="17a5aacf-9bf8-4a6f-ab18-ee98efa132a1"
-			robustPath="/form[@name='Popup']//text[@caption='Settings']"
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="bd58e8d2-a7ec-404e-9e09-a6ae223f5ffc"
+			name="BtnLotSettings"
+			refimgid="1de43605-4068-4392-9cef-0857012b7f2e"
+			robustPath="/form[@processname='KohyoungGUI']//button[@text='Settings']"
 			searchtimeout="30000ms">
-				/form[@name='Popup' and @title='Production Presetting']/container[1]//button[@text='Settings']/text[@caption='Settings']
+				/form[@name='Popup' and @title='Production Presetting']/container[1]//button[@text='Settings']
 			</item>
 			<item
 			addcaps="text,uiautomation"
@@ -714,29 +714,27 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			addcaps="text,wpfelement,wpfgroupelement"
 			capname="text"
 			id="aed0d992-2352-4c95-8ef4-5f52cc8b2a42"
-			name="SomeText"
+			name="TxtLotID"
 			refimgid="db439670-9d4b-4a6f-acc3-4271fb78441a"
-			refpath="/form[@processname='KohyoungGUI']/text/container[2]/container/text/text[@caption='']"
 			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='lotIDTextBox']/text[@caption='']"
 			searchtimeout="30000ms">
-				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/text[@caption='']
+				/form[@processname='KohyoungGUI']//text[@automationid='lotIDTextBox']
 			</item>
 			<item
 			addcaps="text,wpfelement,wpfgroupelement"
 			capname="text"
 			id="ace9f8fa-28eb-4fa7-bb14-57208429f3cb"
-			name="SomeText1"
+			name="TxtLotPlannedQty"
 			refimgid="fcce502a-cb99-46a7-8cbb-12ccc9cf1c12"
-			refpath="/form[@processname='KohyoungGUI']/text/container[2]/text[@automationid='qtyTxtBox']/text[@caption='']"
 			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']"
 			searchtimeout="30000ms">
-				/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']
+				/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']
 			</item>
 			<item
 			addcaps="button,wpfelement,wpfgroupelement"
 			capname="button"
 			id="14f04ded-2ff5-4d72-a88e-2a32afa96f82"
-			name="Apply"
+			name="BtnLotApply"
 			refimgid="9492bd82-99ef-40d9-ba28-d401543b895e"
 			refpath="/form[@processname='KohyoungGUI']/container[@caption='']/button[@text='Apply']"
 			robustPath="/form[@processname='KohyoungGUI']/container[@caption='']/button[@text='Apply']"
@@ -775,17 +773,6 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			robustPath="/form[@processname='KohyoungGUI']//text[@name='Production']"
 			searchtimeout="30000ms">
 				/form[@processname='KohyoungGUI']/?/?/radiobutton[@name='Production']/text[@automationid='HeaderTextBlock']
-			</item>
-			<item
-			addcaps="text,uiautomation"
-			capname="text"
-			id="b8b1b48d-4f65-4067-aefd-1217909bfb9c"
-			name="Settings"
-			refimgid="94dbf6b4-373e-4312-8aa6-938500fd6c24"
-			refpath="/form[@name='Production Presetting']/button[@name='Settings']/text[@name='Settings']"
-			robustPath="/form[@processname='KohyoungGUI']/?/?/text[@name='Settings']"
-			searchtimeout="30000ms">
-				/form[@processname='KohyoungGUI']/?/?/text[@name='Settings']
 			</item>
 			<item
 			addcaps="container,uiautomation"

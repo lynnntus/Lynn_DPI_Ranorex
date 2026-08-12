@@ -61,6 +61,12 @@
 					variableid="70384693-240b-4fc7-88a2-e9c89cc5f5be"
 					variablename="InspectionQuantity">
 					</var>
+					<var
+					dataname="LotName"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="221c16b3-0a1d-403f-81ba-92c412d16ef1"
+					variablename="LotName">
+					</var>
 				</databinding>
 			</testmodule>
 			<testmodule
@@ -501,18 +507,6 @@
 	default="TestRun">
 		<testconfiguration
 		name="TestRun">
-			<testcontainer
-			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
-			</testcontainer>
-			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
-			</testcontainer>
-			<testcontainer
-			id="4985393b-ae1b-4ebd-931b-281c83046a79">
-			</testcontainer>
 			<testcontainer
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">
 			</testcontainer>

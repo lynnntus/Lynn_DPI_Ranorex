@@ -47,6 +47,7 @@ namespace Lynn_DPI_AT
             ModelName = "Lynn_Stacking_Underfill";
             ProductionSetting = "NotUse";
             InspectionQuantity = "";
+            LotName = "";
         }
 
         /// <summary>
@@ -129,6 +130,18 @@ namespace Lynn_DPI_AT
         {
             get { return _InspectionQuantity; }
             set { _InspectionQuantity = value; }
+        }
+
+        string _LotName;
+
+        /// <summary>
+        /// Gets or sets the value of variable LotName.
+        /// </summary>
+        [TestVariable("221c16b3-0a1d-403f-81ba-92c412d16ef1")]
+        public string LotName
+        {
+            get { return _LotName; }
+            set { _LotName = value; }
         }
 
 #endregion
