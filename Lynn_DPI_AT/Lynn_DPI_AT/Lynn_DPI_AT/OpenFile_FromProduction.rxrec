@@ -52,6 +52,10 @@ mode="Desktop">
 		id="70384693-240b-4fc7-88a2-e9c89cc5f5be"
 		name="InspectionQuantity">
 		</var>
+		<var
+		id="221c16b3-0a1d-403f-81ba-92c412d16ef1"
+		name="LotName">
+		</var>
 	</variables>
 	<recorditems>
 		<mouseitem

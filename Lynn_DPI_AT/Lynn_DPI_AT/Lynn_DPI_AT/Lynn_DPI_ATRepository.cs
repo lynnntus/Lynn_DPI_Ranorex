@@ -889,7 +889,7 @@ namespace Lynn_DPI_AT
             RepoItemInfo _radioquantityinspectionInfo;
             RepoItemInfo _radiolotproductionInfo;
             RepoItemInfo _productionstopswhenalllotinspectionInfo;
-            RepoItemInfo _settingsInfo;
+            RepoItemInfo _btnlotsettingsInfo;
             RepoItemInfo _btnapplyproductionpresettingInfo;
 
             /// <summary>
@@ -902,7 +902,7 @@ namespace Lynn_DPI_AT
                 _radioquantityinspectionInfo = new RepoItemInfo(this, "RadioQuantityInspection", ".//radiobutton[@text='Quantity of Inspection Objects']", ".//radiobutton[@text>'Quantity of Inspection Ob']", 30000, null, "b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028");
                 _radiolotproductionInfo = new RepoItemInfo(this, "RadioLotProduction", ".//radiobutton[@text='LOT Production']", ".//radiobutton[@text='LOT Production']", 30000, null, "facbf450-87fd-4556-a5aa-5bd281c7e8cf");
                 _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
-                _settingsInfo = new RepoItemInfo(this, "Settings", "container[1]//button[@text='Settings']/text[@caption='Settings']", ".//text[@caption='Settings']", 30000, null, "312dd64a-e495-491f-8da8-afc70a6ec483");
+                _btnlotsettingsInfo = new RepoItemInfo(this, "BtnLotSettings", "container[1]//button[@text='Settings']", ".//button[@text='Settings']", 30000, null, "bd58e8d2-a7ec-404e-9e09-a6ae223f5ffc");
                 _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", ".//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
             }
 
@@ -1027,26 +1027,26 @@ namespace Lynn_DPI_AT
             }
 
             /// <summary>
-            /// The Settings item.
+            /// The BtnLotSettings item.
             /// </summary>
-            [RepositoryItem("312dd64a-e495-491f-8da8-afc70a6ec483")]
-            public virtual Ranorex.Text Settings
+            [RepositoryItem("bd58e8d2-a7ec-404e-9e09-a6ae223f5ffc")]
+            public virtual Ranorex.Button BtnLotSettings
             {
                 get
                 {
-                    return _settingsInfo.CreateAdapter<Ranorex.Text>(true);
+                    return _btnlotsettingsInfo.CreateAdapter<Ranorex.Button>(true);
                 }
             }
 
             /// <summary>
-            /// The Settings item info.
+            /// The BtnLotSettings item info.
             /// </summary>
-            [RepositoryItemInfo("312dd64a-e495-491f-8da8-afc70a6ec483")]
-            public virtual RepoItemInfo SettingsInfo
+            [RepositoryItemInfo("bd58e8d2-a7ec-404e-9e09-a6ae223f5ffc")]
+            public virtual RepoItemInfo BtnLotSettingsInfo
             {
                 get
                 {
-                    return _settingsInfo;
+                    return _btnlotsettingsInfo;
                 }
             }
 
@@ -1529,13 +1529,12 @@ namespace Lynn_DPI_AT
         [RepositoryFolder("b102d482-a8d6-4cf7-8b38-8adbed6c328f")]
         public partial class KohyoungGUI1AppFolder : RepoGenBaseFolder
         {
-            RepoItemInfo _sometextInfo;
-            RepoItemInfo _sometext1Info;
-            RepoItemInfo _applyInfo;
+            RepoItemInfo _txtlotidInfo;
+            RepoItemInfo _txtlotplannedqtyInfo;
+            RepoItemInfo _btnlotapplyInfo;
             RepoItemInfo _tabproductionInfo;
             RepoItemInfo _continueInfo;
             RepoItemInfo _headertextblock1Info;
-            RepoItemInfo _settingsInfo;
             RepoItemInfo _partcontenthostInfo;
             RepoItemInfo _partcontenthost1Info;
             RepoItemInfo _btndualclose_shutdownInfo;
@@ -1546,13 +1545,12 @@ namespace Lynn_DPI_AT
             public KohyoungGUI1AppFolder(RepoGenBaseFolder parentFolder) :
                     base("KohyoungGUI1", "/form[@processname='KohyoungGUI']", parentFolder, 30000, null, true, "b102d482-a8d6-4cf7-8b38-8adbed6c328f", "")
             {
-                _sometextInfo = new RepoItemInfo(this, "SomeText", "text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/text[@caption='']", ".//text[@automationid='lotIDTextBox']/text[@caption='']", 30000, null, "aed0d992-2352-4c95-8ef4-5f52cc8b2a42");
-                _sometext1Info = new RepoItemInfo(this, "SomeText1", ".//text[@automationid='qtyTxtBox']/text[@caption='']", ".//text[@automationid='qtyTxtBox']/text[@caption='']", 30000, null, "ace9f8fa-28eb-4fa7-bb14-57208429f3cb");
-                _applyInfo = new RepoItemInfo(this, "Apply", "container[@caption='']/button[@text='Apply']", "container[@caption='']/button[@text='Apply']", 30000, null, "14f04ded-2ff5-4d72-a88e-2a32afa96f82");
+                _txtlotidInfo = new RepoItemInfo(this, "TxtLotID", ".//text[@automationid='lotIDTextBox']", ".//text[@automationid='lotIDTextBox']/text[@caption='']", 30000, null, "aed0d992-2352-4c95-8ef4-5f52cc8b2a42");
+                _txtlotplannedqtyInfo = new RepoItemInfo(this, "TxtLotPlannedQty", ".//text[@automationid='qtyTxtBox']", ".//text[@automationid='qtyTxtBox']/text[@caption='']", 30000, null, "ace9f8fa-28eb-4fa7-bb14-57208429f3cb");
+                _btnlotapplyInfo = new RepoItemInfo(this, "BtnLotApply", "container[@caption='']/button[@text='Apply']", "container[@caption='']/button[@text='Apply']", 30000, null, "14f04ded-2ff5-4d72-a88e-2a32afa96f82");
                 _tabproductionInfo = new RepoItemInfo(this, "TabProduction", "container[@automationid='WindowTitleBarPanel']//radiobutton[@text='Production']/text[@automationid='HeaderTextBlock']", ".//radiobutton[@text='Production']/text[@automationid='HeaderTextBlock']", 30000, null, "d7854f56-5fe3-4f77-a14f-99c5af680dba");
                 _continueInfo = new RepoItemInfo(this, "Continue", "?/?/button[@text='Continue']", "?/?/button[@text='Continue']", 30000, null, "46983a4d-b8cb-4427-833d-e8709e51779f");
                 _headertextblock1Info = new RepoItemInfo(this, "HeaderTextBlock1", "?/?/radiobutton[@name='Production']/text[@automationid='HeaderTextBlock']", ".//text[@name='Production']", 30000, null, "391ca643-8351-4c0d-b83c-21ff839e91e2");
-                _settingsInfo = new RepoItemInfo(this, "Settings", "?/?/text[@name='Settings']", "?/?/text[@name='Settings']", 30000, null, "b8b1b48d-4f65-4067-aefd-1217909bfb9c");
                 _partcontenthostInfo = new RepoItemInfo(this, "PARTContentHost", "?/?/text[@automationid='lotIDTextBox']/container[@automationid='PART_ContentHost']", ".//container[@automationid='PART_ContentHost']", 30000, null, "934312b9-5385-4f03-9fb7-efc6e91b1813");
                 _partcontenthost1Info = new RepoItemInfo(this, "PARTContentHost1", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", "?/?/text[@automationid='qtyTxtBox']/container[@automationid='PART_ContentHost']", 30000, null, "cd72e252-5db7-46c4-aaef-c25a001b7564");
                 _btndualclose_shutdownInfo = new RepoItemInfo(this, "BtnDualClose_Shutdown", "?/?/button[@automationid='btnDualClose']", "?/?/button[@automationid='btnDualClose']", 30000, null, "b0d8b335-4d6a-4016-943a-6028f15c44af");
@@ -1583,74 +1581,74 @@ namespace Lynn_DPI_AT
             }
 
             /// <summary>
-            /// The SomeText item.
+            /// The TxtLotID item.
             /// </summary>
             [RepositoryItem("aed0d992-2352-4c95-8ef4-5f52cc8b2a42")]
-            public virtual Ranorex.Text SomeText
+            public virtual Ranorex.Text TxtLotID
             {
                 get
                 {
-                    return _sometextInfo.CreateAdapter<Ranorex.Text>(true);
+                    return _txtlotidInfo.CreateAdapter<Ranorex.Text>(true);
                 }
             }
 
             /// <summary>
-            /// The SomeText item info.
+            /// The TxtLotID item info.
             /// </summary>
             [RepositoryItemInfo("aed0d992-2352-4c95-8ef4-5f52cc8b2a42")]
-            public virtual RepoItemInfo SomeTextInfo
+            public virtual RepoItemInfo TxtLotIDInfo
             {
                 get
                 {
-                    return _sometextInfo;
+                    return _txtlotidInfo;
                 }
             }
 
             /// <summary>
-            /// The SomeText1 item.
+            /// The TxtLotPlannedQty item.
             /// </summary>
             [RepositoryItem("ace9f8fa-28eb-4fa7-bb14-57208429f3cb")]
-            public virtual Ranorex.Text SomeText1
+            public virtual Ranorex.Text TxtLotPlannedQty
             {
                 get
                 {
-                    return _sometext1Info.CreateAdapter<Ranorex.Text>(true);
+                    return _txtlotplannedqtyInfo.CreateAdapter<Ranorex.Text>(true);
                 }
             }
 
             /// <summary>
-            /// The SomeText1 item info.
+            /// The TxtLotPlannedQty item info.
             /// </summary>
             [RepositoryItemInfo("ace9f8fa-28eb-4fa7-bb14-57208429f3cb")]
-            public virtual RepoItemInfo SomeText1Info
+            public virtual RepoItemInfo TxtLotPlannedQtyInfo
             {
                 get
                 {
-                    return _sometext1Info;
+                    return _txtlotplannedqtyInfo;
                 }
             }
 
             /// <summary>
-            /// The Apply item.
+            /// The BtnLotApply item.
             /// </summary>
             [RepositoryItem("14f04ded-2ff5-4d72-a88e-2a32afa96f82")]
-            public virtual Ranorex.Button Apply
+            public virtual Ranorex.Button BtnLotApply
             {
                 get
                 {
-                    return _applyInfo.CreateAdapter<Ranorex.Button>(true);
+                    return _btnlotapplyInfo.CreateAdapter<Ranorex.Button>(true);
                 }
             }
 
             /// <summary>
-            /// The Apply item info.
+            /// The BtnLotApply item info.
             /// </summary>
             [RepositoryItemInfo("14f04ded-2ff5-4d72-a88e-2a32afa96f82")]
-            public virtual RepoItemInfo ApplyInfo
+            public virtual RepoItemInfo BtnLotApplyInfo
             {
                 get
                 {
-                    return _applyInfo;
+                    return _btnlotapplyInfo;
                 }
             }
 
@@ -1723,30 +1721,6 @@ namespace Lynn_DPI_AT
                 get
                 {
                     return _headertextblock1Info;
-                }
-            }
-
-            /// <summary>
-            /// The Settings item.
-            /// </summary>
-            [RepositoryItem("b8b1b48d-4f65-4067-aefd-1217909bfb9c")]
-            public virtual Ranorex.Text Settings
-            {
-                get
-                {
-                    return _settingsInfo.CreateAdapter<Ranorex.Text>(true);
-                }
-            }
-
-            /// <summary>
-            /// The Settings item info.
-            /// </summary>
-            [RepositoryItemInfo("b8b1b48d-4f65-4067-aefd-1217909bfb9c")]
-            public virtual RepoItemInfo SettingsInfo
-            {
-                get
-                {
-                    return _settingsInfo;
                 }
             }
 
