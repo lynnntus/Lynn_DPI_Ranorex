@@ -43,6 +43,8 @@ namespace Lynn_DPI_AT
                 string.Format("ProductionSetting = '{0}'", ProductionSetting));
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 string.Format("InspectionQuantity = '{0}'", InspectionQuantity));
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("LotName = '{0}'", LotName));
         }
 
         public string OpenRecipeFileByPath()
@@ -283,8 +285,7 @@ namespace Lynn_DPI_AT
                     ClickRadioAndVerify(
                         repo.InspectionRegionSettings.RadioLotProduction,
                         "RadioLotProduction");
-                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                        "LotProduction chua ho tro day du — chi chon radio, khong xu ly man hinh con.");
+                    HandleLotProductionSettings();
                     break;
 
                 default:
@@ -292,6 +293,90 @@ namespace Lynn_DPI_AT
                         string.Format("ProductionSetting = '{0}' khong nhan dien. Giu nguyen.", setting));
                     break;
             }
+        }
+
+        private const int LOT_DIALOG_TIMEOUT_MS = 15000;
+        private const int LOT_DIALOG_POLL_MS = 500;
+
+        private void HandleLotProductionSettings()
+        {
+            string lotName = (this.LotName ?? "").Trim();
+
+            if (string.IsNullOrEmpty(lotName))
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "LotName rong — skip LOT Settings, giu nguyen.");
+                return;
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                "Click BtnLotSettings de mo LOT Settings...");
+            repo.InspectionRegionSettings.BtnLotSettings.Click();
+            Delay.Milliseconds(500);
+
+            if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_TIMEOUT_MS))
+            {
+                Report.Screenshot(repo.CCIMainWindow.Self, true);
+                throw new Exception(string.Format(
+                    "LOT Settings dialog khong xuat hien sau {0}ms.", LOT_DIALOG_TIMEOUT_MS));
+            }
+            Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                "LOT Settings dialog da mo.");
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                string.Format("Nhap LOT ID = '{0}'...", lotName));
+            repo.KohyoungGUI1.TxtLotID.Click();
+            Delay.Milliseconds(200);
+            Keyboard.Press(lotName);
+            Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                string.Format("Da nhap LOT ID = '{0}'.", lotName));
+
+            string qty = (this.InspectionQuantity ?? "").Trim();
+            Keyboard.Press("{Tab}");
+            Delay.Milliseconds(200);
+
+            if (!string.IsNullOrEmpty(qty))
+            {
+                int qtyNum;
+                if (!int.TryParse(qty, out qtyNum) || qtyNum <= 0)
+                    throw new ArgumentException(string.Format(
+                        "InspectionQuantity = '{0}' khong hop le. Can so nguyen duong.", qty));
+
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    string.Format("Nhap Planned Qty = '{0}'...", qty));
+                Keyboard.Press("^a");
+                Delay.Milliseconds(200);
+                Keyboard.Press(qty);
+                Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                    string.Format("Da nhap Planned Qty = '{0}'.", qty));
+            }
+            else
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "InspectionQuantity rong — giu nguyen Planned Qty mac dinh.");
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                "Click BtnLotApply...");
+            repo.KohyoungGUI1.BtnLotApply.Click();
+            Delay.Milliseconds(500);
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < LOT_DIALOG_TIMEOUT_MS)
+            {
+                if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_POLL_MS))
+                {
+                    sw.Stop();
+                    Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                        string.Format("LOT Settings da dong ({0}ms).", sw.ElapsedMilliseconds));
+                    return;
+                }
+            }
+
+            sw.Stop();
+            Report.Screenshot(repo.CCIMainWindow.Self, true);
+            throw new Exception(string.Format(
+                "LOT Settings dialog khong dong sau {0}ms.", LOT_DIALOG_TIMEOUT_MS));
         }
 
         private void ClickRadioAndVerify(RadioButton radio, string radioName)

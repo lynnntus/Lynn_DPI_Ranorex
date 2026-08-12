@@ -1,5 +1,14 @@
 # Change History
 
+## 2026-08-12
+
+### ~PM — Giai đoạn 2: LOT Production
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs`
+  - Thay nhánh `"lotproduction"` trong `SelectProductionSetting()`: gọi `HandleLotProductionSettings()` thay vì log warning
+  - Thêm `HandleLotProductionSettings()`: click BtnLotSettings → chờ LOT Settings → nhập LOT ID → Tab → nhập Planned Qty (Ctrl+A xóa cũ) → click BtnLotApply → chờ dialog đóng
+  - Thêm log `LotName` trong `Init()`
+  - Thêm constants: `LOT_DIALOG_TIMEOUT_MS`, `LOT_DIALOG_POLL_MS`
+
 ## 2026-08-11
 
 ### ~PM — Data-driven Production Setting + HANDOFF update

@@ -1,5 +1,13 @@
 # Chat History
 
+## 2026-08-12
+
+### ~PM — Giai đoạn 2: LOT Production
+- **Yêu cầu**: Xử lý đầy đủ nhánh LotProduction trong `SelectProductionSetting()` — mở LOT Settings dialog, nhập LOT ID + Planned Qty, click Apply
+- **Implement**: Thêm `HandleLotProductionSettings()`, dùng accessor mới từ .rxrep đã sync (BtnLotSettings, TxtLotID, TxtLotPlannedQty, BtnLotApply)
+- **File**: `OpenFile_FromProduction.UserCode.cs`
+- **Data**: `this.LotName` (LOT ID), `this.InspectionQuantity` (Planned Qty, dùng chung). LotName rỗng → skip LOT Settings
+
 ## 2026-08-11
 
 ### ~PM — Data-driven Production Setting + Review + HANDOFF update
