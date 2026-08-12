@@ -1,6 +1,6 @@
 # HANDOFF — Lynn_DPI_AT Session Context
 
-> Tao boi Claude Code — cap nhat 2026-07-20
+> Tao boi Claude Code — cap nhat 2026-08-11
 > Muc dich: Ban giao context cho session moi
 
 ---
@@ -54,7 +54,7 @@ Lynn_DPI_AT (suite)
 |----------|-----------|--------|-----|
 | `Users.csv` | `NewConnector` | `LoginRetry` | `UserName`, `Password` |
 | `OpenFileData.csv` | `OpenFile` | `OpenFile` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `Model Name` |
-| `Production_OpenFileData.csv` | `Production_OpenFile` | `OpenFile_FromProduction` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `ModeName` |
+| `Production_OpenFileData.csv` | `Production_OpenFile` | `OpenFile_FromProduction` | `CaseId`, `Enabled`, `RecipeFilePath`, `ExpectedFileName`, `ModeName`, `ProductionSetting`, `InspectionQuantity`, `LotName` |
 
 ---
 
@@ -67,13 +67,24 @@ Lynn_DPI_AT (suite)
 | `CCILoginWindow` | `/form[@name='View']` | True | `Login`, `XIDPWLoginArea`(`SomeText`, `TextXPW`, `XPWWatermark`) |
 | `CCIMainWindow` | `/form[@title='CCIMainWindow']` | True | `CreateOrOpenRecipe`, `SomeButton`, `LeftMenuOpenToogleButton`, `SomeIndicator`, `Text`, `SomeIndicator1`, `SomeText`, `MenuOpenRecipe`, `SomeTable`, `Production`, `Area1`(`BtnMore`, `TopTextRecipeName`, `BtnOpenFileFromProduction`) |
 | `ShutdownDialog` | `/form[@name='Popup' and @title='Inspection Region Settings']` | False | `BtnDualClose_Shutdown` |
-| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | False | `BtnDualClose`, `ProductionStopsWhenAllLOTInspection`, `LOTProduction`, `Settings`, **`BtnApplyProductionPresetting`** |
+| `InspectionRegionSettings` | `/form[@name='Popup' and @title='Production Presetting']` | False | `RadioNotUse`, `RadioQuantityInspection`, `RadioLotProduction`, `ProductionStopsWhenAllLOTInspection`, `Settings`, **`BtnApplyProductionPresetting`**, `BtnDualClose`, `LOTProduction` |
 | `SelectRecipeFile` | `/form[@title='Select Recipe File']` | False | `SystemItemNameDisplay`, `Text1148`, `TxtFileNameInDialog` |
-| `KohyoungGUI1` | `/form[@processname='KohyoungGUI']` | True | `SomeText`, `SomeText1`, `Apply`, `TabProduction`, `Continue`, `HeaderTextBlock1`, `Settings`, `PARTContentHost`, `PARTContentHost1` |
+| `KohyoungGUI1` | `/form[@processname='KohyoungGUI']` | True | `SomeText`(automationid='lotIDTextBox'), `SomeText1`(automationid='qtyTxtBox'), `Apply`, `TabProduction`, `Continue`, `HeaderTextBlock1`, `Settings`, `PARTContentHost`, `PARTContentHost1` |
 | `Explorer` | `/desktop[@processname='explorer']` | True | `NEPTUNECALLINONE`, `ExportLynn` |
 | Root level | — | — | `BtnOpenInDialog` → `/form[@title='Select Recipe File']/button[@text='&Open']` |
 
 > Ca 2 folder dung `form[@name='Popup']` deu da dat Use Cache = False (Bug 1 da fix).
+
+### Production Setting radio buttons (folder InspectionRegionSettings)
+
+| Accessor | Absolute Path |
+|----------|--------------|
+| `RadioNotUse` | `.//radiobutton[@text='Not Use']` |
+| `RadioQuantityInspection` | `.//radiobutton[@text='Quantity of Inspection Objects']` |
+| `RadioLotProduction` | `.//radiobutton[@text='LOT Production']` |
+| `BtnApplyProductionPresetting` | `.//button[@text='Apply']` |
+
+> O nhap so Quantity KHONG co repo item on dinh (flaky). Nhap bang ban phim: click radio Quantity → {Tab} 1 lan → go so.
 
 ### CANH BAO: 2 nut Apply khac nhau
 
@@ -173,14 +184,16 @@ Constants: `DIALOG_APPEAR_TIMEOUT_MS=10000`, `DIALOG_AUTOCLOSE_TIMEOUT_MS=30000`
 
 | Method | Mo ta |
 |--------|-------|
-| `Init()` | Log `Enable`, `RecipeFilePath`, `ModelName` |
-| `OpenRecipeFileByPath()` | Flow 7 buoc: check Enable → click BtnOpenFileFromProduction → cho dialog → nhap path → click Open → click Apply (fallback) → validate TopModelName |
+| `Init()` | Log `Enable`, `RecipeFilePath`, `ModelName`, `ProductionSetting`, `InspectionQuantity` |
+| `OpenRecipeFileByPath()` | Flow 8 buoc: check Enable → click BtnOpenFileFromProduction → cho dialog → nhap path → click Open → cho Production Presetting dialog → chon Production Setting → click Apply (fallback) → validate TopModelName |
 | `EnterPathIntoFileNameField(path)` | Set `TextValue`, verify match |
 | `ReadFileNameField()` | Try `TextValue` → fallback `WindowText` |
 | `ValidateTopModelName()` | Poll `TopTextRecipeName.Text` (fallback `SelectionText`) contains `ModelName`, max 60s |
-| `ClickApplyWithFallback()` | 4 strategy: (1) Native Click, (2) Focus+Space, (3) UIA Exists+Click, (4) Coordinate click. Kiem tra dialog dong sau moi strategy |
-| `LogPopupAndApplyDiag(tag)` | **CODE TAM** — log so luong Popup, Apply buttons, accessor state, screenshot |
-| `CleanupDialog()` | Escape → Close dialog neu con mo |
+| `SelectProductionSetting()` | Switch theo `this.ProductionSetting`: NotUse/Quantity/LotProduction. Voi Quantity: validate so → {Tab} → go so. LotProduction: chi chon radio, log warning |
+| `ClickRadioAndVerify(radio, radioName)` | EnsureVisible + check Enabled + Click + poll verify Checked (3s timeout). Dung chung cho 3 radio |
+| `ClickApplyWithFallback()` | 4 strategy: (1) Native Click, (2) Focus+Space, (3) UIA Exists+Click, (4) Coordinate click. Poll dialog dong sau moi strategy (max 60s, log moi 10s) |
+| `WaitForDialogClose(strategyName, timeoutMs, pollMs, logIntervalMs)` | Poll `InspectionRegionSettings.SelfInfo.Exists()` de xac nhan dialog dong |
+| `CleanupDialog()` | Dong InspectionRegionSettings (Escape → Close) roi dong SelectRecipeFile. Non-fatal, try/catch rieng tung dialog |
 
 Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, `TOP_VALIDATE_TIMEOUT_MS=60000`, `TOP_VALIDATE_POLL_MS=2000`
 
@@ -214,7 +227,7 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 | SmokeTest | StartAUT → LoginRetry → Login_Pass [DISABLED] → Logout [DISABLED] | `Users.csv` (rows 1-2) | Login retry qua CSV |
 | OpenFile | OpenFile | `OpenFileData.csv` | Open recipe tu menu |
 | Production_TabNavigation | Tab_Production → Verify_ProductionPresettingDialog_AutoClose | — | Chuyen tab Production + verify dialog tu dong dong |
-| Production_OpenFile | OpenFile_FromProduction | `Production_OpenFileData.csv` | Open recipe tu Production tab |
+| Production_OpenFile | OpenFile_FromProduction | `Production_OpenFileData.csv` | Open recipe tu Production tab, chon Production Setting |
 | Logout | Logout | — | Logout cuoi cung |
 
 ### Luu y quan trong
@@ -222,57 +235,41 @@ Constants: `FILE_DIALOG_TIMEOUT_MS=15000`, `APPLY_PRESETTING_TIMEOUT_MS=15000`, 
 - `Login_Pass` va `Logout` trong SmokeTest deu **DISABLED**
 - `AppProcessID` truyen tu `StartAUT` → `CloseAUT` qua test case parameter — neu them test case moi can bind lai
 - Tat ca search timeout trong repository: 30,000ms (30 giay)
+- CSV `Production_OpenFileData.csv` co 4 row: OF_001 (NotUse), OF_002 (Quantity,10), OF_003 (LotProduction, Enable=N), OF_004 (Quantity,5)
 
 ---
 
-## 5. VAN DE DANG XU LY
+## 5. TRANG THAI HIEN TAI
 
-### ĐÃ FIX (phiên 2026-07-20)
+### ĐÃ HOÀN THÀNH — Giai đoạn 1: Data-driven Production Setting
+- Module OpenFile_FromProduction giờ chọn được Production Setting theo test data (CSV).
+- Đã thêm 2 biến: ProductionSetting ("NotUse"/"Quantity"/"LotProduction"), InspectionQuantity.
+- Method SelectProductionSetting() + helper ClickRadioAndVerify() (EnsureVisible + check Enabled
+  + click + poll verify Checked, không delay mù). Gọi ở luồng chính, trước Apply.
+- Repository folder InspectionRegionSettings có: RadioNotUse, RadioQuantityInspection,
+  RadioLotProduction, BtnApplyProductionPresetting (path .//radiobutton[@text='...']).
+- Ô nhập số Quantity KHÔNG có path ổn định (flaky) -> nhập bằng bàn phím: click radio Quantity
+  -> Keyboard {Tab} 1 lần -> gõ số. Ô trống sẵn, không cần Enter confirm.
+- Đã verify PASS: chọn Quantity + nhập số + Apply + validate ModelName khớp.
 
-**Bug 1 — Repo cache element cha đã chết (root cause chính)**
-- Triệu chứng: "Element is not visible" khi click Apply, dù Spy thấy nút hiển thị bình thường.
-- Log DIAG: chỉ có 1 form[@name='Popup'] (giả thuyết "nhiều Popup" là SAI). Tìm trực tiếp ->
-  Apply Visible=True, Rect={998,849,120,32}. Qua repo accessor -> Visible=False, Rect={0,0,0,0}.
-- Nguyên nhân: folder InspectionRegionSettings cache form[@name='Popup'] cũ đã đóng.
-- FIX: Use Cache = False cho folder đó. Sau fix Apply click được (Strategy 2 Focus+Space).
-- Folder ShutdownDialog cũng dùng form[@name='Popup'] -> nên tắt cache tương tự.
+### ĐANG XỬ LÝ
+(trống — Giai đoạn 1 đã xong)
 
-**Bug 2 — Path lồng form trong form**
-- BtnApplyProductionPresetting từng có robustPath /form[@processname='KohyoungGUI']/
-  form[@name='Popup']//button[...] — hai form nối nhau, không hợp lệ. Đã sửa:
-    Item     : .//button[@text='Apply']
-    Robust   : /form[@name='Popup' and @title='Production Presetting']//button[@text='Apply']
-    Absolute : (giống Robust)
-- Giữ @title vì repo có 2 folder cùng dùng form[@name='Popup'] (ShutdownDialog='Inspection
-  Region Settings', InspectionRegionSettings='Production Presetting').
+### TỒN ĐỌNG / GIAI ĐOẠN 2
+- Giai đoạn 2: LOT Production. Chọn radio LOT Production -> mở màn hình con "LOT Settings"
+  (Register LOT Information) cần nhập LOT ID + Planned Qty rồi Apply. Hiện code mới chỉ click
+  radio + log warning, CHƯA xử lý màn hình con.
+- Element màn LOT Settings đã có sẵn trong folder KohyoungGUI1: SomeText (automationid
+  'lotIDTextBox' = ô LOT ID), SomeText1 (automationid 'qtyTxtBox' = ô Planned Qty). Nên đổi tên
+  cho rõ khi làm GĐ2 (TxtLotID, TxtLotPlannedQty).
+- CSV có sẵn cột LotName cho GĐ2. Row LotProduction hiện để Enable=N khi test GĐ1.
+- Tồn đọng kỹ thuật (không cấp bách): 4 strategy click Apply dư thừa (chỉ Strategy 1/2 ăn);
+  Absolute Path của BtnApplyProductionPresetting vẫn miss -> fallback Robust path.
 
-### ĐÃ FIX
-**Bug 3 — ValidateTopModelName đọc sai attribute**: Actual='topTextRecipeName' không đổi suốt
-60s poll. Spy xác minh: Caption trả về AUTOMATIONID, text thật ("KYE_Ver9_3_Job remake_1") nằm
-ở Text/SelectionText. ModelName trong CSV ĐÚNG.
-**Đã fix 2026-07-24**: Code hiện tại dùng `GetAttributeValueText("Text")` với fallback
-`GetAttributeValueText("SelectionText")` — không còn dùng Caption.
-Xem lesson: [wpf-caption-vs-textvalue.md](lessons/wpf-caption-vs-textvalue.md).
-
-**Bug 4 — ClickApplyWithFallback() chờ quá ngắn sau khi click Apply**
-- Triệu chứng: Strategy 1 click Apply thành công, dialog chuyển sang trạng thái "Please Wait"
-  (app đang load jobfile). Nhưng code chỉ chờ 3 giây (`DIALOG_CLOSE_CHECK_MS = 3000`), thấy
-  dialog vẫn mở → tưởng click thất bại → nhảy sang strategy tiếp. Thực tế chỉ cần chờ đủ lâu.
-- Nguyên nhân: `DIALOG_CLOSE_CHECK_MS = 3000` quá ngắn. App load jobfile có thể mất 30-60 giây.
-- FIX: Sau Strategy 1, poll dialog tối đa 60 giây (log mỗi 10 giây). Chỉ khi hết 60 giây mà
-  dialog vẫn mở thì mới chuyển sang strategy tiếp.
-
-### TỒN ĐỌNG
-- BtnApplyProductionPresetting vẫn fallback sang Robust path (~30s/lần), chưa fail nhưng chậm.
-- ClickApplyWithFallback() có 4 strategy nhưng CẢ 4 dùng cùng 1 element -> không phải dự phòng
-  thật; chỉ Strategy 2 ăn. Nên thay bằng poll mỗi 1s, timeout 60-90s: (1) dialog mất -> Success;
-  (2) Apply Visible+Enabled -> click ĐÚNG 1 phát; (3) chưa sẵn sàng -> chờ.
-- Code DIAG (LogPopupAndApplyDiag) là code tạm, xóa sau.
-
-### HÀNH VI DIALOG "Production Presetting" (xác minh tay)
-Hiện ở trạng thái LOADING, lúc đó Apply KHÔNG nhận click.
-(a) Chuyển sang tab Production: dialog TỰ biến mất, không cần Apply.
-(b) Mở jobfile từ tab Production: BẮT BUỘC click Apply mới đóng.
+### HÀNH VI DIALOG (giữ nguyên, đã xác minh tay)
+- Production Presetting hiện ở trạng thái LOADING; Apply không nhận click lúc loading.
+- Chuyển tab Production: dialog tự biến mất. Mở jobfile: phải click Apply mới đóng.
+- Click radio Quantity KHÔNG auto-focus ô số; Tab 1 lần thì vào; ô trống; không cần Enter.
 
 ---
 
@@ -299,6 +296,10 @@ Hiện ở trạng thái LOADING, lúc đó Apply KHÔNG nhận click.
 10. **2 may**: May A (Claude Code sua code) va may Ranorex (chinh repository + chay test). File `.rxrep` chi sua tren may Ranorex. Truoc khi doc/tham chieu `.rxrep`, phai dong bo ban moi nhat tu may Ranorex ve.
 
 11. **Khi copy code tu may A sang may Ranorex**, KHONG de `.rxrep` va file `.cs` sinh tu no (vd `Lynn_DPI_ATRepository.cs`) — se mat cac thiet lap nhu Use Cache va path da sua.
+
+12. **O nhap khong co path on dinh** → nhap bang ban phim (focus qua Tab tu element co @text on dinh). Vi du: o nhap so Quantity — click radio co @text → {Tab} → go so.
+
+13. **Element "not visible" du man hinh thay ro** → nghi repository cache folder cha, kiem tra Use Cache. Da xay ra voi folder InspectionRegionSettings truoc khi tat cache.
 
 ---
 
@@ -332,4 +333,4 @@ Tien hanh investigation theo quy trinh:
 | Input text sai | Lessons: Input / Keyboard |
 | Test FAIL intermittent / timeout | Lessons: Timing / Wait |
 | Code khong co effect | Lessons: Ranorex Framework |
-| Element "Visible=False" du UI hien thi | Quy tac 7: kiem tra Use Cache |
+| Element "Visible=False" du UI hien thi | Quy tac 7 + 13: kiem tra Use Cache |

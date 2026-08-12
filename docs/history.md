@@ -1,5 +1,16 @@
 # Change History
 
+## 2026-08-11
+
+### ~PM — Data-driven Production Setting + HANDOFF update
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs`
+  - Thêm `SelectProductionSetting()`: switch NotUse/Quantity/LotProduction, gọi trước Apply
+  - Thêm `ClickRadioAndVerify()`: EnsureVisible + Enabled check + Click + poll Checked
+  - Restructure `OpenRecipeFileByPath()`: 7→8 bước, tách wait dialog ra khỏi ClickApplyWithFallback
+  - Update `CleanupDialog()`: đóng InspectionRegionSettings (Escape→Close) trước SelectRecipeFile
+  - Thêm log `ProductionSetting`, `InspectionQuantity` trong Init()
+- **Modified**: `docs/HANDOFF.md` — Cập nhật toàn bộ 7 sections: data sources, repository radio buttons, functions table, trạng thái GĐ1 hoàn thành, 2 quy tắc mới (#12 bàn phím, #13 cache)
+
 ## 2026-07-24
 
 ### ~PM 3 — Verify lesson system + CLAUDE.md Debugging Workflow

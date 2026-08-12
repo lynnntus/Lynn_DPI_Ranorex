@@ -1,5 +1,17 @@
 # Chat History
 
+## 2026-08-11
+
+### ~PM — Data-driven Production Setting + Review + HANDOFF update
+- **Yêu cầu 1**: Thêm logic chọn Production Setting (NotUse/Quantity/LotProduction) vào OpenFile_FromProduction.UserCode.cs, data-driven từ CSV
+- **Plan**: 2 vòng review — user sửa 4 điểm (tách trách nhiệm, verify thay delay, check Enabled, xác minh Keyboard.Press API)
+- **Implement**: Thêm `SelectProductionSetting()`, `ClickRadioAndVerify()`, restructure flow 8 bước, tách wait dialog khỏi ClickApplyWithFallback
+- **Review**: Code review PASS (0 Critical, 4 Warning, 3 Suggestion). Fix W4: CleanupDialog() bổ sung đóng InspectionRegionSettings
+- **Yêu cầu 2**: Cập nhật docs/HANDOFF.md — sections 1-4 từ file thật, sections 5-6 nội dung user cung cấp
+- **Kết quả**: Code compile OK (trừ 4 lỗi CS0103 do chưa thêm module variable trong Ranorex Studio)
+- **Files thay đổi**: `OpenFile_FromProduction.UserCode.cs`, `docs/HANDOFF.md`
+- **Pending**: User cần thêm `ProductionSetting` + `InspectionQuantity` module variables trong Ranorex Studio, bind CSV, Save + Build
+
 ## 2026-07-24
 
 ### ~PM 2 — Update CLAUDE.md: tích hợp Debugging Workflow
