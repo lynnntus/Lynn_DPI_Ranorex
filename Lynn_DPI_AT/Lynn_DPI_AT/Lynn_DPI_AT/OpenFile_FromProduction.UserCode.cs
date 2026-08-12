@@ -327,7 +327,11 @@ namespace Lynn_DPI_AT
                 string.Format("Nhap LOT ID = '{0}'...", lotName));
             repo.KohyoungGUI1.TxtLotID.Click();
             Delay.Milliseconds(200);
-            Keyboard.Press("{Home}{Shift+End}{Delete}");
+            Keyboard.Press("{Home}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Shift down}{End}{Shift up}");
+            Delay.Milliseconds(100);
+            Keyboard.Press("{Delete}");
             Delay.Milliseconds(200);
             Keyboard.Press(lotName);
             Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
@@ -346,7 +350,11 @@ namespace Lynn_DPI_AT
 
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     string.Format("Nhap Planned Qty = '{0}'...", qty));
-                Keyboard.Press("{Home}{Shift+End}{Delete}");
+                Keyboard.Press("{Home}");
+                Delay.Milliseconds(100);
+                Keyboard.Press("{Shift down}{End}{Shift up}");
+                Delay.Milliseconds(100);
+                Keyboard.Press("{Delete}");
                 Delay.Milliseconds(200);
                 Keyboard.Press(qty);
                 Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
