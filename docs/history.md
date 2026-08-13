@@ -1,5 +1,12 @@
 # Change History
 
+## 2026-08-13
+
+### ~AM — Fix LOT Settings dialog close detection
+- **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs`
+  - Thêm constant `LOT_DIALOG_RXPATH` và helper `TryFindLotDialog()` — dùng `Host.Local.TryFindSingle()` bypass repo cache
+  - Thay 3 chỗ `repo.KohyoungGUI1.TxtLotIDInfo.Exists()` bằng `TryFindLotDialog()` trong `HandleLotProductionSettings()`
+
 ## 2026-08-12
 
 ### ~PM — Giai đoạn 2: LOT Production

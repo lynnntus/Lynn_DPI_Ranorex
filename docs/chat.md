@@ -1,5 +1,15 @@
 # Chat History
 
+## 2026-08-13
+
+### ~AM — Fix LOT Settings dialog close detection
+- **Triệu chứng**: Sau click BtnLotApply, LOT Settings đóng OK nhưng code báo "KHONG dong sau 15000ms" — false failure
+- **Root cause**: `repo.KohyoungGUI1.TxtLotIDInfo.Exists()` dùng `usecache="True"` → cache giữ stale reference sau khi dialog đóng → `Exists()` luôn True
+- **Fix**: Thêm `TryFindLotDialog()` dùng `Host.Local.TryFindSingle()` (bypass cache), thay 3 chỗ `TxtLotIDInfo.Exists()` trong `HandleLotProductionSettings()`
+- **Lessons áp dụng**: `repo-use-cache-stale-element.md`, `dialog-close-polling-timeout.md`
+- **File**: `OpenFile_FromProduction.UserCode.cs`
+- **Pending**: Save + Build trên Máy A, chạy OF_003 trên Máy B
+
 ## 2026-08-12
 
 ### ~PM — Giai đoạn 2: LOT Production

@@ -297,6 +297,13 @@ namespace Lynn_DPI_AT
 
         private const int LOT_DIALOG_TIMEOUT_MS = 15000;
         private const int LOT_DIALOG_POLL_MS = 500;
+        private const string LOT_DIALOG_RXPATH = "/form[@processname='KohyoungGUI']//text[@automationid='lotIDTextBox']";
+
+        private bool TryFindLotDialog(int timeoutMs)
+        {
+            Ranorex.Text element;
+            return Host.Local.TryFindSingle(LOT_DIALOG_RXPATH, timeoutMs, out element);
+        }
 
         private void HandleLotProductionSettings()
         {
@@ -314,7 +321,7 @@ namespace Lynn_DPI_AT
             repo.InspectionRegionSettings.BtnLotSettings.Click();
             Delay.Milliseconds(500);
 
-            if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_TIMEOUT_MS))
+            if (!TryFindLotDialog(LOT_DIALOG_TIMEOUT_MS))
             {
                 Report.Screenshot(repo.CCIMainWindow.Self, true);
                 throw new Exception(string.Format(
@@ -371,7 +378,7 @@ namespace Lynn_DPI_AT
             repo.KohyoungGUI1.BtnLotApply.Click();
             Delay.Milliseconds(1000);
 
-            if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_POLL_MS))
+            if (!TryFindLotDialog(LOT_DIALOG_POLL_MS))
             {
                 Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
                     "LOT Settings da dong sau Apply.");
@@ -381,7 +388,7 @@ namespace Lynn_DPI_AT
             var sw = System.Diagnostics.Stopwatch.StartNew();
             while (sw.ElapsedMilliseconds < LOT_DIALOG_TIMEOUT_MS)
             {
-                if (!repo.KohyoungGUI1.TxtLotIDInfo.Exists(LOT_DIALOG_POLL_MS))
+                if (!TryFindLotDialog(LOT_DIALOG_POLL_MS))
                 {
                     sw.Stop();
                     Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
