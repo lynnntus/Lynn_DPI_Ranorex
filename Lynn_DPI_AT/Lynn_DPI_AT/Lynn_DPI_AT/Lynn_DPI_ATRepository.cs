@@ -1543,7 +1543,7 @@ namespace Lynn_DPI_AT
             /// Creates a new KohyoungGUI1  folder.
             /// </summary>
             public KohyoungGUI1AppFolder(RepoGenBaseFolder parentFolder) :
-                    base("KohyoungGUI1", "/form[@processname='KohyoungGUI']", parentFolder, 30000, null, true, "b102d482-a8d6-4cf7-8b38-8adbed6c328f", "")
+                    base("KohyoungGUI1", "/form[@processname='KohyoungGUI']", parentFolder, 30000, null, false, "b102d482-a8d6-4cf7-8b38-8adbed6c328f", "")
             {
                 _txtlotidInfo = new RepoItemInfo(this, "TxtLotID", ".//text[@automationid='lotIDTextBox']", ".//text[@automationid='lotIDTextBox']/text[@caption='']", 30000, null, "aed0d992-2352-4c95-8ef4-5f52cc8b2a42");
                 _txtlotplannedqtyInfo = new RepoItemInfo(this, "TxtLotPlannedQty", ".//text[@automationid='qtyTxtBox']", ".//text[@automationid='qtyTxtBox']/text[@caption='']", 30000, null, "ace9f8fa-28eb-4fa7-bb14-57208429f3cb");
