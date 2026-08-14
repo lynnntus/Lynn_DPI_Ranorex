@@ -1,5 +1,14 @@
 # Change History
 
+## 2026-08-14
+
+### Fix false failure Bước 3b — Production Presetting dialog close timeout
+
+- **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+- **Thay đổi**: `APPLY_CLOSE_VERIFY_TIMEOUT_MS`: 15000 → 45000 (15s → 45s)
+- **Lý do**: App DPI đôi khi mất >21s để đóng dialog sau click Apply (xử lý ảnh nặng). Timeout 15s gây false failure. Tăng lên 45s (~2x observed max) theo lesson `dialog-close-polling-timeout`.
+- **Không ảnh hưởng performance**: `WaitForNotExists` return ngay khi dialog đóng, 45s chỉ là upper bound.
+
 ## 2026-08-13
 
 ### ~AM — Fix LOT Settings dialog close detection → PASS
