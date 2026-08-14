@@ -63,6 +63,29 @@ if errorlevel 1 (
 )
 
 echo.
+echo Dang pull --rebase truoc khi push...
+echo.
+
+git pull --rebase origin main
+if errorlevel 1 (
+    echo.
+    echo ========================================
+    echo   PULL --REBASE THAT BAI ^(co conflict^)!
+    echo.
+    echo   Cach xu ly:
+    echo     1. Mo VS Code, chon Accept Current/Incoming/Both
+    echo     2. git add .
+    echo     3. git rebase --continue
+    echo     4. git push origin main
+    echo.
+    echo   Neu roi qua thi chay: git rebase --abort
+    echo ========================================
+    echo.
+    pause
+    goto :EOF
+)
+
+echo.
 echo Dang push len Git...
 echo.
 

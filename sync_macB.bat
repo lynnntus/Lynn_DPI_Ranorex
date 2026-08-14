@@ -37,7 +37,7 @@ if not "%STATUS%"=="" (
 echo Khong co file thay doi local. Dang pull code moi tu Git...
 echo.
 
-git pull origin main
+git pull --rebase origin main
 if errorlevel 1 (
     echo.
     echo ========================================
