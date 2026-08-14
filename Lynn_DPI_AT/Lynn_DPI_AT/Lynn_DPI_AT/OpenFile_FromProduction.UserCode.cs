@@ -286,6 +286,7 @@ namespace Lynn_DPI_AT
                         repo.InspectionRegionSettings.RadioLotProduction,
                         "RadioLotProduction");
                     HandleLotProductionSettings();
+                    EnsureLotCheckboxChecked();
                     break;
 
                 default:
@@ -293,6 +294,29 @@ namespace Lynn_DPI_AT
                         string.Format("ProductionSetting = '{0}' khong nhan dien. Giu nguyen.", setting));
                     break;
             }
+        }
+
+        private void EnsureLotCheckboxChecked()
+        {
+            var chk = repo.InspectionRegionSettings.ChkProductionStopsWhenAllLotComplete;
+
+            if (chk.Checked)
+            {
+                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                    "Checkbox 'Production stops when all LOT...' da CHECKED san.");
+                return;
+            }
+
+            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                "Checkbox 'Production stops when all LOT...' chua checked — click...");
+            chk.Click();
+            Delay.Milliseconds(300);
+
+            if (!chk.Checked)
+                throw new Exception("Checkbox 'Production stops when all LOT...' van chua CHECKED sau khi click.");
+
+            Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
+                "Checkbox 'Production stops when all LOT...' da CHECKED thanh cong.");
         }
 
         private const int LOT_DIALOG_TIMEOUT_MS = 15000;
