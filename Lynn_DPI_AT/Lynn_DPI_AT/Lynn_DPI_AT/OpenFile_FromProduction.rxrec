@@ -2127,6 +2127,10 @@ yPUUtFACZHqKMj1FLRQAmR6ijI9RS0UAf//Z
 			<comment>
 			</comment>
 			<bindings>
+				<binding
+				target="Message"
+				variable="ExpectedFileName">
+				</binding>
 			</bindings>
 		</loggingrecorditem>
 	</recorditems>

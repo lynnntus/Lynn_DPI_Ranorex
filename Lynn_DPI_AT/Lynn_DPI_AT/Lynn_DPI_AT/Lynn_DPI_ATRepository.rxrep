@@ -343,7 +343,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			addcaps="checkbox,wpfelement,wpfgroupelement"
 			capname="checkbox"
 			id="08c334b9-f5fb-4690-b779-609d02b71459"
-			name="ProductionStopsWhenAllLOTInspection"
+			name="ChkProductionStopsWhenAllLotComplete"
 			refimgid="3bddf9ea-8213-44d5-9ab4-835f67ae3e78"
 			robustPath="/form[@name='Popup']//checkbox[@text>'Production stops when all']"
 			searchtimeout="30000ms">

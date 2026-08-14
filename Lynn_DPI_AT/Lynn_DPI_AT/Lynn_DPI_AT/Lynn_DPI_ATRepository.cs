@@ -888,7 +888,7 @@ namespace Lynn_DPI_AT
             RepoItemInfo _radionotuseInfo;
             RepoItemInfo _radioquantityinspectionInfo;
             RepoItemInfo _radiolotproductionInfo;
-            RepoItemInfo _productionstopswhenalllotinspectionInfo;
+            RepoItemInfo _chkproductionstopswhenalllotcompleteInfo;
             RepoItemInfo _btnlotsettingsInfo;
             RepoItemInfo _btnapplyproductionpresettingInfo;
 
@@ -901,7 +901,7 @@ namespace Lynn_DPI_AT
                 _radionotuseInfo = new RepoItemInfo(this, "RadioNotUse", ".//radiobutton[@text='Not Use']", ".//radiobutton[@text='Not Use']", 30000, null, "f7956365-8b39-40b4-8c5f-c663045209d1");
                 _radioquantityinspectionInfo = new RepoItemInfo(this, "RadioQuantityInspection", ".//radiobutton[@text='Quantity of Inspection Objects']", ".//radiobutton[@text>'Quantity of Inspection Ob']", 30000, null, "b6f8ca6e-b8c9-4604-b937-dbf4c6dd9028");
                 _radiolotproductionInfo = new RepoItemInfo(this, "RadioLotProduction", ".//radiobutton[@text='LOT Production']", ".//radiobutton[@text='LOT Production']", 30000, null, "facbf450-87fd-4556-a5aa-5bd281c7e8cf");
-                _productionstopswhenalllotinspectionInfo = new RepoItemInfo(this, "ProductionStopsWhenAllLOTInspection", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
+                _chkproductionstopswhenalllotcompleteInfo = new RepoItemInfo(this, "ChkProductionStopsWhenAllLotComplete", "container[1]/?/?/checkbox[@text>'Production stops when all']", ".//checkbox[@text>'Production stops when all']", 30000, null, "08c334b9-f5fb-4690-b779-609d02b71459");
                 _btnlotsettingsInfo = new RepoItemInfo(this, "BtnLotSettings", "container[1]//button[@text='Settings']", ".//button[@text='Settings']", 30000, null, "bd58e8d2-a7ec-404e-9e09-a6ae223f5ffc");
                 _btnapplyproductionpresettingInfo = new RepoItemInfo(this, "BtnApplyProductionPresetting", ".//button[@text='Apply']", ".//button[@text='Apply']", 30000, true, "d3124fd6-d55f-4ce9-a842-9704dd0a508c");
             }
@@ -1003,26 +1003,26 @@ namespace Lynn_DPI_AT
             }
 
             /// <summary>
-            /// The ProductionStopsWhenAllLOTInspection item.
+            /// The ChkProductionStopsWhenAllLotComplete item.
             /// </summary>
             [RepositoryItem("08c334b9-f5fb-4690-b779-609d02b71459")]
-            public virtual Ranorex.CheckBox ProductionStopsWhenAllLOTInspection
+            public virtual Ranorex.CheckBox ChkProductionStopsWhenAllLotComplete
             {
                 get
                 {
-                    return _productionstopswhenalllotinspectionInfo.CreateAdapter<Ranorex.CheckBox>(true);
+                    return _chkproductionstopswhenalllotcompleteInfo.CreateAdapter<Ranorex.CheckBox>(true);
                 }
             }
 
             /// <summary>
-            /// The ProductionStopsWhenAllLOTInspection item info.
+            /// The ChkProductionStopsWhenAllLotComplete item info.
             /// </summary>
             [RepositoryItemInfo("08c334b9-f5fb-4690-b779-609d02b71459")]
-            public virtual RepoItemInfo ProductionStopsWhenAllLOTInspectionInfo
+            public virtual RepoItemInfo ChkProductionStopsWhenAllLotCompleteInfo
             {
                 get
                 {
-                    return _productionstopswhenalllotinspectionInfo;
+                    return _chkproductionstopswhenalllotcompleteInfo;
                 }
             }
 

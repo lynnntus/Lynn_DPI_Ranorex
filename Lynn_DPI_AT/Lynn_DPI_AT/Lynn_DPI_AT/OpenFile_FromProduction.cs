@@ -190,7 +190,7 @@ namespace Lynn_DPI_AT
             //repo.BtnOpenInDialog.Click("39;14");
             //Delay.Milliseconds(0);
             
-            Report.Screenshot(ReportLevel.Success, "User", "", null, false, new RecordItemIndex(5));
+            Report.Screenshot(ReportLevel.Success, "User", ExpectedFileName, null, false, new RecordItemIndex(5));
             
         }
 
