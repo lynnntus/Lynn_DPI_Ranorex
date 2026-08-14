@@ -133,6 +133,7 @@ namespace Lynn_DPI_AT
 
             // 3b: Verify dialog dong sau click Apply
             sw.Restart();
+            LogDiagElementState("TRUOC_WAIT");
             try
             {
                 repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.WaitForNotExists(APPLY_CLOSE_VERIFY_TIMEOUT_MS);
@@ -140,6 +141,7 @@ namespace Lynn_DPI_AT
             catch
             {
                 sw.Stop();
+                LogDiagElementState("SAU_WAIT_FAIL");
                 TakeScreenshot();
                 Report.Log(ReportLevel.Failure, "VerifyAutoClose",
                     string.Format("THAT BAI: Dialog van con mo sau khi click Apply ({0}s). App loi nghiem trong.",
@@ -154,6 +156,96 @@ namespace Lynn_DPI_AT
                 string.Format("Dialog da dong sau khi click Apply ({0:F1}s). "
                     + "TEST PASS nhung app KHONG tu dong dong dialog — can review lai.",
                     sw.ElapsedMilliseconds / 1000.0));
+        }
+
+        private void LogDiagElementState(string label)
+        {
+            const string DIALOG_RXPATH = "/form[@name='Popup' and @title='Production Presetting']";
+            const string BUTTON_RXPATH = DIALOG_RXPATH + "/.//button[@text='Apply']";
+
+            try
+            {
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("=== DIAG [{0}] BAT DAU ===", label));
+
+                // 1. Dem so form match dialog path
+                var forms = Host.Local.Find<Ranorex.Form>(DIALOG_RXPATH);
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("[{0}] So form match dialog path: {1}", label, forms.Count));
+
+                for (int i = 0; i < forms.Count; i++)
+                {
+                    try
+                    {
+                        var f = forms[i];
+                        var rect = f.Element.ScreenRectangle;
+                        Report.Log(ReportLevel.Info, "DIAG",
+                            string.Format("[{0}] Form[{1}]: Visible={2}, Enabled={3}, Rect={4}, Path={5}",
+                                label, i, f.Visible, f.Enabled,
+                                string.Format("({0},{1},{2},{3})", rect.X, rect.Y, rect.Width, rect.Height),
+                                f.Element.ToString()));
+                    }
+                    catch (Exception ex)
+                    {
+                        Report.Log(ReportLevel.Warn, "DIAG",
+                            string.Format("[{0}] Form[{1}]: LOI doc properties — {2}", label, i, ex.Message));
+                    }
+                }
+
+                // 2. Dem so button match Apply path (direct find)
+                var buttons = Host.Local.Find<Ranorex.Button>(BUTTON_RXPATH);
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("[{0}] So button match Apply path (direct): {1}", label, buttons.Count));
+
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    try
+                    {
+                        var b = buttons[i];
+                        var rect = b.Element.ScreenRectangle;
+                        Report.Log(ReportLevel.Info, "DIAG",
+                            string.Format("[{0}] Button[{1}]: Visible={2}, Enabled={3}, Rect={4}",
+                                label, i, b.Visible, b.Enabled,
+                                string.Format("({0},{1},{2},{3})", rect.X, rect.Y, rect.Width, rect.Height)));
+                    }
+                    catch (Exception ex)
+                    {
+                        Report.Log(ReportLevel.Warn, "DIAG",
+                            string.Format("[{0}] Button[{1}]: LOI doc properties — {2}", label, i, ex.Message));
+                    }
+                }
+
+                // 3. Repo accessor — kiem tra stale cache
+                bool repoExists = repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(0);
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("[{0}] Repo BtnApply Exists(0): {1}", label, repoExists));
+
+                if (repoExists)
+                {
+                    try
+                    {
+                        var repoBtn = repo.InspectionRegionSettings.BtnApplyProductionPresetting;
+                        var repoRect = repoBtn.Element.ScreenRectangle;
+                        Report.Log(ReportLevel.Info, "DIAG",
+                            string.Format("[{0}] Repo BtnApply: Visible={1}, Enabled={2}, Rect=({3},{4},{5},{6})",
+                                label, repoBtn.Visible, repoBtn.Enabled,
+                                repoRect.X, repoRect.Y, repoRect.Width, repoRect.Height));
+                    }
+                    catch (Exception ex)
+                    {
+                        Report.Log(ReportLevel.Warn, "DIAG",
+                            string.Format("[{0}] Repo BtnApply: LOI doc properties — {1}", label, ex.Message));
+                    }
+                }
+
+                Report.Log(ReportLevel.Info, "DIAG",
+                    string.Format("=== DIAG [{0}] KET THUC ===", label));
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "DIAG",
+                    string.Format("[{0}] DIAG LOI TONG: {1}", label, ex.Message));
+            }
         }
 
         private void TakeScreenshot()

@@ -2,6 +2,18 @@
 
 ## 2026-08-14
 
+### Thêm DIAG log tại Bước 3b — Verify_ProductionPresettingDialog
+
+- **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+- **Thay đổi**: Thêm method `LogDiagElementState(label)` và gọi tại 2 điểm trong Bước 3b (trước `WaitForNotExists` và trong catch khi fail)
+- **Mục đích**: Thu thập evidence — đếm element match, log Visible/Enabled/Rect, so sánh repo vs direct find. Xác định root cause: path đụng, stale cache, hoặc invisible element.
+- **Tạm thời**: Sẽ cleanup sau khi fix root cause.
+
+### Tạo HANDOFF file cho Verify_ProductionPresettingDialog session
+
+- **File**: `docs/HANDOFF_Verify_ProductionPresettingDialog_20260814.md`
+- **Nội dung**: Lịch sử 5 bước fix, trạng thái hiện tại (FAIL 90s nhưng dialog không hiển thị), nghi ngờ root cause (path/element issue), next step (thêm DIAG log)
+
 ### Fix false failure Bước 3b — Production Presetting dialog close timeout (lần 2)
 
 - **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
