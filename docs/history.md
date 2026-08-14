@@ -2,6 +2,14 @@
 
 ## 2026-08-14
 
+### Fix false failure Bước 3b — Production Presetting dialog close timeout (lần 2)
+
+- **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+- **Thay đổi**: `APPLY_CLOSE_VERIFY_TIMEOUT_MS`: 45000 → 90000 (45s → 90s)
+- **Lý do**: App version mới có performance regression — dialog mất ~37s để đóng (manual test xác nhận). Timeout 45s không đủ. Tăng lên 90s (~2.4x observed max) theo lesson `dialog-close-polling-timeout`.
+- **Thay đổi phụ**: Xóa stale comment `(max 5s)` ở dòng 134 — đã sai từ lần sửa trước.
+- **Không ảnh hưởng performance**: `WaitForNotExists` return ngay khi dialog đóng, 90s chỉ là upper bound.
+
 ### Fix false failure Bước 3b — Production Presetting dialog close timeout
 
 - **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
