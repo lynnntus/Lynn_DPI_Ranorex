@@ -24,6 +24,7 @@ Khi test PASS ở row 1 (hoặc lần chạy đầu) nhưng FAIL ở row 2+ vớ
 3. Tìm trực tiếp bằng `Host.Local.Find()` → element Visible=True, Rect có giá trị đúng. Nhưng qua repo accessor → Visible=False, Rect={0,0,0,0}.
 4. Thuộc tính element qua repo accessor trả về giá trị từ lần chạy trước (stale data).
 5. Dialog/form đã đóng rồi mở lại, nhưng repo vẫn trỏ đến instance cũ đã bị destroy.
+6. **Polling `.Exists()` / `WaitForNotExists` loop chạy hết timeout dù dialog đã đóng thật** (screenshot xác nhận chỉ còn parent window, không còn dialog). `Exists()` trả True cho element đã bị destroy vì cache giữ stale reference.
 
 ## Nguyên nhân gốc
 
@@ -74,12 +75,13 @@ Repository folder có **Use Cache = True** (mặc định trong Ranorex). Khi fo
 - **TUYỆT ĐỐI KHÔNG** giả định "element not visible" là do selector sai nếu chưa so sánh repo accessor vs tìm trực tiếp.
 - **TUYỆT ĐỐI KHÔNG** tăng timeout khi root cause là stale reference — chờ bao lâu cũng không fix được object đã chết.
 - **TUYỆT ĐỐI KHÔNG** để Use Cache = True cho folder chứa dialog/popup tạm thời.
+- **TUYỆT ĐỐI KHÔNG** bypass cache bằng `Host.Local.TryFindSingle()` với RxPath hardcode trong UserCode — selector và cache config đều thuộc về repository. Fix đúng là tắt Use Cache trong `.rxrep`, không phải viết code workaround.
 - **LUÔN LUÔN** kiểm tra Use Cache của folder cha KHI gặp "element not visible" mà Spy thấy element hiển thị.
 
 ## Evidence
 
-- HANDOFF master: `docs/HANDOFF.md` — Bug 1: "Repo cache element cha đã chết". Log DIAG xác nhận: direct find → Visible=True, Rect={998,849,120,32}; repo accessor → Visible=False, Rect={0,0,0,0}.
-- Fix: Use Cache = False cho folder `InspectionRegionSettings` và `ShutdownDialog` (cả 2 dùng `form[@name='Popup']`).
+- **Case 1 — ClickApplyWithFallback (2026-07-20):** HANDOFF master `docs/HANDOFF.md` — Bug 1: "Repo cache element cha đã chết". Log DIAG xác nhận: direct find → Visible=True, Rect={998,849,120,32}; repo accessor → Visible=False, Rect={0,0,0,0}. Fix: Use Cache = False cho folder `InspectionRegionSettings` và `ShutdownDialog` (cả 2 dùng `form[@name='Popup']`).
+- **Case 2 — HandleLotProductionSettings (2026-08-13):** OF_003 LotProduction report 225030. Sau click BtnLotApply, LOT Settings đóng OK (screenshot 01:20.263 xác nhận chỉ còn Production Presetting). Nhưng `repo.KohyoungGUI1.TxtLotIDInfo.Exists()` trả True → polling loop chạy hết 15s → false failure "LOT Settings KHONG dong sau 15000ms". Root cause: folder `KohyoungGUI1` có Use Cache = True, cache giữ stale reference cho `lotIDTextBox` sau khi dialog đóng. Fix: Use Cache = False cho folder `KohyoungGUI1`.
 
 ## Xem thêm
 

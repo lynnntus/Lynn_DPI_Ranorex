@@ -2,13 +2,14 @@
 
 ## 2026-08-13
 
-### ~AM — Fix LOT Settings dialog close detection
+### ~AM — Fix LOT Settings dialog close detection → PASS
 - **Triệu chứng**: Sau click BtnLotApply, LOT Settings đóng OK nhưng code báo "KHONG dong sau 15000ms" — false failure
 - **Root cause**: `repo.KohyoungGUI1.TxtLotIDInfo.Exists()` dùng `usecache="True"` → cache giữ stale reference sau khi dialog đóng → `Exists()` luôn True
-- **Fix**: Thêm `TryFindLotDialog()` dùng `Host.Local.TryFindSingle()` (bypass cache), thay 3 chỗ `TxtLotIDInfo.Exists()` trong `HandleLotProductionSettings()`
-- **Lessons áp dụng**: `repo-use-cache-stale-element.md`, `dialog-close-polling-timeout.md`
+- **Fix ban đầu**: Thêm `TryFindLotDialog()` dùng `Host.Local.TryFindSingle()` (bypass cache)
+- **Fix đúng**: Set Use Cache = False trên folder `KohyoungGUI1` trong Ranorex Studio — xác nhận root cause là stale cache, không phải RxPath quá rộng
+- **Kết quả**: OF_003 (LotProduction) PASS
+- **Docs updated**: `repo-use-cache-stale-element.md` (thêm case 2 + anti-pattern bypass cache), `INDEX.md` (thêm symptom polling timeout)
 - **File**: `OpenFile_FromProduction.UserCode.cs`
-- **Pending**: Save + Build trên Máy A, chạy OF_003 trên Máy B
 
 ## 2026-08-12
 

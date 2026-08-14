@@ -1,7 +1,7 @@
 # Lessons Learned — Index
 
 > Tra cứu theo triệu chứng để tìm lesson phù hợp.  
-> Cập nhật: 2026-07-24
+> Cập nhật: 2026-08-13
 
 ---
 
@@ -27,6 +27,7 @@
 | Test PASS row 1, FAIL row 2+ — element "not visible" dù UI hiển thị | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
 | Repo accessor: Visible=False, Rect={0,0,0,0} — Direct find: Visible=True | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
 | Dialog đóng rồi mở lại nhưng repo vẫn trỏ element cũ | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
+| Polling `.Exists()` / `WaitForNotExists` loop hết timeout dù dialog đã đóng thật | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
 | RxPath có `/form[...]/form[...]` — hai form nối nhau | RxPath Nested Form Invalid | [rxpath-nested-form-invalid.md](rxpath-nested-form-invalid.md) |
 | Element tìm thấy chậm (~30s fallback) dù UI hiển thị ngay | RxPath Nested Form Invalid | [rxpath-nested-form-invalid.md](rxpath-nested-form-invalid.md) |
 | Ranorex auto-generated Robust path chứa form lồng form | RxPath Nested Form Invalid | [rxpath-nested-form-invalid.md](rxpath-nested-form-invalid.md) |

@@ -2,10 +2,17 @@
 
 ## 2026-08-13
 
-### ~AM — Fix LOT Settings dialog close detection
+### ~AM — Fix LOT Settings dialog close detection → PASS
 - **Modified**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/OpenFile_FromProduction.UserCode.cs`
   - Thêm constant `LOT_DIALOG_RXPATH` và helper `TryFindLotDialog()` — dùng `Host.Local.TryFindSingle()` bypass repo cache
   - Thay 3 chỗ `repo.KohyoungGUI1.TxtLotIDInfo.Exists()` bằng `TryFindLotDialog()` trong `HandleLotProductionSettings()`
+- **Modified**: `docs/lessons/repo-use-cache-stale-element.md`
+  - Thêm triệu chứng #6: polling `.Exists()` loop hết timeout dù dialog đã đóng
+  - Thêm Evidence Case 2: OF_003 LotProduction, folder `KohyoungGUI1` Use Cache stale
+  - Thêm anti-pattern: bypass cache bằng `Host.Local.TryFindSingle()` hardcode — fix đúng là tắt Use Cache trong repo
+- **Modified**: `docs/lessons/INDEX.md`
+  - Thêm symptom: "Polling `.Exists()` / `WaitForNotExists` loop hết timeout dù dialog đã đóng thật" → Use Cache Stale Element
+  - Cập nhật ngày: 2026-08-13
 
 ## 2026-08-12
 
