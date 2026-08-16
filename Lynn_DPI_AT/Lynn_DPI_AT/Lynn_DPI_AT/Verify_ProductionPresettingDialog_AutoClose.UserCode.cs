@@ -33,9 +33,19 @@ namespace Lynn_DPI_AT
         private void Init()
         {
             Report.Log(ReportLevel.Info, "VerifyAutoClose", "Module bat dau — verify dialog Production Presetting tu dong dong.");
+            RunVerifyAutoClose();
         }
 
+        /// <summary>
+        /// Recording step — must return within Ranorex Action Timeout (5s default).
+        /// All logic runs in Init() → RunVerifyAutoClose() to avoid timeout.
+        /// </summary>
         public void ClickApplyWithPolling()
+        {
+            Report.Log(ReportLevel.Info, "VerifyAutoClose", "ClickApplyWithPolling — logic da chay trong Init(). Skip.");
+        }
+
+        private void RunVerifyAutoClose()
         {
             var sw = System.Diagnostics.Stopwatch.StartNew();
 

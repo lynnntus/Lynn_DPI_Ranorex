@@ -2,6 +2,22 @@
 
 ## 2026-08-16
 
+### Fix "Invocation did not finish within timeout 5s" — Chuyển logic vào Init()
+
+- **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+- **Root cause**: `ClickApplyWithPolling()` là recording step (userrecorditem trong .rxrec) → bị Ranorex Action Timeout 5s default. Method cần ~34-60s → bị kill.
+- **Thay đổi**:
+  - `Init()` → gọi `RunVerifyAutoClose()` (private method mới chứa toàn bộ logic)
+  - `ClickApplyWithPolling()` → no-op (log + return ngay)
+  - Logic test không thay đổi, chỉ chuyển nơi gọi
+- **Build**: PASS
+
+### Tạo lesson — Recording Step Action Timeout
+
+- **File**: `docs/lessons/recording-step-action-timeout.md`
+- **Nội dung**: Recording step bị Action Timeout 5s default. Fix: chuyển logic dài vào Init().
+- **Update**: `docs/lessons/INDEX.md` — thêm 2 triệu chứng + category entry
+
 ### Fix Bước 3b — Thay WaitForNotExists bằng polling loop
 
 - **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
@@ -17,10 +33,10 @@
 - **Nội dung**: WaitForNotExists bị giới hạn bởi repo search timeout khi parameter > 30s. Fix: dùng polling loop `Exists(0)`.
 - **Update**: `docs/lessons/INDEX.md` — thêm 2 triệu chứng mới + category entry
 
-### Update HANDOFF — Verify_ProductionPresettingDialog
+### Tạo HANDOFF mới cho session 2026-08-16
 
-- **File**: `docs/HANDOFF_Verify_ProductionPresettingDialog_20260814.md`
-- **Thay đổi**: Thêm bước 7-8 (phân tích DIAG + fix), cập nhật trạng thái "ĐÃ FIX — chờ verify"
+- **File**: `docs/HANDOFF_Verify_ProductionPresettingDialog_20260816.md`
+- **Nội dung**: Lịch sử 8 bước, trạng thái hiện tại (error mới "Invocation did not finish within timeout 5s"), next step cho session tiếp theo
 
 ## 2026-08-14
 

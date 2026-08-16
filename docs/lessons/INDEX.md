@@ -28,6 +28,8 @@
 | Repo accessor: Visible=False, Rect={0,0,0,0} — Direct find: Visible=True | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
 | Dialog đóng rồi mở lại nhưng repo vẫn trỏ element cũ | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
 | Polling `.Exists()` / `WaitForNotExists` loop hết timeout dù dialog đã đóng thật | Use Cache Stale Element | [repo-use-cache-stale-element.md](repo-use-cache-stale-element.md) |
+| `"Invocation did not finish within the timeout of '00:00:05'"` trên user code method | Recording Step Action Timeout | [recording-step-action-timeout.md](recording-step-action-timeout.md) |
+| User code method (polling/wait loop) bị kill sau 5s dù logic đúng | Recording Step Action Timeout | [recording-step-action-timeout.md](recording-step-action-timeout.md) |
 | `WaitForNotExists` throw sớm hơn timeout parameter (~30s thay vì 90s) | WaitForNotExists Repo Timeout Limit | [waitfornotexists-repo-timeout-limit.md](waitfornotexists-repo-timeout-limit.md) |
 | `WaitForNotExists` throw dù element đã biến mất (DIAG confirm 0 match) | WaitForNotExists Repo Timeout Limit | [waitfornotexists-repo-timeout-limit.md](waitfornotexists-repo-timeout-limit.md) |
 | RxPath có `/form[...]/form[...]` — hai form nối nhau | RxPath Nested Form Invalid | [rxpath-nested-form-invalid.md](rxpath-nested-form-invalid.md) |
@@ -61,6 +63,7 @@
 ### Ranorex Framework
 - `.claude/lessons/login-retry-lesson.md` (R2) — Kiểm tra call chain trước khi sửa hàm
 - `.claude/lessons/login-retry-lesson.md` (R3) — `Init()` không thể skip recording steps
+- [recording-step-action-timeout.md](recording-step-action-timeout.md) — Recording step bị Action Timeout 5s → chuyển logic vào Init()
 
 ---
 
