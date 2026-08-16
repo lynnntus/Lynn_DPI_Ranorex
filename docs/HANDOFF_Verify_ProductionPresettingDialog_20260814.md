@@ -1,6 +1,6 @@
 # HANDOFF — Verify_ProductionPresettingDialog_AutoClose
 
-> Session: 2026-08-14
+> Session: 2026-08-14 ~ 2026-08-16
 
 ## Task
 
@@ -14,35 +14,23 @@ Module `Verify_ProductionPresettingDialog_AutoClose`. Verify dialog "Production 
 4. App version mới regression, manual test 37s → tăng Bước 3b từ 15s → 45s → 90s
 5. Timeout 90s vẫn FAIL, nhưng dialog KHÔNG còn hiển thị trên màn hình khi test báo fail
 6. Thêm DIAG log tại Bước 3b: `LogDiagElementState()` — chờ chạy test lấy evidence
+7. **Phân tích DIAG → root cause: `WaitForNotExists` bị giới hạn bởi repo search timeout (30s)**
+8. **Fix: thay WaitForNotExists bằng polling loop `Exists(0)`, cleanup DIAG, giảm timeout 90s → 60s**
 
 ## Trạng thái
 
-- Timeout Bước 3b = 90s (`APPLY_CLOSE_VERIFY_TIMEOUT_MS = 90000`)
-- Test FAIL sau 90s
-- **QUAN TRỌNG**: gap giữa quan sát thực tế và log → nghi ngờ path/element issue, không phải timing
+- **ĐÃ FIX** — chờ chạy test trên máy B để verify
+- Timeout Bước 3b = 60s (`APPLY_CLOSE_VERIFY_TIMEOUT_MS = 60000`)
+- Bước 3b dùng polling loop `Exists(0)` thay `WaitForNotExists`
+- DIAG code đã cleanup
 
-## Nghi ngờ root cause
+## Root cause (confirmed bằng DIAG evidence)
 
-Ranorex tìm thấy element match path nhưng element đó KHÔNG phải dialog đang hiển thị. Có thể: path đụng, stale reference, invisible element trong UI tree.
+`WaitForNotExists(90000)` KHÔNG chờ 90s. Bị giới hạn bởi repo search timeout = 30s. Throw exception sau ~29s dù element đã biến mất. Catch block coi đó là "element vẫn tồn tại" → false failure.
 
-## Business context
+Evidence: DIAG `SAU_WAIT_FAIL` xác nhận direct find = 0, repo Exists(0) = False — element đã biến mất tại thời điểm throw.
 
-- Test verify FUNCTIONAL (dialog đóng được), KHÔNG test performance
-- PASS khi dialog tự đóng HOẶC click Apply đóng được
-- Chấp nhận test chạy chậm với app version mới
-
-## Next step
-
-**DIAG log đã thêm (bước 6)**. Chạy test trên máy B, khi FAIL sẽ có log category `DIAG` trong Ranorex report.
-
-Cách đọc log DIAG:
-- `[TRUOC_WAIT]`: trạng thái ngay sau click Apply, trước khi chờ
-- `[SAU_WAIT_FAIL]`: trạng thái khi 90s hết mà vẫn báo element tồn tại
-- Nếu `So form match > 0` nhưng `Visible=False, Rect=(0,0,0,0)` → stale cache (lesson `repo-use-cache-stale-element`)
-- Nếu `So form match > 1` → path đụng (lesson `generic-popup-path-collision`)
-- Nếu direct find = 0 nhưng repo Exists = True → stale cache confirmed
-
-Sau khi có log, mở session mới và gửi kết quả DIAG để phân tích root cause.
+Lesson mới: [docs/lessons/waitfornotexists-repo-timeout-limit.md](docs/lessons/waitfornotexists-repo-timeout-limit.md)
 
 ## File liên quan
 

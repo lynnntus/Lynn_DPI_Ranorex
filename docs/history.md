@@ -1,5 +1,27 @@
 # Change History
 
+## 2026-08-16
+
+### Fix Bước 3b — Thay WaitForNotExists bằng polling loop
+
+- **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+- **Root cause**: `WaitForNotExists(90000)` bị giới hạn bởi repo search timeout (30s), throw sau ~29s dù element đã biến mất. DIAG log (08-14) xác nhận: direct find = 0, repo Exists(0) = False tại thời điểm throw.
+- **Thay đổi**:
+  - Bước 3b: thay `WaitForNotExists` bằng polling loop `Exists(0)` + `Delay.Milliseconds(500)`
+  - `APPLY_CLOSE_VERIFY_TIMEOUT_MS`: 90000 → 60000 (polling loop hoạt động đúng, không cần buffer lớn)
+  - Cleanup: xóa method `LogDiagElementState()` và 2 lời gọi DIAG
+
+### Tạo lesson — WaitForNotExists Repo Timeout Limit
+
+- **File**: `docs/lessons/waitfornotexists-repo-timeout-limit.md`
+- **Nội dung**: WaitForNotExists bị giới hạn bởi repo search timeout khi parameter > 30s. Fix: dùng polling loop `Exists(0)`.
+- **Update**: `docs/lessons/INDEX.md` — thêm 2 triệu chứng mới + category entry
+
+### Update HANDOFF — Verify_ProductionPresettingDialog
+
+- **File**: `docs/HANDOFF_Verify_ProductionPresettingDialog_20260814.md`
+- **Thay đổi**: Thêm bước 7-8 (phân tích DIAG + fix), cập nhật trạng thái "ĐÃ FIX — chờ verify"
+
 ## 2026-08-14
 
 ### Thêm DIAG log tại Bước 3b — Verify_ProductionPresettingDialog
