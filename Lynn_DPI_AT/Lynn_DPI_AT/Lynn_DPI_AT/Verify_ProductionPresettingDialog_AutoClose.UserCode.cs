@@ -29,6 +29,7 @@ namespace Lynn_DPI_AT
         private const int APPLY_ENABLED_TIMEOUT_MS = 10000;
         private const int APPLY_CLOSE_VERIFY_TIMEOUT_MS = 60000;
         private const int POLL_INTERVAL_MS = 500;
+        private const int ANR_RECOVERY_WAIT_MS = 3000;
 
         private void Init()
         {
@@ -49,6 +50,8 @@ namespace Lynn_DPI_AT
         {
             var sw = System.Diagnostics.Stopwatch.StartNew();
 
+            try
+            {
             // === BUOC 1: Cho dialog xuat hien (max 15s) ===
             Report.Log(ReportLevel.Info, "VerifyAutoClose",
                 string.Format("BUOC 1: Cho dialog 'Production Presetting' xuat hien (toi da {0}s)...",
@@ -150,10 +153,26 @@ namespace Lynn_DPI_AT
             bool dialogClosed = false;
             while (sw.ElapsedMilliseconds < APPLY_CLOSE_VERIFY_TIMEOUT_MS)
             {
-                if (!repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(0))
+                try
                 {
-                    dialogClosed = true;
-                    break;
+                    if (!repo.InspectionRegionSettings.BtnApplyProductionPresettingInfo.Exists(0))
+                    {
+                        dialogClosed = true;
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (!ex.GetType().Name.Contains("ApplicationNotResponding"))
+                        throw;
+
+                    Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                        string.Format("[APP_NOT_RESPONDING] BUOC 3b: App Not Responding khi polling dialog close — "
+                            + "cho {0}ms roi retry... (da chay {1:F1}s/{2}s)",
+                            ANR_RECOVERY_WAIT_MS, sw.ElapsedMilliseconds / 1000.0,
+                            APPLY_CLOSE_VERIFY_TIMEOUT_MS / 1000));
+                    Thread.Sleep(ANR_RECOVERY_WAIT_MS);
+                    continue;
                 }
                 Delay.Milliseconds(POLL_INTERVAL_MS);
             }
@@ -174,6 +193,34 @@ namespace Lynn_DPI_AT
                 string.Format("Dialog da dong sau khi click Apply ({0:F1}s). "
                     + "TEST PASS nhung app KHONG tu dong dong dialog — can review lai.",
                     sw.ElapsedMilliseconds / 1000.0));
+            }
+            finally
+            {
+                CleanupLeftoverDialog();
+            }
+        }
+
+        private void CleanupLeftoverDialog()
+        {
+            try
+            {
+                if (repo.InspectionRegionSettings.SelfInfo.Exists(1000))
+                {
+                    Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                        "[CLEANUP] Dialog Production Presetting van mo sau khi module ket thuc — dang dong...");
+                    Keyboard.Press("{Escape}");
+                    Thread.Sleep(500);
+                    if (repo.InspectionRegionSettings.SelfInfo.Exists(1000))
+                        repo.InspectionRegionSettings.Self.Close();
+                    Report.Log(ReportLevel.Info, "VerifyAutoClose",
+                        "[CLEANUP] Da dong dialog Production Presetting.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Report.Log(ReportLevel.Warn, "VerifyAutoClose",
+                    string.Format("[CLEANUP] Exception khi dong dialog (non-fatal): {0}", ex.Message));
+            }
         }
 
         private void TakeScreenshot()

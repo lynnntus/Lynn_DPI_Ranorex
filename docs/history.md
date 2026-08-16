@@ -2,6 +2,25 @@
 
 ## 2026-08-16
 
+### Fix ApplicationNotRespondingException cascade — Verify + OpenFile
+
+- **Files**:
+  - `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
+  - `OpenFile_FromProduction.UserCode.cs`
+- **Root cause**: App Neptune đôi khi trở thành Not Responding (OS-level hung) sau khi Verify module click Apply. Tất cả UI interaction throw `ApplicationNotRespondingException`. BUOC 3b polling loop KHÔNG có try-catch → exception propagate → module crash → dialog vẫn mở → OpenFile bắt đầu ngay 102ms sau → app vẫn hung → cascade FAIL.
+- **Thay đổi Verify module**:
+  - Thêm constant `ANR_RECOVERY_WAIT_MS = 3000`
+  - BUOC 3b: catch ANR + Thread.Sleep(3000) + continue polling (retry thay vì crash)
+  - Wrap `RunVerifyAutoClose()` body trong try-finally
+  - Thêm `CleanupLeftoverDialog()` — đóng dialog sót khi module kết thúc
+- **Thay đổi OpenFile module**:
+  - Thêm constants: `APP_RESPONSIVE_TIMEOUT_MS`, `CLICK_MAX_RETRIES`, `CLICK_ANR_WAIT_MS`
+  - Thêm `WaitForAppResponsive()` — poll CCIMainWindow.Exists(0), catch ANR + wait + retry (15s timeout)
+  - Init(): gọi `WaitForAppResponsive()` → `CleanupDialog()` TRƯỚC main flow
+  - Buoc 1: thay single try-catch bằng retry loop (max 3 attempts, catch ANR, 5s wait giữa retry)
+- **Build**: PASS
+- **Next**: Test 7-10 lần trên Máy B. Nếu PASS stable → cleanup DIAG logs + tạo lesson.
+
 ### DIAG logging — OpenFile_FromProduction flaky "Invocation did not finish within timeout 5s"
 
 - **File**: `OpenFile_FromProduction.UserCode.cs`

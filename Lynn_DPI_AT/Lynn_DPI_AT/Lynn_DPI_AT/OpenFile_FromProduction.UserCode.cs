@@ -29,6 +29,10 @@ namespace Lynn_DPI_AT
         public const int APPLY_PRESETTING_TIMEOUT_MS = 15000;
         public const int TOP_VALIDATE_TIMEOUT_MS = 60000;
         public const int TOP_VALIDATE_POLL_MS = 2000;
+        private const int APP_RESPONSIVE_TIMEOUT_MS = 15000;
+        private const int APP_RESPONSIVE_RETRY_WAIT_MS = 5000;
+        private const int CLICK_MAX_RETRIES = 2;
+        private const int CLICK_ANR_WAIT_MS = 5000;
 
         private void Init()
         {
@@ -47,6 +51,9 @@ namespace Lynn_DPI_AT
                 string.Format("InspectionQuantity = '{0}'", InspectionQuantity));
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 string.Format("LotName = '{0}'", LotName));
+            WaitForAppResponsive();
+            CleanupDialog();
+
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 string.Format("[DIAG] Init() END — {0}", System.DateTime.Now.ToString("HH:mm:ss.fff")));
         }
@@ -85,22 +92,56 @@ namespace Lynn_DPI_AT
                 // [DIAG] Element state truoc click
                 LogDiagBtnState("TRUOC CLICK");
 
-                var diagStep1Sw = System.Diagnostics.Stopwatch.StartNew();
-                try
+                Exception lastClickException = null;
+                bool clickSuccess = false;
+                for (int attempt = 0; attempt <= CLICK_MAX_RETRIES; attempt++)
                 {
-                    repo.CCIMainWindow.Area1.BtnOpenFileFromProduction.Click();
-                    diagStep1Sw.Stop();
-                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                        string.Format("[DIAG] Buoc 1 Click THANH CONG — {0}ms", diagStep1Sw.ElapsedMilliseconds));
+                    var diagStep1Sw = System.Diagnostics.Stopwatch.StartNew();
+                    try
+                    {
+                        if (attempt > 0)
+                            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                                string.Format("Buoc 1: Retry {0}/{1}...", attempt, CLICK_MAX_RETRIES));
+
+                        repo.CCIMainWindow.Area1.BtnOpenFileFromProduction.Click();
+                        diagStep1Sw.Stop();
+                        Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                            string.Format("[DIAG] Buoc 1 Click THANH CONG — {0}ms (attempt {1})",
+                                diagStep1Sw.ElapsedMilliseconds, attempt + 1));
+                        clickSuccess = true;
+                        break;
+                    }
+                    catch (Exception clickEx)
+                    {
+                        diagStep1Sw.Stop();
+                        lastClickException = clickEx;
+
+                        if (!clickEx.GetType().Name.Contains("ApplicationNotResponding"))
+                        {
+                            Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
+                                string.Format("[DIAG] Buoc 1 Click EXCEPTION (non-ANR) sau {0}ms — {1}: {2}",
+                                    diagStep1Sw.ElapsedMilliseconds, clickEx.GetType().Name, clickEx.Message));
+                            LogDiagBtnState("SAU CLICK EXCEPTION");
+                            throw;
+                        }
+
+                        Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                            string.Format("[APP_NOT_RESPONDING] Buoc 1: App Not Responding khi click OpenFile "
+                                + "(attempt {0}/{1}) — cho {2}ms roi retry...",
+                                attempt + 1, CLICK_MAX_RETRIES + 1, CLICK_ANR_WAIT_MS));
+
+                        if (attempt < CLICK_MAX_RETRIES)
+                            Thread.Sleep(CLICK_ANR_WAIT_MS);
+                    }
                 }
-                catch (Exception clickEx)
+
+                if (!clickSuccess)
                 {
-                    diagStep1Sw.Stop();
                     Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
-                        string.Format("[DIAG] Buoc 1 Click EXCEPTION sau {0}ms — {1}: {2}",
-                            diagStep1Sw.ElapsedMilliseconds, clickEx.GetType().Name, clickEx.Message));
-                    LogDiagBtnState("SAU CLICK EXCEPTION");
-                    throw;
+                        string.Format("Buoc 1: FAIL sau {0} attempts — App Not Responding khong hoi phuc.",
+                            CLICK_MAX_RETRIES + 1));
+                    LogDiagBtnState("SAU ALL RETRY FAIL");
+                    throw lastClickException;
                 }
 
                 // [DIAG] Element state sau click
@@ -641,6 +682,37 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
                 string.Format("{0}: dialog van con mo sau {1}ms.", strategyName, timeoutMs));
             return false;
+        }
+
+        private void WaitForAppResponsive()
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < APP_RESPONSIVE_TIMEOUT_MS)
+            {
+                try
+                {
+                    repo.CCIMainWindow.SelfInfo.Exists(0);
+                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
+                        string.Format("WaitForAppResponsive: App responsive ({0:F1}s).",
+                            sw.ElapsedMilliseconds / 1000.0));
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    if (!ex.GetType().Name.Contains("ApplicationNotResponding"))
+                        throw;
+
+                    Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                        string.Format("[APP_NOT_RESPONDING] WaitForAppResponsive: App chua responsive — "
+                            + "cho {0}ms roi retry... (da chay {1:F1}s/{2}s)",
+                            APP_RESPONSIVE_RETRY_WAIT_MS, sw.ElapsedMilliseconds / 1000.0,
+                            APP_RESPONSIVE_TIMEOUT_MS / 1000));
+                    Thread.Sleep(APP_RESPONSIVE_RETRY_WAIT_MS);
+                }
+            }
+            Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
+                string.Format("WaitForAppResponsive: App van chua responsive sau {0}s — tiep tuc, co the fail.",
+                    APP_RESPONSIVE_TIMEOUT_MS / 1000));
         }
 
         private void LogDiagBtnState(string phase)
