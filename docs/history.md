@@ -2,6 +2,20 @@
 
 ## 2026-08-16
 
+### DIAG logging — OpenFile_FromProduction flaky "Invocation did not finish within timeout 5s"
+
+- **File**: `OpenFile_FromProduction.UserCode.cs`
+- **Mục tiêu**: Thu thập data so sánh PASS vs FAIL run (flaky: 2/7 FAIL)
+- **Thay đổi**:
+  - Thêm `[DIAG]` log ở Init() (timestamp start/end)
+  - Thêm `Stopwatch` tổng ở `OpenRecipeFileByPath()` + timing mỗi bước (2-8)
+  - Wrap Bước 1 (click BtnOpenFileFromProduction) với try-catch + DIAG trước/sau
+  - Thêm `LogDiagBtnState()` helper — log Exists, Visible, Enabled, Element path, RxPath match count
+  - Log entry/exit method với timestamp + tổng elapsed
+- **KHÔNG sửa business logic** — chỉ thêm Report.Log
+- **Build**: PASS
+- **Next**: Chạy 5-10 lần trên Máy B, thu thập PASS vs FAIL log, phân tích session tiếp
+
 ### Fix "Invocation did not finish within timeout 5s" — Chuyển logic vào Init()
 
 - **File**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`
