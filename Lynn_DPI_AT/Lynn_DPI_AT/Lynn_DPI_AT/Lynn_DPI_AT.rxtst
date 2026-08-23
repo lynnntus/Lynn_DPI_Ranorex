@@ -229,6 +229,7 @@
 			<smartfoldernode
 			datasource="Production_OpenFile"
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
+			iterationcount="2"
 			name="Production_OpenFile">
 			</smartfoldernode>
 			<testsuite
@@ -262,6 +263,10 @@
 			reportwriteinterval="30000ms"
 			singlereportpdfdirectory="SingleReportPDF">
 			</testsuite>
+			<smartfoldernode
+			id="d9519220-36b0-4aac-8a3a-48b8ab318aaa"
+			name="ProductionFlow_Loop(n)">
+			</smartfoldernode>
 			<testmodule
 			enabled="False"
 			id="db56bd37-53c2-4db5-b317-dff5bc08120c"
@@ -367,38 +372,42 @@
 						name="Logout">
 						</testmodule>
 					</testcase>
-					<testcase
-					id="21ad167a-be4e-4564-af1f-cca60a80e8ed"
-					name="OpenFile">
-						<testmodule
-						id="34d391e5-cdae-4239-8ad5-3c270f56ffdd"
+					<smartfoldernode
+					id="d9519220-36b0-4aac-8a3a-48b8ab318aaa"
+					name="ProductionFlow_Loop(n)">
+						<testcase
+						id="21ad167a-be4e-4564-af1f-cca60a80e8ed"
 						name="OpenFile">
-						</testmodule>
-					</testcase>
-					<testcase
-					id="4985393b-ae1b-4ebd-931b-281c83046a79"
-					name="Production_TabNavigation">
-						<testmodule
-						id="f20ab570-e3d3-4563-9701-70ab406a552d"
-						name="Tab_Production">
-						</testmodule>
-						<testmodule
-						id="639740b6-0aab-4720-b0d4-cb535714613c"
-						name="Verify_ProductionPresettingDialog_AutoClose">
-						</testmodule>
-					</testcase>
-					<testcase
-					id="e3c00646-e4a8-4447-bca3-db0ca47b0c38"
-					name="Production_OpenFile">
-						<smartfoldernode
-						id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
-						name="Production_OpenFile">
 							<testmodule
-							id="33de9e53-27f4-4344-b1d0-3f8cee1c4b56"
-							name="OpenFile_FromProduction">
+							id="34d391e5-cdae-4239-8ad5-3c270f56ffdd"
+							name="OpenFile">
 							</testmodule>
-						</smartfoldernode>
-					</testcase>
+						</testcase>
+						<testcase
+						id="4985393b-ae1b-4ebd-931b-281c83046a79"
+						name="Production_TabNavigation">
+							<testmodule
+							id="f20ab570-e3d3-4563-9701-70ab406a552d"
+							name="Tab_Production">
+							</testmodule>
+							<testmodule
+							id="639740b6-0aab-4720-b0d4-cb535714613c"
+							name="Verify_ProductionPresettingDialog_AutoClose">
+							</testmodule>
+						</testcase>
+						<testcase
+						id="e3c00646-e4a8-4447-bca3-db0ca47b0c38"
+						name="Production_OpenFile">
+							<smartfoldernode
+							id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
+							name="Production_OpenFile">
+								<testmodule
+								id="33de9e53-27f4-4344-b1d0-3f8cee1c4b56"
+								name="OpenFile_FromProduction">
+								</testmodule>
+							</smartfoldernode>
+						</testcase>
+					</smartfoldernode>
 					<testcase
 					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
 					name="Logout">
@@ -520,7 +529,13 @@
 			id="4985393b-ae1b-4ebd-931b-281c83046a79">
 			</testcontainer>
 			<testcontainer
+			id="bed77880-1e1a-4061-9d52-61e4510ded0a">
+			</testcontainer>
+			<testcontainer
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">
+			</testcontainer>
+			<testcontainer
+			id="d9519220-36b0-4aac-8a3a-48b8ab318aaa">
 			</testcontainer>
 			<testcontainer
 			id="e3c00646-e4a8-4447-bca3-db0ca47b0c38">
