@@ -1,5 +1,18 @@
 # Chat History
 
+## 2026-08-23
+
+### Cleanup DIAG code + Tạo lesson ANR state cascade
+- **Yêu cầu**: Fix ANR đã stable → xóa DIAG diagnostic code, giữ business logic + ANR handling, tạo lesson
+- **Quy trình**: Plan → confirm → cleanup code → self-review → build → lesson → INDEX → docs
+- **Kết quả**:
+  - `OpenFile_FromProduction.UserCode.cs`: xóa ~25 DIAG items (logs, Stopwatch, LogDiagBtnState method), reformat 2 dòng mixed
+  - `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs`: KHÔNG thay đổi (không chứa DIAG)
+  - Tạo `docs/lessons/anr-state-cascade.md`: lesson về ANR cascade pattern, fix chuẩn, ví dụ code
+  - Update `docs/lessons/INDEX.md`: +4 triệu chứng, +1 category entry
+  - Build PASS
+- **Files**: `OpenFile_FromProduction.UserCode.cs`, `docs/lessons/anr-state-cascade.md`, `docs/lessons/INDEX.md`
+
 ## 2026-08-13
 
 ### ~AM — Fix LOT Settings dialog close detection → PASS

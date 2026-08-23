@@ -1,5 +1,19 @@
 # Change History
 
+## 2026-08-23
+
+### Cleanup DIAG code + Tạo lesson ANR state cascade
+
+- **File sửa**: `OpenFile_FromProduction.UserCode.cs`
+  - Xóa toàn bộ DIAG diagnostic code (~25 items): `[DIAG]` logs, `LogDiagBtnState()` method, `diagTotalSw`/`diagStep1Sw` Stopwatch
+  - Reformat 2 dòng mixed DIAG+business: bỏ `[DIAG]` tag nhưng giữ error info
+  - **GIỮ NGUYÊN**: ANR handling (catch, retry, cleanup), business logs, constants
+  - File giảm từ 792 → ~715 dòng
+- **File không đổi**: `Verify_ProductionPresettingDialog_AutoClose.UserCode.cs` (không chứa DIAG)
+- **File mới**: `docs/lessons/anr-state-cascade.md` — lesson về ApplicationNotRespondingException cascade pattern
+- **File update**: `docs/lessons/INDEX.md` — thêm 4 triệu chứng ANR + 1 category entry
+- **Build**: PASS
+
 ## 2026-08-16
 
 ### Fix ApplicationNotRespondingException cascade — Verify + OpenFile

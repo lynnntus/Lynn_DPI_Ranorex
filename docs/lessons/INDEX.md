@@ -1,7 +1,7 @@
 # Lessons Learned — Index
 
 > Tra cứu theo triệu chứng để tìm lesson phù hợp.  
-> Cập nhật: 2026-08-16
+> Cập nhật: 2026-08-23
 
 ---
 
@@ -38,6 +38,10 @@
 | `Caption` trả về AutomationId thay vì text hiển thị | WPF Caption vs Text | [wpf-caption-vs-textvalue.md](wpf-caption-vs-textvalue.md) |
 | `GetAttributeValueText("Caption")` trả giá trị tĩnh, không đổi dù UI thay đổi | WPF Caption vs Text | [wpf-caption-vs-textvalue.md](wpf-caption-vs-textvalue.md) |
 | Validation FAIL: actual = internal name (ví dụ `topTextRecipeName`) | WPF Caption vs Text | [wpf-caption-vs-textvalue.md](wpf-caption-vs-textvalue.md) |
+| `"Invocation did not finish within the timeout of '00:00:05'"` + app hung (Not Responding) | ANR State Cascade | [anr-state-cascade.md](anr-state-cascade.md) |
+| Nhiều module FAIL đồng thời, log đều cách 5s | ANR State Cascade | [anr-state-cascade.md](anr-state-cascade.md) |
+| `Exists(0)` block 5s thay vì return ngay | ANR State Cascade | [anr-state-cascade.md](anr-state-cascade.md) |
+| Module FAIL vì dialog/state từ module trước chưa cleanup | ANR State Cascade | [anr-state-cascade.md](anr-state-cascade.md) |
 
 ---
 
@@ -56,6 +60,7 @@
 ### Timing / Wait
 - [dialog-close-polling-timeout.md](dialog-close-polling-timeout.md) — Polling thay fixed wait cho dialog close
 - [waitfornotexists-repo-timeout-limit.md](waitfornotexists-repo-timeout-limit.md) — WaitForNotExists bị giới hạn bởi repo search timeout
+- [anr-state-cascade.md](anr-state-cascade.md) — ApplicationNotRespondingException cascade giữa modules
 
 ### Attribute / Property
 - [wpf-caption-vs-textvalue.md](wpf-caption-vs-textvalue.md) — WPF Caption trả AutomationId, dùng Text/SelectionText

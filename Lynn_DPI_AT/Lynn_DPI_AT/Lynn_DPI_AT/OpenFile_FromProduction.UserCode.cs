@@ -36,8 +36,6 @@ namespace Lynn_DPI_AT
 
         private void Init()
         {
-            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                string.Format("[DIAG] Init() START — {0}", System.DateTime.Now.ToString("HH:mm:ss.fff")));
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction", "Module bat dau.");
             Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                 string.Format("Enable = '{0}'", Enable));
@@ -53,17 +51,10 @@ namespace Lynn_DPI_AT
                 string.Format("LotName = '{0}'", LotName));
             WaitForAppResponsive();
             CleanupDialog();
-
-            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                string.Format("[DIAG] Init() END — {0}", System.DateTime.Now.ToString("HH:mm:ss.fff")));
         }
 
         public string OpenRecipeFileByPath()
         {
-            var diagTotalSw = System.Diagnostics.Stopwatch.StartNew();
-            Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                string.Format("[DIAG] OpenRecipeFileByPath() ENTER — {0}", System.DateTime.Now.ToString("HH:mm:ss.fff")));
-
             if (!string.Equals(this.Enable, "Y", StringComparison.OrdinalIgnoreCase))
             {
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
@@ -89,14 +80,10 @@ namespace Lynn_DPI_AT
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 1: Click BtnOpenFileFromProduction...");
 
-                // [DIAG] Element state truoc click
-                LogDiagBtnState("TRUOC CLICK");
-
                 Exception lastClickException = null;
                 bool clickSuccess = false;
                 for (int attempt = 0; attempt <= CLICK_MAX_RETRIES; attempt++)
                 {
-                    var diagStep1Sw = System.Diagnostics.Stopwatch.StartNew();
                     try
                     {
                         if (attempt > 0)
@@ -104,24 +91,18 @@ namespace Lynn_DPI_AT
                                 string.Format("Buoc 1: Retry {0}/{1}...", attempt, CLICK_MAX_RETRIES));
 
                         repo.CCIMainWindow.Area1.BtnOpenFileFromProduction.Click();
-                        diagStep1Sw.Stop();
-                        Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                            string.Format("[DIAG] Buoc 1 Click THANH CONG — {0}ms (attempt {1})",
-                                diagStep1Sw.ElapsedMilliseconds, attempt + 1));
                         clickSuccess = true;
                         break;
                     }
                     catch (Exception clickEx)
                     {
-                        diagStep1Sw.Stop();
                         lastClickException = clickEx;
 
                         if (!clickEx.GetType().Name.Contains("ApplicationNotResponding"))
                         {
                             Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
-                                string.Format("[DIAG] Buoc 1 Click EXCEPTION (non-ANR) sau {0}ms — {1}: {2}",
-                                    diagStep1Sw.ElapsedMilliseconds, clickEx.GetType().Name, clickEx.Message));
-                            LogDiagBtnState("SAU CLICK EXCEPTION");
+                                string.Format("Buoc 1: Click EXCEPTION (non-ANR) — {0}: {1}",
+                                    clickEx.GetType().Name, clickEx.Message));
                             throw;
                         }
 
@@ -140,20 +121,12 @@ namespace Lynn_DPI_AT
                     Report.Log(ReportLevel.Error, "OpenFile_FromProduction",
                         string.Format("Buoc 1: FAIL sau {0} attempts — App Not Responding khong hoi phuc.",
                             CLICK_MAX_RETRIES + 1));
-                    LogDiagBtnState("SAU ALL RETRY FAIL");
                     throw lastClickException;
                 }
-
-                // [DIAG] Element state sau click
-                LogDiagBtnState("SAU CLICK OK");
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 1 tong: {0}ms", diagTotalSw.ElapsedMilliseconds));
 
                 Delay.Milliseconds(500);
 
                 // --- Buoc 2: Cho dialog xuat hien ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 2 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 2: Cho dialog Select Recipe File...");
                 if (!repo.SelectRecipeFile.SelfInfo.Exists(FILE_DIALOG_TIMEOUT_MS))
@@ -163,24 +136,18 @@ namespace Lynn_DPI_AT
                         "Select Recipe File dialog khong xuat hien sau khi click BtnOpenFileFromProduction.");
                 }
                 Report.Log(ReportLevel.Success, "OpenFile_FromProduction",
-                    string.Format("Buoc 2 OK: dialog xuat hien. [DIAG] elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
+                    "Buoc 2 OK: dialog xuat hien.");
 
                 // --- Buoc 3: Nhap path ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 3 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction", "Buoc 3: Nhap path...");
                 EnterPathIntoFileNameField(recipeFilePath);
 
                 // --- Buoc 4: Click Open ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 4 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction", "Buoc 4: Click Open...");
                 repo.BtnOpenInDialog.Click();
                 Delay.Milliseconds(1000);
 
                 // --- Buoc 5: Cho Production Presetting dialog xuat hien ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 5 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 5: Cho Production Presetting dialog...");
                 if (!repo.InspectionRegionSettings.SelfInfo.Exists(APPLY_PRESETTING_TIMEOUT_MS))
@@ -193,27 +160,19 @@ namespace Lynn_DPI_AT
                     "Buoc 5 OK: Production Presetting dialog da xuat hien.");
 
                 // --- Buoc 5.5: Chon Production Setting theo test data ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 5.5 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 SelectProductionSetting();
 
                 // --- Buoc 6: Click Apply voi fallback ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 6 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 6: Click Apply voi fallback...");
                 ClickApplyWithFallback();
 
                 // --- Buoc 7: Cho app load sau Apply ---
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 7 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 7: Cho app load sau Apply...");
                 Delay.Milliseconds(2000);
 
                 // --- Buoc 8: Validate TopTextRecipeName chua ModelName ---
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] Buoc 8 START — elapsed {0}ms", diagTotalSw.ElapsedMilliseconds));
                 Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
                     "Buoc 8: Validate ModelName tai vung TOP...");
                 ValidateTopModelName();
@@ -221,10 +180,6 @@ namespace Lynn_DPI_AT
             finally
             {
                 CleanupDialog();
-                diagTotalSw.Stop();
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] OpenRecipeFileByPath() EXIT — tong {0}ms — {1}",
-                        diagTotalSw.ElapsedMilliseconds, System.DateTime.Now.ToString("HH:mm:ss.fff")));
             }
 
             return this.RecipeFilePath;
@@ -713,39 +668,6 @@ namespace Lynn_DPI_AT
             Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
                 string.Format("WaitForAppResponsive: App van chua responsive sau {0}s — tiep tuc, co the fail.",
                     APP_RESPONSIVE_TIMEOUT_MS / 1000));
-        }
-
-        private void LogDiagBtnState(string phase)
-        {
-            try
-            {
-                var btnInfo = repo.CCIMainWindow.Area1.BtnOpenFileFromProductionInfo;
-                bool exists = btnInfo.Exists(0);
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] BtnOpenFileFromProduction {0} — Exists={1}", phase, exists));
-
-                if (exists)
-                {
-                    var btn = repo.CCIMainWindow.Area1.BtnOpenFileFromProduction;
-                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                        string.Format("[DIAG] BtnOpenFileFromProduction {0} — Visible={1}, Enabled={2}",
-                            phase, btn.Visible, btn.Enabled));
-                    Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                        string.Format("[DIAG] BtnOpenFileFromProduction {0} — Element={1}",
-                            phase, btn.Element.ToString()));
-                }
-
-                string rxPath = btnInfo.AbsolutePath.ToString();
-                IList<Ranorex.Adapter> matches = Host.Local.Find<Ranorex.Adapter>(rxPath, 0);
-                Report.Log(ReportLevel.Info, "OpenFile_FromProduction",
-                    string.Format("[DIAG] BtnOpenFileFromProduction {0} — RxPath match count={1}",
-                        phase, matches.Count));
-            }
-            catch (Exception ex)
-            {
-                Report.Log(ReportLevel.Warn, "OpenFile_FromProduction",
-                    string.Format("[DIAG] LogDiagBtnState({0}) exception: {1}", phase, ex.Message));
-            }
         }
 
         private void CleanupDialog()
