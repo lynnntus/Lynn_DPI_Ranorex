@@ -182,6 +182,8 @@ namespace Lynn_DPI_AT
                 CleanupDialog();
             }
 
+            ProductionContext.LastInspectionQuantity = this.InspectionQuantity;
+
             return this.RecipeFilePath;
         }
 

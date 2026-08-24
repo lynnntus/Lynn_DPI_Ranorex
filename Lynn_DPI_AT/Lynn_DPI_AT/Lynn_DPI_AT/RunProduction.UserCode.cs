@@ -41,17 +41,18 @@ namespace Lynn_DPI_AT
         /// </summary>
         private void Init()
         {
+            string iqRaw = ProductionContext.LastInspectionQuantity;
             Report.Log(ReportLevel.Info, "RunProduction",
-                string.Format("=== BAT DAU RunProduction === InspectionQuantity='{0}'", this.InspectionQuantity));
+                string.Format("=== BAT DAU RunProduction === InspectionQuantity='{0}' (tu ProductionContext)", iqRaw));
 
-            string iqTrimmed = (this.InspectionQuantity ?? "").Trim();
+            string iqTrimmed = (iqRaw ?? "").Trim();
             int expectedQty;
             if (string.IsNullOrEmpty(iqTrimmed) || !int.TryParse(iqTrimmed, out expectedQty) || expectedQty <= 0)
             {
                 Report.Log(ReportLevel.Error, "RunProduction",
-                    string.Format("InspectionQuantity khong hop le: '{0}'. Phai la so nguyen > 0.", this.InspectionQuantity));
+                    string.Format("InspectionQuantity khong hop le: '{0}'. Phai la so nguyen > 0. Kiem tra OpenFile_FromProduction da chay thanh cong voi Enable='Y' chua.", iqRaw));
                 throw new ArgumentException(string.Format(
-                    "InspectionQuantity khong hop le: '{0}'", this.InspectionQuantity));
+                    "InspectionQuantity khong hop le: '{0}' (tu ProductionContext.LastInspectionQuantity)", iqRaw));
             }
 
             Report.Log(ReportLevel.Info, "RunProduction",
