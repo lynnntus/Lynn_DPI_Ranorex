@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <Array name="active" />
+  <Array name="active">
+    <Element value="Recording1.rxrec" />
+  </Array>
   <Array name="bookmarks" />
   <Array name="files">
     <Element value="Lynn_DPI_AT.rxtst" />
+    <Element value="Recording1.rxrec" />
   </Array>
   <Properties name="projectSavedData">
     <Properties name="customTool">

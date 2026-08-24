@@ -265,6 +265,60 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 			searchtimeout="30000ms">
 				/form[@title='CCIMainWindow']/container[@automationid='WindowTitleBarPanel']//radiobutton[@text='Production']
 			</item>
+			<folder
+			capname="container"
+			id="a00ea2fe-ee09-4bd8-bfb4-df6d23596078"
+			isrooted="True"
+			name="MainView"
+			searchtimeout="30000ms"
+			usecache="False">
+				<item
+				addcaps="progressbar,wpfelement,wpfgroupelement"
+				capname="progressbar"
+				id="9dbe459f-4ad4-4b86-8c0a-acafd8b732eb"
+				name="ProgressBar"
+				refimgid="84aab81f-9abb-4d6e-865f-9c32d928b0ea"
+				refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[1]/container[@automationid='area5_2']/checkbox/container[4]/progressbar[@automationid='progressBar']"
+				robustPath="/form[@title='CCIMainWindow']//container[@automationid='area5_2']/checkbox/container[4]/progressbar[@automationid='progressBar']"
+				searchtimeout="30000ms">
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='area5_2']//progressbar[@automationid='progressBar']
+				</item>
+				<item
+				addcaps="text,wpfelement"
+				capname="text"
+				id="bebb6158-62b8-4e9d-a9ef-db280046e9af"
+				name="TxtProducedQty"
+				refimgid="f7f4d8ea-82ae-4a22-8d06-83ce8d5f27a9"
+				robustPath="/form[@title='CCIMainWindow']//text[@caption='1/1']"
+				searchtimeout="30000ms">
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='area5_2']//text
+				</item>
+				<item
+				addcaps="button,wpfelement,wpfgroupelement"
+				capname="button"
+				id="f32fea9c-608d-4b33-9e96-91822af6db48"
+				name="BtnRun"
+				refimgid="d8c607db-eeb3-4089-a661-db7ae7cbaf91"
+				refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/form/container[1]/container/button/button[2]"
+				robustPath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/form/container[1]/container[@caption='']/button/button[2]"
+				searchtimeout="30000ms">
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/form/container[1]/container[@caption='']/button/button[2]
+				</item>
+				<item
+				addcaps="container,wpfelement"
+				capname="container"
+				id="445b1b4a-78f0-4f9e-8760-628bbd266c43"
+				name="SomeContainer"
+				refimgid="92fd805e-2d8a-47e0-ba6e-f15d3d1dd032"
+				refpath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[1]/container[@automationid='area5_2']/checkbox/container[4]"
+				robustPath="/form[@title='CCIMainWindow']/container[@automationid='MainView']/container[@automationid='area5_2']/checkbox/container[4]"
+				searchtimeout="30000ms">
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='area5_2']/checkbox/container[4]
+				</item>
+				<basepath>
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']
+				</basepath>
+			</folder>
 			<basepath>
 				/form[@title='CCIMainWindow']
 			</basepath>
@@ -298,6 +352,37 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 		usecache="False">
 			<basepath>
 				/form[@name='Popup' and @title='Inspection Region Settings']
+			</basepath>
+		</folder>
+		<folder
+		capname="form"
+		id="7c9e2404-7f4b-42a4-8f46-255f38d7d21a"
+		isrooted="True"
+		name="NoticePopup"
+		searchtimeout="30000ms"
+		usecache="False">
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="a9042a51-e00e-484d-b60d-f77b51967076"
+			name="TxtNotice"
+			refimgid="f122224c-a60d-48cd-82b7-d0561c7723e6"
+			robustPath="/form[@processname='KohyoungGUI']/?/?/text[@caption='Notice']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/text[@caption='Notice']
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="05eacce5-25d8-40fe-9d78-a7d0c417f917"
+			name="Confirm"
+			refimgid="3f268dbc-8808-4491-9923-15e3ddb9a0b8"
+			robustPath="/form[@processname='KohyoungGUI']/button[@text='Confirm']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/button[@text='Confirm']
+			</item>
+			<basepath>
+				/form[@processname='KohyoungGUI']
 			</basepath>
 		</folder>
 		<appfolder
@@ -706,7 +791,7 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 		id="b102d482-a8d6-4cf7-8b38-8adbed6c328f"
 		isrooted="True"
 		name="KohyoungGUI1"
-		refimgid="afd3239b-3e16-40fc-97e5-a37393a78f82"
+		refimgid="fa2568c1-29de-4cc4-9a50-7c57bdaeb545"
 		refpath="/form[@processname='KohyoungGUI']"
 		searchtimeout="30000ms"
 		usecache="False">
@@ -806,6 +891,309 @@ VZB4/J8BADyZI3kwAy98AAAAAElFTkSuQmCC
 			robustPath="/form[@processname='KohyoungGUI']/?/?/button[@automationid='btnDualClose']"
 			searchtimeout="30000ms">
 				/form[@processname='KohyoungGUI']/?/?/button[@automationid='btnDualClose']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="c8b1d17f-e17e-4312-96c3-581758a0ec91"
+			name="LOTSettings"
+			refpath="/form[@processname='KohyoungGUI']/container[@automationid='xTitleBar']/text[@caption='LOT Settings']"
+			robustPath="/form[@processname='KohyoungGUI']/?/?/text[@caption='LOT Settings']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/text[@caption='LOT Settings']
+			</item>
+			<item
+			addcaps="container,wpfelement,wpfgroupelement"
+			capname="container"
+			id="e1fa201e-dd50-46d8-a28b-27c0437c9160"
+			name="XTitleBar"
+			refpath="/form[@processname='KohyoungGUI']/container[@automationid='xTitleBar']"
+			robustPath="/form[@processname='KohyoungGUI']/container[@automationid='xTitleBar']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/container[@automationid='xTitleBar']
+			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="62bfaba9-9608-496c-9711-14c038d55128"
+			name="Lane"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[1]/text[@caption='Lane']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption='Lane']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption='Lane']
+			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="360079dc-5131-4d28-820c-75acc2fc1e36"
+			name="Front"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[1]/text[@caption='Front']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption='Front']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption='Front']
+			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="02478ae0-b5da-4f07-a3bd-0f49d61116e0"
+			name="Name"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[1]/text[@caption='Name']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption='Name']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption='Name']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="2c4eaba8-8988-4e67-a937-56bfbf701473"
+			name="KYEVer93JobRemakeThicknessEditPCB"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[1]/text[@caption='KYE_Ver9_3_Job remake_Thickness_EditPCB']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption>'KYE_Ver9_3_Job remake_Thi']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption&gt;'KYE_Ver9_3_Job remake_Thi']
+			</item>
+			<item
+			addcaps="container,wpfelement,wpfgroupelement"
+			capname="container"
+			id="30a615ef-9895-49fc-b469-f52a7d4c9a4e"
+			name="SomeContainer"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[1]"
+			robustPath="/form[@processname='KohyoungGUI']/text/container[1]"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text/container[1]
+			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="f580eb9d-3405-4b2e-8556-eca582256bc4"
+			name="LOTID"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@caption='LOT ID']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption='LOT ID']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption='LOT ID']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="cdb40e49-cee1-416a-bb29-6a3e21b660f0"
+			name="SomeText"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/text[@automationid='lotIDTextBox']/text[@caption='']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='lotIDTextBox']/text[@caption='']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/text[@caption='']
+			</item>
+			<item
+			addcaps="container,wpfelement,wpfgroupelement"
+			capname="container"
+			id="9f04501c-dac0-44ec-98fd-6b3bd6c02f4d"
+			name="PARTScrollContentPresenter"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/text[@automationid='lotIDTextBox']/container[@automationid='PART_ScrollContentPresenter']"
+			robustPath="/form[@processname='KohyoungGUI']//container[@automationid='PART_ScrollContentPresenter']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/container[@automationid='PART_ScrollContentPresenter']
+			</item>
+			<item
+			addcaps="scrollbar,wpfelement"
+			capname="scrollbar"
+			id="d30792f3-3bf2-4483-945b-56b51e9cfca0"
+			name="VerticalScrollBar"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/text[@automationid='lotIDTextBox']/scrollbar[@automationid='VerticalScrollBar']"
+			robustPath="/form[@processname='KohyoungGUI']//scrollbar[@automationid='VerticalScrollBar']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/scrollbar[@automationid='VerticalScrollBar']
+			</item>
+			<item
+			addcaps="scrollbar,wpfelement"
+			capname="scrollbar"
+			id="6d5cf6c4-4eee-4851-93f0-1d71c78e0294"
+			name="HorizontalScrollBar"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/text[@automationid='lotIDTextBox']/scrollbar[@automationid='HorizontalScrollBar']"
+			robustPath="/form[@processname='KohyoungGUI']//scrollbar[@automationid='HorizontalScrollBar']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']/scrollbar[@automationid='HorizontalScrollBar']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="5b96fe89-0ce9-4a66-bdfc-b2322e4937c6"
+			name="LotIDTextBox"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/text[@automationid='lotIDTextBox']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='lotIDTextBox']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//text[@automationid='lotIDTextBox']
+			</item>
+			<item
+			addcaps="list,wpfelement"
+			capname="list"
+			id="a9b9e437-5efc-48c4-8cb1-b03c9addd9ed"
+			name="XRecentLotIDListBox"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/form[@automationid='recentLotNamePopup']/list[@automationid='xRecentLotIDListBox']"
+			robustPath="/form[@processname='KohyoungGUI']//list[@automationid='xRecentLotIDListBox']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//form[@automationid='recentLotNamePopup']/list[@automationid='xRecentLotIDListBox']
+			</item>
+			<item
+			addcaps="form,wpfelement,wpfgroupelement"
+			capname="form"
+			id="09684b23-5025-4153-abfa-ed87a0ce6b40"
+			name="RecentLotNamePopup"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/container[@caption='']/form[@automationid='recentLotNamePopup']"
+			robustPath="/form[@processname='KohyoungGUI']//form[@automationid='recentLotNamePopup']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']//form[@automationid='recentLotNamePopup']
+			</item>
+			<item
+			addcaps="text,wpfelement"
+			capname="text"
+			id="e6676cf3-199e-4c6f-b522-2530faee8d39"
+			name="PlannedQty"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@caption='Planned Q''ty']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@caption='Planned Q''ty']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@caption='Planned Q''ty']
+			</item>
+			<item
+			addcaps="scrollbar,wpfelement"
+			capname="scrollbar"
+			id="c89d8603-bb18-4ec1-859d-277a48025abd"
+			name="VerticalScrollBar1"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/text[@caption='']/scrollbar[@automationid='VerticalScrollBar']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']/scrollbar[@automationid='VerticalScrollBar']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@automationid='qtyTxtBox']/?/?/scrollbar[@automationid='VerticalScrollBar']
+			</item>
+			<item
+			addcaps="scrollbar,wpfelement"
+			capname="scrollbar"
+			id="b9385df3-c792-4627-bc51-1f28a3a0f24c"
+			name="HorizontalScrollBar1"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/text[@caption='']/scrollbar[@automationid='HorizontalScrollBar']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']/scrollbar[@automationid='HorizontalScrollBar']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@automationid='qtyTxtBox']/?/?/scrollbar[@automationid='HorizontalScrollBar']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="f6a47388-4953-4506-a844-5f684ec95a86"
+			name="SomeText1"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/text[@caption='']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/text[@caption='']
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="c2998e1e-253c-4f43-91f7-b639d02bf91a"
+			name="SomeButton1"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/container[@caption='']/button[1]"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/container[@caption='']/button[1]"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@automationid='qtyTxtBox']/container/button[1]
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="4186cbd3-4b50-41f8-90be-3f7a3c3f543d"
+			name="SomeButton2"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/container[@caption='']/button[2]"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/container[@caption='']/button[2]"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@automationid='qtyTxtBox']/container/button[2]
+			</item>
+			<item
+			addcaps="container,wpfelement,wpfgroupelement"
+			capname="container"
+			id="57bd1d2b-8908-45a0-94e9-e96503e36401"
+			name="SomeContainer2"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']/container[@caption='']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/container[@caption='']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']/container[@caption='']
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="b423a99f-11b0-4125-a52c-80eef2787163"
+			name="QtyTxtBox"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/text[@automationid='qtyTxtBox']"
+			robustPath="/form[@processname='KohyoungGUI']//text[@automationid='qtyTxtBox']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/text[@automationid='qtyTxtBox']
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="3e8c13be-2a63-4517-b115-0feed22f576c"
+			name="AddButton"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]/button[@automationid='addButton']"
+			robustPath="/form[@processname='KohyoungGUI']//button[@automationid='addButton']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/?/?/button[@automationid='addButton']
+			</item>
+			<item
+			addcaps="container,wpfelement,wpfgroupelement"
+			capname="container"
+			id="f302c8fa-e19a-4d97-a2e7-d8c6cd2b8a02"
+			name="SomeContainer3"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']/container[2]"
+			robustPath="/form[@processname='KohyoungGUI']/text/container[2]"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text/container[2]
+			</item>
+			<item
+			addcaps="text,wpfelement,wpfgroupelement"
+			capname="text"
+			id="ab04e82c-6df0-4006-a6e7-d84cf1275b5f"
+			name="RegisterLOTInformation"
+			refpath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']"
+			robustPath="/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/text[@caption='Register LOT Information.']
+			</item>
+			<item
+			addcaps="container,wpfelement"
+			capname="container"
+			id="531ca1d7-dce5-48dd-b3d2-1eac4fa9a07c"
+			name="SomeContainer4"
+			refimgid="4e83c0d7-25b0-4435-b92b-c9b2f4e24bee"
+			refpath="/form[@processname='KohyoungGUI']/container[@caption='']"
+			robustPath="/form[@processname='KohyoungGUI']/container[@caption='']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/container[@caption='']
+			</item>
+			<item
+			addcaps="menuitem,accessible"
+			capname="menuitem"
+			id="a90c61cd-06b8-4913-baf5-24b68e90f6a0"
+			name="System"
+			refimgid="42985d68-fe9b-4118-ad1b-7fcde750ce74"
+			refpath="/form[@processname='KohyoungGUI']/menubar[@accessiblename='System']/menuitem[@accessiblename='System']"
+			robustPath="/form[@processname='KohyoungGUI']/?/?/menuitem[@accessiblename='System']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/menuitem[@accessiblename='System']
+			</item>
+			<item
+			addcaps="menubar,accessible"
+			capname="menubar"
+			id="90c2aa32-57c4-4190-9bc8-659809a9c63f"
+			name="System1"
+			refimgid="91d063bd-d32c-4944-8ede-ba49521f134d"
+			refpath="/form[@processname='KohyoungGUI']/menubar[@accessiblename='System']"
+			robustPath="/form[@processname='KohyoungGUI']/menubar[@accessiblename='System']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/menubar[@accessiblename='System']
+			</item>
+			<item
+			addcaps="button,wpfelement,wpfgroupelement"
+			capname="button"
+			id="b05c0231-df62-4350-a944-d50ae4182826"
+			name="BtnCancelLotSettings"
+			refimgid="6a9e3d93-bab5-40b8-8b1b-4c559910ea75"
+			robustPath="/form[@processname='KohyoungGUI']/?/?/button[@text='Cancel']"
+			searchtimeout="30000ms">
+				/form[@processname='KohyoungGUI']/?/?/button[@text='Cancel']
 			</item>
 			<basepath>
 				/form[@processname='KohyoungGUI']

@@ -24,29 +24,29 @@ namespace Lynn_DPI_AT
 {
 #pragma warning disable 0436 //(CS0436) The type 'type' in 'assembly' conflicts with the imported type 'type2' in 'assembly'. Using the type defined in 'assembly'.
     /// <summary>
-    ///The Recording1 recording.
+    ///The RunProduction recording.
     /// </summary>
     [TestModule("31a668c9-4d3a-4de2-b4d0-832098b8e516", ModuleType.Recording, 1)]
-    public partial class Recording1 : ITestModule
+    public partial class RunProduction : ITestModule
     {
         /// <summary>
         /// Holds an instance of the Lynn_DPI_ATRepository repository.
         /// </summary>
         public static Lynn_DPI_ATRepository repo = Lynn_DPI_ATRepository.Instance;
 
-        static Recording1 instance = new Recording1();
+        static RunProduction instance = new RunProduction();
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public Recording1()
+        public RunProduction()
         {
         }
 
         /// <summary>
         /// Gets a static instance of this recording.
         /// </summary>
-        public static Recording1 Instance
+        public static RunProduction Instance
         {
             get { return instance; }
         }

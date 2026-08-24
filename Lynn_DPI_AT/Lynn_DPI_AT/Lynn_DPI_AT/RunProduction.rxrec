@@ -19,7 +19,7 @@ mode="Desktop">
 		True
 	</useDefaultItemLogging>
 	<codegen
-	classname="Recording1"
+	classname="RunProduction"
 	namespace="Lynn_DPI_AT">
 	</codegen>
 	<variables>
@@ -41,7 +41,7 @@ mode="Desktop">
 	</repository>
 	<usercodefile
 	lang="CSharp">
-		Recording1.UserCode.cs
+		RunProduction.UserCode.cs
 	</usercodefile>
 	<references>
 	</references>
