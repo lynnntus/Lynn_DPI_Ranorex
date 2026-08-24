@@ -147,6 +147,24 @@
 			ref="19eff9e4-8b0d-407c-a2c6-45940e8d82b6"
 			type="Recording">
 			</testmodule>
+			<testcase
+			id="7a318c88-ce9d-4027-aaaf-3f6497af60a9"
+			name="RunProduction">
+			</testcase>
+			<testmodule
+			id="89feb3a8-8f64-41fc-9d72-59bff96585bf"
+			name="RunProduction"
+			ref="31a668c9-4d3a-4de2-b4d0-832098b8e516"
+			type="Recording">
+				<missingdatabinding>
+					<var
+					dataname="InspectionQuantity"
+					datasourceid="80a8d855-407c-4c04-814b-f7785a0691ce"
+					variableid="f0cbb94d-a9a1-425e-9311-c757b9f9ad29"
+					variablename="InspectionQuantity">
+					</var>
+				</missingdatabinding>
+			</testmodule>
 			<testmodule
 			id="8bce43af-0c7b-4dc9-ad07-16b0eba7a5b1"
 			name="Logout"
@@ -229,7 +247,6 @@
 			<smartfoldernode
 			datasource="Production_OpenFile"
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f"
-			iterationcount="2"
 			name="Production_OpenFile">
 			</smartfoldernode>
 			<testsuite
@@ -310,12 +327,6 @@
 					</param>
 				</parameters>
 			</testcase>
-			<testmodule
-			id="f67877db-5542-490c-ad46-12669de85ed6"
-			name="Recording1"
-			ref="31a668c9-4d3a-4de2-b4d0-832098b8e516"
-			type="Recording">
-			</testmodule>
 		</flatlistofchildren>
 		<childhierarchy>
 			<testsuite
@@ -335,10 +346,6 @@
 							name="StartAUT">
 							</testmodule>
 						</setup>
-						<testmodule
-						id="f67877db-5542-490c-ad46-12669de85ed6"
-						name="Recording1">
-						</testmodule>
 						<teardown
 						id="5a935d87-f885-417b-b0ac-061dac073162"
 						name="teardown">
@@ -408,6 +415,14 @@
 							</smartfoldernode>
 						</testcase>
 					</smartfoldernode>
+					<testcase
+					id="7a318c88-ce9d-4027-aaaf-3f6497af60a9"
+					name="RunProduction">
+						<testmodule
+						id="89feb3a8-8f64-41fc-9d72-59bff96585bf"
+						name="RunProduction">
+						</testmodule>
+					</testcase>
 					<testcase
 					id="bed77880-1e1a-4061-9d52-61e4510ded0a"
 					name="Logout">
@@ -517,16 +532,7 @@
 		<testconfiguration
 		name="TestRun">
 			<testcontainer
-			id="21ad167a-be4e-4564-af1f-cca60a80e8ed">
-			</testcontainer>
-			<testcontainer
-			id="381b6681-d396-4d7f-acb9-ba7d3441db5a">
-			</testcontainer>
-			<testcontainer
-			id="3d1682f4-1614-490d-9714-819edec40d65">
-			</testcontainer>
-			<testcontainer
-			id="4985393b-ae1b-4ebd-931b-281c83046a79">
+			id="7a318c88-ce9d-4027-aaaf-3f6497af60a9">
 			</testcontainer>
 			<testcontainer
 			id="c94db1a5-1ec7-460a-ad47-12cdbc25582f">

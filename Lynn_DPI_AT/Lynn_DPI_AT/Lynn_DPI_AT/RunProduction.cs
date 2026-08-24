@@ -41,6 +41,7 @@ namespace Lynn_DPI_AT
         /// </summary>
         public RunProduction()
         {
+            NewVariable = "";
         }
 
         /// <summary>
@@ -52,6 +53,18 @@ namespace Lynn_DPI_AT
         }
 
 #region Variables
+
+        string _NewVariable;
+
+        /// <summary>
+        /// Gets or sets the value of variable NewVariable.
+        /// </summary>
+        [TestVariable("f0cbb94d-a9a1-425e-9311-c757b9f9ad29")]
+        public string NewVariable
+        {
+            get { return _NewVariable; }
+            set { _NewVariable = value; }
+        }
 
 #endregion
 
@@ -79,6 +92,21 @@ namespace Lynn_DPI_AT
 
             Init();
 
+            Step1_ClickRun();
+            Delay.Milliseconds(0);
+            
+            Step2_WaitForInspectionComplete();
+            Delay.Milliseconds(0);
+            
+            Step3_ClickConfirmOnNotice();
+            Delay.Milliseconds(0);
+            
+            Step5_VerifyProducedQuantity(ValueConverter.ArgumentFromString<int>("expectedQty", "0"));
+            Delay.Milliseconds(0);
+            
+            Step5_VerifyProducedQuantity(ValueConverter.ArgumentFromString<int>("expectedQty", "0"));
+            Delay.Milliseconds(0);
+            
         }
 
 #region Image Feature Data
