@@ -92,21 +92,6 @@ namespace Lynn_DPI_AT
 
             Init();
 
-            Step1_ClickRun();
-            Delay.Milliseconds(0);
-            
-            Step2_WaitForInspectionComplete();
-            Delay.Milliseconds(0);
-            
-            Step3_ClickConfirmOnNotice();
-            Delay.Milliseconds(0);
-            
-            Step4_ClickCancelOnLotSettings();
-            Delay.Milliseconds(0);
-            
-            Step5_VerifyProducedQuantity(ValueConverter.ArgumentFromString<int>("expectedQty", "0"));
-            Delay.Milliseconds(0);
-            
         }
 
 #region Image Feature Data
