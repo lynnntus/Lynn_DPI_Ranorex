@@ -78,7 +78,7 @@ mode="Desktop">
 		classname="RunProduction"
 		enabled="True"
 		isexternaltestmethod="False"
-		methodname="Step5_VerifyProducedQuantity"
+		methodname="Step4_ClickCancelOnLotSettings"
 		namespace="Lynn_DPI_AT"
 		optional="False">
 			<comment>
@@ -87,16 +87,6 @@ mode="Desktop">
 			</bindings>
 			<arguments
 			id="688ef408-9983-4c11-97f0-a2aa59de8dff">
-				<argument
-				argname="expectedQty"
-				id="5728d11d-2144-43b9-bcd5-e31edb9d917f">
-					<argvaluetype>
-						System.Int32
-					</argvaluetype>
-					<argvalue>
-						0
-					</argvalue>
-				</argument>
 			</arguments>
 		</userrecorditem>
 		<userrecorditem

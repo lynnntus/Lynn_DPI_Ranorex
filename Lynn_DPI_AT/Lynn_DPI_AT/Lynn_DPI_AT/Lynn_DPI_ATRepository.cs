@@ -879,7 +879,7 @@ namespace Lynn_DPI_AT
                     base("MainView", "container[@automationid='MainView']", parentFolder, 30000, null, false, "a00ea2fe-ee09-4bd8-bfb4-df6d23596078", "")
             {
                 _progressbarInfo = new RepoItemInfo(this, "ProgressBar", "?/?/container[@automationid='area5_2']//progressbar[@automationid='progressBar']", "container[@automationid='area5_2']/checkbox/container[4]/progressbar[@automationid='progressBar']", 30000, null, "9dbe459f-4ad4-4b86-8c0a-acafd8b732eb");
-                _txtproducedqtyInfo = new RepoItemInfo(this, "TxtProducedQty", "?/?/container[@automationid='area5_2']//text", "text[@caption='1/1']", 30000, null, "bebb6158-62b8-4e9d-a9ef-db280046e9af");
+                _txtproducedqtyInfo = new RepoItemInfo(this, "TxtProducedQty", "?/?/container[@automationid='area5_2']//progressbar[@automationid='progressBar']/text", "text[@caption='1/1']", 30000, null, "bebb6158-62b8-4e9d-a9ef-db280046e9af");
                 _btnrunInfo = new RepoItemInfo(this, "BtnRun", "form/container[1]/container[@caption='']/button/button[2]", "form/container[1]/container[@caption='']/button/button[2]", 30000, null, "f32fea9c-608d-4b33-9e96-91822af6db48");
                 _somecontainerInfo = new RepoItemInfo(this, "SomeContainer", "?/?/container[@automationid='area5_2']/checkbox/container[4]", "container[@automationid='area5_2']/checkbox/container[4]", 30000, null, "445b1b4a-78f0-4f9e-8760-628bbd266c43");
             }

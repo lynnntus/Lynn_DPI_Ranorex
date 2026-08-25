@@ -101,7 +101,7 @@ namespace Lynn_DPI_AT
             Step3_ClickConfirmOnNotice();
             Delay.Milliseconds(0);
             
-            Step5_VerifyProducedQuantity(ValueConverter.ArgumentFromString<int>("expectedQty", "0"));
+            Step4_ClickCancelOnLotSettings();
             Delay.Milliseconds(0);
             
             Step5_VerifyProducedQuantity(ValueConverter.ArgumentFromString<int>("expectedQty", "0"));

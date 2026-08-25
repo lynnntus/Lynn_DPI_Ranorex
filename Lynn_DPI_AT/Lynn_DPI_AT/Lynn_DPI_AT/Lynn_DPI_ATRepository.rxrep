@@ -291,7 +291,7 @@ BIemTjEYqzcuy/8gUJdmCfXWyyJjHy1/g1zzWYhNZyAsG0aash9xGfsRGasFIyLtKoOxJp9WHl4x
 				refimgid="f7f4d8ea-82ae-4a22-8d06-83ce8d5f27a9"
 				robustPath="/form[@title='CCIMainWindow']//text[@caption='1/1']"
 				searchtimeout="30000ms">
-					/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='area5_2']//text
+					/form[@title='CCIMainWindow']/container[@automationid='MainView']/?/?/container[@automationid='area5_2']//progressbar[@automationid='progressBar']/text
 				</item>
 				<item
 				addcaps="button,wpfelement,wpfgroupelement"
