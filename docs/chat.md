@@ -1,5 +1,17 @@
 # Chat History
 
+## 2026-08-25
+
+### Fix 2 bugs trong module RunProduction
+- **Yêu cầu**: Fix 2 bugs phát hiện trong test run đầu tiên: (1) Step 5 đọc label text thay vì giá trị số "X/Y" từ progress bar, (2) Flow chạy lại từ đầu sau khi Step 5 FAIL
+- **Quy trình**: Đọc INDEX.md → match 2 lessons (WPF Caption vs Text + Recording Step Action Timeout) → lên plan → user approve → implement → build verify
+- **Kết quả**:
+  - Bug 1: Viết lại `ReadProgressBarText()` với 3-approach fallback + regex validation `\d+/\d+`
+  - Bug 2: Thêm `_stepsRanFromInit` guard pattern — Init() chạy logic, recording steps skip
+  - Build PASS
+- **Files**: `RunProduction.UserCode.cs`
+- **Lesson mới**: Không (cả 2 bugs đều match lessons đã có trong INDEX.md)
+
 ## 2026-08-23
 
 ### Cleanup DIAG code + Tạo lesson ANR state cascade

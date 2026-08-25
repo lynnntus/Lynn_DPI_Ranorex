@@ -1,5 +1,24 @@
 # Change History
 
+## 2026-08-25
+
+### Fix 2 bugs trong module RunProduction
+
+- **File sửa**: `RunProduction.UserCode.cs`
+  - **Bug 1 (Step 5 đọc sai giá trị progress bar)**:
+    - Root cause: `ReadProgressBarText()` đọc Caption trước → trả label "Production Information(...)" thay vì value "2/2". Matched lesson "WPF Caption vs Text".
+    - Fix: Viết lại `ReadProgressBarText()` với 3-approach fallback: (1) TxtProducedQty Text attr, (2) ProgressBar element attrs, (3) dynamic Find text children + regex `\d+/\d+` validation
+    - Thêm helper `IsProgressValue()` — regex validation cho pattern X/Y
+    - `Step5_VerifyProducedQuantityImpl()` dùng `ReadProgressBarText()` + `_expectedQty` instance field
+  - **Bug 2 (Flow chạy lại sau fail)**:
+    - Root cause: `Init()` gọi `RunProductionFlow()` → 5 steps. Sau đó auto-generated `Run()` gọi lại từng Step. Matched lessons "Init() Limitations" + "Recording Step Action Timeout".
+    - Fix: Thêm `_stepsRanFromInit` flag + `_expectedQty` instance field
+    - Tách mỗi StepX() thành: public guard (check flag → skip) + private StepX_Impl() (logic thật)
+    - `RunProductionFlow()` gọi Impl methods trực tiếp
+    - Init() set `_stepsRanFromInit = true` trước `RunProductionFlow()`
+- **File không đổi**: `RunProduction.cs` (auto-generated), `ProductionContext.cs`
+- **Build**: PASS
+
 ## 2026-08-23
 
 ### Cleanup DIAG code + Tạo lesson ANR state cascade
