@@ -437,7 +437,8 @@ namespace Lynn_DPI_AT
                                 SafeReadAttribute(pbEl, "Caption"),
                                 SafeReadAttribute(pbEl, "AccessibleValue")));
                         Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] ProgressBar — Minimum='{0}', Maximum='{1}'",
+                            string.Format("[DIAG_PROGRESS] ProgressBar — Value='{0}', Minimum='{1}', Maximum='{2}'",
+                                SafeReadAttribute(pbEl, "Value"),
                                 SafeReadAttribute(pbEl, "Minimum"),
                                 SafeReadAttribute(pbEl, "Maximum")));
                     } catch (Exception exLog) {
@@ -466,10 +467,11 @@ namespace Lynn_DPI_AT
                             try {
                                 var childEl = texts[i].Element;
                                 Report.Log(ReportLevel.Info, "RunProduction",
-                                    string.Format("[DIAG_PROGRESS] TextChild[{0}] — Text='{1}', Caption='{2}', Visible={3}, ScreenRect={4}",
+                                    string.Format("[DIAG_PROGRESS] TextChild[{0}] — Text='{1}', Caption='{2}', AccessibleValue='{3}', Visible={4}, ScreenRect={5}",
                                         i,
                                         SafeReadAttribute(childEl, "Text"),
                                         SafeReadAttribute(childEl, "Caption"),
+                                        SafeReadAttribute(childEl, "AccessibleValue"),
                                         SafeReadAttribute(childEl, "Visible"),
                                         SafeGetScreenRect(childEl)));
                             } catch (Exception exChild) {
@@ -480,7 +482,7 @@ namespace Lynn_DPI_AT
 
                         foreach (var txt in texts)
                         {
-                            foreach (string attr in new[] { "Text", "Caption" })
+                            foreach (string attr in new[] { "Text", "Caption", "AccessibleValue" })
                             {
                                 string val = SafeReadAttribute(txt.Element, attr);
                                 if (IsProgressValue(val))
