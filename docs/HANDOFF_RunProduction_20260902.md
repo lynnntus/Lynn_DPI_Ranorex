@@ -1,9 +1,9 @@
 # HANDOFF: RunProduction — Session 2026-09-02
 
 > Ngay tao: 2026-09-02  
-> Trang thai: DIAG DA BO SUNG — can deploy va test tren May B  
-> File code: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs` (534 dong)  
-> Commit truoc: `9a605f7` | Commit moi: (xem git log)
+> Trang thai: APPROACH 4 DA IMPLEMENT — can deploy va test tren May B  
+> File code: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs` (~580 dong)  
+> Commit truoc: `9a605f7` | Commit moi: (chua commit — cho user xac nhan)
 
 ---
 
@@ -38,7 +38,18 @@ Flow chay lap lai sau khi Step 5 FAIL — da fix bang guard pattern `_stepsRanFr
 - Regex validation `IsProgressValue()`: pattern `\d+\s*/\s*\d+`
 - Guard pattern `_stepsRanFromInit` ngan recording steps chay lai
 
-### 2.2. DIAG logging (session nay — commit `9a605f7`)
+### 2.2. Approach 4 — Parent Search (session nay — chua commit)
+
+Them Approach 4 vao `ReadProgressBarText()` (dong ~499-544):
+- Tim text tu PARENT cua ProgressBar, leo toi da 3 level
+- Moi level: log AutomationId + ControlTypeName (DIAG-A5 ParentSearch)
+- Tim tat ca text elements bang `Find<Ranorex.Text>(".//text")`
+- Doc 3 attribute: Text, Caption, AccessibleValue
+- Chi nhan gia tri khop `IsProgressValue()` (regex `\d+\s*/\s*\d+`)
+- Wrap trong try-catch voi DIAG logging
+- Build: PASS — 0 error, 0 warning (Debug x86)
+
+### 2.3. DIAG logging (session truoc — commit `9a605f7`)
 
 Them diagnostic logging voi prefix `[DIAG_PROGRESS]` de grep trong Ranorex Report:
 
@@ -51,6 +62,7 @@ Them diagnostic logging voi prefix `[DIAG_PROGRESS]` de grep trong Ranorex Repor
 | **DIAG-A2** | ReadProgressBarText Approach 2 (dong 418-453) | ProgressBarInfo.Exists(0), Text, Caption, AccessibleValue, **Value**, Minimum, Maximum | H2 |
 | **DIAG-A3** | ReadProgressBarText Approach 3 (dong 456-495) | Text children count, moi child: Text, Caption, **AccessibleValue**, Visible, ScreenRect | H1 (bao nhieu children, thu tu) |
 | **DIAG-A4** | ReadProgressBarText outer catch (dong 500-507) | Exception type, message, phan biet ANR vs non-ANR | H5 |
+| **DIAG-A5** | ReadProgressBarText Approach 4 (dong 499-544) | ParentSearch: level, AutomationId, ControlType, text count, Text/Caption/AccessibleValue cua moi text child | H7 (text la sibling) |
 
 Helper moi: `SafeGetScreenRect()` (dong 521-525) — tra ve ScreenRectangle dang string, wrap try-catch.
 
@@ -71,6 +83,7 @@ Helper moi: `SafeGetScreenRect()` (dong 521-525) — tra ve ScreenRectangle dang
 | H4 | Stale cache reference | THAP-TB | DIAG-A1: ScreenRect co dung? Visible=True? |
 | H5 | ANR (App Not Responding) | THAP | DIAG-B3/A4: exception logs neu co ANR |
 | H6 | Timing — UI chua update progress bar | THAP-TB | DIAG-B2: gia tri thay doi qua cac poll iterations |
+| **H7** | **Text "X/Y" la SIBLING cua ProgressBar, khong phai child** | **CAO — root cause** | **DIAG-A5: ParentSearch tim thay text khop X/Y tai level nao** |
 
 ---
 
@@ -114,39 +127,30 @@ ProgressBar:
 
 ## 5. Viec can tiep tuc
 
-### Buoc 1: Deploy va test (tren May B)
+### Buoc 1: Commit va deploy (tren May A → May B)
 
-1. Git push tu May A
+1. User xac nhan → git commit + push tu May A
 2. Git pull tren May B
 3. Mo Ranorex Studio → chay test case chua RunProduction
 4. Mo Ranorex Report → grep `[DIAG_PROGRESS]`
 
-### Buoc 2: Phan tich DIAG output
+### Buoc 2: Kiem tra ket qua Approach 4
 
-Voi ket qua DIAG, tra loi cac cau hoi:
+| Ky vong | DIAG log |
+|---------|----------|
+| ParentSearch L0/L1/L2 — thay text khop X/Y | `[DIAG_PROGRESS] ParentSearch L{n} Text[{j}]` |
+| Return gia tri dung (vd: "2/2") | `[DIAG_PROGRESS] Poll #N result='2/2'` |
+| Step 5 PASS | Ranorex Report status |
 
-| Cau hoi | Xem DIAG nao |
-|---------|--------------|
-| TxtProducedQtyInfo.Exists(0) = True hay False? | DIAG-A1 |
-| Neu True: Text va Caption cua no la gi? | DIAG-A1 |
-| ProgressBarInfo.Exists(0) = True hay False? | DIAG-A2 |
-| Co bao nhieu text children trong ProgressBar? | DIAG-A3 |
-| Text child nao chua gia tri X/Y? | DIAG-A3 TextChild[i] |
-| Co ANR exception nao khong? | DIAG-B3, DIAG-A4 |
-| Gia tri co thay doi qua cac poll iterations? | DIAG-B2 |
+Neu Approach 4 KHONG tim thay text:
+- Doc DIAG ParentSearch de xem AutomationId/ControlType tai moi level
+- Xem xet tang so level (hien tai max 3)
+- Hoac dung Spy de xac dinh vi tri chinh xac cua text element
 
-### Buoc 3: Xac dinh root cause va fix
-
-Sau khi co evidence, doi chieu voi 6 gia thuyet (H1-H6):
-- Neu H1 confirmed → sua selector hoac doi approach doc child text dung
-- Neu H2 confirmed → doi thuoc tinh doc (AccessibleValue, Value, v.v.)
-- Neu H3 confirmed → Approach 3 da hoat dong, chi can uu tien no
-- Fix phai duoc chung minh bang evidence TRUOC KHI implement
-
-### Buoc 4: Sau khi fix
+### Buoc 3: Sau khi PASS stable
 
 - Xoa DIAG logging (khong can giu lai trong production)
-- Tao lesson moi neu root cause dang ghi lai (hoi user)
+- Tao lesson moi cho H7 (text sibling pattern) → hoi user
 - Update INDEX.md
 
 ---
@@ -175,3 +179,5 @@ Sau khi co evidence, doi chieu voi 6 gia thuyet (H1-H6):
 | 2026-08-27 | Tao handoff DIAG doc (6 gia thuyet, selector details) | — |
 | 2026-09-02 | Them DIAG logging [DIAG_PROGRESS], build PASS | `9a605f7` |
 | 2026-09-02 | Bo sung DIAG gap: Value (A2), AccessibleValue (A3 log+return), build PASS | (xem git log) |
+| 2026-09-02 | Phan tich DIAG tu May B → H1-H6 loai tru, xac dinh H7 (text la sibling) | — |
+| 2026-09-02 | Implement Approach 4: ParentSearch 3 level + DIAG-A5, build PASS | (chua commit) |

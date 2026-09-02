@@ -2,6 +2,20 @@
 
 ## 2026-09-02
 
+### Phan tich DIAG Report + Implement Approach 4 (H7 fix)
+- **Yeu cau**: Phan tich screenshot DIAG Report tu May B, xac dinh root cause Step 5 khong doc duoc X/Y. Sau khi duyet plan, implement Approach 4
+- **Phan tich DIAG**:
+  - H1-H6 da loai tru bang evidence tu Report
+  - H7 (MOI): Text "X/Y" la SIBLING cua ProgressBar trong WPF UI Automation tree, khong phai child. 3 approach cu tim TRONG ProgressBar → khong thay
+- **Implement Approach 4**: Them vao `ReadProgressBarText()` (dong ~499-544):
+  - Leo tu ProgressBar.Element.Parent len toi da 3 level
+  - Tim text elements bang `Find<Ranorex.Text>(".//text")`
+  - Doc Text, Caption, AccessibleValue — chi nhan gia tri khop regex X/Y
+  - DIAG-A5 ParentSearch logging de kiem chung
+- **Build**: PASS — 0 error, 0 warning (Debug x86)
+- **Files**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`, `docs/HANDOFF_RunProduction_20260902.md`
+- **Luu y**: Chua commit, chua push — cho user xac nhan
+
 ### Bo sung DIAG gap truoc khi deploy May B
 - **Yeu cau**: Doc handoff, tu tiep tuc debug RunProduction. Review DIAG gap va bo sung truoc khi deploy
 - **Ket qua**: Tim 3 DIAG gap, da bo sung:

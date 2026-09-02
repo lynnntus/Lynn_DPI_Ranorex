@@ -495,6 +495,53 @@ namespace Lynn_DPI_AT
                             string.Format("[DIAG_PROGRESS] Approach 3 Find EXCEPTION: {0}: {1}",
                                 findEx.GetType().Name, findEx.Message));
                     }
+
+                    // --- DIAG-A5: Approach 4 — Search PARENT containers for text siblings ---
+                    try
+                    {
+                        var currentEl = repo.CCIMainWindow.MainView.ProgressBar.Element.Parent;
+                        for (int level = 0; level < 3 && currentEl != null; level++)
+                        {
+                            Report.Log(ReportLevel.Info, "RunProduction",
+                                string.Format("[DIAG_PROGRESS] ParentSearch L{0} — AutomationId='{1}', ControlType='{2}'",
+                                    level,
+                                    SafeReadAttribute(currentEl, "AutomationId"),
+                                    SafeReadAttribute(currentEl, "ControlTypeName")));
+
+                            var parentAdapter = new Ranorex.Unknown(currentEl);
+                            IList<Ranorex.Text> siblingTexts = parentAdapter.Find<Ranorex.Text>(".//text");
+
+                            Report.Log(ReportLevel.Info, "RunProduction",
+                                string.Format("[DIAG_PROGRESS] ParentSearch L{0} text count = {1}",
+                                    level, siblingTexts.Count));
+
+                            for (int j = 0; j < siblingTexts.Count; j++)
+                            {
+                                var sEl = siblingTexts[j].Element;
+                                string sTxt = SafeReadAttribute(sEl, "Text");
+                                string sCap = SafeReadAttribute(sEl, "Caption");
+                                string sAcc = SafeReadAttribute(sEl, "AccessibleValue");
+
+                                Report.Log(ReportLevel.Info, "RunProduction",
+                                    string.Format("[DIAG_PROGRESS] ParentSearch L{0} Text[{1}] — Text='{2}', Caption='{3}', AccessibleValue='{4}'",
+                                        level, j, sTxt, sCap, sAcc));
+
+                                foreach (string val in new[] { sTxt, sCap, sAcc })
+                                {
+                                    if (IsProgressValue(val))
+                                        return val.Trim();
+                                }
+                            }
+
+                            currentEl = currentEl.Parent;
+                        }
+                    }
+                    catch (Exception ex4)
+                    {
+                        Report.Log(ReportLevel.Info, "RunProduction",
+                            string.Format("[DIAG_PROGRESS] Approach 4 EXCEPTION: {0}: {1}",
+                                ex4.GetType().Name, ex4.Message));
+                    }
                 }
 
                 return "(no X/Y found)";
