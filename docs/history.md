@@ -2,6 +2,15 @@
 
 ## 2026-09-02
 
+### Them DIAG logging vao RunProduction (lan 2 — session moi)
+
+- **File sua**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+  - `Step5_VerifyProducedQuantityImpl()`: Them timestamp, poll iteration log, ANR exception log
+  - `ReadProgressBarText()`: Them DIAG cho 3 approach + outer exception
+  - Them helper `SafeGetScreenRect()`
+  - Prefix: `[DIAG_PROGRESS]` — de grep trong Ranorex Report
+  - Build: Debug x86 PASS (0 error, 0 warning)
+
 ### Code review DIAG truoc khi trien khai May B
 
 - **File review** (chi doc, khong sua): `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`

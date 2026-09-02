@@ -2,6 +2,16 @@
 
 ## 2026-09-02
 
+### Them DIAG logging vao RunProduction Step 5 (lan 2 — session moi)
+- **Yeu cau**: Kiem tra file UserCode, xac nhan chua co DIAG, tao plan, them DIAG, build
+- **Ket qua**: File CHUA co `[DIAG_PROGRESS]` (session truoc chua duoc commit). Them DIAG moi vao:
+  - `Step5_VerifyProducedQuantityImpl()`: DIAG-B1 (timestamp), DIAG-B2 (poll iteration), DIAG-B3 (ANR exception)
+  - `ReadProgressBarText()`: DIAG-A1 (TxtProducedQty attributes), DIAG-A2 (ProgressBar attributes), DIAG-A3 (text children), DIAG-A4 (exception logging)
+  - Helper moi: `SafeGetScreenRect()` (wrap try-catch)
+- **Build**: PASS — 0 error, 0 warning (Debug x86)
+- **Files**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+- **Luu y**: Dung `System.DateTime` tranh ambiguous CS0104. Moi DIAG block wrap try-catch rieng
+
 ### Them DIAG logging vao RunProduction Step 5
 - **Yeu cau**: Them diagnostic logging vao `ReadProgressBarText()` va `Step5_VerifyProducedQuantityImpl()` de thu thap evidence truoc khi fix bug doc sai gia tri progress bar
 - **Quy trinh**: Doc handoff → doc INDEX.md → doc UserCode → tao ke hoach → user duyet → them DIAG → build
