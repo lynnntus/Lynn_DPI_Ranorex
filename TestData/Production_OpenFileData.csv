@@ -1,5 +1,5 @@
 CaseId,Enabled,RecipeFilePath,ExpectedFileName,ModeName,ProductionSetting,InspectionQuantity,LotName
 OF_001,Y,C:\Kohyoung\Job\Lynn_20251204_CreateNewPCB(160_145)\Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good.kyjob,Lynn_20251204_CreateNewPCB(160_145)_Coating_Good,NotUse,,
 OF_002,Y,C:\Kohyoung\Job\Lynn_20260516_Stacking\Lynn_Stacking_Underfill_Chuan_Config.kyjob,Lynn_Stacking_Underfill_Chuan_Config.kyjob,Lynn_Stacking_Underfill,Quantity,10,
-OF_003,Y,C:\Kohyoung\Job\KYE_Ver9_3_Job remake_Lynn\KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_Lynn,LotProduction,100,Book_20260902_005
-OF_004,Y,C:\Kohyoung\Job\KYE_Ver9_3_Job remake_1\KYE_Ver9_3_Job remake_Lynn_Only_Coating.kyjob,KYE_Ver9_3_Job remake_Lynn_Only_Coating.kyjob,KYE_Ver9_3_Job remake_Lynn_Only_Coating,LotProduction,3,Lynn_20260902_005
+OF_003,Y,C:\Kohyoung\Job\KYE_Ver9_3_Job remake_Lynn\KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_Lynn.kyjob,KYE_Ver9_3_Job remake_Lynn,LotProduction,100,Book_20260902_006
+OF_004,Y,C:\Kohyoung\Job\KYE_Ver9_3_Job remake_1\KYE_Ver9_3_Job remake_Lynn_Only_Coating.kyjob,KYE_Ver9_3_Job remake_Lynn_Only_Coating.kyjob,KYE_Ver9_3_Job remake_Lynn_Only_Coating,LotProduction,3,Lynn_20260902_006
