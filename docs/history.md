@@ -1,5 +1,31 @@
 # Change History
 
+## 2026-09-02
+
+### Code review DIAG truoc khi trien khai May B
+
+- **File review** (chi doc, khong sua): `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+  - Ket qua: 0 Critical, 2 Warning, 4 Suggestion → co the trien khai ngay
+  - Cap nhat: `docs/chat.md`
+
+### Them DIAG logging vao RunProduction ReadProgressBarText va Step5
+
+- **File sua**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+  - `ReadProgressBarText()`: Them DIAG log cho moi approach (TxtProducedQty, ProgressBar, text children)
+  - `Step5_VerifyProducedQuantityImpl()`: Them timestamp va polling iteration log
+  - Fix loi compile: `DateTime` → `System.DateTime` (ambiguous voi `Ranorex.DateTime`)
+  - Prefix: `[DIAG_PROGRESS]` — de grep trong Ranorex Report
+
+## 2026-08-27
+
+### Tao handoff tai lieu debug RunProduction ProgressBar
+
+- **File tao**: `docs/HANDOFF_RunProduction_ProgressBar_DIAG_20260827.md`
+  - Tai lieu ban giao de debug Step 5 (doc gia tri progress bar)
+  - Gom: trieu chung, flow, lessons da check, 6 gia thuyet, code path, selector details
+  - Ke hoach session tiep: chi them DIAG, chua sua selector/timeout
+  - Checklist evidence can thu thap tu Ranorex Report va Spy
+
 ## 2026-08-25
 
 ### Fix 2 bugs trong module RunProduction

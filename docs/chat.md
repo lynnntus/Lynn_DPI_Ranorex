@@ -1,5 +1,30 @@
 # Chat History
 
+## 2026-09-02
+
+### Them DIAG logging vao RunProduction Step 5
+- **Yeu cau**: Them diagnostic logging vao `ReadProgressBarText()` va `Step5_VerifyProducedQuantityImpl()` de thu thap evidence truoc khi fix bug doc sai gia tri progress bar
+- **Quy trinh**: Doc handoff → doc INDEX.md → doc UserCode → tao ke hoach → user duyet → them DIAG → build
+- **Ket qua**: Build PASS. Them DIAG voi prefix `[DIAG_PROGRESS]` ghi: Exists, Visible, Enabled, ScreenRect, Text, Caption, AccessibleValue, Value, SelectionText, Minimum, Maximum, text children count, exception type (phan biet ANR), polling iteration
+- **Files**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+- **Luu y**: Chi them log, khong sua selector/timeout/logic. 1 loi compile (DateTime ambiguous) da fix thanh `System.DateTime`
+
+### Code review DIAG truoc khi trien khai May B
+- **Yeu cau**: Review code DIAG bang agent code-reviewer truoc khi deploy len May B
+- **Ket qua**: 0 Critical, 2 Warning, 4 Suggestion. Ket luan: **co the trien khai ngay**
+- **Warning**: (1) `Exists(0)` wrap try-catch thay doi behavior nho — chap nhan duoc, (2) double-read attributes giua DIAG va business logic — xac suat race thap
+- **Tuan thu**: 12/12 project rules PASS (khong sua auto-generated, khong hardcode, khong doi timeout/selector)
+- **Files**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs` (chi doc, khong sua)
+
+## 2026-08-27
+
+### Tao handoff RunProduction ProgressBar diagnostic
+- **Yeu cau**: Tao tai lieu handoff cho viec debug module RunProduction, focus vao Step 5 doc sai gia tri progress bar
+- **Quy trinh**: Doc INDEX.md + RunProduction.UserCode.cs + RunProduction.cs + repository selectors (ProgressBar, TxtProducedQty) → tong hop thanh handoff document
+- **Ket qua**: Tao `docs/HANDOFF_RunProduction_ProgressBar_DIAG_20260827.md` voi 9 sections: trieu chung, flow, lessons, code path, 6 gia thuyet, viec chua chung minh, ke hoach, file rules, thong tin can thu thap
+- **Files**: `docs/HANDOFF_RunProduction_ProgressBar_DIAG_20260827.md`, `docs/history.md`, `docs/chat.md`
+- **Luu y**: Khong sua code, khong sua .rxrep/.rxrec/.rxtst/.csproj
+
 ## 2026-08-25
 
 ### Fix 2 bugs trong module RunProduction
