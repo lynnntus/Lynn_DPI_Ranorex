@@ -1,5 +1,34 @@
 # Chat History
 
+## 2026-09-06
+
+### Xac nhan DIAG da sach — xoa artifact (H7) con sot
+
+- **Thoi gian**: 2026-09-06
+- **Yeu cau**: Don sach toan bo code chan doan (DIAG) trong RunProduction.UserCode.cs
+- **Ket qua**:
+  - Phan tich toan bo 462 dong — DIAG code DA DUOC DON SACH tu commit truoc
+  - Khong con `[DIAG_PROGRESS]`, DIAG-B1/B2/B3, DIAG-A1-A5, `SafeGetScreenRect()`, `pollIteration`
+  - Chi con 1 artifact nho: comment `(H7)` o dong 410 — da xoa
+  - Build: Debug x86 PASS (0 error, 0 warning)
+  - Grep xac nhan: 0 ket qua cho DIAG/H7
+- **File sua**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs` (dong 410)
+
+### Phan tich DIAG Report lan 2 — Machine B (chua co Approach 4)
+
+- **Thoi gian**: 2026-09-06
+- **Yeu cau**: Phan tich DIAG Report screenshot tu Machine B sau khi chay test
+- **Ket qua**:
+  - Approach 4 CHUA duoc deploy (khong co DIAG-A5 ParentSearch logs)
+  - TxtProducedQtyInfo.Exists(0) = False — moi iteration (Approach 1 vo dung)
+  - ProgressBar: Text/Caption/AccessibleValue deu empty (Approach 2 vo dung)
+  - ProgressBar.Value = PHAN TRAM (3→97), Min=0, Max=100 — khong phai X/Y
+  - Text children count = 0 — moi iteration (Approach 3 vo dung)
+  - H7 duoc CUNG CO: text X/Y nam NGOAI ProgressBar
+  - Step 2 hoan thanh OK (Notice popup sau 1906s), Step 3-4 OK
+  - Phat hien moi: ProgressBar.Value la percentage, co the dung lam backup
+- **De xuat**: Pull code commit 00420e7 sang Machine B → chay lai → kiem tra DIAG-A5
+
 ## 2026-09-02
 
 ### Phan tich DIAG Report + Implement Approach 4 (H7 fix)

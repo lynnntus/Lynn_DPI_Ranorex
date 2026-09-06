@@ -250,26 +250,16 @@ namespace Lynn_DPI_AT
         {
             Report.Log(ReportLevel.Info, "RunProduction", "Step 5: Verify produced quantity...");
 
-            Report.Log(ReportLevel.Info, "RunProduction",
-                string.Format("[DIAG_PROGRESS] Step5 START at {0}",
-                    System.DateTime.Now.ToString("HH:mm:ss.fff")));
-
             Delay.Milliseconds(2000);
 
             string progressText = null;
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            int pollIteration = 0;
 
             while (sw.ElapsedMilliseconds < IDLE_VERIFY_TIMEOUT_MS)
             {
-                pollIteration++;
                 try
                 {
                     progressText = ReadProgressBarText();
-
-                    Report.Log(ReportLevel.Info, "RunProduction",
-                        string.Format("[DIAG_PROGRESS] Step5 poll #{0}: result='{1}', elapsed={2}ms",
-                            pollIteration, progressText, sw.ElapsedMilliseconds));
 
                     if (IsProgressValue(progressText))
                         break;
@@ -277,10 +267,6 @@ namespace Lynn_DPI_AT
                 }
                 catch (Exception ex)
                 {
-                    Report.Log(ReportLevel.Info, "RunProduction",
-                        string.Format("[DIAG_PROGRESS] Step5 poll #{0} EXCEPTION: {1}: {2}",
-                            pollIteration, ex.GetType().Name, ex.Message));
-
                     if (!ex.GetType().Name.Contains("ApplicationNotResponding"))
                         throw;
                     Thread.Sleep(CLICK_ANR_WAIT_MS);
@@ -369,41 +355,14 @@ namespace Lynn_DPI_AT
         {
             try
             {
-                // --- DIAG-A1: Approach 1 — TxtProducedQty ---
+                // Approach 1 — TxtProducedQty repo item
                 bool txtExists = false;
                 try { txtExists = repo.CCIMainWindow.MainView.TxtProducedQtyInfo.Exists(0); }
-                catch (Exception exA1) {
-                    Report.Log(ReportLevel.Info, "RunProduction",
-                        string.Format("[DIAG_PROGRESS] TxtProducedQtyInfo.Exists(0) EXCEPTION: {0}: {1}",
-                            exA1.GetType().Name, exA1.Message));
-                }
-
-                Report.Log(ReportLevel.Info, "RunProduction",
-                    string.Format("[DIAG_PROGRESS] TxtProducedQtyInfo.Exists(0) = {0}", txtExists));
+                catch { }
 
                 if (txtExists)
                 {
                     var el = repo.CCIMainWindow.MainView.TxtProducedQty.Element;
-
-                    try {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] TxtProducedQty — Visible={0}, Enabled={1}, ScreenRect={2}",
-                                SafeReadAttribute(el, "Visible"),
-                                SafeReadAttribute(el, "Enabled"),
-                                SafeGetScreenRect(el)));
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] TxtProducedQty — Text='{0}', Caption='{1}', AccessibleValue='{2}'",
-                                SafeReadAttribute(el, "Text"),
-                                SafeReadAttribute(el, "Caption"),
-                                SafeReadAttribute(el, "AccessibleValue")));
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] TxtProducedQty — Value='{0}', SelectionText='{1}'",
-                                SafeReadAttribute(el, "Value"),
-                                SafeReadAttribute(el, "SelectionText")));
-                    } catch (Exception exLog) {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] TxtProducedQty DIAG log error: {0}", exLog.Message));
-                    }
 
                     string text = SafeReadAttribute(el, "Text");
                     if (IsProgressValue(text))
@@ -414,37 +373,14 @@ namespace Lynn_DPI_AT
                         return caption.Trim();
                 }
 
-                // --- DIAG-A2: Approach 2 — ProgressBar element ---
+                // Approach 2 — ProgressBar direct attributes
                 bool pbExists = false;
                 try { pbExists = repo.CCIMainWindow.MainView.ProgressBarInfo.Exists(0); }
-                catch (Exception exA2) {
-                    Report.Log(ReportLevel.Info, "RunProduction",
-                        string.Format("[DIAG_PROGRESS] ProgressBarInfo.Exists(0) EXCEPTION: {0}: {1}",
-                            exA2.GetType().Name, exA2.Message));
-                }
-
-                Report.Log(ReportLevel.Info, "RunProduction",
-                    string.Format("[DIAG_PROGRESS] ProgressBarInfo.Exists(0) = {0}", pbExists));
+                catch { }
 
                 if (pbExists)
                 {
                     var pbEl = repo.CCIMainWindow.MainView.ProgressBar.Element;
-
-                    try {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] ProgressBar — Text='{0}', Caption='{1}', AccessibleValue='{2}'",
-                                SafeReadAttribute(pbEl, "Text"),
-                                SafeReadAttribute(pbEl, "Caption"),
-                                SafeReadAttribute(pbEl, "AccessibleValue")));
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] ProgressBar — Value='{0}', Minimum='{1}', Maximum='{2}'",
-                                SafeReadAttribute(pbEl, "Value"),
-                                SafeReadAttribute(pbEl, "Minimum"),
-                                SafeReadAttribute(pbEl, "Maximum")));
-                    } catch (Exception exLog) {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] ProgressBar DIAG log error: {0}", exLog.Message));
-                    }
 
                     foreach (string attr in new[] { "Text", "Caption", "AccessibleValue" })
                     {
@@ -453,32 +389,11 @@ namespace Lynn_DPI_AT
                             return val.Trim();
                     }
 
-                    // --- DIAG-A3: Approach 3 — Text children ---
+                    // Approach 3 — text children cua ProgressBar
                     try
                     {
                         IList<Ranorex.Text> texts =
                             repo.CCIMainWindow.MainView.ProgressBar.Find<Ranorex.Text>(".//text");
-
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] Text children count = {0}", texts.Count));
-
-                        for (int i = 0; i < texts.Count; i++)
-                        {
-                            try {
-                                var childEl = texts[i].Element;
-                                Report.Log(ReportLevel.Info, "RunProduction",
-                                    string.Format("[DIAG_PROGRESS] TextChild[{0}] — Text='{1}', Caption='{2}', AccessibleValue='{3}', Visible={4}, ScreenRect={5}",
-                                        i,
-                                        SafeReadAttribute(childEl, "Text"),
-                                        SafeReadAttribute(childEl, "Caption"),
-                                        SafeReadAttribute(childEl, "AccessibleValue"),
-                                        SafeReadAttribute(childEl, "Visible"),
-                                        SafeGetScreenRect(childEl)));
-                            } catch (Exception exChild) {
-                                Report.Log(ReportLevel.Info, "RunProduction",
-                                    string.Format("[DIAG_PROGRESS] TextChild[{0}] DIAG error: {1}", i, exChild.Message));
-                            }
-                        }
 
                         foreach (var txt in texts)
                         {
@@ -490,44 +405,23 @@ namespace Lynn_DPI_AT
                             }
                         }
                     }
-                    catch (Exception findEx) {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] Approach 3 Find EXCEPTION: {0}: {1}",
-                                findEx.GetType().Name, findEx.Message));
-                    }
+                    catch { }
 
-                    // --- DIAG-A5: Approach 4 — Search PARENT containers for text siblings ---
+                    // Approach 4 — text la sibling: tim tu parent cua ProgressBar, toi da 3 level
                     try
                     {
                         var currentEl = repo.CCIMainWindow.MainView.ProgressBar.Element.Parent;
                         for (int level = 0; level < 3 && currentEl != null; level++)
                         {
-                            Report.Log(ReportLevel.Info, "RunProduction",
-                                string.Format("[DIAG_PROGRESS] ParentSearch L{0} — AutomationId='{1}', ControlType='{2}'",
-                                    level,
-                                    SafeReadAttribute(currentEl, "AutomationId"),
-                                    SafeReadAttribute(currentEl, "ControlTypeName")));
-
                             var parentAdapter = new Ranorex.Unknown(currentEl);
                             IList<Ranorex.Text> siblingTexts = parentAdapter.Find<Ranorex.Text>(".//text");
 
-                            Report.Log(ReportLevel.Info, "RunProduction",
-                                string.Format("[DIAG_PROGRESS] ParentSearch L{0} text count = {1}",
-                                    level, siblingTexts.Count));
-
-                            for (int j = 0; j < siblingTexts.Count; j++)
+                            foreach (var sTxtEl in siblingTexts)
                             {
-                                var sEl = siblingTexts[j].Element;
-                                string sTxt = SafeReadAttribute(sEl, "Text");
-                                string sCap = SafeReadAttribute(sEl, "Caption");
-                                string sAcc = SafeReadAttribute(sEl, "AccessibleValue");
-
-                                Report.Log(ReportLevel.Info, "RunProduction",
-                                    string.Format("[DIAG_PROGRESS] ParentSearch L{0} Text[{1}] — Text='{2}', Caption='{3}', AccessibleValue='{4}'",
-                                        level, j, sTxt, sCap, sAcc));
-
-                                foreach (string val in new[] { sTxt, sCap, sAcc })
+                                var sEl = sTxtEl.Element;
+                                foreach (string attr in new[] { "Text", "Caption", "AccessibleValue" })
                                 {
+                                    string val = SafeReadAttribute(sEl, attr);
                                     if (IsProgressValue(val))
                                         return val.Trim();
                                 }
@@ -536,22 +430,13 @@ namespace Lynn_DPI_AT
                             currentEl = currentEl.Parent;
                         }
                     }
-                    catch (Exception ex4)
-                    {
-                        Report.Log(ReportLevel.Info, "RunProduction",
-                            string.Format("[DIAG_PROGRESS] Approach 4 EXCEPTION: {0}: {1}",
-                                ex4.GetType().Name, ex4.Message));
-                    }
+                    catch { }
                 }
 
                 return "(no X/Y found)";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Report.Log(ReportLevel.Info, "RunProduction",
-                    string.Format("[DIAG_PROGRESS] ReadProgressBarText OUTER EXCEPTION ({0}): {1}: {2}",
-                        ex.GetType().Name.Contains("ApplicationNotResponding") ? "ANR" : "NON-ANR",
-                        ex.GetType().Name, ex.Message));
                 return "(read error)";
             }
         }
@@ -565,12 +450,6 @@ namespace Lynn_DPI_AT
         {
             try { return el.GetAttributeValueText(attr); }
             catch { return null; }
-        }
-
-        private string SafeGetScreenRect(Ranorex.Core.Element el)
-        {
-            try { return el.ScreenRectangle.ToString(); }
-            catch { return "(N/A)"; }
         }
 
         private void TakeScreenshot()

@@ -1,5 +1,19 @@
 # Change History
 
+## 2026-09-06
+
+### Xac nhan DIAG da sach — xoa artifact (H7) con sot
+
+- **File sua**: `Lynn_DPI_AT/Lynn_DPI_AT/Lynn_DPI_AT/RunProduction.UserCode.cs`
+  - Dong 410: xoa `(H7)` khoi comment Approach 4
+  - Day la thay doi duy nhat — toan bo DIAG code da duoc don sach tu commit truoc
+  - Build: Debug x86 PASS (0 error, 0 warning)
+
+### Phan tich DIAG Report lan 2 — xac nhan H7, Approach 4 chua deploy
+
+- **File**: (khong sua file nao — chi phan tich)
+- **Noi dung**: Phan tich DIAG Report tu Machine B. Xac nhan Approach 4 chua deploy (khong co DIAG-A5 logs). Evidence cung co H7: ProgressBar co 0 text children, tat ca string attributes empty, Value la percentage (0-100). Can pull code moi sang Machine B.
+
 ## 2026-09-02
 
 ### Phan tich DIAG Report + Implement Approach 4 (H7 — text la sibling)
